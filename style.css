@@ -1,0 +1,51 @@
+.login {
+    /*background-color: red;*/
+    text-align: center;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    bottom: 15%;
+    padding: 5%;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.campos-login {
+    padding-top: 5%;
+}
+
+.titulo-login {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    size: 20%;
+}
+
+.mensaje {
+    position: relative;
+    background: none repeat scroll 0 0 #ff3c00;
+    border-radius: 20px 20px 20px 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.body {
+    height: 100%;
+    /* Ubicación de la imagen */
+    background-image: url(image/19994917.png);
+    /* Para dejar la imagen de fondo centrada, vertical y
+
+    horizontalmente */
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+
+    de fondo o si hay problemas para cargarla */
+    background-color: cornflowerblue;
+}
