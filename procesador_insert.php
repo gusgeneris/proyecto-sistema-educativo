@@ -2,12 +2,7 @@
 require_once "class/Persona.php";
 require_once "class/Usuario.php";
 require_once "class/Mysql.php";
-$user=1;
-$psw=123;
-$id=10;
-
-/*Usuario::insertUser($user,$psw,$id);*/
-
+require_once "configs.php";
 
 
 $nombreUser = $_POST['NombreUser'];
@@ -16,20 +11,30 @@ $personaNombre = $_POST['NombrePers'];
 $personaApellido = $_POST['Apellido'];
 $personaDni = $_POST['Dni'];
 $personaFechaNac = $_POST['FechaNac'];
-$personaEstado = $_POST['Estado'];
+$personaNacionalidad= $_POST['Nacionalidad'];
 $personaSexo= $_POST['Sexo'];
+$usuarioPerfil= $_POST['Perfil'];
+
 
 $user=new Usuario();
-$user->insertUser($personaNombre,$personaApellido,$personaDni,$personaFechaNac,$personaEstado,$personaSexo,$nombreUser,$contrasenia);  
+$user->setNombreUsuario($nombreUser);
+$user->setContraseña($contrasenia);
+$user->setNombre($personaNombre);
+$user->setApellido($personaApellido);
+$user->setDni($personaDni);
+$user->setFechaNacimiento($personaFechaNac);
+$user->setNacionalidad($personaNacionalidad);
+$user->setIdSexo($personaSexo);
+$user->setIdPerfil($usuarioPerfil);
+$user->set_estaLogeado('1');
+$user->setPerfil('1');
 
-echo 'HI';
+$user->insertUser();
 
-/*$db=new Mysql();
+highlight_string(var_export($user,true));
 
-
-
-
-
-$user=Usuario::insertUser($nombreUser,$contrasenia,$idUser);*/
+if ($user){
+    header("Location:test_usuario_obtener_todos.php?mj=".CORRECT_INSERT_CODE);
+}
 
 ?>

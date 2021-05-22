@@ -1,18 +1,21 @@
 <?php
 require_once "class/Usuario.php";
 require_once "class/Persona.php";
-
-/*$user= new Usuario();
-
-$user->setNombreUsuario("gusgeneris");
-$user->setContraseña("1234");
-
-highlight_string(var_export($user,true)); 
-*/
-
-#$eliminar= Usuario::eliminarPorId(2);
+require_once "configs.php";
 
 $lista = Usuario::obtenerTodos();
+
+    
+$mensaje='';
+    
+if(isset($_GET['mj'])){
+    $mj=$_GET['mj'];
+    if ($mj==CORRECT_INSERT_CODE){
+        $mensaje=CORRECT_INSERT_MENSAJE;?>
+<div class="mensajes"><?php echo $mensaje;?></div><?php
+    }
+};
+
 
 ?>
 
@@ -22,11 +25,14 @@ $lista = Usuario::obtenerTodos();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css" class="">
+    <link rel="stylesheet" href="styleInsert.css" class="">
     <style class=""></style>
-    <title>Document</title>
+    <title>Listado</title>
 </head>
 <body>
+    <a href="insert_usuario" class="">Insertar usuario</a>
+    <br>
+    <br>
     <table border="5px">
         <tr >
             <th> ID Usuario</th>
@@ -35,6 +41,7 @@ $lista = Usuario::obtenerTodos();
             <th> Apellido</th>
             <th> Fecha Nacimiento</th>
             <th> Nombre Usuario</th>
+            <th> Sexo</th>
         </tr>
         <?php foreach ($lista as $usuario ):?> 
             <tr >
@@ -55,6 +62,9 @@ $lista = Usuario::obtenerTodos();
                 </td>
                 <td>
                     <?php echo $usuario->getNombreUsuario(); ?>
+                </td>
+                <td>
+                    <?php echo $usuario->getIdSexo(); ?>
                 </td>
             
             </tr>

@@ -6,5 +6,8 @@ const ERROR_LOGIN_CODE_INACTIVE_USER = '2';
 const ERROR_LOGIN_MENSAJE_INACTIVE_USER = 'Usuario inactivo';
 const ERROR_LOGIN_CODE_NULL_DATA = '3';
 const ERROR_LOGIN_MENSAJE_NULL_DATA = 'Ingrese algun dato.';
+const CORRECT_INSERT_CODE= '4';
+const CORRECT_INSERT_MENSAJE= 'Se ingresarion los datos correctamente';
+
 
 ?>

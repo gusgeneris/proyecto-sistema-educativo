@@ -6,6 +6,7 @@ require_once "configs.php";
 $usuario=$_POST['txtUsuario'];
 $contrasenia=$_POST['txtContrasenia'];
 
+
 $user=Usuario::login($usuario,$contrasenia);
 
 if($user->estaLogeado()==1){

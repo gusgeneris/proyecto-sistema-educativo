@@ -58,11 +58,12 @@ class Sexo{
         if($datos->num_rows > 0){
             while ($registro = $datos->fetch_assoc()){
                 $sexo=new Sexo();
-                $sexo->_idSexo=$registro['id_sexo'];
-                $sexo->_descripcion=$registro['sexo_descripcion'];
-                $listadoUsuarios[]=$sexo;
+                $sexo->set_idSexo($registro['id_sexo']);
+                $sexo->set_descripcion($registro['sexo_descripcion']);
+                $descripcion=$sexo->get_descripcion();
+                $listadoUsuarios[]=$descripcion;
             }
-            return $sexo;}
+            return $listadoUsuarios;}
       
 
 

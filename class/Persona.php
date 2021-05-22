@@ -1,5 +1,6 @@
 <?php
 require_once "Mysql.php";
+require_once "Sexo.php";
 
 class Persona{
     protected $_idPersona;
@@ -7,12 +8,34 @@ class Persona{
     protected $_apellido;
     protected $_fechaNacimiento;
     protected $_dni;
+    protected $_idSexo;
     protected $_nacionalidad;
 
     public function __toString() {
         return "{$this->_nombre},{$this->_apellido}";
     }
      
+        /**
+     * Get the value of _sexo
+     */ 
+    public function getIdSexo()
+    {
+        return $this->_idSexo;
+    }
+
+    /**
+     * Set the value of _sexo
+     *
+     * @return  self
+     */ 
+    public function setIdSexo($_idSexo)
+    {
+        $this->_idSexo = $_idSexo;
+
+        return $this;
+    }
+    
+
 
     /**
      * Get the value of _idPersona
@@ -134,23 +157,15 @@ class Persona{
         return $this;
     }
 
-    public static function insertPersona($personaNombre,$personaApellido,$personaDni,$personaFechaNac,$personaEstado,$personaSexo){
-        $sql="INSERT INTO persona (`persona_nombre`, `persona_apellido`, `persona_dni`, `persona_fecha_nac`, `persona_estado`, `sexo_id_sexo`) 
-            VALUES ('{$personaNombre}', '{$personaApellido}', '{$personaDni}', '{$personaFechaNac}', '{$personaEstado}', '{$personaSexo}');";
-
+    public  function insertPersona(){
         $database=new Mysql();
-        $datos=$database->insertarRegistro($sql);
-        $conex=$database->getConexion();
-        $idP=mysqli_insert_id($conex);
 
-        $persona=new Persona();
+        $sql="INSERT INTO persona (`persona_nombre`, `persona_apellido`, `persona_dni`, `persona_fecha_nac`, `sexo_id_sexo`,`persona_nacionalidad`) 
+            VALUES ('{$this->_nombre}', '{$this->_apellido}', '{$this->_dni}', '{$this->_fechaNacimiento}', '{$this->_idSexo}', '{$this->_nacionalidad}');";
 
-        $persona->setIdPersona($idP);
         
-
-        return $persona;
-
-
+        $idPersona=$database->insertarRegistro($sql);
+        $this->_idPersona = $idPersona;
 
     }
 }

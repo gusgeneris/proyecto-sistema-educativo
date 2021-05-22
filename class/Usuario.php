@@ -3,12 +3,10 @@ require_once "persona.php";
 require_once "mysql.php";
 
 class Usuario extends Persona {
-    protected $_idPersona;
     private $_idUsuario;
     protected $_idPerfil;
     protected $_nombreUsuario;
     protected $_contraseña;
-
     protected $_perfil;
     protected $_estaLogeado;
 
@@ -145,11 +143,12 @@ class Usuario extends Persona {
         $user->_idPersona= $registro['id_persona'];
         $user->_nombre= $registro['persona_nombre'];
         $user->_apellido= $registro['persona_apellido'];
-        $user->_fechaNacimiento= $registro['persona_fecha_nacimiento'];
+        $user->_fechaNacimiento= $registro['persona_fecha_nac'];
         $user->_dni= $registro['persona_dni'];
         $user->_nacionalidad= $registro['persona_nacionalidad'];
         $user->_nombreUsuario= $registro['usuario_nombre'];
         $user->_contraseña= $registro['usuario_contrasenia'];
+        $user->_idSexo= $registro['sexo_id_sexo'];
 
         return $user;
 
@@ -157,9 +156,9 @@ class Usuario extends Persona {
 
     static function obtenerTodos(){
         $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
-                    persona.id_persona,persona.persona_fecha_nacimiento, persona.persona_nombre,
-                    persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni FROM usuario 
-                JOIN persona on persona.id_persona=usuario.id_persona";
+                    persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
+                    persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM usuario 
+                JOIN persona on persona.id_persona=usuario.persona_id_persona";
 
         $db = new MySql();
         $datos = $db->consultar($sql);
@@ -187,9 +186,11 @@ class Usuario extends Persona {
 
     public static function login($nombreUsuario,$contrasenia){
         $sql= "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
-        persona.id_persona,persona.persona_fecha_nacimiento, persona.persona_nombre,
-        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni, usuario.estado FROM usuario 
-        JOIN persona on persona.id_persona=usuario.id_persona
+        persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni, persona.persona_estado,
+        sexo_id_sexo
+        FROM usuario 
+        JOIN persona on persona.id_persona=usuario.persona_id_persona
         WHERE usuario_nombre='{$nombreUsuario}' AND usuario_contrasenia='{$contrasenia}'";
         
         $database=new MySql();
@@ -200,7 +201,7 @@ class Usuario extends Persona {
 
             $registro=$datos->fetch_assoc();
 
-            if($registro['estado']==1){
+            if($registro['persona_estado']==1){
 
                 $user->crear_usuario($user,$registro);
                 $user->_estaLogeado= 1;
@@ -212,52 +213,20 @@ class Usuario extends Persona {
         return $user;
     }
 
-    public static function insertUser($personaNombre,$personaApellido,$personaDni,$personaFechaNac,$personaEstado,$personaSexo,$nombreUser,$contrasenia){
+    public function insertUser(){
         
-        $idPersona=Persona::insertPersona($personaNombre,$personaApellido,$personaDni,$personaFechaNac,$personaEstado,$personaSexo)->getIdPersona();
-        
-        /*$persona=new Persona;
-        $persona->insertPersona($personaNombre,$personaApellido,$personaDni,$personaFechaNac,$personaEstado,$personaSexo);
-        $idPersona=$persona->getIdPersona();*/
-
-        highlight_string(var_export($idPersona));
-        
-        $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$nombreUser}','{$contrasenia}','1','{$idPersona}')";
+        parent::insertPersona();
 
         $database=new MySql();
-        $datos= $database->insertarRegistro($sql);
+
+        $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contraseña}','{$this->_idPerfil}','{$this->_idPersona}')";
+
         
+        $database->insertarRegistro($sql);
 
-        $conex=$database->getConexion();
-        $idUser=mysqli_insert_id($conex);
-
-
-
-        $user=new Usuario();
-        $user->setIdUsuario($idUser);
-        $user->setNombreUsuario($nombreUser);
-        $user->setContraseña($contrasenia);
-        $user->setIdPersona($idPersona);
-        $user->setPerfil('1');
-        $user->setNombre($personaNombre);
-        $user->setApellido($personaApellido);
-        $user->setFechaNacimiento($personaFechaNac);
-        $user->setDni($personaDni);
-        $user->setIdPerfil('1');
-        $user->set_estaLogeado('1');
-
-        highlight_string(var_export($user,true));
 
     }
 
 
  
 }
-
-
-
-
-
-
-
-?>

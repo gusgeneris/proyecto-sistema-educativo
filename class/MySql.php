@@ -23,7 +23,7 @@ class MySql{
 
     public function insertarRegistro($sql){
         $datos=$this->_conexion->query($sql);
-        return $datos;
+        return $this->_conexion->insert_id;
 
     }
     

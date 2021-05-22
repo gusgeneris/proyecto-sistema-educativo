@@ -1,6 +1,7 @@
 <?php  
     require_once 'class/Sexo.php';
-    require_once 'class/MySql.php';        
+    require_once 'class/MySql.php';    
+    require_once 'class/Persona.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,18 +15,23 @@
 <body>
 <?php  
     $sexo=new Sexo();
+    $listado=[];
     $listado=$sexo->sexoTodos();
-    $r=$sexo->get_idSexo();
-    highlight_string(var_export($listado)) ;
 
+    $persona=new Persona();;
+    $sex= $_POST['sexo'];
+    echo $sex;
+?>
 
-    /*for($i=0;$i<count($listado);$i++){
-            print_r( $listado[$i]);
-    ?>
-    <br class="">
-    <?php }*/
-    ?>
+    <form method="POST" action="pruebasexo.php">
+        <select name="sexo" id="" class="" >
+        <option value="1" class=""><?php echo $listado['0']; ?></option>
+        <option value="2" class=""><?php echo $listado['1']; ?></option>
+        </select>
+        <input type="submit" class="go"> 
+    </form>
 
+    
 
 
 
