@@ -10,6 +10,8 @@ class Persona{
     protected $_dni;
     protected $_idSexo;
     protected $_nacionalidad;
+    protected $_estado;
+    protected $_sexo;
 
     public function __toString() {
         return "{$this->_nombre},{$this->_apellido}";
@@ -157,6 +159,26 @@ class Persona{
         return $this;
     }
 
+        /**
+     * Get the value of _estado
+     */ 
+    public function get_estado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function set_estado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
+
     public  function insertPersona(){
         $database=new Mysql();
 
@@ -167,6 +189,39 @@ class Persona{
         $idPersona=$database->insertarRegistro($sql);
         $this->_idPersona = $idPersona;
 
+    }
+
+    public function actualizarPersona(){
+
+        $database=new MySql();
+
+        $sql="UPDATE `test_usuario`.`persona` SET `persona_nombre` = '{$this->_nombre}', `persona_apellido` = '{$this->_apellido}', `persona_dni` = '{$this->_dni}', `persona_fecha_nac` = '{$this->_fechaNacimiento}', `persona_nacionalidad` = '{$this->_nacionalidad}',`sexo_id_sexo` = '{$this->_idSexo}' WHERE (`id_persona` = '{$this->_idPersona}')";
+        
+        $database->actualizar($sql);
+
+    }
+
+
+
+
+    /**
+     * Get the value of _sexo
+     */ 
+    public function getSexo()
+    {
+        return $this->_sexo;
+    }
+
+    /**
+     * Set the value of _sexo
+     *
+     * @return  self
+     */ 
+    public function setSexo(Sexo $descripcion)
+    {
+        $this->_sexo = $descripcion;
+
+        return $this;
     }
 }
 

@@ -8,6 +8,10 @@ const ERROR_LOGIN_CODE_NULL_DATA = '3';
 const ERROR_LOGIN_MENSAJE_NULL_DATA = 'Ingrese algun dato.';
 const CORRECT_INSERT_CODE= '4';
 const CORRECT_INSERT_MENSAJE= 'Se ingresarion los datos correctamente';
+const CORRECT_UPDATE_CODE= '5';
+const CORRECT_UPDATE_MENSAJE= 'Se actualizaron los datos correctamente';
+const INCORRECT_SESSION_CODE= '6';
+const INCORRECT_SESSION_MENSAJE= 'Necesita logearse para ingresar a esta seccion';
 
 
 ?>

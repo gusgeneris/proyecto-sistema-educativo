@@ -1,6 +1,7 @@
 <?php
 require_once "persona.php";
 require_once "mysql.php";
+require_once "sexo.php";
 
 class Usuario extends Persona {
     private $_idUsuario;
@@ -149,6 +150,7 @@ class Usuario extends Persona {
         $user->_nombreUsuario= $registro['usuario_nombre'];
         $user->_contraseña= $registro['usuario_contrasenia'];
         $user->_idSexo= $registro['sexo_id_sexo'];
+        $user->_idPerfil= $registro['perfil_id_perfil'];
 
         return $user;
 
@@ -157,7 +159,7 @@ class Usuario extends Persona {
     static function obtenerTodos(){
         $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
                     persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-                    persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM usuario 
+                    persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil FROM usuario 
                 JOIN persona on persona.id_persona=usuario.persona_id_persona";
 
         $db = new MySql();
@@ -188,7 +190,7 @@ class Usuario extends Persona {
         $sql= "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
         persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni, persona.persona_estado,
-        sexo_id_sexo
+        sexo_id_sexo,perfil_id_perfil
         FROM usuario 
         JOIN persona on persona.id_persona=usuario.persona_id_persona
         WHERE usuario_nombre='{$nombreUsuario}' AND usuario_contrasenia='{$contrasenia}'";
@@ -220,9 +222,43 @@ class Usuario extends Persona {
         $database=new MySql();
 
         $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contraseña}','{$this->_idPerfil}','{$this->_idPersona}')";
-
         
         $database->insertarRegistro($sql);
+
+    }
+
+    public static function obtenerTodoPorId($id){
+        $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
+        persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil FROM usuario 
+        JOIN persona on persona.id_persona=usuario.persona_id_persona WHERE id_usuario={$id}";
+
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+
+        $listadoUsuarios = [];
+
+        while ($registro = $datos->fetch_assoc()){
+
+        $user=new Usuario();
+        $user->crear_usuario($user,$registro);
+
+        $listadoUsuarios[]=$user;
+        }
+
+        return $listadoUsuarios;
+
+
+    }
+
+    public function actualizarUsuario(){
+
+        parent::actualizarPersona();
+
+        $database = new MySql();
+        $sql = "UPDATE `test_usuario`.`usuario` SET `usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+
+        $database->actualizar($sql);
 
 
     }

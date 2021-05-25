@@ -4,35 +4,40 @@ require_once "class/Usuario.php";
 require_once "class/Mysql.php";
 require_once "configs.php";
 
+$cancelar= $_POST['Cancelar'];
 
-$nombreUser = $_POST['NombreUser'];
-$contrasenia = $_POST['Contrasenia'];
-$personaNombre = $_POST['NombrePers'];
+if($cancelar==true){
+    header("Location:test_usuario_obtener_todos.php");
+    exit;
+}
+
+$idUsuario=$_POST['idUsuario'];
+$nombreUser = $_POST['UsuarioNom'];
+$personaNombre = $_POST['PersonaNom'];
 $personaApellido = $_POST['Apellido'];
 $personaDni = $_POST['Dni'];
 $personaFechaNac = $_POST['FechaNac'];
 $personaNacionalidad= $_POST['Nacionalidad'];
+$idPersona= $_POST['IdPersona'];
 $personaSexo= $_POST['Sexo'];
 $usuarioPerfil= $_POST['Perfil'];
 
-
 $user=new Usuario();
+$user->setIdUsuario($idUsuario);
 $user->setNombreUsuario($nombreUser);
-$user->setContraseña($contrasenia);
 $user->setNombre($personaNombre);
 $user->setApellido($personaApellido);
 $user->setDni($personaDni);
 $user->setFechaNacimiento($personaFechaNac);
 $user->setNacionalidad($personaNacionalidad);
+$user->setIdPersona($idPersona);
 $user->setIdSexo($personaSexo);
 $user->setIdPerfil($usuarioPerfil);
-$user->set_estaLogeado('1');
-$user->setPerfil('1');
 
-$user->insertUser();
+$user->actualizarUsuario();
 
 if ($user){
-    header("Location:test_usuario_obtener_todos.php?mj=".CORRECT_INSERT_CODE);
+    header("Location:test_usuario_obtener_todos.php?mj=".CORRECT_UPDATE_CODE);
 }
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once "class/Usuario.php";
+require_once "class/Alumno.php";
 require_once "class/Persona.php";
 require_once "class/Sexo.php";
 require_once "configs.php";
@@ -12,7 +12,7 @@ if(isset($_SESSION['usuario'])){
 else{header("Location:test_login.php?error=".INCORRECT_SESSION_CODE);
 exit;}
 
-$lista = Usuario::obtenerTodos();
+$lista = Alumno::listadoAlumnos();
 
 
 $mensaje='';
@@ -48,53 +48,57 @@ if(isset($_GET['mj'])){
         <a class="frasecabeza" href="inicio.php">S.I.G.E</a>
     </nav>
 </header>
+
 <body class="body-listuser">
-    <h1 class="titulo">Lista de Usuarios</h1>
+    <br>
+    <br>
+    <h1 class="titulo">Lista de Alumnos</h1>
         <div class="botonesnav">
-                <a href="insert_usuario.php" class="insert">Insertar nuevo usuario</a>
+                <a href="insert_alumno.php" class="insert">Insertar nuevo Alumno</a>
         </div>
     <table class="tabla" method="GET">
         <tr >
-            <th> ID Usuario</th>
+            <th> ID Alumno</th>
             <th> ID Persona</th>
             <th> Nombre</th>
             <th> Apellido</th>
             <th> Fecha Nacimiento</th>
-            <th> Nombre Usuario</th>
+            <th> Nacionalidad</th>
+            <th> Numero Legajo</th>
             <th> Sexo</th>
-            <th> Perfil</th>
+
             <th> Acciones</th>
 
         </tr>
-        <?php foreach ($lista as $usuario ):?> 
+        <?php foreach ($lista as $alumno ):?> 
             <tr >
                 <td >
-                    <?php echo $usuario->getIdUsuario(); ?>
+                    <?php echo $alumno->getIdAlumno(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdPersona(); ?>
+                    <?php echo $alumno->getIdPersona(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getNombre(); ?>
+                    <?php echo $alumno->getNombre(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getApellido(); ?>
+                    <?php echo $alumno->getApellido(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getFechaNacimiento(); ?>
+                    <?php echo $alumno->getFechaNacimiento(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getNombreUsuario(); ?>
+                    <?php echo $alumno->getNacionalidad(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdSexo(); ?>
+                    <?php echo $alumno->getNumLegajo(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdPerfil(); ?>
+                    <?php echo $alumno->getIdSexo(); ?>
                 </td>
                 <td>
                     <a href="borrar_usuario.php" class="">borrar</a>
-                    <a href="modificar_usuario.php?id= <?php echo $usuario->getIdUsuario(); ?>" class="">modificar</a>
+                    <a href="modificar_alumno.php?id= <?php echo $alumno->getIdAlumno(); ?>" class="">modificar</a>
                 </td>
             </tr>
         <?php endforeach ?>

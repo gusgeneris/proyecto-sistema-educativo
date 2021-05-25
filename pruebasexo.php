@@ -14,22 +14,25 @@
 </head>
 <body>
 <?php  
-    $sexo=new Sexo();
-    $listado=[];
-    $listado=$sexo->sexoTodos();
 
-    $persona=new Persona();;
-    $sex= $_POST['sexo'];
-    echo $sex;
+    $per= new Persona();
+    
+    $per->setSexo(Sexo::sexoTodoPorId(1));
+    $per->getSexo();
+
+    highlight_string(var_export($per,true));
+
+
+
 ?>
 
-    <form method="POST" action="pruebasexo.php">
-        <select name="sexo" id="" class="" >
-        <option value="1" class=""><?php echo $listado['0']; ?></option>
-        <option value="2" class=""><?php echo $listado['1']; ?></option>
-        </select>
-        <input type="submit" class="go"> 
-    </form>
+<?php foreach ($per as $usuario ):?>
+    <table>
+        <td class="">asd<?php echo $usuario->getSexo(); ?></td>
+    </table>
+<?php endforeach ?>
+
+
 
     
 

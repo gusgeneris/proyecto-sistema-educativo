@@ -1,5 +1,5 @@
 <?php
-require_once "class/Usuario.php";
+require_once "class/Docente.php";
 require_once "class/Persona.php";
 require_once "class/Sexo.php";
 require_once "configs.php";
@@ -12,7 +12,7 @@ if(isset($_SESSION['usuario'])){
 else{header("Location:test_login.php?error=".INCORRECT_SESSION_CODE);
 exit;}
 
-$lista = Usuario::obtenerTodos();
+$lista = Docente::listadoDocente();
 
 
 $mensaje='';
@@ -49,52 +49,55 @@ if(isset($_GET['mj'])){
     </nav>
 </header>
 <body class="body-listuser">
-    <h1 class="titulo">Lista de Usuarios</h1>
+    <br>
+    <br>
+    <h1 class="titulo">Lista de Docentes</h1>
         <div class="botonesnav">
-                <a href="insert_usuario.php" class="insert">Insertar nuevo usuario</a>
+                <a href="insert_docente.php" class="insert">Insertar Nuevo Docente</a>
         </div>
     <table class="tabla" method="GET">
         <tr >
-            <th> ID Usuario</th>
+            <th> ID Docente</th>
             <th> ID Persona</th>
             <th> Nombre</th>
             <th> Apellido</th>
             <th> Fecha Nacimiento</th>
-            <th> Nombre Usuario</th>
+            <th> Nacionalidad</th>
+            <th> Numero Matricula</th>
             <th> Sexo</th>
-            <th> Perfil</th>
+
             <th> Acciones</th>
 
         </tr>
-        <?php foreach ($lista as $usuario ):?> 
+        <?php foreach ($lista as $docente ):?> 
             <tr >
                 <td >
-                    <?php echo $usuario->getIdUsuario(); ?>
+                    <?php echo $docente->getIdDocente(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdPersona(); ?>
+                    <?php echo $docente->getIdPersona(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getNombre(); ?>
+                    <?php echo $docente->getNombre(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getApellido(); ?>
+                    <?php echo $docente->getApellido(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getFechaNacimiento(); ?>
+                    <?php echo $docente->getFechaNacimiento(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getNombreUsuario(); ?>
+                    <?php echo $docente->getNacionalidad(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdSexo(); ?>
+                    <?php echo $docente->getNumMatricula(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdPerfil(); ?>
+                    <?php echo $docente->getIdSexo(); ?>
                 </td>
                 <td>
                     <a href="borrar_usuario.php" class="">borrar</a>
-                    <a href="modificar_usuario.php?id= <?php echo $usuario->getIdUsuario(); ?>" class="">modificar</a>
+                    <a href="modificar_docente.php?id= <?php echo $docente->getIdDocente(); ?>" class="">modificar</a>
                 </td>
             </tr>
         <?php endforeach ?>

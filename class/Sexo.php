@@ -9,7 +9,7 @@ class Sexo{
     /**
      * Get the value of _descripcion
      */ 
-    public function get_descripcion()
+    public function getDescripcion()
     {
         return $this->_descripcion;
     }
@@ -19,17 +19,16 @@ class Sexo{
      *
      * @return  self
      */ 
-    public function set_descripcion($_descripcion)
+    public function setDescripcion($_descripcion)
     {
         $this->_descripcion = $_descripcion;
 
-        return $this;
     }
 
     /**
      * Get the value of _idSexo
      */ 
-    public function get_idSexo()
+    public function getIdSexo()
     {
         return $this->_idSexo;
     }
@@ -39,11 +38,10 @@ class Sexo{
      *
      * @return  self
      */ 
-    public function set_idSexo($_idSexo)
+    public function setIdSexo($_idSexo)
     {
         $this->_idSexo = $_idSexo;
 
-        return $this;
     }
 
     public static function sexoTodos(){
@@ -52,26 +50,40 @@ class Sexo{
 
         $database=new MySql();
         $datos = $database->consultar($sql);
-        $listadoUsuarios = [];
+        $listado = [];
 
  
         if($datos->num_rows > 0){
             while ($registro = $datos->fetch_assoc()){
                 $sexo=new Sexo();
-                $sexo->set_idSexo($registro['id_sexo']);
-                $sexo->set_descripcion($registro['sexo_descripcion']);
-                $descripcion=$sexo->get_descripcion();
-                $listadoUsuarios[]=$descripcion;
+                $sexo->setIdSexo($registro['id_sexo']);
+                $sexo->setDescripcion($registro['sexo_descripcion']);
+                $descripcion=$sexo->getDescripcion();
+                $listado[]=$descripcion;
             }
-            return $listadoUsuarios;}
+        return $listado;}
       
+    }
 
+    public static function sexoTodoPorId($id){
+        $sql = "SELECT id_sexo,sexo_descripcion FROM sexo WHERE id_sexo= {$id}";
+
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+ 
+        if($datos->num_rows > 0){
+                $registro=$datos->fetch_assoc();
+                $sexo=new Sexo();
+                $sexo->setIdSexo($registro['id_sexo']);
+                $sexo->setDescripcion($registro['sexo_descripcion']);
+                $lista[]=$sexo;
+            }
+        return $sexo;}
 
     }
     
 
 
-}
 
 
 

@@ -15,7 +15,9 @@
 }
 
 .titulo-login {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: fantasy;
+    color: rgb(5, 5, 5);
+    background-color: rgba(255, 255, 255, 0.452);
     size: 20%;
 }
 
@@ -33,7 +35,7 @@
 .body {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/19994917.png);
+    background-image: url(image/SL-073119-22070-13.jpg);
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */

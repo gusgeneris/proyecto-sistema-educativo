@@ -26,6 +26,11 @@ class MySql{
         return $this->_conexion->insert_id;
 
     }
+
+    public function actualizar($sql){
+        $datos=$this->_conexion->query($sql);
+    }
+
     
 }
 

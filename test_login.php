@@ -19,6 +19,11 @@ if(isset($_GET['error'])){
         <div class="mensaje"><?php echo $mensaje;?></div><?php
         
     }
+    else if ($error==INCORRECT_SESSION_CODE){
+        $mensaje=INCORRECT_SESSION_MENSAJE;?>
+        <div class="mensaje"><?php echo $mensaje;?></div><?php
+        
+    }
 };
 ?>
 

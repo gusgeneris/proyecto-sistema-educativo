@@ -16,7 +16,7 @@
 .body {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/5425729.jpg);
+    background-image: url(image/SL-073119-22070-13.jpg);
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */
@@ -35,19 +35,155 @@
 
 .titulo {
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: rgb(48, 105, 226);
-    border: 2px rgb(48, 105, 226) solid;
+    font-family: fantasy;
+    color: rgb(0, 0, 0);
+    border: 2px rgb(0, 0, 0) solid;
     background-color: white;
 }
 
 .mensajes {
     position: relative;
-    background: none repeat scroll 0 0 #ff3c00;
+    background: none repeat scroll 0 0 #ff8800;
     border-radius: 20px 20px 20px 20px;
     color: rgb(255, 255, 255);
     font-weight: bold;
     padding: 10px 20px;
     text-align: center;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.tabla {
+    background-color: white;
+    width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+td,
+th {
+    border: 3px solid black;
+    border-collapse: collapse;
+}
+
+.body-listuser {
+    height: 100%;
+    /* Ubicación de la imagen */
+    background-image: url(image/SL-073119-22070-13.jpg);
+    /* Para dejar la imagen de fondo centrada, vertical y
+
+    horizontalmente */
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+
+    de fondo o si hay problemas para cargarla */
+    background-color: cornflowerblue;
+}
+
+.insert {
+    float: left;
+}
+
+.botonesnav a {
+    margin: 10px;
+    font-family: fantasy;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    padding: 5px;
+    background-color: rgba(173, 173, 173, 0.562);
+}
+
+.cerrar_sesion a {
+    margin: 10px;
+    font-family: fantasy;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    padding: 5px;
+    background-color: rgba(177, 176, 176, 0.623);
+}
+
+.body-inicio {
+    height: 100%;
+    /* Ubicación de la imagen */
+    background-image: url(image/SL-073119-22070-13.jpg);
+    /* Para dejar la imagen de fondo centrada, vertical y
+
+    horizontalmente */
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+
+    de fondo o si hay problemas para cargarla */
+    background-color: cornflowerblue;
+}
+
+.boton-list-user {
+    margin: 10px;
+    font-family: fantasy;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    padding: 5px;
+    background-color: rgba(163, 163, 163, 0.5);
+}
+
+.modif-user {
+    height: 100%;
+    /* Ubicación de la imagen */
+    background-image: url(image/SL-073119-22070-13.jpg);
+    /* Para dejar la imagen de fondo centrada, vertical y
+
+    horizontalmente */
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+
+    de fondo o si hay problemas para cargarla */
+    background-color: cornflowerblue;
+}
+
+.logob {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    text-decoration: none;
+    float: left;
+    line-height: 50px;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+nav {
+    background-color: rgba(255, 0, 0, 0.288);
+    font-family: fantasy;
+    text-decoration: none;
+    font-size: 40px;
+    padding: 5px;
+    text-decoration: none;
+    background-color: rgba(173, 173, 173, 0.562);
 }
