@@ -64,24 +64,23 @@ class Alumno extends Persona{
     public static function listadoAlumnos(){
         $sql = "SELECT alumno.id_alumno,alumno.alumno_num_legajo,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM alumno 
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,persona.estado_id_estado FROM alumno 
         JOIN persona on persona.id_persona=alumno.persona_id_persona";
 
     $db = new MySql();
     $datos = $db->consultar($sql);
 
-    $listadoUsuariosAlumnos = [];
+    $listadoAlumnos = [];
 
     while ($registro = $datos->fetch_assoc()){
+        if($registro['estado_id_estado']==1){
+            $alumno=new Alumno();
+            $alumno->crear_alumno($alumno,$registro);
 
-    $alumno=new Alumno();
-    $alumno->crear_alumno($alumno,$registro);
+            $listadoAlumnos[]=$alumno;
+    }}
 
-    $listadoUsuariosAlumnos[]=$alumno;
-    }
-
-    return $listadoUsuariosAlumnos;
-
+    return $listadoAlumnos;
 
     }
 
@@ -93,8 +92,6 @@ class Alumno extends Persona{
 
         $db = new MySql();
         $datos = $db->consultar($sql);
-
-        $listadoUsuarios = [];
 
         while ($registro = $datos->fetch_assoc()){
 
@@ -111,7 +108,7 @@ class Alumno extends Persona{
     public function insertAlumno(){
         parent::insertPersona();
 
-        $sql = "INSERT INTO `test_usuario`.`alumno` (`persona_id_persona`, `alumno_num_legajo`) VALUES ('{$this->_idPersona}', '{$this->_numLegajo}');";
+        $sql = "INSERT INTO `alumno` (`persona_id_persona`, `alumno_num_legajo`) VALUES ('{$this->_idPersona}', '{$this->_numLegajo}');";
 
         $database= new Mysql();
 
@@ -125,11 +122,18 @@ class Alumno extends Persona{
         parent::actualizarPersona();
 
         $database = new MySql();
-        $sql = "UPDATE `test_usuario`.`alumno` SET `alumno_num_legajo` = '{$this->_numLegajo}' WHERE (`id_alumno` = '{$this->_idAlumno}');";
+        $sql = "UPDATE `alumno` SET `alumno_num_legajo` = '{$this->_numLegajo}' WHERE (`id_alumno` = '{$this->_idAlumno}');";
 
         $database->actualizar($sql);
 
 
+    }
+
+    public static function eliminarPorId($idAlumno){
+        $sql="SELECT persona_id_persona FROM alumno WHERE id_alumno={$idAlumno}";
+        $db = new MySql();
+        $id=$db->consultar($sql);
+      
     }
 }
 

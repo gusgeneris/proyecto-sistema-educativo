@@ -5,7 +5,7 @@ class MySql{
     protected $_conexion;
 
     public function __construct(){
-        $this->_conexion = new mysqli("localhost","root","","test_usuario");
+        $this->_conexion = new mysqli("localhost","root","","sistema_educativo");
     }
 
     public function getConexion(){

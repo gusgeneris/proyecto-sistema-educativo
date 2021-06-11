@@ -1,19 +1,11 @@
+
 <?php
-require_once "class/Usuario.php";
-require_once "class/Persona.php";
-require_once "class/Sexo.php";
-require_once "configs.php";
-
-session_start();
-
-if(isset($_SESSION['usuario'])){
-    $usuario=$_SESSION['usuario'];
-}
-else{header("Location:test_login.php?error=".INCORRECT_SESSION_CODE);
-exit;}
+require_once "../../class/Usuario.php";
+require_once "../../class/Perfil.php";
+require_once "../../class/Usuario.php";
+require_once "../../configs.php";
 
 $lista = Usuario::obtenerTodos();
-
 
 $mensaje='';
     
@@ -37,22 +29,19 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleInsert.css" class="">
-    <style class=""></style>
-    <title>Listado</title>
+    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista Usuarios</title>
+
 </head>
-<header class="">
-    <nav>
-        <a><img class="logob" src="image/logo.png" href="inicio.php"></a>
-    
-        <a class="frasecabeza" href="inicio.php">S.I.G.E</a>
-    </nav>
-</header>
+<?php require_once "../../menu.php";?>
 <body class="body-listuser">
+    <br>
+    <br>
     <h1 class="titulo">Lista de Usuarios</h1>
-        <div class="botonesnav">
-                <a href="insert_usuario.php" class="insert">Insertar nuevo usuario</a>
-        </div>
+    <br>
+    <br>
+        
     <table class="tabla" method="GET">
         <tr >
             <th> ID Usuario</th>
@@ -87,20 +76,25 @@ if(isset($_GET['mj'])){
                     <?php echo $usuario->getNombreUsuario(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdSexo(); ?>
+                    <?php $listadoSexo= Sexo::sexoTodoPorId($usuario->getIdSexo());
+                        foreach($listadoSexo as $sexo):
+                            echo $sexo->getDescripcion(); 
+                        endforeach 
+                        #echo $usuario->getIdSexo(); ?>
                 </td>
                 <td>
-                    <?php echo $usuario->getIdPerfil(); ?>
+                    <?php $listadoPerfil= Perfil::perfilTodoPorId($usuario->getIdPerfil());
+                        foreach($listadoPerfil as $perfil):
+                            echo $perfil->getPerfilNombre(); 
+                        endforeach  
+                        #echo $usuario->getIdPerfil(); ?>
                 </td>
                 <td>
-                    <a href="borrar_usuario.php" class="">borrar</a>
-                    <a href="modificar_usuario.php?id= <?php echo $usuario->getIdUsuario(); ?>" class="">modificar</a>
+                    <a href="dar_baja.php?id=<?php echo $usuario->getIdPersona(); ?>" class="">borrar</a>
+                    <a href="modificar.php?id= <?php echo $usuario->getIdUsuario(); ?>" class="">modificar</a>
                 </td>
             </tr>
         <?php endforeach ?>
-        <div class="cerrar_sesion">
-                <a href="cerrar_sesion.php" class="">Cerrar Sesion</a>
-        </div>
     
     </table>
 

@@ -159,7 +159,7 @@ class Usuario extends Persona {
     static function obtenerTodos(){
         $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
                     persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-                    persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil FROM usuario 
+                    persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil, estado_id_estado FROM usuario 
                 JOIN persona on persona.id_persona=usuario.persona_id_persona";
 
         $db = new MySql();
@@ -168,11 +168,13 @@ class Usuario extends Persona {
         $listadoUsuarios = [];
 
         while ($registro = $datos->fetch_assoc()){
-            
+            if($registro['estado_id_estado']==1){
+
             $user=new Usuario();
             $user->crear_usuario($user,$registro);
 
             $listadoUsuarios[]=$user;
+            }
         }
 
         return $listadoUsuarios;
@@ -189,8 +191,8 @@ class Usuario extends Persona {
     public static function login($nombreUsuario,$contrasenia){
         $sql= "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni, persona.persona_estado,
-        sexo_id_sexo,perfil_id_perfil
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,
+        sexo_id_sexo,perfil_id_perfil,estado_id_estado
         FROM usuario 
         JOIN persona on persona.id_persona=usuario.persona_id_persona
         WHERE usuario_nombre='{$nombreUsuario}' AND usuario_contrasenia='{$contrasenia}'";
@@ -203,7 +205,7 @@ class Usuario extends Persona {
 
             $registro=$datos->fetch_assoc();
 
-            if($registro['persona_estado']==1){
+            if($registro['estado_id_estado']==1){
 
                 $user->crear_usuario($user,$registro);
                 $user->_estaLogeado= 1;
@@ -256,7 +258,7 @@ class Usuario extends Persona {
         parent::actualizarPersona();
 
         $database = new MySql();
-        $sql = "UPDATE `test_usuario`.`usuario` SET `usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+        $sql = "UPDATE `usuario` SET `usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
 
         $database->actualizar($sql);
 

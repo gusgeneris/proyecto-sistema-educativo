@@ -60,18 +60,28 @@ class Perfil{
                 $perfil=new Perfil();
                 $perfil->setIdPerfil($registro['id_perfil']);
                 $perfil->setPerfilNombre($registro['perfil_nombre']);
-                $nombrePerfil=$perfil->getPerfilNombre();
-                $listadoUsuarios[]=$nombrePerfil;
+                $listadoUsuarios[]=$perfil;
             }
             return $listadoUsuarios;}
 
     }
 
+    public static function perfilTodoPorId($id){
+        $sql = "SELECT id_perfil,perfil_nombre FROM perfil WHERE id_perfil= {$id}";
 
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+ 
+        if($datos->num_rows > 0){
+                $registro=$datos->fetch_assoc();
+                $perfil=new perfil();
+                $perfil->setIdperfil($registro['id_perfil']);
+                $perfil->setPerfilNombre($registro['perfil_nombre']);
+                $lista[]=$perfil;
+            }
+        return $lista;}
 
-
-}
-
+    }
 
 
 

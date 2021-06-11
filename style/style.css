@@ -35,7 +35,7 @@
 .body {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/SL-073119-22070-13.jpg);
+    background-color: #eeeeee;
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */
@@ -49,5 +49,4 @@
     /* Se muestra un color de fondo mientras se está cargando la imagen
 
     de fondo o si hay problemas para cargarla */
-    background-color: cornflowerblue;
 }

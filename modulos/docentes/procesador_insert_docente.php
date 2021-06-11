@@ -1,8 +1,15 @@
 <?php
-require_once "class/Persona.php";
-require_once "class/Docente.php";
-require_once "class/Mysql.php";
-require_once "configs.php";
+require_once "../../class/Persona.php";
+require_once "../../class/Docente.php";
+require_once "../../class/Mysql.php";
+require_once "../../configs.php";
+
+$cancelar= $_POST['Cancelar'];
+
+if($cancelar==true){
+    header("Location:listado.php");
+    exit;
+}
 
 $personaNombre = $_POST['NombrePers'];
 $personaApellido = $_POST['Apellido'];
@@ -25,6 +32,6 @@ $docente->setIdSexo($personaSexo);
 $docente->insertDocente();
 
 if ($docente){
-    header("Location:listado_docente.php?mj=".CORRECT_INSERT_CODE);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
 } 
 ?>

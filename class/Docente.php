@@ -66,7 +66,7 @@ class Docente extends Persona{
     public static function listadoDocente(){
         $sql = "SELECT docente.id_docente, docente.docente_num_matricula,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM docente 
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,persona.estado_id_estado FROM docente 
         JOIN persona on persona.id_persona=docente.persona_id_persona";
 
     $db = new MySql();
@@ -75,12 +75,12 @@ class Docente extends Persona{
     $listadoDocente = [];
 
     while ($registro = $datos->fetch_assoc()){
+        if($registro['estado_id_estado']==1){
+            $docente=new Docente();
+            $docente->crear_docente($docente,$registro);
 
-    $docente=new Docente();
-    $docente->crear_docente($docente,$registro);
-
-    $listadoDocente[]=$docente;
-    }
+            $listadoDocente[]=$docente;
+    }}
 
     return $listadoDocente;
 
@@ -113,7 +113,7 @@ class Docente extends Persona{
     public function insertDocente(){
         parent::insertPersona();
 
-        $sql = "INSERT INTO `test_usuario`.`docente` (`persona_id_persona`, `docente_num_matricula`) VALUES ('{$this->_idPersona}', '{$this->_numMatricula}');";
+        $sql = "INSERT INTO `docente` (`persona_id_persona`, `docente_num_matricula`) VALUES ('{$this->_idPersona}', '{$this->_numMatricula}');";
 
         $database= new Mysql();
 
@@ -127,19 +127,13 @@ class Docente extends Persona{
         parent::actualizarPersona();
 
         $database = new MySql();
-        $sql = "UPDATE `test_usuario`.`docente` SET `docente_num_matricula` = '{$this->_numMatricula}' WHERE (`id_docente` = '{$this->_idDocente}');";
+        $sql = "UPDATE `docente` SET `docente_num_matricula` = '{$this->_numMatricula}' WHERE (`id_docente` = '{$this->_idDocente}');";
 
         $database->actualizar($sql);
 
 
     }
 
-
-
-
-
 }
-
-
 
 ?>

@@ -1,15 +1,7 @@
 <?php
-    require_once 'class/Sexo.php';
-    require_once 'class/MySql.php'; 
-    require_once "configs.php";  
-
-    session_start();
-
-    if(isset($_SESSION['usuario'])){
-        $usuario=$_SESSION['usuario'];
-    }
-    else{header("Location:test_login.php?error=".INCORRECT_SESSION_CODE);
-    exit;}
+    require_once '../../class/Sexo.php';
+    require_once '../../class/MySql.php'; 
+    require_once "../../configs.php";  
     
     $mensaje='';
     
@@ -22,9 +14,8 @@
     };
 ?>
 <?php  
-    $sexo=new Sexo();
-    $listado=[];
-    $listado=$sexo->sexoTodos();
+    
+    $listado=Sexo::sexoTodos();
 
 ?>
 <!DOCTYPE html>
@@ -34,21 +25,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleInsert.css">
-    <title>Insert</title>
+    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar nuevo Docente</title>
 </head>
-<header class="">
-    <nav>
-        <a><img class="logob" src="image/logo.png" href="inicio.php"></a>
-    
-        <a class="frasecabeza" href="inicio.php">S.I.G.E</a>
-    </nav>
-</header>
+
+<?php require_once "../../menu.php";?>
 
 <body class="body">
 
     <form action="procesador_insert_docente.php" method=POST class="formulario">
         <h1 class="titulo"> Registro de Docente</h1>
+        <br><br>
         <div class=""><input type="text" name="NombrePers" class="" placeholder="Nombre"></div>
         <div class=""><input type="text" name="Apellido" class="" placeholder="Apellido"></div>
         <div class=""><input type="text" name="Dni" class="" placeholder="Dni"></div>
@@ -56,13 +44,15 @@
         <div class=""><input type="text" name="Nacionalidad" class="" placeholder="Nacionalidad"></div>
         <div class=""><input type="text" name="NumMatricula" class="" placeholder="Numero Matricula"></div>
         <div class="">
-            <select name="Sexo" id="" class="">
-                <option value="0" class="">seleccione sexo</option>
-                <option value="1" class=""><?php echo $listado['0']; ?></option>
-                <option value="2" class=""><?php echo $listado['1']; ?></option>
+        <select name="Sexo" id="" class="">
+                <option value="NULL" class="">seleccione sexo</option>
+                <?php foreach($listado as $sexo):?>
+                <option value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
+                <?php endforeach?>
             </select>
         </div>
-        <div class=""><input type="submit" class="" name="guardar">
+        <div class=""><input type="submit" class="" name="guardar" value="Guardar">
+        <input name="Cancelar" type="submit" value="Cancelar">
 
         </div>
 

@@ -1,13 +1,13 @@
 <?php
-require_once "class/Persona.php";
-require_once "class/Alumno.php";
-require_once "class/Mysql.php";
-require_once "configs.php";
+require_once "../../class/Persona.php";
+require_once "../../class/Alumno.php";
+require_once "../../class/Mysql.php";
+require_once "../../configs.php";
 
 $cancelar= $_POST['Cancelar'];
 
 if($cancelar==true){
-    header("Location:test_usuario_obtener_todos.php");
+    header("Location:listado.php");
     exit;
 }
 
@@ -35,7 +35,7 @@ $alumno->setNumeroLegajo($numLegajo);
 $alumno->actualizarAlumno();
 
 if ($alumno){
-    header("Location:listado_alumnos.php?mj=".CORRECT_UPDATE_CODE);
+    header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
 }
 
 ?>

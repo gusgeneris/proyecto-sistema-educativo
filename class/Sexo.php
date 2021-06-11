@@ -58,8 +58,7 @@ class Sexo{
                 $sexo=new Sexo();
                 $sexo->setIdSexo($registro['id_sexo']);
                 $sexo->setDescripcion($registro['sexo_descripcion']);
-                $descripcion=$sexo->getDescripcion();
-                $listado[]=$descripcion;
+                $listado[]=$sexo;
             }
         return $listado;}
       
@@ -78,7 +77,7 @@ class Sexo{
                 $sexo->setDescripcion($registro['sexo_descripcion']);
                 $lista[]=$sexo;
             }
-        return $sexo;}
+        return $lista;}
 
     }
     

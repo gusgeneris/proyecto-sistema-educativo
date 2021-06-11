@@ -2,7 +2,7 @@
     text-align: center;
     position: absolute;
     width: 30%;
-    top: 15%;
+    top: 25%;
     left: 30%;
     right: 15%;
     bottom: 15%;
@@ -16,7 +16,7 @@
 .body {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/SL-073119-22070-13.jpg);
+    background-color: #eeeeee;
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */
@@ -30,7 +30,6 @@
     /* Se muestra un color de fondo mientras se está cargando la imagen
 
     de fondo o si hay problemas para cargarla */
-    background-color: cornflowerblue;
 }
 
 .titulo {
@@ -53,6 +52,7 @@
 }
 
 .tabla {
+    padding-top: 100px;
     background-color: white;
     width: 80%;
     border-collapse: collapse;
@@ -68,7 +68,7 @@ th {
 .body-listuser {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/SL-073119-22070-13.jpg);
+    background-color: #eeeeee;
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */
@@ -82,39 +82,16 @@ th {
     /* Se muestra un color de fondo mientras se está cargando la imagen
 
     de fondo o si hay problemas para cargarla */
-    background-color: cornflowerblue;
 }
 
 .insert {
     float: left;
 }
 
-.botonesnav a {
-    margin: 10px;
-    font-family: fantasy;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    padding: 5px;
-    background-color: rgba(173, 173, 173, 0.562);
-}
-
-.cerrar_sesion a {
-    margin: 10px;
-    font-family: fantasy;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    padding: 5px;
-    background-color: rgba(177, 176, 176, 0.623);
-}
-
 .body-inicio {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/SL-073119-22070-13.jpg);
+    background-color: #eeeeee;
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */
@@ -128,24 +105,12 @@ th {
     /* Se muestra un color de fondo mientras se está cargando la imagen
 
     de fondo o si hay problemas para cargarla */
-    background-color: cornflowerblue;
-}
-
-.boton-list-user {
-    margin: 10px;
-    font-family: fantasy;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    padding: 5px;
-    background-color: rgba(163, 163, 163, 0.5);
 }
 
 .modif-user {
     height: 100%;
     /* Ubicación de la imagen */
-    background-image: url(image/SL-073119-22070-13.jpg);
+    background-color: #eeeeee;
     /* Para dejar la imagen de fondo centrada, vertical y
 
     horizontalmente */
@@ -159,31 +124,4 @@ th {
     /* Se muestra un color de fondo mientras se está cargando la imagen
 
     de fondo o si hay problemas para cargarla */
-    background-color: cornflowerblue;
-}
-
-.logob {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    text-decoration: none;
-    float: left;
-    line-height: 50px;
-    overflow: hidden;
-    text-decoration: none;
-}
-
-nav a {
-    text-decoration: none;
-    color: black;
-}
-
-nav {
-    background-color: rgba(255, 0, 0, 0.288);
-    font-family: fantasy;
-    text-decoration: none;
-    font-size: 40px;
-    padding: 5px;
-    text-decoration: none;
-    background-color: rgba(173, 173, 173, 0.562);
 }
