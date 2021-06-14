@@ -83,11 +83,11 @@ if(isset($_GET['mj'])){
                         #echo $usuario->getIdSexo(); ?>
                 </td>
                 <td>
-                    <?php $listadoPerfil= Perfil::perfilTodoPorId($usuario->getIdPerfil());
-                        foreach($listadoPerfil as $perfil):
+                    <?php $perfil= Perfil::perfilPorId($usuario->getIdPerfil());
+                        /*foreach($listadoPerfil as $perfil):
                             echo $perfil->getPerfilNombre(); 
-                        endforeach  
-                        #echo $usuario->getIdPerfil(); ?>
+                        endforeach  */
+                        echo $perfil->getPerfilNombre(); ?>
                 </td>
                 <td>
                     <a href="dar_baja.php?id=<?php echo $usuario->getIdPersona(); ?>" class="">borrar</a>

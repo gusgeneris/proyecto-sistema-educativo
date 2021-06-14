@@ -7,7 +7,7 @@ session_start();
 if(isset($_SESSION['usuario'])){
     $usuario=$_SESSION['usuario'];
 }
-else{header("Location:login.php?error=".INCORRECT_SESSION_CODE);
+else{header("Location:/proyecto-modulos/login.php?error=".INCORRECT_SESSION_CODE);
 exit;}
 $_SESSION['usuario']=$usuario;
 
@@ -35,6 +35,18 @@ $_SESSION['usuario']=$usuario;
                     <li><a href="/proyecto-modulos/modulos/docentes/listado.php" class="a">Listado</a></li>
                     <li><a href="/proyecto-modulos/modulos/docentes/insert.php" class="a">Agregar nuevo</a></li>
                 </ul></li>
+            <li class=""><a href="/proyecto-modulos/modulos/carreras/listado.php" class="a">Carrera</a>
+                <ul>
+                        <li><a href="/proyecto-modulos/modulos/carreras/listado.php" class="a">Listado</a></li>
+                        <li><a href="/proyecto-modulos/modulos/carreras/insert.php" class="a">Agregar nuevo</a></li>
+                </ul>
+            </li>
+            <li class=""><a href="/proyecto-modulos/modulos/materias/listado.php" class="a">Materia</a>
+                <ul>
+                        <li><a href="/proyecto-modulos/modulos/materias/listado.php" class="a">Listado</a></li>
+                        <li><a href="/proyecto-modulos/modulos/materias/insert.php" class="a">Agregar nuevo</a></li>
+                </ul>
+            </li>
             <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
         </ul>
 

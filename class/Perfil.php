@@ -66,7 +66,7 @@ class Perfil{
 
     }
 
-    public static function perfilTodoPorId($id){
+    public static function perfilPorId($id){
         $sql = "SELECT id_perfil,perfil_nombre FROM perfil WHERE id_perfil= {$id}";
 
         $db = new MySql();
@@ -77,9 +77,8 @@ class Perfil{
                 $perfil=new perfil();
                 $perfil->setIdperfil($registro['id_perfil']);
                 $perfil->setPerfilNombre($registro['perfil_nombre']);
-                $lista[]=$perfil;
             }
-        return $lista;}
+        return $perfil;}
 
     }
 
