@@ -32,8 +32,8 @@ $user->setFechaNacimiento($personaFechaNac);
 $user->setNacionalidad($personaNacionalidad);
 $user->setIdSexo($personaSexo);
 $user->setIdPerfil($usuarioPerfil);
-$user->set_estaLogeado('1');
-$user->setPerfil('1');
+$user->setEstado('1');
+$user->perfil=$usuarioPerfil;
 
 $user->insertUser();
 

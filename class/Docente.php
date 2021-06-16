@@ -95,17 +95,14 @@ class Docente extends Persona{
         $db = new MySql();
         $datos = $db->consultar($sql);
 
-        $listadoUsuarios = [];
-
         while ($registro = $datos->fetch_assoc()){
 
         $docente=new Docente();
         $docente->crear_docente($docente,$registro);
 
-        $listadoDocente[]=$docente;
         }
 
-        return $listadoDocente;
+        return $docente;
 
 
     }

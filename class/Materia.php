@@ -121,6 +121,26 @@ Class Materia{
         $database=new Mysql();
         $database->actualizar($sql);
     }
+    public static function listadoPorIdCarrera($idCarrera){
+        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado from materia 
+        JOIN curricula_carrera on curricula_carrera.materia_id_materia=materia.id_materia
+        JOIN carrera on curricula_carrera.carrera_id_carrera = carrera.id_carrera 
+        WHERE id_carrera={$idCarrera}; ";
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+
+        $materia=new Materia();
+        $listadoMaterias= [];
+        while ($registro = $datos->fetch_assoc()){
+            $materia->_idMateria=$registro['id_materia'];
+            $materia->_nombre=$registro['materia_nombre'];
+            $materia->_estado=$registro['estado_id_estado'];
+            $listadoMaterias[]=$materia;
+        }
+        return $listadoMaterias;
+    }
+
+
 
 
 

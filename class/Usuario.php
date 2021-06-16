@@ -2,14 +2,15 @@
 require_once "persona.php";
 require_once "mysql.php";
 require_once "sexo.php";
+require_once "Perfil.php";
 
 class Usuario extends Persona {
-    private $_idUsuario;
+    protected $_idUsuario;
     protected $_idPerfil;
     protected $_nombreUsuario;
     protected $_contraseña;
-    protected $_perfil;
-    protected $_estaLogeado;
+
+    public $perfil;
 
 
     /**
@@ -99,45 +100,6 @@ class Usuario extends Persona {
         return $this;
     }
 
-    /**
-     * Get the value of _perfil
-     */ 
-    public function getPerfil()
-    {
-        return $this->_perfil;
-    }
-
-    /**
-     * Set the value of _perfil
-     *
-     * @return  self
-     */ 
-    public function setPerfil($_perfil)
-    {
-        $this->_perfil = $_perfil;
-
-        return $this;
-    }
-
-        /**
-     * Get the value of _estaLogeado
-     */ 
-    public function estaLogeado()
-    {
-        return $this->_estaLogeado;
-    }
-
-       /**
-     * Set the value of _estaLogeado
-     *
-     * @return  self
-     */ 
-    public function set_estaLogeado($_estaLogeado)
-    {
-        $this->_estaLogeado = $_estaLogeado;
-
-        return $this;
-    }
 
     static private function crear_usuario($user,$registro) {
         $user->_idUsuario= $registro['id_usuario'];
@@ -151,16 +113,32 @@ class Usuario extends Persona {
         $user->_contraseña= $registro['usuario_contrasenia'];
         $user->_idSexo= $registro['sexo_id_sexo'];
         $user->_idPerfil= $registro['perfil_id_perfil'];
+        $user->perfil= Perfil::perfilPorId($user->_idPerfil);
 
         return $user;
 
     }
 
-    static function obtenerTodos(){
+    static function obtenerTodos($filtroEstado = 0, $filtroApellido = ""){
         $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
                     persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
                     persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil, estado_id_estado FROM usuario 
-                JOIN persona on persona.id_persona=usuario.persona_id_persona";
+                JOIN persona on persona.id_persona=usuario.persona_id_persona ";
+
+        $where = "";
+
+        if($filtroEstado!=0){
+            $where.="WHERE persona.estado_id_estado={$filtroEstado}";
+        };
+
+        if($filtroApellido != ""){
+            if($where!= ""){
+                $where.=" AND persona.persona_apellido like '%{$filtroApellido}%'";
+            }else{
+                $where= "WHERE persona.persona_apellido like '%{$filtroApellido}%'";
+            }
+        }
+        $sql.=$where;
 
         $db = new MySql();
         $datos = $db->consultar($sql);
@@ -168,13 +146,13 @@ class Usuario extends Persona {
         $listadoUsuarios = [];
 
         while ($registro = $datos->fetch_assoc()){
-            if($registro['estado_id_estado']==1){
+            #if($registro['estado_id_estado']==1){
 
             $user=new Usuario();
             $user->crear_usuario($user,$registro);
 
             $listadoUsuarios[]=$user;
-            }
+            
         }
 
         return $listadoUsuarios;
@@ -208,10 +186,10 @@ class Usuario extends Persona {
             if($registro['estado_id_estado']==1){
 
                 $user->crear_usuario($user,$registro);
-                $user->_estaLogeado= 1;
+                $user->_estado= 1;
     
             } else {
-                $user->_estaLogeado= 2;
+                $user->_estado= 2;
             }
         }
         return $user;

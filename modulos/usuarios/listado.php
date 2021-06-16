@@ -3,11 +3,28 @@
 require_once "../../class/Usuario.php";
 require_once "../../class/Perfil.php";
 require_once "../../class/Usuario.php";
+require_once "../../class/Estado.php";
 require_once "../../configs.php";
 
-$lista = Usuario::obtenerTodos();
+if(isset($_GET["cboFiltroEstado"])){
+    $filtroEstado=$_GET["cboFiltroEstado"];
+} else{
+    $filtroEstado=1;
+}
+
+if(isset($_GET["txtApellido"])){
+    $filtroApellido=$_GET["txtApellido"];
+} else{
+    $filtroApellido="";
+}
+
+
+
+$lista = Usuario::obtenerTodos($filtroEstado,$filtroApellido);
 
 $mensaje='';
+
+
     
 if(isset($_GET['mj'])){
     $mj=$_GET['mj'];
@@ -41,7 +58,23 @@ if(isset($_GET['mj'])){
     <h1 class="titulo">Lista de Usuarios</h1>
     <br>
     <br>
-        
+
+    <form >
+    &nbsp;&nbsp;&nbsp;&nbsp;
+        <label> Estado: </label>
+            <select name="cboFiltroEstado" id="" method="GET">
+                <?php $listadoEstados= Estado::estadoTodos();
+                    foreach($listadoEstados as $estado):?>
+                <option value="<?php echo $estado->getIdEstado(); ?>" class=""><?php echo $estado->getDescripcion() ; ?></option>  
+                <?php endforeach ?>
+            <option value="0" class="">Todos</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label> Apellido: </label>
+            <input type="text" name="txtApellido">
+        <input type="submit" value="Filtrar">
+    </form>
+    <br><br>
     <table class="tabla" method="GET">
         <tr >
             <th> ID Usuario</th>
@@ -76,7 +109,8 @@ if(isset($_GET['mj'])){
                     <?php echo $usuario->getNombreUsuario(); ?>
                 </td>
                 <td>
-                    <?php $listadoSexo= Sexo::sexoTodoPorId($usuario->getIdSexo());
+                    <?php 
+                        $listadoSexo= Sexo::sexoTodoPorId($usuario->getIdSexo());
                         foreach($listadoSexo as $sexo):
                             echo $sexo->getDescripcion(); 
                         endforeach 

@@ -1,11 +1,13 @@
 <?php
 require_once "Mysql.php";
+require_once "Materia.php";
 
 Class Carrera{
     private $_idCarrera;
     private $_nombre;
     private $_duracionAnios;
     private $_estado;
+    private $_arrMateria;
     
 
     /**
@@ -116,7 +118,7 @@ Class Carrera{
     }
 
     public static function listadoPorId($idCarrera){
-        $sql="SELECT id_carrera, carrera_nombre, carrera_duracion_anios FROM carrera WHERE id_carrera= {$idCarrera};";
+        $sql="SELECT id_carrera, carrera_nombre, carrera_duracion_anios, estado_id_estado FROM carrera WHERE id_carrera= {$idCarrera};";
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
@@ -144,6 +146,8 @@ Class Carrera{
         $carrera->setIdCarrera($registro['id_carrera']);
         $carrera->setNombre($registro['carrera_nombre']);
         $carrera->setDuracionAnios($registro['carrera_duracion_anios']);
+        $carrera->setEstado($registro['estado_id_estado']);
+        $carrera->_arrMateria = Materia:: listadoPorIdCarrera($carrera->_idCarrera);
     
         return $carrera;
 

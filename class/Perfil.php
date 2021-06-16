@@ -1,10 +1,12 @@
 <?php
 require_once 'MySql.php';
+require_once 'Modulo.php';
 
 
 class Perfil{
-    protected $_idPerfil;
-    protected $_perfilNombre;
+    private $_idPerfil;
+    private $_perfilNombre;
+    private $_arrModulos;
 
 
     /**
@@ -47,12 +49,20 @@ class Perfil{
         return $this;
     }
 
+        /**
+     * Get the value of _arrModulos
+     */ 
+    public function getArrModulos()
+    {
+        return $this->_arrModulos;
+    }
+
     public static function perfilTodos(){
 
         $sql="SELECT id_perfil,perfil_nombre FROM perfil";
         $database=new MySql();
         $datos = $database->consultar($sql);
-        $listadoUsuarios = [];
+        $listadoPerfil = [];
 
  
         if($datos->num_rows > 0){
@@ -60,9 +70,9 @@ class Perfil{
                 $perfil=new Perfil();
                 $perfil->setIdPerfil($registro['id_perfil']);
                 $perfil->setPerfilNombre($registro['perfil_nombre']);
-                $listadoUsuarios[]=$perfil;
+                $listadoPerfil[]=$perfil;
             }
-            return $listadoUsuarios;}
+            return $listadoPerfil;}
 
     }
 
@@ -77,11 +87,9 @@ class Perfil{
                 $perfil=new perfil();
                 $perfil->setIdperfil($registro['id_perfil']);
                 $perfil->setPerfilNombre($registro['perfil_nombre']);
+                $perfil->_arrModulos= Modulo :: obtenerPorIdPerfil($perfil->_idPerfil);
             }
         return $perfil;}
 
-    }
-
-
-
+}
 ?>

@@ -161,7 +161,7 @@ class Persona{
         /**
      * Get the value of _estado
      */ 
-    public function get_estado()
+    public function getEstado()
     {
         return $this->_estado;
     }
@@ -171,7 +171,7 @@ class Persona{
      *
      * @return  self
      */ 
-    public function set_estado($_estado)
+    public function setEstado($_estado)
     {
         $this->_estado = $_estado;
 

@@ -5,6 +5,7 @@ require_once "../../configs.php";
 $carrera=new Carrera();
 
 $listadoCarreras=$carrera->listadoCarreras();
+#highlight_string(var_export($listadoCarreras,true));
 
 $mensaje='';
     
