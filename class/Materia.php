@@ -1,10 +1,12 @@
 <?php
 require_once "Mysql.php";
+require_once "EjeContenido.php";
 
 Class Materia{
     private $_idMateria;
     private $_nombre;
     private $_estado;
+    private $_arrEjeContenido;
 
         /**
      * Get the value of _idMateria
@@ -70,9 +72,11 @@ Class Materia{
     private function crearMateria($registro,$materia){
         $materia->setIdMateria($registro['id_materia']);
         $materia->setNombre($registro['materia_nombre']);
-        return $materia;
+        #$materia->_arrEjeContenido=EjeContenido::obtenerTodoPorId(1);
 
+        return $materia;
     }
+    
     public function insert(){
 
         $sql = "INSERT INTO `sistema_educativo`.`materia` (`materia_nombre`) VALUES ('{$this->nombre}');";
@@ -139,6 +143,8 @@ Class Materia{
         }
         return $listadoMaterias;
     }
+
+    
 
 
 

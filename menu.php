@@ -19,7 +19,7 @@ $listadoModulos= $usuario->perfil->getArrModulos();
 <header class="encabezado">
     <nav>    
         <div class="">
-            <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logo.png" ></a>
+            <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
         </div>
         <ul class="">
             <?php foreach($listadoModulos as $modulos): ?>

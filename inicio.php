@@ -12,7 +12,9 @@
 <?php require_once "menu.php";?>
 <br><br><br><br><br>
 
+<?php #highlight_string(var_export($usuario,true));?>
+
 <h1 class="titulo">Bienvenido <?php echo $usuario;?></h1>
-    
+
 </body>
 </html>

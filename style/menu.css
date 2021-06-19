@@ -8,9 +8,8 @@
 }
 
 .logob {
-    width: 50px;
-    border-radius: 50%;
     align-items: center;
+    width: 150px;
 }
 
 .encabezado nav {
@@ -60,10 +59,6 @@
 
 .encabezado nav ul li:hover>ul {
     display: block;
-}
-
-.logob:hover {
-    background-color: white;
 }
 
 

@@ -4,7 +4,12 @@ require_once "../../configs.php";
 
 $materia=new Materia();
 
-$listadomaterias=$materia->listadoMaterias();
+if(isset($_GET['id'])){
+    $idCarrera=$_GET["id"];
+    $listadomaterias=$materia->listadoPorIdCarrera($idCarrera);
+}else{
+    $listadomaterias=$materia->listadoMaterias();
+}
 
 $mensaje='';
     
@@ -54,7 +59,7 @@ if(isset($_GET['mj'])){
                     <?php echo $materia->getNombre()?> 
                 </td>
                 <td>
-                    <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>">modificar</a>  |  <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>">borrar</a>
+                    <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>">modificar</a>  |  <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>">borrar</a>  |  <a href="../eje_contenido/listado.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera ?>">Listado de contenido</a>
                 </td>
                 <?php endforeach?>
             </tr>

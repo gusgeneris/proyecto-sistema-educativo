@@ -51,7 +51,7 @@ if(isset($_GET['mj'])){
         <?php foreach ($listadoCarreras as $carrera):?>
         <tr>
             <td>
-                <?php echo $carrera->getIdCarrera()?>
+                <a href=""><?php echo $carrera->getIdCarrera()?></a>
             </td>
             <td>
                 <?php echo $carrera->getNombre()?> 
@@ -60,7 +60,7 @@ if(isset($_GET['mj'])){
                 <?php echo $carrera->getDuracionAnios()?>
             </td>
             <td>
-                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a> <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a>
+                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a> | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a> |  <a href="../../modulos/materias/listado?id= <?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
             </td>
             <?php endforeach?>
         </tr>
