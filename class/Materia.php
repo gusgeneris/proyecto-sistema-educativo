@@ -79,7 +79,15 @@ Class Materia{
     
     public function insert(){
 
-        $sql = "INSERT INTO `sistema_educativo`.`materia` (`materia_nombre`) VALUES ('{$this->nombre}');";
+        $sql = "INSERT INTO `materia` (`materia_nombre`) VALUES ('{$this->_nombre}');";
+        $database= new Mysql();
+        $idMateria=$database->insertarRegistro($sql);
+        $this->_idMateria=$idMateria;
+
+    }
+
+    public function insertPorCarrera($idCarrera){
+        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `carrera_id_carrera`) VALUES ({$this->_idMateria}, {$idCarrera})";
         $database= new Mysql();
         $database->insertarRegistro($sql);
 
@@ -106,7 +114,7 @@ Class Materia{
         $sql="SELECT id_materia, materia_nombre FROM materia WHERE id_materia= {$idMateria};";
         $database=new Mysql();
         $datos=$database->consultar($sql);
-
+        
         $materia=new Materia();
         $registro=$datos->fetch_assoc();
         $materia->crearMateria($registro,$materia);
@@ -133,9 +141,9 @@ Class Materia{
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
-        $materia=new Materia();
         $listadoMaterias= [];
         while ($registro = $datos->fetch_assoc()){
+            $materia=new Materia();
             $materia->_idMateria=$registro['id_materia'];
             $materia->_nombre=$registro['materia_nombre'];
             $materia->_estado=$registro['estado_id_estado'];

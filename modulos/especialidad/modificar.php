@@ -1,14 +1,12 @@
 <?php
-require_once "../../class/EjeContenido.php";
+require_once "../../class/Especialidad.php";
 require_once "../../configs.php";
 
 if(isset($_GET['id'])){
     $id=$_GET['id'];    
 }
-$idCarrera=$_GET["idCarrera"];
-$idMateria=$_GET["idMateria"];
 
-$ejeContenido= EjeContenido::obtenerTodoPorId($id);
+$especialidad= Especialidad::obtenerTodoPorId($id);
 
 ?>
 
@@ -31,17 +29,11 @@ $ejeContenido= EjeContenido::obtenerTodoPorId($id);
         <h1 class="titulo">Ingrese los nuevos datos</h1>
     
         <table>
-        
-            <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera ?>></div>
-            <div><input type="hidden" name=IdMateria value=<?php echo $idMateria ?>></div>
             <div class=""> 
-                <input name="idEjeContenido" type="hidden" class="" value="<?php echo $ejeContenido->getIdEjeContenido(); ?>">
-            </div>
-            <div> Numero
-                <input name="Numero" type="number" class="" value="<?php echo $ejeContenido->getNumero(); ?>">
+                <input name="idespecialidad" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
             </div>
             <div> Descripcion
-                <input name="Descripcion" type="text" class="" value="<?php echo $ejeContenido->getDescripcion(); ?>">
+                <input name="Descripcion" type="text" class="" value="<?php echo $especialidad->getDescripcion(); ?>">
             </div>
             <div> 
                 <input name="Guardar" type="submit" value="Actualizar" >

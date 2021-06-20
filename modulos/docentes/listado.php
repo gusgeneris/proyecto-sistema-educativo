@@ -6,6 +6,8 @@ require_once "../../configs.php";
 
 $lista = Docente::listadoDocente();
 
+#highlight_string(var_export($lista,true));
+
 $mensaje='';
     
 if(isset($_GET['mj'])){
@@ -88,8 +90,9 @@ if(isset($_GET['mj'])){
                     ?>
                 </td>
                 <td>
-                    <a href="dar_baja.php?id=<?php echo $docente->getIdPersona(); ?>" class="">borrar</a>
-                    <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class="">modificar</a>
+                    <a href="dar_baja.php?id=<?php echo $docente->getIdPersona(); ?>" class="">borrar</a> |
+                    <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class="">modificar</a> |
+                    <a href="../especialidad/listado.php?idDocente= <?php echo $docente->getIdDocente(); ?>" class="">Lista de Especialidades</a>
                 </td>
             </tr>
         <?php endforeach ?>

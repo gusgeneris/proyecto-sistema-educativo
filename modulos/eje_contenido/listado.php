@@ -31,6 +31,9 @@ $lista=EjeContenido::obtenerPorIdMateria($idMateria,$idCarrera);
     <h1 class="titulo">Lista de Eje Contenido</h1>
     <br>
     <br>
+    <div><a href="../eje_contenido/insert.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>">Agregar Eje Contenido</a></div>
+    <br>
+    <br>
 
     <form >
 
@@ -54,8 +57,8 @@ $lista=EjeContenido::obtenerPorIdMateria($idMateria,$idCarrera);
                     <?php echo $contenido->getDescripcion(); ?>
                 </td>
                 <td>
-                    <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>" class="">borrar</a>
-                    <a href="modificar.php?id= <?php echo $contenido->getIdEjeContenido(); ?>" class="">modificar</a>
+                    <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">borrar</a>
+                    <a href="modificar.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">modificar</a>
                 </td>
             </tr>
         <?php endforeach ?>

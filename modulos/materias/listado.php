@@ -4,13 +4,12 @@ require_once "../../configs.php";
 
 $materia=new Materia();
 
-if(isset($_GET['id'])){
-    $idCarrera=$_GET["id"];
-    $listadomaterias=$materia->listadoPorIdCarrera($idCarrera);
+if(isset($_GET['idCarrera'])){
+    $idCarrera=$_GET["idCarrera"];
+    $listadoMaterias=$materia->listadoPorIdCarrera($idCarrera);
 }else{
-    $listadomaterias=$materia->listadoMaterias();
+    $listadoMaterias=$materia->listadoMaterias();
 }
-
 $mensaje='';
     
 if(isset($_GET['mj'])){
@@ -45,12 +44,15 @@ if(isset($_GET['mj'])){
     <h1 class="titulo">Lista de Materias</h1>
     <br>
     <br>
+    <div><a href="../materias/insert.php?idCarrera=<?php echo $idCarrera?>">Agregar Materia</a></div>
+    <br>
+    <br>
     <table class="tabla">
         <th>Id materia</th>
         <th>Nombre</th>
         <th>Acciones</th>
         <tr>
-            <?php foreach ($listadomaterias as $materia):?>
+            <?php foreach ($listadoMaterias as $materia):?>
             <tr>
                 <td>
                     <?php echo $materia->getIdmateria()?>

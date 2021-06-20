@@ -2,11 +2,13 @@
 
 require_once "Mysql.php";
 require_once "Persona.php";
+require_once "Especialidad.php";
 
 class Docente extends Persona{
 
     private $_idDocente;
     private $_numMatricula;
+    private $_arrEspecialidad;
 
 
     /**
@@ -59,6 +61,8 @@ class Docente extends Persona{
         $docente->_nacionalidad= $registro['persona_nacionalidad'];
         $docente->_numMatricula= $registro['docente_num_matricula'];
         $docente->_idSexo= $registro['sexo_id_sexo'];
+        $docente->_estado= $registro['estado_id_estado'];
+        $docente->_arrEspecialidad=Especialidad::listarPorDocente($docente->_idDocente);
 
         return $docente;
 

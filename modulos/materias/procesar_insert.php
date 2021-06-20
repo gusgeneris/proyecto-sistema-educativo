@@ -11,13 +11,15 @@
     }
 
     $materiaNombre=$_POST["Nombre"];
+    $idCarrera=$_POST["IdCarrera"];
 
     $materia=new Materia();
-    $materia->setNombre($MateriaNombre);
-
+    $materia->setNombre($materiaNombre);
     $materia->insert();
 
+    $materia->insertPorCarrera($idCarrera);
+
     if ($materia){
-        header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
+        header("Location:listado.php?idCarrera=".$idCarrera."&mj=".CORRECT_INSERT_CODE);
     }
 ?>

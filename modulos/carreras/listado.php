@@ -60,7 +60,7 @@ if(isset($_GET['mj'])){
                 <?php echo $carrera->getDuracionAnios()?>
             </td>
             <td>
-                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a> | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a> |  <a href="../../modulos/materias/listado?id= <?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
+                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a> | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a> |  <a href="../../modulos/materias/listado?idCarrera= <?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
             </td>
             <?php endforeach?>
         </tr>

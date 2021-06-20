@@ -84,8 +84,28 @@ class EjeContenido{
         $sql = "INSERT INTO `eje_contenido` (`eje_descripcion`, `eje_numero`) VALUES ('$this->_descripcion', '$this->_numero')";
         $database=new Mysql();
 
+        $idEjeContenido=$database->insertarRegistro($sql);
+        $this->_idEjeContenido=$idEjeContenido;
+        
+    }
+
+    public function insertPorCarreraMateria($idCarrera,$idMateria){
+        $idCurriculaCarrera="SELECT id_curricula_carrera from curricula_carrera where materia_id_materia={$idMateria} and carrera_id_carrera={$idCarrera};";
+        $database=new Mysql();
+        $resultado=($database->consultar($idCurriculaCarrera))->fetch_assoc();
+        $idCurriculaCarrera = $resultado['id_curricula_carrera'];
+
+        $sql = "INSERT INTO `curricula_carrera_contenido` (`eje_contenido_id_eje_contenido`, `curricula_carrera_id_curricula_carrera`) VALUES ('$this->_idEjeContenido', $idCurriculaCarrera);";
+
         $database->insertarRegistro($sql);
         
+    }
+
+    public function consultaId($idCarrera,$idMateria){
+        $sql="SELECT id_curricula_carrera from curricula_carrera where materia_id_materia={$idMateria} and carrera_id_carrera={$idCarrera};";
+        $database= new Mysql();
+        $id=$database->consultar($sql);
+
     }
 
     public static function listaTodos(){
@@ -125,13 +145,11 @@ class EjeContenido{
 
         while ($registro = $datos->fetch_assoc()){
 
-        $ejeContenido=new EjeContenido();
-        $ejeContenido->crearEjeContenido($ejeContenido,$registro);
-
+            $ejeContenido=new EjeContenido();
+            $ejeContenido->crearEjeContenido($ejeContenido,$registro);
         }
 
         return $ejeContenido;
-
 
     }
 
@@ -160,9 +178,9 @@ class EjeContenido{
 
         while ($registro = $datos->fetch_assoc()){
 
-        $ejeContenido=new EjeContenido();
-        $ejeContenido->crearEjeContenido($ejeContenido,$registro);
-        $listadoEjeContenido[]=$ejeContenido;
+            $ejeContenido=new EjeContenido();
+            $ejeContenido->crearEjeContenido($ejeContenido,$registro);
+            $listadoEjeContenido[]=$ejeContenido;
         }
 
         return $listadoEjeContenido;
