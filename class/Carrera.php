@@ -95,6 +95,14 @@ Class Carrera{
 
         $sql="INSERT INTO `carrera` ( `carrera_nombre`, `carrera_duracion_anios`) VALUES ( '{$this->_nombre}', '{$this->_duracionAnios}');";
         $database=new Mysql();
+        $idCarrera=$database->insertarRegistro($sql);
+        $this->_idCarrera=$idCarrera;
+    }
+
+    public function crearRelacionConCicloLectivo($idCicloLectivo){
+        $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,{$this->_idCarrera});
+        ";
+        $database=new Mysql();
         $database->insertarRegistro($sql);
 
     }
@@ -151,6 +159,23 @@ Class Carrera{
     
         return $carrera;
 
+    }
+    public static function listadoCarrerasPorCicloLectivo($idCicloLectivo){
+
+        $sql="SELECT id_carrera, carrera_nombre,carrera_duracion_anios,estado_id_estado from carrera JOIN ciclo_lectivo_carrera on ciclo_lectivo_carrera.carrera_id_carrera=carrera.id_carrera JOIN ciclo_lectivo on ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo=ciclo_lectivo.id_ciclo_lectivo WHERE ciclo_lectivo.id_ciclo_lectivo= $idCicloLectivo";
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+        $listadoCarreras=[];
+        
+        while ($registro = $datos->fetch_assoc()){
+            #if ($registro['estado_id_estado']==1){
+            $carrera=new Carrera();
+            $carrera->crearCarrera($registro,$carrera);
+
+            $listadoCarreras[]=$carrera;
+        }
+        return $listadoCarreras;
+        
     }
 
 }

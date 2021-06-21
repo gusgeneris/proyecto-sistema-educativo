@@ -4,7 +4,10 @@ require_once "../../configs.php";
 
 $carrera=new Carrera();
 
-$listadoCarreras=$carrera->listadoCarreras();
+#$listadoCarreras=$carrera->listadoCarreras();
+
+$idCicloLectivo=$_GET["idCiclo"];
+$listadoCarreras=$carrera->listadoCarrerasPorCicloLectivo($idCicloLectivo);
 #highlight_string(var_export($listadoCarreras,true));
 
 $mensaje='';
@@ -42,6 +45,9 @@ if(isset($_GET['mj'])){
     <h1 class="titulo">Lista de Carreras</h1>
     <br>
     <br>
+    <div><a href="../carreras/insert.php?idCiclo=<?php echo $idCicloLectivo?>">Agregar Carrera</a></div>
+    <br>
+    <br>
     <table class="tabla">
     <th>Id Carrera</th>
     <th>Nombre</th>
@@ -60,7 +66,7 @@ if(isset($_GET['mj'])){
                 <?php echo $carrera->getDuracionAnios()?>
             </td>
             <td>
-                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a> | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a> |  <a href="../../modulos/materias/listado?idCarrera=<?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
+                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">modificar</a> | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">borrar</a> |  <a href="../../modulos/materias/listado?idCarrera=<?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
             </td>
             <?php endforeach?>
         </tr>

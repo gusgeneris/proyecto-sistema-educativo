@@ -113,6 +113,7 @@ class Usuario extends Persona {
         $user->_contraseña= $registro['usuario_contrasenia'];
         $user->_idSexo= $registro['sexo_id_sexo'];
         $user->_idPerfil= $registro['perfil_id_perfil'];
+        $user->_estado= $registro['estado_id_estado'];
         $user->perfil= Perfil::perfilPorId($user->_idPerfil);
 
         return $user;
@@ -144,6 +145,7 @@ class Usuario extends Persona {
         $datos = $db->consultar($sql);
 
         $listadoUsuarios = [];
+        
 
         while ($registro = $datos->fetch_assoc()){
             #if($registro['estado_id_estado']==1)
@@ -156,6 +158,7 @@ class Usuario extends Persona {
         }
 
         return $listadoUsuarios;
+
     }
 
 

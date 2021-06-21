@@ -12,7 +12,7 @@ if(isset($_GET['mj'])){
         <div class="mensajes"><?php echo $mensaje;?></div><?php
     }
 };
-
+$idCicloLectivo=$_GET["idCiclo"];
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,7 @@ if(isset($_GET['mj'])){
     <form action="procesar_insert.php" method="POST" class="formulario">
         <h1 class="titulo"> Registro de Carrera</h1>
         <br>
+        <div><input type="hidden" name=IdCiclo value=<?php echo $idCicloLectivo ?>></div>
         <div><input type="text" name=Nombre placeholder="Carrera Nombre"></div>
         <div><input type="number" name=AnioDuracion placeholder="Duracion en Años"></div>
         <div><input type="submit" name="Guardar" value="Guardar"></div>

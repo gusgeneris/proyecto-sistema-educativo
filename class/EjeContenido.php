@@ -89,7 +89,7 @@ class EjeContenido{
         
     }
 
-    public function insertPorCarreraMateria($idCarrera,$idMateria){
+    public function  crearRelacionConCurriculaCarrera($idCarrera,$idMateria){
         $idCurriculaCarrera="SELECT id_curricula_carrera from curricula_carrera where materia_id_materia={$idMateria} and carrera_id_carrera={$idCarrera};";
         $database=new Mysql();
         $resultado=($database->consultar($idCurriculaCarrera))->fetch_assoc();

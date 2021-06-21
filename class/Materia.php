@@ -72,7 +72,7 @@ Class Materia{
     private function crearMateria($registro,$materia){
         $materia->setIdMateria($registro['id_materia']);
         $materia->setNombre($registro['materia_nombre']);
-        #$materia->_arrEjeContenido=EjeContenido::obtenerTodoPorId(1);
+        $materia->_arrEjeContenido=EjeContenido::obtenerTodoPorId(1);
 
         return $materia;
     }
@@ -86,7 +86,7 @@ Class Materia{
 
     }
 
-    public function insertPorCarrera($idCarrera){
+    public function crearRelacionConCarrera($idCarrera){
         $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `carrera_id_carrera`) VALUES ({$this->_idMateria}, {$idCarrera})";
         $database= new Mysql();
         $database->insertarRegistro($sql);
@@ -147,6 +147,7 @@ Class Materia{
             $materia->_idMateria=$registro['id_materia'];
             $materia->_nombre=$registro['materia_nombre'];
             $materia->_estado=$registro['estado_id_estado'];
+            $materia->_arrEjeContenido=EjeContenido::obtenerPorIdMateria($materia->_idMateria,$idCarrera);
             $listadoMaterias[]=$materia;
         }
         return $listadoMaterias;

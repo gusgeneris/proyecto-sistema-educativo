@@ -1,10 +1,13 @@
 <?php
 
 require_once "../../class/MySql.php";
+require_once "../../class/Carrera.php";
 
 class cicloLectivo{
     private $_idCicloLectivo;
     private $_anio;
+
+    private $_arrCarrera;
 
 
     
@@ -54,6 +57,7 @@ class cicloLectivo{
     public function crearCicloLectivo($cicloLectivo,$registro){
         $cicloLectivo->_idCicloLectivo= $registro['id_ciclo_lectivo'];
         $cicloLectivo->_anio= $registro['ciclo_lectivo_anio'];
+        $cicloLectivo->_arrCarrera= Carrera::listadoCarrerasPorCicloLectivo($cicloLectivo->_idCicloLectivo);
         return $cicloLectivo;
     }
 

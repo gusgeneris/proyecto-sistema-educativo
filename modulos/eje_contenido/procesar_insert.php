@@ -20,7 +20,7 @@ $ejeContenido->setNumero($numero);
 $ejeContenido->setDescripcion($descripcion);
 
 $ejeContenido->insert();
-$ejeContenido->insertPorCarreraMateria($idMateria, $idCarrera);
+$ejeContenido-> crearRelacionConCurriculaCarrera($idCarrera,$idMateria);
 
 if ($ejeContenido){
     header("Location:listado.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_INSERT_CODE);

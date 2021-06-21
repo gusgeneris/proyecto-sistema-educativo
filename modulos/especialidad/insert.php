@@ -11,6 +11,8 @@
             <div class="mensajes"><?php echo $mensaje;?></div><?php
         }
     };
+
+    $idDocente=$_GET["idDocente"];
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +34,8 @@
 
     <form action="procesar_insert.php" method=POST class="formulario">
         <h1 class="titulo"> Registro de Especialidad</h1>
+
+        <div><input type="hidden" name=IdDocente value=<?php echo $idDocente ?>></div>
         <div class=""><input type="text" name="Descripcion" class="" placeholder="Descripcion"></div>
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">
             <input name="Cancelar" type="submit" value="Cancelar">

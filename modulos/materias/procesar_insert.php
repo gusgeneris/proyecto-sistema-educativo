@@ -17,7 +17,7 @@
     $materia->setNombre($materiaNombre);
     $materia->insert();
 
-    $materia->insertPorCarrera($idCarrera);
+    $materia->crearRelacionConCarrera($idCarrera);
 
     if ($materia){
         header("Location:listado.php?idCarrera=".$idCarrera."&mj=".CORRECT_INSERT_CODE);

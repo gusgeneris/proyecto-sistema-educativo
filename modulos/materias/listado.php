@@ -11,6 +11,8 @@ if(isset($_GET['idCarrera'])){
     $listadoMaterias=$materia->listadoMaterias();
 }
 $mensaje='';
+
+#highlight_string(var_export($listadoMaterias,true));
     
 if(isset($_GET['mj'])){
     $mj=$_GET['mj'];

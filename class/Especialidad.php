@@ -55,11 +55,20 @@ public function crearEspecialidad($especialidad,$registro){
 
 
 public function insert(){
-    $sql = "INSERT INTO `especialidad` (`especialidad_descripcion`) VALUES ('$this->_descripcion', '$this->_horaFin', '$this->_numero)";
+    $sql = "INSERT INTO `especialidad` (`especialidad_descripcion`) VALUES ('$this->_descripcion')";
+    $database=new Mysql();
+
+    $idEspecialidad=$database->insertarRegistro($sql);
+    $this->_idEspecialidad=$idEspecialidad;
+}
+
+public function crearRelacionconDocente($idDocente){
+    $sql="INSERT INTO `docente_especialidad` (`especialidad_id_especialidad`, `docente_id_docente`) VALUES ({$this->_idEspecialidad}, {$idDocente});
+    ";
     $database=new Mysql();
 
     $database->insertarRegistro($sql);
-    
+
 }
 
 public static function listaTodos(){
@@ -71,10 +80,10 @@ public static function listaTodos(){
     while ($registro = $datos->fetch_assoc()){
         if($registro['estado']==1){
 
-        $Especialidad=new Especialidad();
-        $Especialidad->crearEspecialidad($Especialidad,$registro);
+        $especialidad=new Especialidad();
+        $especialidad->crearEspecialidad($especialidad,$registro);
 
-        $listadoEspecialidad[]=$Especialidad;
+        $listadoEspecialidad[]=$especialidad;
         }
         
     }
@@ -90,17 +99,15 @@ public static function darDeBaja($idEspecialidad){
     $datos = $database->eliminarRegistro($sql);
 }
 
-public static function obtenerTodoPorId($id){
+public static function obtenerPorId($id){
     $sql = "SELECT id_especialidad,especialidad_descripcion from especialidad WHERE id_especialidad={$id};";
 
     $db = new MySql();
     $datos = $db->consultar($sql);
+    $registro=$datos->fetch_assoc();
 
-    while ($registro = $datos->fetch_assoc()){
-
-        $especialidad=new Especialidad();
-        $especialidad->crearEspecialidad($especialidad,$registro);
-    }
+    $especialidad=new Especialidad();
+    $especialidad->crearEspecialidad($especialidad,$registro);
 
     return $especialidad;
 }
@@ -113,7 +120,6 @@ public function actualizarEspecialidad(){
 
     $database->actualizar($sql);
 
-
 }
 
 public static function listarPorDocente($idDocente){
@@ -124,9 +130,9 @@ public static function listarPorDocente($idDocente){
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
-        $especialidad=new Especialidad();
         $listadoEspecialidades= [];
-        while ($registro = $datos->fetch_assoc()){
+        while ($registro = $datos->fetch_assoc()){  
+            $especialidad=new Especialidad();
             $especialidad->_idEspecialidad=$registro['id_especialidad'];
             $especialidad->_descripcion=$registro['especialidad_descripcion'];
             #$especialidad->_estado=$registro['estado_id_estado'];

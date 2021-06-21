@@ -34,7 +34,10 @@ $lista=Especialidad::listarPorDocente($idDocente);
 <body class="body-listuser">
     <br>
     <br>
-    <h1 class="titulo">Lista de especialidad Contenido</h1>
+    <h1 class="titulo">Lista de Especialidades</h1>
+    <br>
+    <br>
+    <div><a href="../especialidad/insert.php?idDocente=<?php echo $idDocente?>">Agregar Especialidad</a></div>
     <br>
     <br>
 
@@ -57,8 +60,8 @@ $lista=Especialidad::listarPorDocente($idDocente);
                     <?php echo $especialidad->getDescripcion(); ?>
                 </td>
                 <td>
-                    <a href="dar_baja.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>" class="">borrar</a>
-                    <a href="modificar.php?id= <?php echo $especialidad->getIdEspecialidad(); ?>" class="">modificar</a>
+                    <a href="dar_baja.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>&idDocente=<?php echo $idDocente?>" class="">borrar</a>
+                    <a href="modificar.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>&idDocente=<?php echo $idDocente?>" class="">modificar</a>
                 </td>
             </tr>
         <?php endforeach ?>

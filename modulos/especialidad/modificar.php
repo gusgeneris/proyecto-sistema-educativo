@@ -3,10 +3,12 @@ require_once "../../class/Especialidad.php";
 require_once "../../configs.php";
 
 if(isset($_GET['id'])){
-    $id=$_GET['id'];    
+    $id=$_GET['id']; 
+    $idDocente=$_GET['idDocente']; 
+
 }
 
-$especialidad= Especialidad::obtenerTodoPorId($id);
+$especialidad= Especialidad::obtenerPorId($id);
 
 ?>
 
@@ -30,7 +32,10 @@ $especialidad= Especialidad::obtenerTodoPorId($id);
     
         <table>
             <div class=""> 
-                <input name="idespecialidad" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
+                <input name="IdEspecialidad" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
+            </div>
+            <div class=""> 
+                <input name="IdDocente" type="hidden" class="" value="<?php echo $idDocente; ?>">
             </div>
             <div> Descripcion
                 <input name="Descripcion" type="text" class="" value="<?php echo $especialidad->getDescripcion(); ?>">

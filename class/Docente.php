@@ -93,7 +93,7 @@ class Docente extends Persona{
     public static function obtenerTodoPorId($id){
         $sql = "SELECT docente.id_docente, docente.docente_num_matricula,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM docente 
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo, persona.estado_id_estado FROM docente 
         JOIN persona on persona.id_persona=docente.persona_id_persona WHERE id_docente={$id}";
 
         $db = new MySql();

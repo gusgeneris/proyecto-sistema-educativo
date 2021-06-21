@@ -63,6 +63,7 @@ if(isset($_GET['mj'])){
     &nbsp;&nbsp;&nbsp;&nbsp;
         <label> Estado: </label>
             <select name="cboFiltroEstado" id="" method="GET">
+            
                 <?php $listadoEstados= Estado::estadoTodos();
                     foreach($listadoEstados as $estado):?>
                 <option value="<?php echo $estado->getIdEstado(); ?>" class=""><?php echo $estado->getDescripcion() ; ?></option>  

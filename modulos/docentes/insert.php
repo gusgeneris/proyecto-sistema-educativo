@@ -34,7 +34,7 @@
 
 <body class="body">
 
-    <form action="procesador_insert_docente.php" method=POST class="formulario">
+    <form action="procesar_insert.php" method=POST class="formulario">
         <h1 class="titulo"> Registro de Docente</h1>
         <br><br>
         <div class=""><input type="text" name="NombrePers" class="" placeholder="Nombre"></div>

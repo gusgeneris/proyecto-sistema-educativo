@@ -3,13 +3,14 @@
     require_once "../../configs.php";
 
     $cancelar= $_POST['Cancelar'];
+    $idCicloLectivo=$_POST["IdCiclo"];
 
     if($cancelar==true){
-        header("Location:listado.php");
+        header("Location:listado.php?idCiclo=".$idCicloLectivo);
         exit;
     }
 
-    $idCarrera=$_POST["idCarrera"];
+    $idCarrera=$_POST["IdCarrera"];
     $nombre=$_POST["Nombre"];
     $duracionAnios=$_POST["DuracionAnios"];
 
@@ -21,7 +22,7 @@
     $carrera->modificar();
 
     if ($carrera){
-        header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
+        header("Location:listado.php?mj=".CORRECT_UPDATE_CODE."&idCiclo=".$idCicloLectivo);
     }
 
 ?>

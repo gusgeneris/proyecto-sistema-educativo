@@ -38,7 +38,7 @@
         
         <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera ?>></div>
         <div><input type="hidden" name=IdMateria value=<?php echo $idMateria ?>></div>
-        <div class=""><input type="text" name="Numero" class="" placeholder="Numero"></div>
+        <div class=""><input type="number" name="Numero" class="" placeholder="Numero"></div>
         <div class=""><input type="text" name="Descripcion" class="" placeholder="Descripcion"></div>
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">
             <input name="Cancelar" type="submit" value="Cancelar">
