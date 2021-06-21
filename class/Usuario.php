@@ -146,7 +146,7 @@ class Usuario extends Persona {
         $listadoUsuarios = [];
 
         while ($registro = $datos->fetch_assoc()){
-            #if($registro['estado_id_estado']==1){
+            #if($registro['estado_id_estado']==1)
 
             $user=new Usuario();
             $user->crear_usuario($user,$registro);
