@@ -10,6 +10,8 @@ $idMateria=$_GET["idMateria"];
 
 $ejeContenido= EjeContenido::obtenerTodoPorId($id);
 
+highlight_string(var_export($ejeContenido,true))
+
 ?>
 
 <!DOCTYPE html>

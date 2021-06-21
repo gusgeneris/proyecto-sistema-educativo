@@ -2,6 +2,7 @@
     require_once "../../class/Materia.php";
     require_once "../../configs.php";
 
+    $idCarrera=$_GET["idCarrera"];
     $idMateria=$_GET["id"];
     $materia=Materia::listadoPorId($idMateria);
     $nombreMateria=$materia->getNombre();
@@ -23,9 +24,13 @@
 
 <body>
 
-<form action="procesar_actualizar.php" method="post" class="formulario">
+<form action="procesar_actualizar.php" method="POST" class="formulario">
     <h1 class="titulo">Ingrese los nuevos datos</h1>
     <br>
+    
+    <div>
+        <input type="hidden" name=IdCarrera value=<?php echo $idCarrera ?>>
+    </div>
     <div class="">
         <input name="idMateria" type="hidden" value="<?php echo $materia->getIdMateria();?>">
     </div>

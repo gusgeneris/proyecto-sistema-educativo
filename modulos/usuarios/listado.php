@@ -67,12 +67,12 @@ if(isset($_GET['mj'])){
                     foreach($listadoEstados as $estado):?>
                 <option value="<?php echo $estado->getIdEstado(); ?>" class=""><?php echo $estado->getDescripcion() ; ?></option>  
                 <?php endforeach ?>
-            <option value="0" class="">Todos</option>
-        </select>
+                <option value="0" class="">Todos</option>
+            </select>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label> Apellido: </label>
             <input type="text" name="txtApellido">
-        <input type="submit" value="Filtrar">
+            <input type="submit" value="Filtrar">
     </form>
     <br><br>
     <table class="tabla" method="GET">

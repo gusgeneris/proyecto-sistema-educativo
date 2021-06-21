@@ -158,13 +158,6 @@ class Usuario extends Persona {
         return $listadoUsuarios;
     }
 
-    public static function eliminarPorId($idUsuario){
-        $sql = "DELETE FROM usuario WHERE id_usuario={$idUsuario}";
-
-        $db = new MySql();
-        $datos = $db->eliminarRegistro($sql);
-
-    }
 
     public static function login($nombreUsuario,$contrasenia){
         $sql= "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,

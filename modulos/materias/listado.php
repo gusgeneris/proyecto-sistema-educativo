@@ -61,7 +61,7 @@ if(isset($_GET['mj'])){
                     <?php echo $materia->getNombre()?> 
                 </td>
                 <td>
-                    <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>">modificar</a>  |  <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>">borrar</a>  |  <a href="../eje_contenido/listado.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera ?>">Listado de contenido</a>
+                    <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">modificar</a>  |  <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">borrar</a>  |  <a href="../eje_contenido/listado.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">Listado de contenido</a>
                 </td>
                 <?php endforeach?>
             </tr>

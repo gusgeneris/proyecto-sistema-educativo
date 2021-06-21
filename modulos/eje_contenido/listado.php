@@ -6,6 +6,8 @@ $eje=new EjeContenido();
 $idMateria=$_GET['idMateria'];
 $idCarrera=$_GET['idCarrera'];
 
+
+
 $lista=EjeContenido::obtenerPorIdMateria($idMateria,$idCarrera);
 #highlight_string(var_export($lista,true));
 

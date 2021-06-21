@@ -16,14 +16,14 @@ $numero = $_POST['Numero'];
 $descripcion = $_POST['Descripcion'];
 
 $ejeContenido=new EjeContenido();
-$ejeContenido->setIdejeContenido($numero);
+$ejeContenido->setIdEjeContenido($idEjeContenido);
 $ejeContenido->setNumero($numero);
 $ejeContenido->setDescripcion($descripcion);
 
 $ejeContenido->actualizarEjeContenido();
 
 if ($ejeContenido){
-    header("Location:listado.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."mj=".CORRECT_UPDATE_CODE);
+    header("Location:listado.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_UPDATE_CODE);
 }
 
 ?>
