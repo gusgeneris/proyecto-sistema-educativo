@@ -65,6 +65,7 @@ public function insert(){
 public function crearRelacionconDocente($idDocente){
     $sql="INSERT INTO `docente_especialidad` (`especialidad_id_especialidad`, `docente_id_docente`) VALUES ({$this->_idEspecialidad}, {$idDocente});
     ";
+
     $database=new Mysql();
 
     $database->insertarRegistro($sql);
@@ -139,6 +140,20 @@ public static function listarPorDocente($idDocente){
             $listadoEspecialidades[]=$especialidad;
         }
         return $listadoEspecialidades;
+}
+
+public static function eliminarRelacionDocente($idEspecialidad,$idDocente){
+    $sqlId="SELECT id_docente_especialidad FROM docente_especialidad WHERE docente_id_docente={$idDocente} AND especialidad_id_especialidad={$idEspecialidad};";
+
+    $database=new Mysql();
+    $dato=$database->consultar($sqlId);
+    $registro=$dato->fetch_assoc();
+    $idDocenteEspecialidad=$registro["id_docente_especialidad"];
+
+    $sql="DELETE FROM `docente_especialidad` WHERE (`id_docente_especialidad` = {$idDocenteEspecialidad});";
+
+    $database->eliminarRegistro($sql);
+
 }
 
 

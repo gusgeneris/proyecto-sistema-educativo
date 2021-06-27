@@ -3,8 +3,6 @@ require_once "../../class/MySql.php";
 require_once "../../class/Materia.php";    
 require_once "../../configs.php";  
 
-$idCarrera=$_GET["idCarrera"];
-
 $mensaje='';
 
 if(isset($_GET['mj'])){
@@ -35,9 +33,6 @@ if(isset($_GET['mj'])){
 
     <form action="procesar_insert.php" method="POST" class="formulario">
         <h1 class="titulo"> Registro de Materia</h1>
-        <br>
-        
-        <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera ?>></div>
         <div><input type="text" name=Nombre placeholder="Materia Nombre"></div>
         <div><input type="submit" name="Guardar" value="Guardar"></div>
         <div><input type="submit" name="Cancelar" value="Cancelar"></div>

@@ -2,22 +2,36 @@
 require_once "../../class/Carrera.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php";
+require_once "../../class/CicloLectivo.php";
 
 $carrera=new Carrera();
 
+
+
+
 if(isset($_GET["cboFiltroEstado"])){
     $filtroEstado=$_GET["cboFiltroEstado"];
+    $idCicloLectivo=$_GET["idCiclo"];
 } else{
     $filtroEstado=1;
+    $idCicloLectivo=$_GET["idCiclo"];
 }
 
 if(isset($_GET["txtNombre"])){
     $filtroNombre=$_GET["txtNombre"];
+    $idCicloLectivo=$_GET["idCiclo"];
 } else{
     $filtroNombre="";
+    $idCicloLectivo=$_GET["idCiclo"];
 }
 
-$listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
+if (isset($_GET["idCiclo"])){
+    $idCicloLectivo=$_GET["idCiclo"];
+    $listadoCarreras=$carrera->listadoCarrerasPorCicloLectivo($idCicloLectivo,$filtroEstado,$filtroNombre);
+}else{
+    $listadoCarreras=$carrera->listadoCarreras();
+}
+
 #highlight_string(var_export($listadoCarreras,true));
 
 
@@ -33,6 +47,9 @@ if(isset($_GET['mj'])){
         <div class="mensajes"><?php echo $mensaje;?></div><?php
     }
 };
+
+$cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
+$idCicloLectivo=$_GET["idCiclo"];
 
 ?>
 
@@ -53,24 +70,10 @@ if(isset($_GET['mj'])){
     <?php require_once "../../menu.php";?>
     <br>
     <br>
-    <h1 class="titulo">Lista de Carreras </h1>
+    <h1 class="titulo">Lista de Carreras del ciclo lectivo: <?php echo $cicloLectivo?> </h1>
     <br>
     <br>
-    <form >
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label> Estado: </label>
-            <select name="cboFiltroEstado" id="" method="GET">
-                <?php $listadoEstados= Estado::estadoTodos();
-                    foreach($listadoEstados as $estado):?>
-                <option value="<?php echo $estado->getIdEstado(); ?>" name=""><?php echo $estado->getDescripcion() ; ?></option>  
-                <?php endforeach ?>
-                <option value="0" class="">Todos</option>
-            </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label> Apellido: </label>
-            <input type="text" name="txtNombre">
-            <input type="submit" value="Filtrar">
-    </form>
+    <div><a href="../carreras/asignar_carrera.php?idCiclo=<?php echo $idCicloLectivo ?>">Asignar Carrera</a>
     <br>
     <br>
     <table class="tabla">
@@ -90,13 +93,9 @@ if(isset($_GET['mj'])){
             <td>
                 <?php echo $carrera->getDuracionAnios()?>
             </td>
-            
             <td>
-                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a>
-                | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a> 
-                <?php if (($carrera->getEstado())==2){?>
-                    <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>">| Dar Alta</a>
-                    <?php } ?>
+                <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">borrar</a> |  
+                <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
             </td>
             <?php endforeach?>
         </tr>

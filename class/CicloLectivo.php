@@ -9,6 +9,9 @@ class cicloLectivo{
 
     private $_arrCarrera;
 
+    public function __toString() {
+        return "{$this->_anio}";
+    }
 
     
     /**
@@ -100,9 +103,8 @@ class cicloLectivo{
 
     }
 
-    public static function obtenerTodoPorId($id){
-        $sql = "SELECT id_ciclo_lectivo,ciclo_lectivo_anio from ciclo_lectivo WHERE id_ciclo_lectivo={$id};";
-
+    public static function obtenerTodoPorId($idCicloLectivo){
+        $sql = "SELECT id_ciclo_lectivo,ciclo_lectivo_anio from ciclo_lectivo WHERE id_ciclo_lectivo={$idCicloLectivo};";
         $db = new MySql();
         $datos = $db->consultar($sql);
 

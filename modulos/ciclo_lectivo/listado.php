@@ -2,7 +2,8 @@
 require_once "../../class/CicloLectivo.php";
 
 $lista=CicloLectivo::listaTodos();
-highlight_string(var_export($lista,true));
+
+#highlight_string(var_export($lista,true));
 
 ?>
 
@@ -46,7 +47,7 @@ highlight_string(var_export($lista,true));
                 <td>
                     <a href="dar_baja.php?id=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class="">Borrar</a> |
                     <a href="modificar.php?id=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class="">Modificar</a> |
-                    <a href="../carreras/listado.php?idCiclo=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class="">Listado de Carreras</a>
+                    <a href="../carreras/listado_por_ciclo.php?idCiclo=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class="">Listado de Carreras</a>
                 </td>
             </tr>
         <?php endforeach ?>

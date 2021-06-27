@@ -4,6 +4,7 @@
     require_once "../../configs.php";
 
     $cancelar= $_POST['Cancelar'];
+    $idCarrera=$_POST["IdCarrera"];
 
     if($cancelar==true){
         header("Location:listado.php");
@@ -11,15 +12,12 @@
     }
 
     $materiaNombre=$_POST["Nombre"];
-    $idCarrera=$_POST["IdCarrera"];
 
     $materia=new Materia();
     $materia->setNombre($materiaNombre);
     $materia->insert();
 
-    $materia->crearRelacionConCarrera($idCarrera);
-
     if ($materia){
-        header("Location:listado.php?idCarrera=".$idCarrera."&mj=".CORRECT_INSERT_CODE);
+        header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
     }
 ?>

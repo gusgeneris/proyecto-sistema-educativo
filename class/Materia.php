@@ -72,7 +72,7 @@ Class Materia{
     private function crearMateria($registro,$materia){
         $materia->setIdMateria($registro['id_materia']);
         $materia->setNombre($registro['materia_nombre']);
-        $materia->_arrEjeContenido=EjeContenido::obtenerTodoPorId(1);
+        #$materia->_arrEjeContenido=EjeContenido::obtenerTodoPorId(1);
 
         return $materia;
     }
@@ -86,27 +86,47 @@ Class Materia{
 
     }
 
-    public function crearRelacionConCarrera($idCarrera){
-        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `carrera_id_carrera`) VALUES ({$this->_idMateria}, {$idCarrera})";
+    public static function crearRelacionConCarrera($idMateria,$idCarrera){
+        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `carrera_id_carrera`) VALUES ($idMateria, {$idCarrera})";
         $database= new Mysql();
         $database->insertarRegistro($sql);
+        return true;
 
     }
 
-    public static function listadoMaterias(){
-        $sql= "SELECT id_materia,materia_nombre, estado_id_estado FROM materia";
+    public static function listadoMaterias($filtroEstado=0,$filtroNombre=""){
+        $sql= "SELECT id_materia,materia_nombre, estado_id_estado FROM materia ";
+        
+        $where="";
+
+        if($filtroEstado!=0){
+            $where.="WHERE materia.estado_id_estado=$filtroEstado ";
+        };
+
+        if($filtroNombre != ""){
+            if($where!= ""){
+                $where.="AND materia.materia_nombre like '%{$filtroNombre}%'";
+            }else{
+                $where= "WHERE materia.materia_nombre like '%{$filtroNombre}%'";
+            }
+        }
+        $sql.=$where;
+
+    
+
         $database= new Mysql();
         $datos = $database->consultar($sql);
+
 
         $listadoMaterias=[];
         
         while ($registro = $datos->fetch_assoc()){
-            if ($registro['estado_id_estado']==1){
+            #if ($registro['estado_id_estado']==1){
                 $materia=new Materia();
                 $materia->crearMateria($registro,$materia);
 
                 $listadoMaterias[]=$materia;}
-        }
+        
         return $listadoMaterias;
     }
 
@@ -134,25 +154,50 @@ Class Materia{
         $database->actualizar($sql);
     }
     public static function listadoPorIdCarrera($idCarrera){
-        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado from materia 
+        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado FROM materia 
         JOIN curricula_carrera on curricula_carrera.materia_id_materia=materia.id_materia
         JOIN carrera on curricula_carrera.carrera_id_carrera = carrera.id_carrera 
-        WHERE id_carrera={$idCarrera}; ";
+        WHERE id_carrera={$idCarrera} ";
+
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
         $listadoMaterias= [];
-        while ($registro = $datos->fetch_assoc()){
-            $materia=new Materia();
-            $materia->_idMateria=$registro['id_materia'];
-            $materia->_nombre=$registro['materia_nombre'];
-            $materia->_estado=$registro['estado_id_estado'];
-            $materia->_arrEjeContenido=EjeContenido::obtenerPorIdMateria($materia->_idMateria,$idCarrera);
-            $listadoMaterias[]=$materia;
+
+        if($datos->num_rows > 0){
+ 
+            while ($registro = $datos->fetch_assoc()){
+                if ($registro['curricula_carrera_estado']==1){
+                    $materia=new Materia();
+                    $materia->_idMateria=$registro['id_materia'];
+                    $materia->_nombre=$registro['materia_nombre'];
+                    $materia->_estado=$registro['estado_id_estado'];
+                    #$materia->_arrEjeContenido=EjeContenido::obtenerPorIdMateria($materia->_idMateria,$idCarrera);
+                    $listadoMaterias[]=$materia;}
+                
+            }
         }
+
         return $listadoMaterias;
     }
 
+    public static function eliminarRelacionCarrera($idMateria,$idCarrera){
+        $sqlId="SELECT id_curricula_carrera FROM curricula_carrera WHERE materia_id_materia={$idMateria} AND carrera_id_carrera={$idCarrera}";
+
+        $database =new Mysql();
+        $dato=$database->consultar($sqlId);
+        $registro=$dato->fetch_assoc();
+        $idCurriculaCarrera=$registro["id_curricula_carrera"];
+        $sql="UPDATE curricula_carrera SET `curricula_carrera_estado` = '2' WHERE (`id_curricula_carrera` = {$idCurriculaCarrera})";
+
+        $database->eliminarRegistro($sql);
+    }
+
+    public function __toString(){
+
+        return "{$this->_nombre}";
+
+    }
     
 
 

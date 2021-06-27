@@ -135,6 +135,67 @@ class Docente extends Persona{
 
     }
 
+    public static function listadoPorDocenteMateria($idCarrera,$idMateria){
+        $sql="SELECT DISTINCT docente.id_docente, docente.docente_num_matricula,
+        persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,persona.estado_id_estado,docente_materia.docente_materia_estado, docente_carrera.docente_carrera_estado FROM docente JOIN persona ON persona.id_persona=docente.persona_id_persona JOIN docente_materia ON docente_materia.docente_id_docente=docente.id_docente JOIN materia ON docente_materia.materia_id_materia=materia.id_materia JOIN docente_carrera ON docente_carrera.docente_id_docente=docente.id_docente JOIN carrera ON carrera.id_carrera=docente_carrera.carrera_id_carrera WHERE materia.id_materia={$idMateria} AND carrera.id_carrera={$idCarrera}";
+
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+    
+        $listadoDocente = [];
+    
+        while ($registro = $datos->fetch_assoc()){
+            if($registro['docente_materia_estado']==1 & $registro['docente_carrera_estado']==1  ){
+                $docente=new Docente();
+                $docente->crear_docente($docente,$registro);
+    
+                $listadoDocente[]=$docente;
+        }}
+    
+        return $listadoDocente;
+    
+
+    }
+
+    public function asignarCarrera($idDocente,$idCarrera){
+        $sql="INSERT INTO `docente_carrera` (`docente_id_docente`, `carrera_id_carrera`) VALUES ({$idDocente}, {$idCarrera});";
+
+        $database =new Mysql();
+        $datos=$database->insertarRegistro($sql);
+    }
+
+    public function asignarMateria($idDocente,$idMateria){
+        $sql="INSERT INTO `docente_materia` (`docente_id_docente`, `materia_id_materia`) VALUES ({$idDocente}, {$idMateria})";
+
+        $database =new Mysql();
+        $datos=$database->insertarRegistro($sql);
+    }
+
+    public static function eliminarRelacionDocenteMateria($idDocente,$idMateria){
+        $sqlId="SELECT id_docente_materia FROM docente_materia WHERE docente_id_docente={$idDocente} AND materia_id_materia={$idMateria}";
+
+        $database =new Mysql();
+        $dato=$database->consultar($sqlId);
+        $registro=$dato->fetch_assoc();
+        $idDocenteMateria=$registro["id_docente_materia"];
+
+        $sql="UPDATE docente_materia SET `docente_materia_estado` = '2' WHERE (`id_docente_materia` = {$idDocenteMateria})";
+        $database->eliminarRegistro($sql);
+    }
+
+    public static function eliminarRelacionDocenteCarrera($idDocente,$idCarrera){
+        $sqlId="SELECT id_docente_carrera FROM docente_carrera WHERE docente_id_docente={$idDocente} AND carrera_id_carrera={$idCarrera}";
+
+        $database =new Mysql();
+        $dato=$database->consultar($sqlId);
+        $registro=$dato->fetch_assoc();
+        $idDocenteCarrera=$registro["id_docente_carrera"];
+        $sql="UPDATE docente_carrera SET `docente_carrera_estado` = '2' WHERE (`id_docente_carrera` = {$idDocenteCarrera} )";
+        $database->eliminarRegistro($sql);
+    }
+
+
 }
 
 ?>

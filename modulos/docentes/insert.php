@@ -51,6 +51,7 @@
                 <?php endforeach?>
             </select>
         </div>
+
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">
         <input name="Cancelar" type="submit" value="Cancelar">
 

@@ -57,6 +57,15 @@ class Perfil{
         return $this->_arrModulos;
     }
 
+    public function insert(){
+        $sql="INSERT INTO `perfil` (`perfil_nombre`) VALUES ('$this->_perfilNombre');
+        ";
+        $database=new Mysql();
+
+        $database->insertarRegistro($sql);
+              
+    }
+
     public static function perfilTodos(){
 
         $sql="SELECT id_perfil,perfil_nombre FROM perfil";
@@ -90,6 +99,21 @@ class Perfil{
                 $perfil->_arrModulos= Modulo :: obtenerPorIdPerfil($perfil->_idPerfil);
             }
         return $perfil;}
+    
+        public function actualizarPerfil(){
 
+            $database = new MySql();
+            $sql = "UPDATE `perfil` SET `perfil_nombre` = '{$this->_perfilNombre}' WHERE (`id_perfil` = '{$this->_idPerfil}')";
+
+            $database->actualizar($sql);
+
+        }
+
+        public function darDeBaja($idPerfil){
+            $sql = "UPDATE `perfil` SET `estado` = '2' WHERE (`id_perfil` = '$idPerfil')";
+
+            $database= new MySql();
+            $datos = $database->eliminarRegistro($sql);
+        }
 }
 ?>

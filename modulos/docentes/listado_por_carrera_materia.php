@@ -1,11 +1,17 @@
 <?php
 require_once "../../class/Docente.php";
 require_once "../../class/Persona.php";
+require_once "../../class/Materia.php";
+require_once "../../class/Carrera.php";
 require_once "../../class/Sexo.php";
 require_once "../../configs.php";
 
-$lista = Docente::listadoDocente();
+$idMateria=$_GET["idMateria"];
+$idCarrera=$_GET["idCarrera"];
 
+$lista = Docente::listadoPorDocenteMateria($idCarrera,$idMateria);
+$materia=Materia::listadoPorId($idMateria);
+$carrera=Carrera::listadoPorId($idCarrera);
 
 
 #highlight_string(var_export($lista,true));
@@ -43,8 +49,10 @@ if(isset($_GET['mj'])){
 <body class="body-listuser">
     <br>
     <br>
-    <h1 class="titulo">Lista de Docentes</h1>
+    <h1 class="titulo">Lista de Docentes de la Materia: <?php echo $materia ?> / <br><?php echo $carrera ?></h1>
     <br>
+    <br>
+    <a href="asignar_docente?idCarrera=<?php echo $idCarrera?>&idMateria=<?php echo $idMateria?>">Asignar Docente</a>
     <table class="tabla" method="GET">
         <tr >
             <th> ID Docente</th>
@@ -92,8 +100,7 @@ if(isset($_GET['mj'])){
                     ?>
                 </td>
                 <td>
-                    <a href="dar_baja.php?id=<?php echo $docente->getIdPersona(); ?>" class="">borrar</a> |
-                    <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class="">modificar</a> |
+                    <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>" class="">Eliminar</a> |
                     <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class="">Lista de Especialidades</a>
                 </td>
             </tr>

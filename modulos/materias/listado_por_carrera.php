@@ -1,8 +1,8 @@
 <?php
 require_once "../../class/Materia.php";
-require_once "../../class/Carrera.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php";
+require_once "../../class/Carrera.php";
 
 $materia=new Materia();
 
@@ -11,21 +11,28 @@ if(isset($_GET["cboFiltroEstado"])){
 
 } else{
     $filtroEstado=1;
-
+    $idCarrera=$_GET["idCarrera"];
 }
 
 if(isset($_GET["txtNombre"])){
     $filtroNombre=$_GET["txtNombre"];
-
+    $idCarrera=$_GET["idCarrera"];
 } else{
     $filtroNombre="";
-
+    $idCarrera=$_GET["idCarrera"];
 }
 
+if(isset($_GET['idCarrera'])){
+    $idCarrera=$_GET["idCarrera"];
+    $listadoMaterias=$materia->listadoPorIdCarrera($idCarrera,$filtroEstado,$filtroNombre);
+}else{
+    $listadoMaterias=$materia->listadoMaterias();
+}
 $mensaje='';
 
 #highlight_string(var_export($listadoMaterias,true));
-$listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
+
+$carrera=Carrera::listadoPorId($idCarrera);
 
     
 if(isset($_GET['mj'])){
@@ -57,24 +64,10 @@ if(isset($_GET['mj'])){
     <?php require_once "../../menu.php";?>
     <br>
     <br>
-    <h1 class="titulo">Lista de Materias</h1>
+    <h1 class="titulo">Lista de Materias de la carrera de: <?php echo $carrera?></h1>
     <br>
     <br>
-    <form >
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label> Estado: </label>
-            <select name="cboFiltroEstado" id="" method="GET">
-                <?php $listadoEstados= Estado::estadoTodos();
-                    foreach($listadoEstados as $estado):?>
-                <option value="<?php echo $estado->getIdEstado(); ?>" name=""><?php echo $estado->getDescripcion() ; ?></option>  
-                <?php endforeach ?>
-                <option value="0" class="">Todos</option>
-            </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label> Apellido: </label>
-            <input type="text" name="txtNombre">
-            <input type="submit" value="Filtrar">
-    </form>
+    <div><a href="../materias/asignar_materia.php?idCarrera=<?php echo $idCarrera?>">Asignar Materia</a></div>
     <br>
     <br>
     <table class="tabla">
@@ -91,8 +84,7 @@ if(isset($_GET['mj'])){
                     <?php echo $materia->getNombre()?> 
                 </td>
                 <td>
-                    <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>">modificar</a>  
-                    |  <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>">borrar</a>
+                    <a href="eliminar_relacion.php?id=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">borrar</a>  |  <a href="../eje_contenido/listado.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">Listado de contenido</a> |  <a href="../docentes/listado_por_carrera_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">Listado de Docentes</a>
                 </td>
                 <?php endforeach?>
             </tr>

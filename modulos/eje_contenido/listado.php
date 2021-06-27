@@ -1,5 +1,6 @@
 <?php
 require_once "../../class/EjeContenido.php";
+require_once "../../class/Materia.php";
 
 $eje=new EjeContenido();
 
@@ -11,7 +12,7 @@ $idCarrera=$_GET['idCarrera'];
 $lista=EjeContenido::obtenerPorIdMateria($idMateria,$idCarrera);
 #highlight_string(var_export($lista,true));
 
-
+$materia=Materia::listadoPorId($idMateria);
 
 ?>
 
@@ -30,7 +31,7 @@ $lista=EjeContenido::obtenerPorIdMateria($idMateria,$idCarrera);
 <body class="body-listuser">
     <br>
     <br>
-    <h1 class="titulo">Lista de Eje Contenido</h1>
+    <h1 class="titulo">Lista de Eje Contenido de la Materia:  <?php echo $materia?></h1>
     <br>
     <br>
     <div><a href="../eje_contenido/insert.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>">Agregar Eje Contenido</a></div>

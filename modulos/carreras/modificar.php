@@ -3,10 +3,7 @@
     require_once "../../configs.php";
 
     $idCarrera=$_GET["id"];
-    $idCicloLectivo=$_GET["idCiclo"];
     $carrera=Carrera::listadoPorId($idCarrera);
-    $nombreCarrera=$carrera->getNombre();
-    $anioDuracion=$carrera->getDuracionAnios();
 
 ?>
 
@@ -29,9 +26,6 @@
 <form action="procesar_actualizar.php" method="post" class="formulario">
     <h1 class="titulo">Ingrese los nuevos datos</h1>
     <br>
-    <div class="">
-        <input name="IdCiclo" type="hidden" value="<?php echo $idCicloLectivo;?>">
-    </div>
     <div class="">
         <input name="IdCarrera" type="hidden" value="<?php echo $carrera->getIdCarrera();?>">
     </div>

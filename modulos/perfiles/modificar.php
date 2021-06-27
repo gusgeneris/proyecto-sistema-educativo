@@ -1,9 +1,12 @@
 <?php
-require_once "../../class/Especialidad.php";
+require_once "../../class/perfil.php";
 require_once "../../configs.php";
-$id=$_GET['id'];
 
-$especialidad= Especialidad::obtenerPorId($id);
+if(isset($_GET['id'])){
+    $id=$_GET['id'];    
+}
+
+$perfil= Perfil::perfilPorId($id);
 
 ?>
 
@@ -15,7 +18,7 @@ $especialidad= Especialidad::obtenerPorId($id);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Eje Contenido</title>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Ciclo Lectivo</title>
 </head>
 <?php require_once "../../menu.php";?>
 
@@ -23,21 +26,20 @@ $especialidad= Especialidad::obtenerPorId($id);
     
 
     <form action="procesar_actualizar.php" method="POST"class="formulario">
-        <h1 class="titulo">Ingrese los nuevos datos</h1>
+        <h1 class="titulo">Ingrese el nuevo dato</h1>
     
         <table>
             <div class=""> 
-                <input name="IdEspecialidad" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
+                <input name="IdPerfil" type="hidden" class="" value="<?php echo $perfil->getIdperfil(); ?>">
             </div>
-            <div> Descripcion
-                <input name="Descripcion" type="text" class="" value="<?php echo $especialidad->getDescripcion(); ?>">
+            <div> Año
+                <input name="Nombre" type="text" class="" value="<?php echo $perfil->getPerfilNombre(); ?>">
             </div>
             <div> 
                 <input name="Guardar" type="submit" value="Actualizar" >
                 <input name="Cancelar" type="submit" value="Cancelar">
             </div>
         </table>    
-    
     </form>
     
 </body>

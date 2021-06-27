@@ -4,7 +4,6 @@
     require_once "../../configs.php";
 
     $cancelar= $_POST['Cancelar'];
-    $idCicloLectivo=$_POST["IdCiclo"];
 
     if($cancelar==true){
         header("Location:listado.php?idCiclo=".$idCicloLectivo);
@@ -19,7 +18,6 @@
     $carrera->setDuracionAnios($carreraAnioDuracion);
 
     $carrera->insert();
-    $carrera->crearRelacionConCicloLectivo($idCicloLectivo);
 
     if ($carrera){
         header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idCiclo=".$idCicloLectivo);

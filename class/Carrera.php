@@ -8,6 +8,10 @@ Class Carrera{
     private $_duracionAnios;
     private $_estado;
     private $_arrMateria;
+
+    public function __toString() {
+        return "{$this->_nombre}";
+    }
     
 
     /**
@@ -99,27 +103,43 @@ Class Carrera{
         $this->_idCarrera=$idCarrera;
     }
 
-    public function crearRelacionConCicloLectivo($idCicloLectivo){
-        $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,{$this->_idCarrera});
+    public function asignarCiclo($idCicloLectivo,$idCarrera){
+        $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,$idCarrera);
         ";
         $database=new Mysql();
         $database->insertarRegistro($sql);
 
     }
 
-    public function listadoCarreras(){
+    public function listadoCarreras($filtroEstado=0,$filtroNombre=""){
 
-        $sql="SELECT id_carrera, carrera_nombre, carrera_duracion_anios, estado_id_estado FROM carrera;";
+        $sql="SELECT id_carrera, carrera_nombre, carrera_duracion_anios, estado_id_estado FROM carrera ";
+
+        $where="";
+
+        if($filtroEstado!=0){
+            $where.=" WHERE estado_id_estado='$filtroEstado' ";
+        };
+
+        if($filtroNombre != ""){
+            if($where!= ""){
+                $where.=" AND carrera.carrera_nombre like '%{$filtroNombre}%'";
+            }else{
+                $where= " WHERE carrera.carrera_nombre like '%{$filtroNombre}%'";
+            }
+        }
+        $sql.=$where;
+
         $database=new Mysql();
         $datos=$database->consultar($sql);
         $listadoCarreras=[];
         
         while ($registro = $datos->fetch_assoc()){
-            if ($registro['estado_id_estado']==1){
+            #if ($registro['estado_id_estado']==1){
                 $carrera=new Carrera();
                 $carrera->crearCarrera($registro,$carrera);
 
-                $listadoCarreras[]=$carrera;}
+                $listadoCarreras[]=$carrera;
         }
         return $listadoCarreras;
         
@@ -155,27 +175,52 @@ Class Carrera{
         $carrera->setNombre($registro['carrera_nombre']);
         $carrera->setDuracionAnios($registro['carrera_duracion_anios']);
         $carrera->setEstado($registro['estado_id_estado']);
-        $carrera->_arrMateria = Materia:: listadoPorIdCarrera($carrera->_idCarrera);
+        #$carrera->_arrMateria = Materia:: listadoPorIdCarrera($carrera->_idCarrera);
     
         return $carrera;
 
     }
     public static function listadoCarrerasPorCicloLectivo($idCicloLectivo){
 
-        $sql="SELECT id_carrera, carrera_nombre,carrera_duracion_anios,estado_id_estado from carrera JOIN ciclo_lectivo_carrera on ciclo_lectivo_carrera.carrera_id_carrera=carrera.id_carrera JOIN ciclo_lectivo on ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo=ciclo_lectivo.id_ciclo_lectivo WHERE ciclo_lectivo.id_ciclo_lectivo= $idCicloLectivo";
+        $sql="SELECT id_carrera, carrera_nombre,carrera_duracion_anios,estado_id_estado, ciclo_lectivo_carrera.ciclo_lectivo_carrera_estado from carrera JOIN ciclo_lectivo_carrera on ciclo_lectivo_carrera.carrera_id_carrera=carrera.id_carrera JOIN ciclo_lectivo on ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo=ciclo_lectivo.id_ciclo_lectivo WHERE ciclo_lectivo.id_ciclo_lectivo= $idCicloLectivo ";
+
         $database=new Mysql();
         $datos=$database->consultar($sql);
         $listadoCarreras=[];
-        
-        while ($registro = $datos->fetch_assoc()){
-            #if ($registro['estado_id_estado']==1){
-            $carrera=new Carrera();
-            $carrera->crearCarrera($registro,$carrera);
 
-            $listadoCarreras[]=$carrera;
+        if($datos->num_rows > 0){
+        
+            while ($registro = $datos->fetch_assoc()){
+                if ($registro['ciclo_lectivo_carrera_estado']==1){
+                $carrera=new Carrera();
+                $carrera->crearCarrera($registro,$carrera);
+
+                $listadoCarreras[]=$carrera;}
+            }
         }
         return $listadoCarreras;
         
+    }
+
+    public static function eliminarRelacionCiclo($idCicloLectivo,$idCarrera){
+        $sqlId="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera};";
+
+        $database =new Mysql();
+        $dato=$database->consultar($sqlId);
+        $registro=$dato->fetch_assoc();
+        $idCicloLectivoCarrera=$registro["id_ciclo_lectivo_carrera"];
+        $sql="UPDATE ciclo_lectivo_carrera SET `ciclo_lectivo_carrera_estado` = '2' WHERE (`id_ciclo_lectivo_carrera` = {$idCicloLectivoCarrera})";
+        $database->eliminarRegistro($sql);
+
+    }
+
+    public static function darAlta($idCarrera){
+        $sql="UPDATE `sistema_educativo`.`carrera` SET `estado_id_estado` = '1' WHERE (`id_carrera` = {$idCarrera});
+        ";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
 }

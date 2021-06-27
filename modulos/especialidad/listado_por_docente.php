@@ -1,10 +1,22 @@
 <?php
 require_once "../../class/Especialidad.php";
+require_once "../../class/Docente.php";
 
 $especialidad=new Especialidad();
 
-$lista=$especialidad->listaTodos();
+if(isset($_GET['idDocente'])){
+    $idDocente=$_GET['idDocente'];
+}else{
+    header("Location:../../inicio.php");
+};
+
+
+
+$lista=Especialidad::listarPorDocente($idDocente);
+#$lista=$especialidad->listaTodos();
 #highlight_string(var_export($lista,true));
+
+$docente=Docente::obtenerTodoPorId($idDocente);
 
 
 ?>
@@ -24,9 +36,13 @@ $lista=$especialidad->listaTodos();
 <body class="body-listuser">
     <br>
     <br>
-    <h1 class="titulo">Lista de Especialidades </h1>
+    <h1 class="titulo">Lista de Especialidades de <?php echo $docente?> </h1>
     <br>
     <br>
+    <div><a href="../especialidad/asignar_especialidad.php?idDocente=<?php echo $idDocente?>">Asignar una Especialidad</a></div>
+    <br>
+    <br>
+
     <form >
 
     <table class="tabla" method="GET">
@@ -46,8 +62,7 @@ $lista=$especialidad->listaTodos();
                     <?php echo $especialidad->getDescripcion(); ?>
                 </td>
                 <td>
-                    <a href="dar_baja.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>" class="">borrar</a> | 
-                    <a href="modificar.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>" class="">Modificar</a>
+                    <a href="eliminar_relacion.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>&idDocente=<?php echo $idDocente?>" class="">borrar</a>
                 </td>
             </tr>
         <?php endforeach ?>

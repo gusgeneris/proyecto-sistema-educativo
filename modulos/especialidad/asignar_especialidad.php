@@ -14,6 +14,7 @@
 
     $idDocente=$_GET["idDocente"];
 
+    $listado=Especialidad::listaTodos();
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +34,29 @@
 
 <body class="body">
 
-    <form action="procesar_insert.php" method=POST class="formulario">
+    
+
+    <form action="procesar_asignar.php" method=POST class="formulario">
         <h1 class="titulo"> Registro de Especialidad</h1>
+        <br>
+
+        <div><a href="insert.php?idDocente=<?php echo $idDocente?>">Agregar nueva especialidad</a></div>
 
         <div><input type="hidden" name=IdDocente value=<?php echo $idDocente ?>></div>
-        <div class=""><input type="text" name="Descripcion" class="" placeholder="Descripcion"></div>
+
+        <br>
+
+        <?php foreach ($listado as $modulo):?>
+        <tr>
+            <td>
+                <label for=""><input type="checkbox" name="check_lista[]" value="<?php echo $modulo->getIdEspecialidad()?>"><?php echo $modulo->getDescripcion()?> </label>
+            </td>
+            <br>
+            <br>
+        <?php endforeach?>
+
+        <br>
+
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">
             <input name="Cancelar" type="submit" value="Cancelar">
         </div>               
