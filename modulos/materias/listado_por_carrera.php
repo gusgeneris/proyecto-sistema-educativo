@@ -22,12 +22,9 @@ if(isset($_GET["txtNombre"])){
     $idCarrera=$_GET["idCarrera"];
 }
 
-if(isset($_GET['idCarrera'])){
-    $idCarrera=$_GET["idCarrera"];
-    $listadoMaterias=$materia->listadoPorIdCarrera($idCarrera,$filtroEstado,$filtroNombre);
-}else{
-    $listadoMaterias=$materia->listadoMaterias();
-}
+$idCarrera=$_GET["idCarrera"];
+$idCicloLectivo=$_GET["idCiclo"];
+$listadoMaterias=$materia->listadoPorIdCarrera($idCicloLectivo,$idCarrera,$filtroEstado,$filtroNombre);
 $mensaje='';
 
 #highlight_string(var_export($listadoMaterias,true));
@@ -67,7 +64,7 @@ if(isset($_GET['mj'])){
     <h1 class="titulo">Lista de Materias de la carrera de: <?php echo $carrera?></h1>
     <br>
     <br>
-    <div><a href="../materias/asignar_materia.php?idCarrera=<?php echo $idCarrera?>">Asignar Materia</a></div>
+    <div><a href="../materias/asignar_materia.php?idCarrera=<?php echo $idCarrera?>&idCiclo=<?php echo $idCicloLectivo?>">Asignar Materia</a></div>
     <br>
     <br>
     <table class="tabla">
@@ -84,7 +81,7 @@ if(isset($_GET['mj'])){
                     <?php echo $materia->getNombre()?> 
                 </td>
                 <td>
-                    <a href="eliminar_relacion.php?id=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">borrar</a>  |  <a href="../eje_contenido/listado.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">Listado de contenido</a> |  <a href="../docentes/listado_por_carrera_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">Listado de Docentes</a>
+                    <a href="eliminar_relacion.php?id=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo ?>">borrar</a>  |  <a href="../eje_contenido/listado.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Listado de contenido</a> |  <a href="../docentes/listado_por_carrera_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>">Listado de Docentes</a>
                 </td>
                 <?php endforeach?>
             </tr>

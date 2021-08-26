@@ -1,6 +1,6 @@
 <?php
     require_once '../../class/MySql.php'; 
-    require_once "../../class/Especialidad.php";
+    require_once "../../class/TipoContacto.php";
     
     $mensaje='';
     
@@ -24,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Especialidad</title>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Tipo Contacto</title>
     <title>Insertar</title>
 </head>
 
@@ -33,7 +33,7 @@
 <body class="body">
 
     <form action="procesar_insert.php" method=POST class="formulario">
-        <h1 class="titulo"> Registro de Especialidad</h1>
+        <h1 class="titulo"> Registro de Tipo de Contacto</h1>
 
         <div class=""><input type="text" name="Descripcion" class="" placeholder="Descripcion"></div>
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">

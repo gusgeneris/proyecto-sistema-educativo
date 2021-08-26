@@ -7,6 +7,7 @@ $lista=$especialidad->listaTodos();
 #highlight_string(var_export($lista,true));
 
 
+
 ?>
 
 <!DOCTYPE html>

@@ -45,6 +45,9 @@ if(isset($_GET['mj'])){
     }else if($mj==CORRECT_UPDATE_CODE){
         $mensaje=CORRECT_UPDATE_MENSAJE;?>
         <div class="mensajes"><?php echo $mensaje;?></div><?php
+    }else if($mj==INCORRECT_INSERT_MENSAJE_CARRERA_DUPLICATE_CODE){
+        $mensaje=INCORRECT_INSERT_MENSAJE_CARRERA_DUPLICATE;?>
+        <div class="mensajes"><?php echo $mensaje;?></div><?php
     }
 };
 
@@ -95,7 +98,7 @@ $idCicloLectivo=$_GET["idCiclo"];
             </td>
             <td>
                 <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">borrar</a> |  
-                <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>">Listado de Materias</a>
+                <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">Listado de Materias</a>
             </td>
             <?php endforeach?>
         </tr>

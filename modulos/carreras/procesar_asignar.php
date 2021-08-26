@@ -9,10 +9,16 @@
         $idCicloLectivo=$_POST["IdCiclo"];
         $idCarrera=$_POST["Carrera"];
         $carrera=new Carrera();
-        $carrera->asignarCiclo($idCicloLectivo,$idCarrera);
-        header("Location:listado_por_ciclo.php?idCiclo=".$idCicloLectivo);
+        $dato=$carrera->asignarCiclo($idCicloLectivo,$idCarrera);
+        
+        if($dato==1){
+            header("Location:listado_por_ciclo.php?idCiclo=".$idCicloLectivo."&"."mj=".CORRECT_INSERT_CODE);
+            }
+        else{
+            header("Location:listado_por_ciclo.php?idCiclo=".$idCicloLectivo."&"."mj=".INCORRECT_INSERT_MENSAJE_CARRERA_DUPLICATE_CODE);
+            
+        }
         exit;
-
     }
 
     if($cancelar==true){

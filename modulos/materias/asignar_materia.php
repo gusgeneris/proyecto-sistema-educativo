@@ -9,6 +9,8 @@
 
     $materia=new Materia();
     $listado=$materia->listadoMaterias();
+    
+    $idCicloLectivo=$_GET["idCiclo"];
 
     $carrera= Carrera::listadoPorId($idCarrera);
 
@@ -38,6 +40,7 @@
         <br>
 
         <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera  ?>></div>
+        <div><input type="hidden" name=IdCiclo value=<?php echo $idCicloLectivo  ?>></div>
 
         <br>
 

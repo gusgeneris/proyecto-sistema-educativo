@@ -86,12 +86,19 @@ Class Materia{
 
     }
 
-    public static function crearRelacionConCarrera($idMateria,$idCarrera){
-        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `carrera_id_carrera`) VALUES ($idMateria, {$idCarrera})";
+    public static function crearRelacionConCarrera($idMateria,$idCarrera,$idCicloLectivo){
+
+        $sqlIdCicloLectivoCarrera="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera} ;";
+
         $database= new Mysql();
+        $dato=$database->consultar($sqlIdCicloLectivoCarrera);
+        $registro=$dato->fetch_assoc();
+        $idCicloLectivoCarrera=$registro['id_ciclo_lectivo_carrera'];
+
+        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera`) VALUES ($idMateria, {$idCicloLectivoCarrera})";
+        
         $database->insertarRegistro($sql);
         return true;
-
     }
 
     public static function listadoMaterias($filtroEstado=0,$filtroNombre=""){
@@ -153,18 +160,27 @@ Class Materia{
         $database=new Mysql();
         $database->actualizar($sql);
     }
-    public static function listadoPorIdCarrera($idCarrera){
-        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado FROM materia 
+    public static function listadoPorIdCarrera($idCicloLectivo,$idCarrera){
+        /*$sql="SELECT id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado FROM materia 
         JOIN curricula_carrera on curricula_carrera.materia_id_materia=materia.id_materia
-        JOIN carrera on curricula_carrera.carrera_id_carrera = carrera.id_carrera 
-        WHERE id_carrera={$idCarrera} ";
+        JOIN carrera ON carrera.id_carrera=curricula_carrera.carrera_id_carrera
+        JOIN ciclo_lectivo_carrera on carrera.id_carrera=ciclo_lectivo_carrera.carrera_id_carrera
+        JOIN ciclo_lectivo on ciclo_lectivo.id_ciclo_lectivo=ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo
+        WHERE carrera.id_carrera={$idCarrera} AND ciclo_lectivo.id_ciclo_lectivo={$idCicloLectivo}";*/
 
+        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado 
+        FROM curricula_carrera 
+        JOIN materia on curricula_carrera.materia_id_materia=materia.id_materia 
+        JOIN ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera 
+        WHERE ciclo_lectivo_carrera.carrera_id_carrera={$idCarrera} AND ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo}";
+        
+       
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
         $listadoMaterias= [];
 
-        if($datos->num_rows > 0){
+        #if($datos->num_rows > 0){
  
             while ($registro = $datos->fetch_assoc()){
                 if ($registro['curricula_carrera_estado']==1){
@@ -176,20 +192,23 @@ Class Materia{
                     $listadoMaterias[]=$materia;}
                 
             }
-        }
+        
 
         return $listadoMaterias;
     }
 
     public static function eliminarRelacionCarrera($idMateria,$idCarrera){
-        $sqlId="SELECT id_curricula_carrera FROM curricula_carrera WHERE materia_id_materia={$idMateria} AND carrera_id_carrera={$idCarrera}";
-
+        $sqlId="SELECT id_curricula_carrera FROM curricula_carrera 
+        join ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = ciclo_lectivo_carrera.id_ciclo_lectivo_carrera 
+        join carrera on carrera.id_carrera=ciclo_lectivo_carrera.carrera_id_carrera
+        WHERE materia_id_materia=$idMateria AND carrera_id_carrera=$idCarrera";/*SELECT id_curricula_carrera FROM curricula_carrera WHERE materia_id_materia={$idMateria} AND carrera_id_carrera={$idCarrera}";
+        */
         $database =new Mysql();
         $dato=$database->consultar($sqlId);
         $registro=$dato->fetch_assoc();
         $idCurriculaCarrera=$registro["id_curricula_carrera"];
         $sql="UPDATE curricula_carrera SET `curricula_carrera_estado` = '2' WHERE (`id_curricula_carrera` = {$idCurriculaCarrera})";
-
+        
         $database->eliminarRegistro($sql);
     }
 

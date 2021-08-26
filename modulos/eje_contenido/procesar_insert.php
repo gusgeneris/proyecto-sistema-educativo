@@ -5,6 +5,7 @@ require_once "../../configs.php";
 $cancelar= $_POST['Cancelar'];
 $idCarrera=$_POST["IdCarrera"];
 $idMateria=$_POST["IdMateria"];
+$idCicloLectivo=$_POST["IdCicloLectivo"];
 
 
 if($cancelar==true){
@@ -20,10 +21,10 @@ $ejeContenido->setNumero($numero);
 $ejeContenido->setDescripcion($descripcion);
 
 $ejeContenido->insert();
-$ejeContenido-> crearRelacionConCurriculaCarrera($idCarrera,$idMateria);
+$ejeContenido-> crearRelacionConCurriculaCarrera($idCarrera,$idMateria,$idCicloLectivo);
 
 if ($ejeContenido){
-    header("Location:listado.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_INSERT_CODE);
+    header("Location:listado.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&idCicloLectivo=".$idCicloLectivo."&mj=".CORRECT_INSERT_CODE);
 }
 
 ?>

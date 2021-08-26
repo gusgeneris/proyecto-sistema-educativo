@@ -104,11 +104,22 @@ Class Carrera{
     }
 
     public function asignarCiclo($idCicloLectivo,$idCarrera){
-        $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,$idCarrera);
-        ";
-        $database=new Mysql();
-        $database->insertarRegistro($sql);
 
+        $sqlComprobarExistencia="select * from ciclo_lectivo_carrera where ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} and carrera_id_carrera={$idCarrera}";
+        $database=new Mysql();
+        $dato=$database->consultar($sqlComprobarExistencia);
+        
+        if($dato->num_rows == 0){
+            $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,$idCarrera)";
+            
+            $database->insertarRegistro($sql);
+            return 1;
+            
+        }else{
+            
+            return 0;
+        }
+        
     }
 
     public function listadoCarreras($filtroEstado=0,$filtroNombre=""){

@@ -89,9 +89,16 @@ class EjeContenido{
         
     }
 
-    public function  crearRelacionConCurriculaCarrera($idCarrera,$idMateria){
-        $idCurriculaCarrera="SELECT id_curricula_carrera from curricula_carrera where materia_id_materia={$idMateria} and carrera_id_carrera={$idCarrera};";
+    public function  crearRelacionConCurriculaCarrera($idCarrera,$idMateria,$idCicloLectivo){
+        $idCicloLectivoCarrera="SELECT id_ciclo_lectivo_carrera from ciclo_lectivo_carrera where ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} and carrera_id_carrera={$idCarrera}";
+
+
         $database=new Mysql();
+        $resultado=($database->consultar($idCicloLectivoCarrera))->fetch_assoc();
+        $idCicloLectivoCarrera=$resultado['id_ciclo_lectivo_carrera'];
+
+        $idCurriculaCarrera="SELECT id_curricula_carrera from curricula_carrera where materia_id_materia={$idMateria} and ciclo_lectivo_carrera_id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
+        
         $resultado=($database->consultar($idCurriculaCarrera))->fetch_assoc();
         $idCurriculaCarrera = $resultado['id_curricula_carrera'];
 
@@ -164,14 +171,21 @@ class EjeContenido{
     }
 
     public static function obtenerPorIdMateria($idMateria,$idCarrera){
-        $sql = "SELECT eje_contenido.id_eje_contenido,eje_contenido.eje_numero, eje_contenido.eje_descripcion, materia.materia_nombre 
+        $sql = /*"SELECT eje_contenido.id_eje_contenido,eje_contenido.eje_numero, eje_contenido.eje_descripcion, materia.materia_nombre 
         from curricula_carrera_contenido 
         join curricula_carrera on curricula_carrera.id_curricula_carrera = curricula_carrera_contenido.curricula_carrera_id_curricula_carrera 
         join eje_contenido on eje_contenido.id_eje_contenido=curricula_carrera_contenido.eje_contenido_id_eje_contenido 
         join materia on curricula_carrera.materia_id_materia = materia.id_materia 
-        join carrera on curricula_carrera.carrera_id_carrera=carrera.id_carrera where materia.id_materia={$idMateria} and carrera.id_carrera={$idCarrera}";
+        join carrera on curricula_carrera.carrera_id_carrera=carrera.id_carrera */
+        "SELECT eje_contenido.id_eje_contenido,eje_contenido.eje_numero, eje_contenido.eje_descripcion, materia.materia_nombre from curricula_carrera_contenido 
+        join curricula_carrera on curricula_carrera.id_curricula_carrera = curricula_carrera_contenido.curricula_carrera_id_curricula_carrera 
+        join ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = ciclo_lectivo_carrera.id_ciclo_lectivo_carrera
+        join eje_contenido on eje_contenido.id_eje_contenido=curricula_carrera_contenido.eje_contenido_id_eje_contenido 
+        join materia on curricula_carrera.materia_id_materia = materia.id_materia 
+        join carrera on ciclo_lectivo_carrera.carrera_id_carrera=carrera.id_carrera 
+        where materia.id_materia={$idMateria} and carrera.id_carrera={$idCarrera}";
 
-        $db = new MySql();
+        $db = new MySql();  
         $datos = $db->consultar($sql);
 
         $listadoEjeContenido=[];

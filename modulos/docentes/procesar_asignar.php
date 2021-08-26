@@ -9,8 +9,11 @@
     
     $idCarrera=$_POST["IdCarrera"];
     $docente=new Docente();
+
+    // TODO: La linea siguiente sera inecesaria cuando la validacion para asignar materia este hecha.
     $docente->asignarCarrera($idDocente,$idCarrera);
     $docente->asignarMateria($idDocente,$idMateria);
+
     header("Location:listado_por_carrera_materia.php?idMateria=".$idMateria."&idCarrera=".$idCarrera);
 
 

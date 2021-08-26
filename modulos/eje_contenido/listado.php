@@ -6,6 +6,7 @@ $eje=new EjeContenido();
 
 $idMateria=$_GET['idMateria'];
 $idCarrera=$_GET['idCarrera'];
+$idCicloLectivo=$_GET["idCicloLectivo"];
 
 
 
@@ -34,7 +35,7 @@ $materia=Materia::listadoPorId($idMateria);
     <h1 class="titulo">Lista de Eje Contenido de la Materia:  <?php echo $materia?></h1>
     <br>
     <br>
-    <div><a href="../eje_contenido/insert.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>">Agregar Eje Contenido</a></div>
+    <div><a href="../eje_contenido/insert.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Agregar Eje Contenido</a></div>
     <br>
     <br>
 
