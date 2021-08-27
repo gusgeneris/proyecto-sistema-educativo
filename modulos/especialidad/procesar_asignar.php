@@ -11,8 +11,11 @@ if($cancelar==true){
 }
 
 
+$especialidad=new Especialidad();
+$especialidad->eliminarTodaRelacion($idDocente);
+
 foreach ($_POST["check_lista"] as $idEspecialidad){
-    $especialidad=new Especialidad();
+    
     $especialidad->setIdEspecialidad($idEspecialidad);
     $especialidad->crearRelacionconDocente($idDocente);
   

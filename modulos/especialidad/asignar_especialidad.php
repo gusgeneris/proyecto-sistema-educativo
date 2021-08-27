@@ -15,6 +15,16 @@
     $idDocente=$_GET["idDocente"];
 
     $listado=Especialidad::listaTodos();
+
+    $especialidades=Especialidad::listarPorDocente($idDocente);
+    $listadoEspecialidadesActuales=[];
+
+    foreach ($especialidades as $i ){
+       
+            array_push($listadoEspecialidadesActuales, $i->getIdEspecialidad()); 
+    }
+    
+    #highlight_string(var_export($listadoEspecialidadesActuales,true));
 ?>
 
 <!DOCTYPE html>
@@ -46,12 +56,20 @@
 
         <br>
 
-        <?php foreach ($listado as $modulo):?>
+        <?php foreach ($listado as $especialidad):?>
         <tr>
             <td>
-                <label for=""><input type="checkbox" name="check_lista[]" value="<?php echo $modulo->getIdEspecialidad()?>"><?php echo $modulo->getDescripcion()?> </label>
+                <label for="">
+                    <input type="checkbox" name="check_lista[]" value="<?php echo $especialidad->getIdEspecialidad()?>" 
+                        <?php 
+                            foreach ($listadoEspecialidadesActuales as $i ){ 
+                                
+                                if ($i==$especialidad->getIdEspecialidad()){echo "checked";}
+                            }
+                            ?>> 
+                        <?php echo $especialidad->getDescripcion()?> 
+                </label>
             </td>
-            <br>
             <br>
         <?php endforeach?>
 

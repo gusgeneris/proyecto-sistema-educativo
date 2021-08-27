@@ -62,12 +62,20 @@ public function insert(){
     $this->_idEspecialidad=$idEspecialidad;
 }
 
-public function crearRelacionconDocente($idDocente){
-    $sql="INSERT INTO `docente_especialidad` (`especialidad_id_especialidad`, `docente_id_docente`) VALUES ({$this->_idEspecialidad}, {$idDocente});
-    ";
+public function eliminarTodaRelacion($idDocente){
+    $sql="DELETE FROM docente_especialidad WHERE docente_id_docente={$idDocente}";
 
     $database=new Mysql();
+    $database->eliminarRegistro($sql);
 
+}
+
+public function crearRelacionconDocente($idDocente){
+
+
+    $sql="INSERT INTO `docente_especialidad` (`especialidad_id_especialidad`, `docente_id_docente`) VALUES ({$this->_idEspecialidad}, {$idDocente});
+    ";
+    $database=new Mysql();
     $database->insertarRegistro($sql);
 
 }
