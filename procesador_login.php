@@ -27,9 +27,4 @@ else{
     header("Location:login.php?error=".ERROR_LOGIN_CODE);
 }
 
-
-
-
-
-
 ?>
