@@ -63,6 +63,7 @@ if(isset($_GET['mj'])){
             <th> Nacionalidad</th>
             <th> Numero Matricula</th>
             <th> Sexo</th>
+            <th> Direccion </th>
 
             <th> Acciones</th>
 
@@ -98,6 +99,9 @@ if(isset($_GET['mj'])){
                         endforeach
                         #echo $docente->getIdSexo();
                     ?>
+                </td>
+                <td>
+                    <a href="../domicilios/domicilios.php?idPersona=<?php echo $docente->getIdPersona(); ?>">Ver</a> 
                 </td>
                 <td>
                     <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>" class="">Eliminar</a> |

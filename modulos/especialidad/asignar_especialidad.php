@@ -23,6 +23,7 @@
        
             array_push($listadoEspecialidadesActuales, $i->getIdEspecialidad()); 
     }
+
     
     #highlight_string(var_export($listadoEspecialidadesActuales,true));
 ?>
