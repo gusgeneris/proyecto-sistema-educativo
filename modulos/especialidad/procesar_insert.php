@@ -17,7 +17,20 @@ if($cancelar==true){
 }
 
 
-$descripcion = $_POST['Descripcion'];
+$descripcion = $_POST['Especialidad'];
+
+#COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
+if (strlen($descripcion) < 3 ){
+
+    header("Location:listado.php?mj=".ERROR_LONGITUD_NAME_CODE);
+    exit;
+}
+
+if((!preg_match("/^[a-zA-Z_ ]*$/",$descripcion))){
+    header("Location:listado.php?mj=assssd");
+    exit;
+};
+
 $especialidad=new Especialidad();
 $especialidad->setDescripcion($descripcion);
 $especialidad->insert();

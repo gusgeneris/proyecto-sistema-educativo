@@ -1,5 +1,7 @@
 <?php
 
+require_once "Mysql.php";
+
 class Barrio{
     private $_idBarrio;
     private $_nombre;
@@ -71,9 +73,85 @@ class Barrio{
     public function crearBarrio($barrio,$registro){
         $barrio->_idBarrio = $registro['id_barrio'];
         $barrio->_nombre = $registro['barrio_nombre'];
-        $barrio->idLocalidad = $registro['id_localidad'];
+        $barrio->_idLocalidad = $registro['localidad_id_localidad'];
         return $barrio;
     }
+
+    static public function listado(){
+        $sql="SELECT* FROM barrio";
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+    
+        $listadoBarrios=[];
+
+        while($registro= $datos->fetch_assoc()){
+    
+            $barrio=new Barrio();
+            $barrio->crearBarrio($barrio,$registro);
+    
+            $listadoBarrios[]=$barrio;
+        }
+        return $listadoBarrios;
+    }
+
+    static public function listadoPorLocalidad($idLocalidad){
+        $sql="SELECT * FROM barrio WHERE localidad_id_localidad={$idLocalidad}";
+
+        
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+    
+        $listadoBarrrios=[];
+
+        while($registro= $datos->fetch_assoc()){
+               
+            $barrio=new barrio();
+            $barrio->crearbarrio($barrio,$registro);    
+            $listadoBarrrios[]=$barrio;
+        }
+        return $listadoBarrrios;
+    }
+
+    public function insertarBarrio(){
+
+        $sql="INSERT INTO `barrio` (`barrio_nombre`, `localidad_id_localidad`) VALUES ('{$this->_nombre}', '{$this->_idLocalidad}')";
+       
+        $database=new Mysql();
+        $database->insertarRegistro($sql);
+        
+    }
+
+    static function eliminarBarrio($idbarrio){
+        $sql="DELETE FROM `barrio` WHERE (`id_barrio` = {$idbarrio});";
+
+        $database=new Mysql();
+        $database->eliminarRegistro($sql);
+
+    }
+
+    static public function obtenerPorIdBarrio($idBarrio){
+        $sql="SELECT * FROM barrio WHERE id_barrio={$idBarrio}";
+        
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+        
+        $registro=$datos->fetch_assoc();
+        $barrio=new barrio();
+        $barrio->crearbarrio($barrio,$registro);
+
+        return $barrio;
+
+    }
+
+    public function modificarBarrio(){
+        $sql = "UPDATE `barrio` SET `barrio_nombre` = '{$this->_nombre}' WHERE (`id_barrio` = '{$this->_idBarrio}')";
+ 
+        $database= new Mysql();
+        $database->actualizar($sql);
+    
+    }
+
+
 
 }
 

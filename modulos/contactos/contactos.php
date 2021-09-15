@@ -18,7 +18,7 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista Docentes</title>
 </head>
@@ -30,32 +30,50 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 <br>
 <br>
 
-<form method="POST" action="procesar_alta.php">
+<form method="POST" action="procesar_alta.php" method=POST class="formInsert" id="formInsert" name="formInsert">
 
 	<input type="hidden" name="txtIdPersona" value="<?php echo $idPersona; ?>">
 
-	<label>Tipo Contacto</label>
-	<select name="cboTipoContacto">
-		<option value=0>-- Seleccionar --</option>
+	<div class="formGrup" id="GrupoBarrio">
+		<label for="cboTipoContacto" class="formLabel">Tipo Contacto</label>
 
-		<?php foreach ($listadoTipoContactos as $tipoContacto): ?>
+		<select name="cboTipoContacto">
+			<option value=0>-- Seleccionar --</option>
 
-			<option value="<?php echo $tipoContacto->getIdTipoContacto(); ?>">
-				<?php echo $tipoContacto->getDescripcion(); ?>
-			</option>
-			
-		<?php endforeach ?>
+			<?php foreach ($listadoTipoContactos as $tipoContacto): ?>
 
-	</select>
+				<option value="<?php echo $tipoContacto->getIdTipoContacto(); ?>">
+					<?php echo $tipoContacto->getDescripcion(); ?>
+				</option>
+				
+			<?php endforeach ?>
+
+		</select>
+	</div> 
 	
-	&nbsp;&nbsp;&nbsp;&nbsp;
-
-	<label>Valor</label>
-	<input type="text" name="txtValor">
+	<div class="formGrup" id="GrupoContacto">
+        
+        <label for="Contacto" class="formLabel">Valor</label>    
+        <div class="formGrupInput">
+			<input type="text" name="Contacto" id="Contacto" class="formInput">
+		</div>
+        <p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
+    </div> 
 	
 	&nbsp;&nbsp;&nbsp;
+        <!--Grupo de Mensaje-->
+            
+    <div class="formMensaje" id="GrupoMensaje">
+                
+        <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+        
+    </div>
 
-	<input type="submit" value="Agregar">
+        <!--Grupo de Boton Enviar-->
+
+    <div class="formGrupBtnEnviar">
+        <button type="submit" class="formButton" id='Guardar' value='FormInsertContacto'> Guardar</button>
+    </div>
 
 
 </form>
@@ -65,7 +83,7 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 <br>
 <br>
 
-<table border="1">
+<table border=1>
 	<tr>
 		<th>Descripcion</th>
 		<th>Valor</th>
@@ -89,4 +107,6 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 </table>
 
 </body>
+
+<script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 </html>

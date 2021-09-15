@@ -1,10 +1,10 @@
 <?php
-require_once "../../class/Especialidad.php";
+require_once "../../class/TipoContacto.php";
 require_once "../../configs.php";
 $id=$_GET['idTipoContacto'];
 
 require_once "../../class/TipoContacto.php";
-TipoContacto::obtenerPorId($id);
+$tipoContacto=TipoContacto::obtenerPorId($id);
 
 ?>
 
@@ -14,32 +14,51 @@ TipoContacto::obtenerPorId($id);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Eje Contenido</title>
 </head>
 <?php require_once "../../menu.php";?>
 
 <body class="modif-user">
+
+    <h1 class="titulo">Ingrese los nuevos datos</h1>
     
 
-    <form action="procesar_actualizar.php" method="POST"class="formulario">
-        <h1 class="titulo">Ingrese los nuevos datos</h1>
-    
-        <table>
-            <div class=""> 
-                <input name="IdTipoContacto" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
+    <form action="procesar_actualizar.php"  method="POST" class="formUnaColumna" name="formModificar" id="formModificar">
+        
+             
+            <input name="IdTipoContacto" type="hidden" class="" value="<?php echo $tipoContacto->getIdTipoContacto(); ?>">
+            
+
+            <div class="formGrup" id="GrupoTipoContacto" >
+                <label for="TipoContacto" class="formLabel">Descripcion</label>
+                <div class="formGrupInput">
+                    <input name="TipoContacto" type="text" class="formInput" value="<?php echo $tipoContacto->getDescripcion(); ?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div> Descripcion
-                <input name="Descripcion" type="text" class="" value="<?php echo $especialidad->getDescripcion(); ?>">
-            </div>
-            <div> 
-                <input name="Guardar" type="submit" value="Actualizar" >
-                <input name="Cancelar" type="submit" value="Cancelar">
-            </div>
-        </table>    
-    
+
+                  <!--Grupo de Mensaje-->
+                
+                  <div class="formMensaje" id="GrupoMensaje">
+                    
+                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+                </div>
+
+                <div> 
+                <div class="formGrupBtnEnviar">
+                    <button type="submit" class="formButton" value ="FormInsertTipoContacto" id="Guardar"> Guardar</button>
+                </div>
+
+                <div class="formGrupBtnEnviar">
+                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+                </div>
     </form>
-    
+
 </body>
-</html>
+
+
+<script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
+</html

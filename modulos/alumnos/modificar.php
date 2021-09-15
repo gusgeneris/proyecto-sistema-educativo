@@ -21,7 +21,7 @@ $listadoSexo=Sexo::sexoTodos();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Usuario</title>
 </head>
@@ -29,55 +29,114 @@ $listadoSexo=Sexo::sexoTodos();
 <?php require_once "../../menu.php";?>
 
 <body class="modif-user">
-    
 
-    <form action="procesar_actualizar_alumno.php" method="POST"class="formulario">
-        <h1 class="titulo">Ingrese los nuevos datos</h1>
-    <br><br>
+<h1 class="titulo">Ingrese los nuevos datos</h1>
+    
+<main>
+
+    <form action="procesar_actualizar_alumno.php" method="POST"class="formModificar" id="formModificar" name="formModificar">
     
     <?php foreach ($lista as $alumno ):?> 
-        <table>
-            <div class=""> 
-            <input name="idAlumno" type="hidden" class="" value="<?php echo $alumno->getIdAlumno(); ?>">
+            <div> 
+            <input name="IdAlumno" type="hidden" class="" value="<?php echo $alumno->getIdAlumno(); ?>">
             </div>
+
             <div> 
             <input name="IdPersona" type="hidden" class="" value="<?php echo $alumno->getIdPersona(); ?>">
             </div>
-            <div> Nombre
-            <input name="PersonaNom" type="text" class="" value="<?php echo $alumno->getNombre(); ?>">
+
+            <div class="formGrup" id="GrupoNombre" > 
+                <label for="Nombre" class="formLabel">Nombre</label>
+                
+                <div class="formGrupInput"> 
+                    <input name="PersonaNom" type="text" class="formInput" value="<?php echo $alumno->getNombre(); ?>">            
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div> Apellido
-            <input name="Apellido" type="text" class="" value="<?php echo $alumno->getApellido(); ?>">
+
+            <div class="formGrup" id="GrupoApellido" > 
+                <label for="Apellido" class="formLabel">Apellido</label>
+                
+                <div class="formGrupInput"> 
+                    <input name="Apellido" type="text" class="formInput" value="<?php echo $alumno->getApellido(); ?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div>Nueva Fecha Nacimiento
-            <input name="FechaNac" type="date" class="" value="<?php echo $alumno->getFechaNacimiento(); ?>">
+
+            <div class="formGrup" id="GrupoFechaNacimiento" > 
+                <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
+                
+                <div class="formGrupInput">
+                    <input name="FechaNac" type="date" class="formInput" value="<?php echo $alumno->getFechaNacimiento(); ?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div> Dni
-            <input name="Dni" type="text" class="" value="<?php echo $alumno->getDni(); ?>">
+
+            <div class="formGrup" id="GrupoDni" > 
+                <label for="Dni" class="formLabel">Dni</label> 
+                
+                <div class="formGrupInput">
+                    <input name="Dni" type="text" class="formInput" value="<?php echo $alumno->getDni(); ?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div> Nacionalidad
-            <input name="Nacionalidad" type="text" class="" value="<?php echo $alumno->getNacionalidad(); ?>">
+
+            <div class="formGrup" id="GrupoNacionalidad" > 
+                <label for="Nacionalidad" class="formLabel">Nacionalidad</label> 
+            
+                <div class="formGrupInput">
+                    <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $alumno->getNacionalidad(); ?>">
+                </div>
+
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div> Numero Legajo
-            <input name="numLegajo" type="text" class="" value="<?php echo $alumno->getNumLegajo(); ?>">
+
+            <div class="formGrup" id="GrupoNumLegajo" > 
+                <label for="NumLegajo" class="formLabel">Numero de Legajo</label>
+            
+                <div class="formGrupInput">
+                <input name="NumLegajo" type="text" class="formInput" value="<?php echo $alumno->getNumLegajo(); ?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <div class="">
-            <select name="Sexo" id="" class="">
-                <option value="NULL" class="">seleccione sexo</option>
-                <?php foreach($listadoSexo as $sexo):?>
-                <option <?php if($sexo->getIdSexo()==$alumno->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
-                <?php endforeach?>
-            </select>
+
+            <div class="formGrup" id="GrupoSexo">
+                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
+
+                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
+
+                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
+                    <option value="NULL" class="">seleccione sexo</option>
+                        <?php foreach($listadoSexo as $sexo):?>
+                    <option <?php if($sexo->getIdSexo()==$alumno->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
+                        <?php endforeach?>
+                </select>
             </div>
+
+            <!--Grupo de Mensaje-->
+            
+            <div class="formMensaje" id="GrupoMensaje">
+                
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
+
             <div> 
-            <input name="Guardar" type="submit" value="Actualizar" >
-            <input name="Cancelar" type="submit" value="Cancelar">
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
             </div>
-        </table>
+
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
+            </div>
+
     <?php endforeach ?>
     
     
     </form>
+    </main>
     
 </body>
+
+<script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 </html>

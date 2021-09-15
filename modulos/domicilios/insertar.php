@@ -37,6 +37,12 @@
         <div class=""><input type="hidden" name="IdPersona" class="" value="<?php echo $idPersona?>"></div>
         <div class=""><input type="hidden" name="IdBarrio" class=""></div>
         <div class=""><input type="text" name="Detalle" class="" placeholder="Detalle Domicilio"></div>
+
+        <div>
+            <Select>
+                <option value="0">->Seleccionar Pais<-</option>
+            </Select>
+        </div>
         
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">
             <input name="Cancelar" type="submit" value="Cancelar">

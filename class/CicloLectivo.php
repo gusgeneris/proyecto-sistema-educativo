@@ -71,7 +71,6 @@ class cicloLectivo{
         $database=new Mysql();
 
         $database->insertarRegistro($sql);
-        
     }
 
     public static function listaTodos(){

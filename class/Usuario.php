@@ -8,7 +8,7 @@ class Usuario extends Persona {
     protected $_idUsuario;
     protected $_idPerfil;
     protected $_nombreUsuario;
-    protected $_contraseña;
+    protected $_contrasenia;
 
     public $perfil;
 
@@ -81,21 +81,21 @@ class Usuario extends Persona {
     }
 
     /**
-     * Get the value of _contraseña
+     * Get the value of _contrasenia
      */ 
-    public function getContraseña()
+    public function getContrasenia()
     {
-        return $this->_contraseña;
+        return $this->_contrasenia;
     }
 
     /**
-     * Set the value of _contraseña
+     * Set the value of _contrasenia
      *
      * @return  self
      */ 
-    public function setContraseña($_contraseña)
+    public function setContrasenia($_contrasenia)
     {
-        $this->_contraseña = $_contraseña;
+        $this->_contrasenia = $_contrasenia;
 
         return $this;
     }
@@ -110,7 +110,7 @@ class Usuario extends Persona {
         $user->_dni= $registro['persona_dni'];
         $user->_nacionalidad= $registro['persona_nacionalidad'];
         $user->_nombreUsuario= $registro['usuario_nombre'];
-        $user->_contraseña= $registro['usuario_contrasenia'];
+        $user->_contrasenia= $registro['usuario_contrasenia'];
         $user->_idSexo= $registro['sexo_id_sexo'];
         $user->_idPerfil= $registro['perfil_id_perfil'];
         $user->_estado= $registro['estado_id_estado'];
@@ -197,7 +197,7 @@ class Usuario extends Persona {
 
         $database=new MySql();
 
-        $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contraseña}','{$this->_idPerfil}','{$this->_idPersona}')";
+        $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contrasenia}','{$this->_idPerfil}','{$this->_idPersona}')";
         
         $database->insertarRegistro($sql);
 
@@ -206,7 +206,7 @@ class Usuario extends Persona {
     public static function obtenerTodoPorId($id){
         $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
-        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil FROM usuario 
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,perfil_id_perfil,estado_id_estado FROM usuario 
         JOIN persona on persona.id_persona=usuario.persona_id_persona WHERE id_usuario={$id}";
 
         $db = new MySql();

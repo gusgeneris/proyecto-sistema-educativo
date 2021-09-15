@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="GustavoSandoval">
+
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>Mi Pagina</title>
+</head>
+
+<body>
+    <header><img src="imagen/logotipo.png" alt=""></header>
+    <nav><a href="inicio.php">Nombre de la Pagina</a></nav>
+    <!-- Comentario -->
+    <section>
+        <h1>Historia de Formosa</h1>
+        <p>La ciudad de Formosa nació como resultado del proceso de ocupación del espacio chaqueño que se inició con posterioridad a la guerra de la <u>Triple Alianza</u> (1865-1870) que enfrentó al Paraguay con Argentina, Uruguay y Brasil. Al producirse
+            el veredicto arbitral que estableció el río Pilcomayo como límite definitivo entre la República Argentina y la República del Paraguay, Villa Occidental (hoy Villa Hayes) primitiva capital del Chaco Argentino, debió trasladarse al entonces
+            denominado Chaco Central. El traslado, encomendado por el gobernador <b> Lucio V. Mansilla </b> al mayor Luis Jorge Fontana, llevaba una sugerencia explícita sobre el lugar en que debía instalarse la nueva capital del Chaco argentino; aquel
+            punto sería el
+            <i> "conocido desde el tiempo de los españoles con el nombre de Punta Hermosa o Formosa" </i>, acuñándose el último término como denominación definitiva. La fundación del pueblo se concretó el 8 de abril de 1879.
+            <br> A su vez el Territorio de Formosa fue separado del primitivo territorio del Chaco en 1884, constituyéndose como una gobernación con capital en la villa homónima.
+            <br> Los informes de los primeros gobernadores instalados en la nueva capital chaqueña, se preocuparon por señalar la futura importancia económica y comercial de una plaza enclavada sobre una de las vías fluviales más importantes de América
+            y susceptible de establecer excelentes relaciones hacia otros puntos de la geografía nacional.
+        </p>
+        <figure>
+            <img src="mapaFormosa.jpeg">
+            <figcaption> descripcion de imagen </figcaption>
+        </figure>
+        <a href="https://www.formosa.gob.ar/modulos/miprovincia/templates/files/historiaformosa.pdf" target='blank' title='Archivo pdf con posibilidad de descarga'> Mas informacion </a>
+    </section>
+
+    <section>
+        <ol>
+            <li>punto uno</li>
+            <li>punto dos</li>
+            <li>punto tres</li>
+        </ol>
+    </section>
+    <article>
+        <h1>Formulario de Contacto</h1>
+        <form action="">
+            <label for="">Nombre
+                    <input type="text">
+                </label>
+            <label for="">Telefono
+                    <input type="text">
+                </label>Mensaje
+            <input type="text">
+            </label>
+            <button type="submit"> Enviar </button>
+        </form>
+    </article>
+    <aside>
+        <blockquote>
+            "En las religiones universales, del tipo del cristianismo y del budismo, el pavor y la náusea preludian las escapadas de una vida ardiente espiritual. Ahora bien, esta vida espiritual, que se funda en el refuerzo de las prohibiciones primeras, tiene sin
+            embargo el sentido de la fiesta… (Bataille, 2001, p. 54)"
+        </blockquote>
+    </aside>
+
+    <section>
+        <dl>
+            <dt>Formosa</dt>
+            <dd>La ciudad de Formosa es la capital de la provincia y del departamento homónimo. Se encuentra en el margen derecho del río Paraguay, en el nordeste argentino, a 1107 km de la ciudad de Buenos Aires</dd>
+        </dl>
+    </section>
+
+    <section>
+        <table border-collapse="collapse" border-color="black">
+            <caption>Titulo Tabla</caption>
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th colspan="2">NOMBRE</th>
+                    <th>EMAIL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Cantidad de Personas 3</th>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+
+    <section>
+        <video src="videoHistorico.mp4"> </video>
+    </section>
+
+
+    <section>
+        <h1>Formulario de Contacto</h1>
+        <form action="ejemplo.php" method="POST" target="self" autocomplete="off">
+            <fieldset>
+                <label for="nombreId"><b> Nombre: </b></label>
+                <input type="text" name="nombre" id="nombreId" placeholder="Nombre ">
+                <br>
+                <label for="email"><b> Email: </b></label>
+                <input type="email" name="email" id="contraseña" placeholder="Email">
+                <br>
+                <label for="Mensaje"><b> Mensaje: </b></label>
+                <textarea id="Mensaje" name="texto" rows="3" cols="30"></textarea>
+            </fieldset>
+
+            <button type="button" id="Enviar"> Enviar</button>
+            <button type="button" id="Cancelar"> Cancelar</button>
+
+            <button type="reset"> Resetear </button>
+        </form>
+    </section>
+
+    <footer>
+        <a href="www.gustavosandoval.com">Desarrollado por GustavoSandoval</a>
+    </footer>
+
+</body>
+
+</html>

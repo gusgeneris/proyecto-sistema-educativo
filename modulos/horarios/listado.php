@@ -29,9 +29,9 @@ $lista=Horario::listaTodos();
     <table class="tabla" method="GET">
         <tr >
             <th> ID Horario</th>
-            <th> Numero</th>
             <th> Hora Inicio</th>
             <th> Hora Fin</th>
+            <th> Numero</th>
 
         </tr>
         <?php foreach ($lista as $horario ):?> 

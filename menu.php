@@ -38,9 +38,6 @@ $listadoModulos= $usuario->perfil->getArrModulos();
 
 
 </header>
-<?php
-echo "<input type='button' value='Atras' onClick='history.go(-1);'>";
-?>
 
 
 <!-- LINEA 25
