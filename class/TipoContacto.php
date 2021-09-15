@@ -9,6 +9,13 @@ class TipoContacto {
 	private $_idTipoContacto;
 	private $_descripcion;
 
+	public function setIdTipoContacto($idTipoContacto)
+	{
+		$this->_idTipoContacto = $idTipoContacto;
+
+		return $this;
+	}
+
 	public function getIdTipoContacto() {
 		return $this->_idTipoContacto;
 	}

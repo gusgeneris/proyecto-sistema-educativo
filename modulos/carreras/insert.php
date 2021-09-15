@@ -21,7 +21,7 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Carrera</title>
     <title>Agregar nuevo</title>
@@ -30,15 +30,48 @@ if(isset($_GET['mj'])){
 <?php require_once "../../menu.php";?>
 
 <body>
+    <h1 class="titulo"> Registro de Carrera</h1>
 
-    <form action="procesar_insert.php" method="POST" class="formulario">
-        <h1 class="titulo"> Registro de Carrera</h1>
-        <br>
-        <div><input type="text" name=Nombre placeholder="Carrera Nombre"></div>
-        <div><input type="number" name=AnioDuracion placeholder="Duracion en Años"></div>
-        <div><input type="submit" name="Guardar" value="Guardar"></div>
-        <div><input type="submit" name="Cancelar" value="Cancelar"></div>
+    <form action="procesar_insert.php" method="POST" class="formInsert" id="formInsert" name="formInsert">
+
+        <div class="formGrup" id="GrupoNombre" >
+            <label for="Nombre" class="formLabel">Nombre</label>
+            <div class="formGrupInput">
+                <input type="text" id='Nombre' name="Nombre" class="formInput" placeholder="Nombre">
+            </div>
+            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+        </div>
+
+        <div class="formGrup" id="GrupoAnios" >
+            <label for="Anios" class="formLabel">Años de duracion</label>
+            <div class="formGrupInput">
+                <input type="text" id='Anios' name="Anios" class="formInput" placeholder="Duracion en Años">
+            </div>
+            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+        </div>
+
+        <!--Grupo de Mensaje-->
+            
+        <div class="formMensaje" id="GrupoMensaje">
+                
+            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+        
+        </div>
+
+        <!--Grupo de Boton Enviar-->
+
+        <div class="formGrupBtnEnviar">
+            <button type="submit" class="formButton" value ="FormInsertCarrera" id="Guardar"> Guardar</button>
+        </div>
+
+        <div class="formGrupBtnEnviar">
+            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+        </div>
     </form>
     
 </body>
+
+
+<script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+
 </html>

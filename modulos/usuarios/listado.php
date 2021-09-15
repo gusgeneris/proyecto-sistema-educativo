@@ -27,15 +27,50 @@ $mensaje='';
 
     
 if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
+
+    switch($_GET['mj']){
+
+        case ERROR_LONGITUD_NAME_CODE:
+            $mensaje=ERROR_LONGITUD_NAME;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;
+        case ERROR_LONGITUD_LAST_NAME_CODE:
+            $mensaje=ERROR_LONGITUD_LAST_NAME;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;
+        case ERROR_NAME_NO_PERMITE_NUMEROS_CODE:
+            $mensaje=ERROR_NAME_NO_PERMITE_NUMEROS;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;
+        case ERROR_LAST_NAME_NO_PERMITE_NUMEROS_CODE:
+            $mensaje=ERROR_LAST_NAME_NO_PERMITE_NUMEROS;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;
+        case ERROR_LONGITUD_NUMERIC_DNI_CODE:
+            $mensaje=ERROR_LONGITUD_NUMERIC_DNI;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;
+        case ERROR_DATE_INCORRECT_CODE:
+            $mensaje=ERROR_DATE_INCORRECT;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;
+        case ERROR_SEXO_INCORRECT_CODE:
+            $mensaje=ERROR_SEXO_INCORRECT;?>
+            <div class="mensaje"><?php echo $mensaje;?></div><?php
+            break;    
+        case CORRECT_INSERT_CODE:
+            $mensaje=CORRECT_INSERT_MENSAJE;?>
+            <div class="mensajes"><?php echo $mensaje;?></div><?php
+            break;        
+        case CORRECT_UPDATE_CODE:
+            $mensaje=CORRECT_UPDATE_MENSAJE;?>
+            <div class="mensajes"><?php echo $mensaje;?></div><?php
+            break;
+
     }
+
 };
+
 
 
 ?>
@@ -86,6 +121,8 @@ if(isset($_GET['mj'])){
             <th> Nombre Usuario</th>
             <th> Sexo</th>
             <th> Perfil</th>
+            <th>Contacto</th>
+            <th>Direccion</th>
             <th> Acciones</th>
 
         </tr>
@@ -123,6 +160,12 @@ if(isset($_GET['mj'])){
                             echo $perfil->getPerfilNombre(); 
                         endforeach  */
                         echo $perfil->getPerfilNombre(); ?>
+                </td>
+                <td>
+                    <a href="../contactos/contactos.php?idPersona=<?php echo $usuario->getIdPersona(); ?>">Ver</a> 
+                </td>
+                <td>
+                    <a href="../domicilios/domicilios.php?idPersona=<?php echo $usuario->getIdPersona(); ?>">Ver</a> 
                 </td>
                 <td>
                     <a href="dar_baja.php?id=<?php echo $usuario->getIdPersona(); ?>" class="">borrar</a>

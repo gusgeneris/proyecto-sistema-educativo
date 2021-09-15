@@ -9,7 +9,13 @@ if($cancelar==true){
     exit;
 }
 
-$anio = $_POST['Anio'];
+$anio = $_POST['CicloLectivo'];
+
+
+if((!preg_match("/^\d*$/",$anio))){
+    header("Location:listado?mj=".ERROR_DNI_NUMBER_CODE );
+    exit;
+} 
 
 
 $CicloLectivo=new CicloLectivo();

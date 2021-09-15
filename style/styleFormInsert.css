@@ -1,0 +1,221 @@
+    /*APLICANDO ESTILO AL FORMULARIO*/
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background-color: #d1d0d0;
+    }
+    
+    main {
+        max-width: 800px;
+        width: 90%;
+        margin: auto;
+        padding: 45px;
+    }
+    
+    .titulo {
+        text-align: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: rgb(0, 0, 0);
+        border: 2px rgb(0, 0, 0) solid;
+        background-color: white;
+        margin-bottom: 0px;
+    }
+    /*SE APLICA UN ESTILO GRID QUE CONTENGA DOS COLUMNAS*/
+    
+    .formInsert {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        /*espaciado entre cada elemento*/
+    }
+    
+    .formModificar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .formInsertUnaColumna {
+        align: center;
+        /*espaciado entre cada elemento*/
+    }
+    
+    .formLabel {
+        display: block;
+        /*abarque el 100%*/
+        font-weight: 700;
+        /*Fuente del label este en negrita*/
+        padding: 10px;
+        /*espaciado a todos los lados*/
+        cursor: pointer;
+        /*al pasar el cursor se ilumina su respectivo input*/
+    }
+    
+    .formGrupInput {
+        position: relative;
+        /*El grupo tenga un posicionamiento relativo*/
+    }
+    
+    .formInput {
+        width: 100%;
+        /*ocupe todo el ancho*/
+        background-color: rgb(255, 255, 255);
+        border: 3px solid transparent;
+        border-radius: 3px;
+        line-height: 45px;
+        padding: 0 40px 0 10px;
+        transition: .3s ease all;
+        padding-bottom: 0px;
+    }
+    
+    .formInput:focus {
+        border: 3px solid rgb(0, 81, 255);
+        outline: none;
+        /*sacar subrayado autodefinido que le coloca el naegador*/
+        box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4)
+    }
+    
+    .formularioInputError {
+        font-size: 12px;
+        /*elimina el mangen inferior que trae por defecto*/
+        margin-bottom: 0;
+        display: none;
+    }
+    
+    .formularioInputError-activo {
+        display: block;
+    }
+    
+    .formGrupBtnEnviar,
+    .formMensaje {
+        grid-column: span 2;
+        /*abarque dos columnas*/
+    }
+    
+    .formMensaje {
+        height: 45px;
+        line-height: 45px;
+        background: #f66060;
+        padding: 0 15px;
+        border-radius: 3px;
+        display: none;
+    }
+    
+    .formMensaje-activo {
+        display: block;
+    }
+    
+    .formMensaje p {
+        margin: 0;
+    }
+    
+    .formGrupBtnEnviar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .formButton {
+        height: 45px;
+        line-height: 45px;
+        width: 30%;
+        background: rgb(49, 49, 49);
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    
+    .formButton:hover {
+        box-shadow: 3px 0px 30px rgba(163, 163, 163, 3);
+    }
+    
+    .formValidacionEstado {
+        position: absolute;
+        right: 10px;
+        bottom: 12px;
+        z-index: 100;
+        font-size: 16px;
+    }
+    
+    .MnsjSexo {
+        font-size: 14px;
+        color: red;
+    }
+    /*ESTILOS PARA VALIDACION*/
+    /*.formGrupCorrect .formValidacionEstado {
+        color: #1ed12d;
+        opacity: 1;
+    }
+    /*.formGrupCorrect .formLabel {
+        color: #1ed12d;
+    }*/
+    
+    .formGrupCorrect .formInput {
+        border: 3px solid #1ed12d;
+    }
+    /*.formGrupIncorrect .formValidacionEstado {
+        color: #bb2929;
+        opacity: 1;
+    }*/
+    
+    .formGrupIncorrect .formInput {
+        border: 3px solid #bb2929;
+    }
+    /**/
+    
+    select {
+        color: #000000;
+        margin: 20px auto 40px auto;
+        border: 1px solid #d9d9d9;
+        height: 30px;
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    
+    select option:first-child {
+        color: #a7a7a7;
+        align-items: center;
+    }
+    
+    select option {
+        color: #333;
+    }
+    
+    .labelSexo {
+        padding-bottom: 0px;
+    }
+    /*Mediaqueries*/
+    
+    @media screen and (max-width: 800px) {
+        .formInsert {
+            grid-template-columns: 1fr;
+        }
+        .formModificar {
+            grid-template-columns: 1fr;
+        }
+        .formGrupBtnEnviar,
+        .formMensaje {
+            grid-column: span 1;
+            /*cambia a 1 columna*/
+        }
+        .formGrup {
+            position: relative;
+            padding-left: 30px;
+            /*El grupo tenga un posicionamiento relativo*/
+        }
+        .formGrupBtnEnviar {
+            padding-left: 30px;
+        }
+        .formButton {
+            width: 100%;
+        }
+    }

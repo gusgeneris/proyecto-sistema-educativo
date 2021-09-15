@@ -113,8 +113,8 @@ class Alumno extends Persona{
         $database= new Mysql();
 
         $database->insertarRegistro($sql);
-
-
+        
+        return true;
     }
 
     public function actualizarAlumno(){

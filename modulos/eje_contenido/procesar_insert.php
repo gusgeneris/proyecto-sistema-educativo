@@ -16,6 +16,24 @@ if($cancelar==true){
 $numero = $_POST['Numero'];
 $descripcion = $_POST['Descripcion'];
 
+         #COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
+    if (strlen($descripcion) < 3 ){
+
+        header("Location:listado.php?mj=".ERROR_LONGITUD_NAME_CODE);
+        exit;
+    }
+
+    if (ctype_alpha($descripcion) == false){
+        header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
+        exit;
+    }
+
+    
+    if((!preg_match("/^\d*$/",$numero))){
+        header("Location:listado?mj=".ERROR_DNI_NUMBER_CODE );
+        exit;   
+    } 
+
 $ejeContenido=new EjeContenido();
 $ejeContenido->setNumero($numero);
 $ejeContenido->setDescripcion($descripcion);

@@ -181,10 +181,15 @@ class Persona{
     public  function insertPersona(){
         $database=new Mysql();
 
+        #cambio el valor de la fecha, en el caso de que la fecha sea nula engrese
+        if ($this->_fechaNacimiento == null){
+            $this->_fechaNacimiento = "0000-00-00";
+        }
+
+
         $sql="INSERT INTO persona (`persona_nombre`, `persona_apellido`, `persona_dni`, `persona_fecha_nac`, `sexo_id_sexo`,`persona_nacionalidad`) 
             VALUES ('{$this->_nombre}', '{$this->_apellido}', '{$this->_dni}', '{$this->_fechaNacimiento}', '{$this->_idSexo}', '{$this->_nacionalidad}');";
 
-        
         $idPersona=$database->insertarRegistro($sql);
         $this->_idPersona = $idPersona;
 

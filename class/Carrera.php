@@ -98,6 +98,7 @@ Class Carrera{
     public function insert(){
 
         $sql="INSERT INTO `carrera` ( `carrera_nombre`, `carrera_duracion_anios`) VALUES ( '{$this->_nombre}', '{$this->_duracionAnios}');";
+        
         $database=new Mysql();
         $idCarrera=$database->insertarRegistro($sql);
         $this->_idCarrera=$idCarrera;

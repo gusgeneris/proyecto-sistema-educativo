@@ -12,7 +12,26 @@
 
     $idCarrera=$_POST["IdCarrera"];
     $nombre=$_POST["Nombre"];
-    $duracionAnios=$_POST["DuracionAnios"];
+    $duracionAnios=$_POST["Anios"];
+
+          #COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
+    if (strlen($nombre) < 3 ){
+
+        header("Location:listado.php?mj=".ERROR_LONGITUD_NAME_CODE);
+        exit;
+    }
+
+    if((!preg_match("/[a-zA-Z ]{2,254}/",$nombre))){
+        header("Location:listado.php?mj=assssd");
+        exit;
+    };
+
+
+    
+    if((!preg_match("/^\d*$/",$duracionAnios))){
+        header("Location:listado?mj=".ERROR_DNI_NUMBER_CODE );
+        exit;   
+    } 
 
     $carrera=new Carrera();
     $carrera->setIdCarrera($idCarrera);

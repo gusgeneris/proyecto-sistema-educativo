@@ -5,7 +5,7 @@
     $cancelar= $_POST['Cancelar'];
     $idCarrera=$_POST["IdCarrera"];
     $idMateria=$_POST["idMateria"];
-    $nombre=$_POST["Nombre"];
+    $materiaNombre=$_POST["NombreMateria"];
 
 
     if($cancelar==true){
@@ -14,10 +14,22 @@
     }
     
 
+        #COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
+    if (strlen($materiaNombre) < 3 ){
+
+        header("Location:listado.php?mj=".ERROR_LONGITUD_NAME_CODE);
+        exit;
+    }
+
+    if((!preg_match("/^[a-zA-Z0-9_ ]*$/",$materiaNombre))){
+        header("Location:listado.php?mj=assssd");
+        exit;
+    };
+
     
     $materia=new Materia();
     $materia->setIdMateria($idMateria);
-    $materia->setNombre($nombre);
+    $materia->setNombre($materiaNombre);
 
     $materia->modificar();
 

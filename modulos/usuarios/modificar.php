@@ -23,7 +23,7 @@ $listaPerfil=Perfil::perfilTodos();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Usuario</title>
 </head>
@@ -31,55 +31,130 @@ $listaPerfil=Perfil::perfilTodos();
 
 <body class="modif-user">
     
+    <h1 class="titulo">Ingrese los nuevos datos</h1>
 
-    <form action="procesar_actualizar.php" method="POST"class="formulario">
-        <h1 class="titulo">Ingrese los nuevos datos</h1>
+    <form action="procesar_actualizar.php" method="POST" class="formModificar" id="formModificar" name="formModificar">
+
     
     <?php foreach ($lista as $usuario ):?> 
         <table>
             <div class=""> 
             <input name="idUsuario" type="hidden" class="" value="<?php echo $usuario->getIdUsuario(); ?>">
             </div>
+
             <div> 
             <input name="IdPersona" type="hidden" class="" value="<?php echo $usuario->getIdPersona(); ?>">
             </div>
-            <div> nombre
-            <input name="PersonaNom" type="text" class="" value="<?php echo $usuario->getNombre(); ?>">
+
+            <div class="formGrup" id="GrupoNombre" > 
+                <label for="Nombre" class="formLabel">Nombre</label> 
+                
+                <div class="formGrupInput">
+                    <input name="Nombre" type="text" class="formInput" value="<?php echo $usuario->getNombre(); ?>">   
+                
+                </div>
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
-            <div> apellido
-            <input name="Apellido" type="text" class="" value="<?php echo $usuario->getApellido(); ?>">
+            
+
+            <div class="formGrup" id="GrupoApellido" > 
+                <label for="Apellido" class="formLabel">Apellido</label> 
+                <div class="formGrupInput">
+                    <input name="Apellido" type="text" class="formInput" value="<?php echo $usuario->getApellido(); ?>">
+                </div>
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
-            <div>nueva fecha nacimiento
-            <input name="FechaNac" type="date" class="" value="<?php echo $usuario->getFechaNacimiento(); ?>">
+            
             </div>
-            <div> dni
-            <input name="Dni" type="text" class="" value="<?php echo $usuario->getDni(); ?>">
+
+            <div class="formGrup" id="GrupoFechaNacimiento" > 
+                <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
+                <div class="formGrupInput">
+                    <input name="FechaNacimiento" type="date" class="formInput" value="<?php echo $usuario->getFechaNacimiento(); ?>">
+                </div>
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
             </div>
-            <div> nacionalidad
-            <input name="Nacionalidad" type="text" class="" value="<?php echo $usuario->getNacionalidad(); ?>">
+
+            <div class="formGrup" id="GrupoDni" > 
+                <label for="Dni" class="formLabel">Dni</label> 
+                <div class="formGrupInput">
+                    <input name="Dni" type="text" class="formInput" value="<?php echo $usuario->getDni(); ?>">
+                </div>
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
-            <div> nombre usuario
-            <input name="UsuarioNom" type="text" class="" value="<?php echo $usuario->getNombreUsuario(); ?>">
+
+            <div class="formGrup" id="GrupoNacionalidad" > 
+                <label for="Nacionalidad" class="formLabel">Nacionalidad</label>
+                <div class="formGrupInput"> 
+                    <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $usuario->getNacionalidad(); ?>">
+                </div>
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
-            <div class="">
-                <select name="Sexo" id="" class="">
-                    <option value="NULL" class="">seleccione sexo</option>
+
+            <div class="formGrup" id="GrupoNombreUsuario" > 
+                <label for="NombreUsuario" class="formLabel">Nombre Usuario</label>
+                <div class="formGrupInput"> 
+                    <input name="NombreUsuario" type="text" class="formInput" value="<?php echo $usuario->getNombreUsuario(); ?>">            
+                </div>
+            
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+            </div>
+
+            <div class="formGrup" id="GrupoContrasenia" > 
+                <label for="Contrasenia" class="formLabel">Contraseña</label>
+                <div class="formGrupInput"> 
+                    <input name="Contrasenia" type="text" class="formInput" id="Contrasenia" value="<?php echo $usuario->getContrasenia(); ?>">            
+                </div>
+            
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+            </div>
+
+            <div class="formGrup" id="GrupoContrasenia2" >
+                <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
+                <div class="formGrupInput">
+                    <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" value="<?php echo $usuario->getContrasenia(); ?>">
+                    
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div>
+                <p class="formularioInputError"> Las Contraseñas deben coincidir.</p>
+            </div>
+
+            <div class="formGrup" id="GrupoSexo">
+                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
+
+                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
+
+                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
                     <?php foreach($listaSexo as $sexo):?>
                     <option <?php if($sexo->getIdSexo()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
                     <?php endforeach?>
                 </select>
             </div>
-             <div class="">
-                <select name="Perfil" id="" class="">
+
+            <div class="">
+                <label for="cboPerfil" class="formLabel labelSexo">Perfil</label>
+                <select name="cboPerfil" id="" class="cboSexo">
                     <option value="NULL" class="">seleccione perfil</option>
                     <?php foreach($listaPerfil as $perfil):?>
                     <option <?php if($perfil->getIdPerfil()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $perfil->getIdPerfil(); ?>" class=""><?php echo $perfil->getPerfilNombre(); ?></option>
                     <?php endforeach?>
                 </select>
             </div>
+            <!--Grupo de Mensaje-->
+            
+            <div class="formMensaje" id="GrupoMensaje">
+                
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
+
             <div> 
-            <input name="Guardar" type="submit" value="Actualizar" >
-            <input name="Cancelar" type="submit" value="Cancelar">
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
+            </div>
+
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;" >Cancelar</button>
             </div>
         </table>
     <?php endforeach ?>
@@ -88,4 +163,5 @@ $listaPerfil=Perfil::perfilTodos();
     </form>
     
 </body>
+<script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 </html>

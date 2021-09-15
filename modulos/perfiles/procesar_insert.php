@@ -9,7 +9,20 @@ if($cancelar==true){
     exit;
 }
 
-$nombre = $_POST['Nombre'];
+$nombre = $_POST['Perfil'];
+
+#COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
+if (strlen($nombre) < 3 ){
+
+    header("Location:listado.php?mj=".ERROR_LONGITUD_NAME_CODE);
+    exit;
+}
+
+if (ctype_alpha($nombre) == false){
+    header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
+    exit;
+}
+
 
 
 $perfil=new Perfil();
