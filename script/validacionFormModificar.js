@@ -2,6 +2,8 @@ const formulario = document.getElementById('formModificar');
 
 const inputs = document.querySelectorAll('#formModificar input');
 
+const selects = document.querySelectorAll('#formModificar select');
+
 const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -13,7 +15,10 @@ const expresiones = {
     anio: /^\d{4}$/,
     nulo: /^\0$/,
     especialidad: /^[a-zA-Z_ ]*$/,
-    barrio: /^[a-zA-Z0-9_ ]*$/
+    barrio: /^[a-zA-Z0-9_ ]*$/,
+    contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
+    detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
+    cboSelect: /^[1-9]{1,3}$/
 }
 
 const campos = {
@@ -32,7 +37,16 @@ const campos = {
     Barrio: false,
     Pais: false,
     Provincia: false,
-    Localidad: false
+    Localidad: false,
+    Contacto: false,
+    TipoContacto: false,
+    DetalleDomicilio: false,
+    cboPais: false,
+    cboProvincia: false,
+    cboLocalidad: false,
+    cboBarrio: false,
+    cboSexo: false,
+    cboPerfil: false
 }
 
 const validarFormulario = (e) => {
@@ -74,6 +88,9 @@ const validarFormulario = (e) => {
         case "Especialidad":
             validarCampo(expresiones.especialidad, e.target, 'Especialidad')
             break;
+        case "DetalleDomicilio":
+            validarCampo(expresiones.detalleDomicilio, e.target, 'DetalleDomicilio')
+            break;
         case "Barrio":
             validarCampo(expresiones.barrio, e.target, 'Barrio')
             break;
@@ -88,6 +105,24 @@ const validarFormulario = (e) => {
             break;
         case "TipoContacto":
             validarCampo(expresiones.nombre, e.target, 'TipoContacto')
+            break;
+        case "cboPais":
+            validarCampo(expresiones.cboSelect, e.target, 'cboPais')
+            break;
+        case "cboProvincia":
+            validarCampo(expresiones.cboSelect, e.target, 'cboProvincia')
+            break;
+        case "cboLocalidad":
+            validarCampo(expresiones.cboSelect, e.target, 'cboLocalidad')
+            break;
+        case "cboBarrio":
+            validarCampo(expresiones.cboSelect, e.target, 'cboBarrio')
+            break;
+        case "cboSexo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboSexo')
+            break;
+        case "cboPerfil":
+            validarCampo(expresiones.cboSelect, e.target, 'cboPerfil')
             break;
     }
 }
@@ -129,6 +164,11 @@ inputs.forEach((input) => {
     input.addEventListener('blur', (validarFormulario))
 })
 
+selects.forEach((select) => {
+    select.addEventListener('change', (validarFormulario));
+})
+
+
 
 
 
@@ -138,21 +178,21 @@ formulario.addEventListener('submit', (e) => {
     switch (document.getElementById('Guardar').value) {
         case 'FormInsertAlumnos':
 
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertDocente':
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
                 formulario.submit();
             } else {
 
@@ -223,6 +263,13 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInserTipoContacto':
             if (campos.Nombre) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertDetalleDomicilio':
+            if (campos.DetalleDomicilio) {
 
                 formulario.submit();
             } else {

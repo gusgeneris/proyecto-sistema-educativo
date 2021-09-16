@@ -2,6 +2,8 @@ const formulario = document.getElementById('formInsert');
 
 const inputs = document.querySelectorAll('#formInsert input');
 
+const selects = document.querySelectorAll('#formInsert select');
+
 const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -15,7 +17,9 @@ const expresiones = {
     anios: /^\d{1}$/,
     especialidad: /^[a-zA-Z_ ]*$/,
     barrio: /^[a-zA-Z0-9_ ]*$/,
-    contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/
+    contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
+    detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
+    cboSelect: /^[1-9]{1,3}$/
 }
 
 const campos = {
@@ -36,7 +40,15 @@ const campos = {
     Pais: false,
     Provincia: false,
     Localidad: false,
-    Contacto: false
+    Contacto: false,
+    TipoContacto: false,
+    DetalleDomicilio: false,
+    cboPais: false,
+    cboProvincia: false,
+    cboLocalidad: false,
+    cboBarrio: false,
+    cboSexo: false,
+    cboPerfil: false
 
 }
 
@@ -103,10 +115,30 @@ const validarFormulario = (e) => {
         case "TipoContacto":
             validarCampo(expresiones.nombre, e.target, 'TipoContacto')
             break;
-
-
+        case "DetalleDomicilio":
+            validarCampo(expresiones.detalleDomicilio, e.target, 'DetalleDomicilio')
+            break;
+        case "cboPais":
+            validarCampo(expresiones.cboSelect, e.target, 'cboPais')
+            break;
+        case "cboProvincia":
+            validarCampo(expresiones.cboSelect, e.target, 'cboProvincia')
+            break;
+        case "cboLocalidad":
+            validarCampo(expresiones.cboSelect, e.target, 'cboLocalidad')
+            break;
+        case "cboBarrio":
+            validarCampo(expresiones.cboSelect, e.target, 'cboBarrio')
+            break;
+        case "cboSexo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboSexo')
+            break;
+        case "cboPerfil":
+            validarCampo(expresiones.cboSelect, e.target, 'cboPerfil')
+            break;
     }
 }
+
 
 const validarCampo = (expresion, input, campo) => { //expresion hace referencia a las expresiones regulares antes definidas, el input hace referencia al evento que en este caso es target, el campo es el lugar //
     if (expresion.test(input.value)) { //e.target.valu (es el valor)- comparamos de este modo la constante expreciones del tipo nombre adjuntando .test para saber si cumple con la EXR
@@ -142,10 +174,13 @@ const validarContrasenia2 = () => {
 }
 
 inputs.forEach((input) => {
-    input.addEventListener('keyup', (validarFormulario))
-    input.addEventListener('blur', (validarFormulario))
+    input.addEventListener('keyup', (validarFormulario));
+    input.addEventListener('blur', (validarFormulario));
 })
 
+selects.forEach((select) => {
+    select.addEventListener('change', (validarFormulario));
+})
 
 
 
@@ -155,21 +190,21 @@ formulario.addEventListener('submit', (e) => {
     switch (document.getElementById('Guardar').value) {
         case 'FormInsertAlumnos':
 
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertDocente':
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
                 formulario.submit();
             } else {
 
@@ -247,6 +282,13 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInserTipoContacto':
             if (campos.Nombre) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertDetalleDomicilio':
+            if (campos.DetalleDomicilio) {
 
                 formulario.submit();
             } else {

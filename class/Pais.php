@@ -54,7 +54,8 @@ class Pais{
     }
 
     static public function listado(){
-        $sql="SELECT* FROM pais";
+        $sql="SELECT * FROM pais";
+        
         $database=new Mysql();
         $datos=$database->consultar($sql);
     

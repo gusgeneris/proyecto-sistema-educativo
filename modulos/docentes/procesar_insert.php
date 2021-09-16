@@ -54,9 +54,7 @@ if (ctype_alpha($personaApellido) == false){
     exit;
 }
 
-#TODO: PERMITIR QUE ACEPTE ESPACIOS
-
-if((!preg_match("/^[a-zA-Z´]+$/",$personaApellido))){
+if((!preg_match("/^[a-zA-Z_ ]*$/",$personaApellido))){
     header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
     exit;
 } 

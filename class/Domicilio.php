@@ -117,7 +117,7 @@ static public function listadoPorIdPersona($idPersona){
 }
 
 public function insertarDomicilio(){
-    $sql="INSERT INTO domicilio (`domicilio_detalle`, `persona_id_persona`) VALUES ('{$this->_detalle}', '{$this->_idPersona}')";
+    $sql="INSERT INTO domicilio (`domicilio_detalle`, `persona_id_persona`,barrio_id_barrio) VALUES ('{$this->_detalle}', '{$this->_idPersona}','{$this->_idBarrio}')";
     $database=new Mysql();
     $database->insertarRegistro($sql);
 
@@ -132,7 +132,6 @@ static public function obtenerPorId($idDomicilio){
     $registro=$datos->fetch_assoc();
     $domicilio=new Domicilio();
     $domicilio->crearDomicilio($domicilio,$registro);
-    var_dump($domicilio,true);
     return $domicilio;
 
 }

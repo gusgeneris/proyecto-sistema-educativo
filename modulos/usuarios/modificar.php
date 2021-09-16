@@ -119,27 +119,41 @@ $listaPerfil=Perfil::perfilTodos();
                 <p class="formularioInputError"> Las Contraseñas deben coincidir.</p>
             </div>
 
-            <div class="formGrup" id="GrupoSexo">
-                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
-
-                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
-
-                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
-                    <?php foreach($listaSexo as $sexo):?>
-                    <option <?php if($sexo->getIdSexo()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
-                    <?php endforeach?>
-                </select>
+            <div class="formGrup" id="GrupocboSexo">
+                <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
+                <div class="formGrupInput">
+                    <select id="cboSexo" class="formInput" required="required" name="cboSexo">
+                        <option value="0">
+                            -> Seleccione Sexo <-
+                        </option>
+                        <?php foreach($listaSexo as $sexo):?>
+                            <option <?php if($sexo->getIdSexo()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo();?>">
+                                <?php echo $sexo->getDescripcion(); ?>
+                            </option>
+                        <?php endforeach?>
+                    </select>
+                </div>
+                <p class="formularioInputError"> Debe seleccionar una opcion </p> 
             </div>
 
-            <div class="">
+
+
+            <div class="formGrup" id="GrupocboPerfil">
                 <label for="cboPerfil" class="formLabel labelSexo">Perfil</label>
-                <select name="cboPerfil" id="" class="cboSexo">
-                    <option value="NULL" class="">seleccione perfil</option>
-                    <?php foreach($listaPerfil as $perfil):?>
-                    <option <?php if($perfil->getIdPerfil()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $perfil->getIdPerfil(); ?>" class=""><?php echo $perfil->getPerfilNombre(); ?></option>
-                    <?php endforeach?>
-                </select>
-            </div>
+                <div class="formGrupInput">
+                    <select name="cboPerfil" id="cboPerfil" class="formInput" required="required">
+                        <option value="0" class="">
+                                -->Seleccione Perfil<--
+                        </option>
+                        <?php foreach($listaPerfil as $perfil):?>
+                        <option <?php if($perfil->getIdPerfil()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $perfil->getIdPerfil(); ?>">
+                            <?php echo $perfil->getPerfilNombre();?>
+                        </option>
+                        <?php endforeach?>
+                    </select>
+                </div>
+                <p class="formularioInputError"> Debe seleccionar una opcion </p> 
+             </div>
             <!--Grupo de Mensaje-->
             
             <div class="formMensaje" id="GrupoMensaje">

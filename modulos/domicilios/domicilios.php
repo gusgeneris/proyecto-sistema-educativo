@@ -32,8 +32,6 @@ if(isset($_GET['mj'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
-    <script src ="../../jquery3.6.js"></script>
-    <script src ="../../script/comboDomicilio.js"></script>
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar domicilio</title>
 </head>
@@ -73,10 +71,9 @@ if(isset($_GET['mj'])){
                 <td>
                     <?php echo $domicilio->getDetalle(); ?>
                 </td>
-
                 <td>
-                    <a href="eliminar.php?idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>.&idPersona=<?php echo $domicilio->getIdPersona();?>" class="">Borrar</a>
-                    <a href="modificar.php?idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>.&idPersona=<?php echo $domicilio->getIdPersona();?>" class="">Modificar</a>
+                    <a href="eliminar.php?idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class="">Borrar</a>
+                    <a href="modificar.php?idBarrio=<?php echo $domicilio->getIdBarrio();?>&idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class="">Modificar</a>
                 </td>
 
             </tr>

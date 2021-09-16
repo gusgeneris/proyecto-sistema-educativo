@@ -59,12 +59,17 @@ if (ctype_alpha($personaApellido) == false){
 
 #TODO: PERMITIR QUE ACEPTE ESPACIOS
 
-if((!preg_match("/^[a-zA-Z´]+$/",$personaApellido))){
+if((!preg_match("/^[a-zA-Z´_ ]+$/",$personaApellido))){
     header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
     exit;
 } 
 
 if((!preg_match("/^.{4,12}$/",$contrasenia))){
+    header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
+    exit;
+} 
+
+if((!preg_match("/^[a-zA-Z0-9_.-]{3,40}$/,",$nombreUser))){
     header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
     exit;
 } 
@@ -80,7 +85,7 @@ if ($personaSexo=='NULL'){
 
 $user=new Usuario();
 $user->setNombreUsuario($nombreUser);
-$user->setContraseña($contrasenia);
+$user->setContrasenia($contrasenia);
 $user->setNombre($personaNombre);
 $user->setApellido($personaApellido);
 $user->setDni($personaDni);

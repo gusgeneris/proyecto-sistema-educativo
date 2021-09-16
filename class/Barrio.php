@@ -111,6 +111,23 @@ class Barrio{
         }
         return $listadoBarrrios;
     }
+    
+    static public function obtenerBarrioPorIdLocalidad($idLocalidad){
+        $sql="SELECT * FROM barrio WHERE localidad_id_localidad={$idLocalidad}";
+
+        
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+
+        while($registro= $datos->fetch_assoc()){
+               
+            $barrio=new barrio();
+            $barrio->crearbarrio($barrio,$registro);  
+        }
+        return $barrio;
+    }
+
+
 
     public function insertarBarrio(){
 
@@ -142,6 +159,7 @@ class Barrio{
         return $barrio;
 
     }
+
 
     public function modificarBarrio(){
         $sql = "UPDATE `barrio` SET `barrio_nombre` = '{$this->_nombre}' WHERE (`id_barrio` = '{$this->_idBarrio}')";

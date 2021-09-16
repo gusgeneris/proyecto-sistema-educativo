@@ -11,7 +11,7 @@ if(isset($_GET['id'])){
 
 $docente= Docente::obtenerTodoPorId($id);
 
-$listadoSexo=Sexo::sexoTodos();
+$listado=Sexo::sexoTodos();
 
 $listaPerfil=Perfil::perfilTodos();
 
@@ -100,17 +100,22 @@ $listaPerfil=Perfil::perfilTodos();
             <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
         </div>
 
-        <div class="formGrup" id="GrupoSexo">
-                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
-                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
-
-                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
-                    <option value="NULL" class="">seleccione sexo</option>
-                        <?php foreach($listadoSexo as $sexo):?>
-                    <option <?php if($sexo->getIdSexo()==$docente->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
+        <div class="formGrup" id="GrupocboSexo">
+                <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
+                <div class="formGrupInput">
+                    <select id="cboSexo" class="formInput" required="required" name="cboSexo">
+                        <option value="0">
+                            -> Seleccione Sexo <-
+                        </option>
+                        <?php foreach($listado as $sexo):?>
+                            <option <?php if($sexo->getIdSexo()==$docente->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo();?>">
+                                <?php echo $sexo->getDescripcion(); ?>
+                            </option>
                         <?php endforeach?>
-                </select>
-            </div>
+                    </select>
+                </div>
+                <p class="formularioInputError"> Debe seleccionar una opcion </p> 
+        </div>
 
             <!--Grupo de Mensaje-->
             
@@ -126,7 +131,7 @@ $listaPerfil=Perfil::perfilTodos();
             </div>
 
             <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
     </form>
     
