@@ -11,7 +11,11 @@ if(isset($_GET['id'])){
 
 $docente= Docente::obtenerTodoPorId($id);
 
+<<<<<<< HEAD
 $listado=Sexo::sexoTodos();
+=======
+$listadoSexo=Sexo::sexoTodos();
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
 $listaPerfil=Perfil::perfilTodos();
 
@@ -52,6 +56,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <input name="Nombre" type="text" class="formInput" value="<?php echo $docente->getNombre(); ?>">
             </div>
             <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+<<<<<<< HEAD
         </div>
 
         <div class="formGrup" id="GrupoApellido" > 
@@ -68,38 +73,72 @@ $listaPerfil=Perfil::perfilTodos();
                 
             <div class="formGrupInput">
                 <input name="FechaNac" type="date" class="formInput" value="<?php echo $docente->getFechaNacimiento(); ?>">
+=======
+        </div>
+
+        <div class="formGrup" id="GrupoApellido" > 
+                <label for="Apellido" class="formLabel">Apellido</label>
+            
+            <div class="formGrupInput"> 
+                <input name="Apellido" type="text" class="formInput" value="<?php echo $docente->getApellido(); ?>">
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             </div>
             <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
         </div>
 
+<<<<<<< HEAD
         <div class="formGrup" id="GrupoDni" > 
             <label for="Dni" class="formLabel">Dni</label> 
             
             <div class="formGrupInput">
                 <input name="Dni" type="text" class="formInput" value="<?php echo $docente->getDni(); ?>">
+=======
+        <div class="formGrup" id="GrupoFechaNacimiento" > 
+            <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
+                
+            <div class="formGrupInput">
+                <input name="FechaNac" type="date" class="formInput" value="<?php echo $docente->getFechaNacimiento(); ?>">
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             </div>
             <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
         </div>
 
+<<<<<<< HEAD
         <div class="formGrup" id="GrupoNacionalidad" > 
             <label for="Nacionalidad" class="formLabel">Nacionalidad</label> 
             <div class="formGrupInput">
             
                 <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $docente->getNacionalidad(); ?>">
+=======
+        <div class="formGrup" id="GrupoDni" > 
+            <label for="Dni" class="formLabel">Dni</label> 
+            
+            <div class="formGrupInput">
+                <input name="Dni" type="text" class="formInput" value="<?php echo $docente->getDni(); ?>">
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             </div>
             <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
         </div>
 
+<<<<<<< HEAD
 
         <div class="formGrup" id="GrupoNumLegajo" > 
             
             <label for="NumMatricula" class="formLabel">Numero de Matricula</label>
             <div class="formGrupInput">
                 <input name="NumMatricula" type="text" class="formInput" value="<?php echo $docente->getNumMatricula(); ?>">
+=======
+        <div class="formGrup" id="GrupoNacionalidad" > 
+            <label for="Nacionalidad" class="formLabel">Nacionalidad</label> 
+            <div class="formGrupInput">
+            
+                <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $docente->getNacionalidad(); ?>">
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             </div>
             <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
         </div>
 
+<<<<<<< HEAD
         <div class="formGrup" id="GrupocboSexo">
                 <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
                 <div class="formGrupInput">
@@ -117,6 +156,30 @@ $listaPerfil=Perfil::perfilTodos();
                 <p class="formularioInputError"> Debe seleccionar una opcion </p> 
         </div>
 
+=======
+
+        <div class="formGrup" id="GrupoNumLegajo" > 
+            
+            <label for="NumMatricula" class="formLabel">Numero de Matricula</label>
+            <div class="formGrupInput">
+                <input name="NumMatricula" type="text" class="formInput" value="<?php echo $docente->getNumMatricula(); ?>">
+            </div>
+            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+        </div>
+
+        <div class="formGrup" id="GrupoSexo">
+                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
+                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
+
+                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
+                    <option value="NULL" class="">seleccione sexo</option>
+                        <?php foreach($listadoSexo as $sexo):?>
+                    <option <?php if($sexo->getIdSexo()==$docente->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
+                        <?php endforeach?>
+                </select>
+            </div>
+
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             <!--Grupo de Mensaje-->
             
             <div class="formMensaje" id="GrupoMensaje">
@@ -131,7 +194,11 @@ $listaPerfil=Perfil::perfilTodos();
             </div>
 
             <div class="formGrupBtnEnviar">
+<<<<<<< HEAD
                 <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+=======
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             </div>
     </form>
     

@@ -2,8 +2,11 @@ const formulario = document.getElementById('formModificar');
 
 const inputs = document.querySelectorAll('#formModificar input');
 
+<<<<<<< HEAD
 const selects = document.querySelectorAll('#formModificar select');
 
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -15,10 +18,14 @@ const expresiones = {
     anio: /^\d{4}$/,
     nulo: /^\0$/,
     especialidad: /^[a-zA-Z_ ]*$/,
+<<<<<<< HEAD
     barrio: /^[a-zA-Z0-9_ ]*$/,
     contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
     cboSelect: /^[1-9]{1,3}$/
+=======
+    barrio: /^[a-zA-Z0-9_ ]*$/
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 }
 
 const campos = {
@@ -37,6 +44,7 @@ const campos = {
     Barrio: false,
     Pais: false,
     Provincia: false,
+<<<<<<< HEAD
     Localidad: false,
     Contacto: false,
     TipoContacto: false,
@@ -47,6 +55,9 @@ const campos = {
     cboBarrio: false,
     cboSexo: false,
     cboPerfil: false
+=======
+    Localidad: false
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 }
 
 const validarFormulario = (e) => {
@@ -88,9 +99,12 @@ const validarFormulario = (e) => {
         case "Especialidad":
             validarCampo(expresiones.especialidad, e.target, 'Especialidad')
             break;
+<<<<<<< HEAD
         case "DetalleDomicilio":
             validarCampo(expresiones.detalleDomicilio, e.target, 'DetalleDomicilio')
             break;
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
         case "Barrio":
             validarCampo(expresiones.barrio, e.target, 'Barrio')
             break;
@@ -106,6 +120,7 @@ const validarFormulario = (e) => {
         case "TipoContacto":
             validarCampo(expresiones.nombre, e.target, 'TipoContacto')
             break;
+<<<<<<< HEAD
         case "cboPais":
             validarCampo(expresiones.cboSelect, e.target, 'cboPais')
             break;
@@ -124,6 +139,8 @@ const validarFormulario = (e) => {
         case "cboPerfil":
             validarCampo(expresiones.cboSelect, e.target, 'cboPerfil')
             break;
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
     }
 }
 
@@ -164,11 +181,14 @@ inputs.forEach((input) => {
     input.addEventListener('blur', (validarFormulario))
 })
 
+<<<<<<< HEAD
 selects.forEach((select) => {
     select.addEventListener('change', (validarFormulario));
 })
 
 
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
 
 
@@ -178,21 +198,33 @@ formulario.addEventListener('submit', (e) => {
     switch (document.getElementById('Guardar').value) {
         case 'FormInsertAlumnos':
 
+<<<<<<< HEAD
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
+=======
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo) {
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertDocente':
+<<<<<<< HEAD
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
+=======
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula) {
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
+<<<<<<< HEAD
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
+=======
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario) {
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
                 formulario.submit();
             } else {
 
@@ -268,6 +300,7 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
+<<<<<<< HEAD
         case 'FormInsertDetalleDomicilio':
             if (campos.DetalleDomicilio) {
 
@@ -275,6 +308,8 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
 
     }

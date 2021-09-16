@@ -111,6 +111,7 @@ class Barrio{
         }
         return $listadoBarrrios;
     }
+<<<<<<< HEAD
     
     static public function obtenerBarrioPorIdLocalidad($idLocalidad){
         $sql="SELECT * FROM barrio WHERE localidad_id_localidad={$idLocalidad}";
@@ -128,6 +129,8 @@ class Barrio{
     }
 
 
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
     public function insertarBarrio(){
 
@@ -160,7 +163,10 @@ class Barrio{
 
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
     public function modificarBarrio(){
         $sql = "UPDATE `barrio` SET `barrio_nombre` = '{$this->_nombre}' WHERE (`id_barrio` = '{$this->_idBarrio}')";
  

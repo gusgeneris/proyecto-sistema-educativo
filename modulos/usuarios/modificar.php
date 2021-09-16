@@ -81,6 +81,7 @@ $listaPerfil=Perfil::perfilTodos();
                     <input name="Dni" type="text" class="formInput" value="<?php echo $usuario->getDni(); ?>">
                 </div>
                 <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+<<<<<<< HEAD
             </div>
 
             <div class="formGrup" id="GrupoNacionalidad" > 
@@ -104,11 +105,28 @@ $listaPerfil=Perfil::perfilTodos();
                 <label for="Contrasenia" class="formLabel">Contraseña</label>
                 <div class="formGrupInput"> 
                     <input name="Contrasenia" type="text" class="formInput" id="Contrasenia" value="<?php echo $usuario->getContrasenia(); ?>">            
+=======
+            </div>
+
+            <div class="formGrup" id="GrupoNacionalidad" > 
+                <label for="Nacionalidad" class="formLabel">Nacionalidad</label>
+                <div class="formGrupInput"> 
+                    <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $usuario->getNacionalidad(); ?>">
+                </div>
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+            </div>
+
+            <div class="formGrup" id="GrupoNombreUsuario" > 
+                <label for="NombreUsuario" class="formLabel">Nombre Usuario</label>
+                <div class="formGrupInput"> 
+                    <input name="NombreUsuario" type="text" class="formInput" value="<?php echo $usuario->getNombreUsuario(); ?>">            
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
                 </div>
             
                 <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
 
+<<<<<<< HEAD
             <div class="formGrup" id="GrupoContrasenia2" >
                 <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
                 <div class="formGrupInput">
@@ -161,6 +179,55 @@ $listaPerfil=Perfil::perfilTodos();
                 <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
             
             </div>
+=======
+            <div class="formGrup" id="GrupoContrasenia" > 
+                <label for="Contrasenia" class="formLabel">Contraseña</label>
+                <div class="formGrupInput"> 
+                    <input name="Contrasenia" type="text" class="formInput" id="Contrasenia" value="<?php echo $usuario->getContrasenia(); ?>">            
+                </div>
+            
+                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+            </div>
+
+            <div class="formGrup" id="GrupoContrasenia2" >
+                <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
+                <div class="formGrupInput">
+                    <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" value="<?php echo $usuario->getContrasenia(); ?>">
+                    
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div>
+                <p class="formularioInputError"> Las Contraseñas deben coincidir.</p>
+            </div>
+
+            <div class="formGrup" id="GrupoSexo">
+                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
+
+                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
+
+                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
+                    <?php foreach($listaSexo as $sexo):?>
+                    <option <?php if($sexo->getIdSexo()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
+                    <?php endforeach?>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="cboPerfil" class="formLabel labelSexo">Perfil</label>
+                <select name="cboPerfil" id="" class="cboSexo">
+                    <option value="NULL" class="">seleccione perfil</option>
+                    <?php foreach($listaPerfil as $perfil):?>
+                    <option <?php if($perfil->getIdPerfil()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $perfil->getIdPerfil(); ?>" class=""><?php echo $perfil->getPerfilNombre(); ?></option>
+                    <?php endforeach?>
+                </select>
+            </div>
+            <!--Grupo de Mensaje-->
+            
+            <div class="formMensaje" id="GrupoMensaje">
+                
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
             <div> 
             <div class="formGrupBtnEnviar">

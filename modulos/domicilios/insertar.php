@@ -92,6 +92,7 @@
             <p class="formularioInputError">Debe seleccionar una opcion.</p> 
         </div>
 
+<<<<<<< HEAD
         <div class="formGrup" id="GrupocboBarrio">
             <label for="cboBarrio" class="formLabel">Barrio</label>
             <div class="formGrupInput">
@@ -102,6 +103,18 @@
                 </Select>
             </div>
             <p class="formularioInputError">Debe seleccionar una opcion.</p> 
+=======
+    <form action="procesador_insert.php" method=POST class="formulario">
+        <h1 class="titulo"> Registro de Domicilio</h1>
+        <div class=""><input type="hidden" name="IdPersona" class="" value="<?php echo $idPersona?>"></div>
+        <div class=""><input type="hidden" name="IdBarrio" class=""></div>
+        <div class=""><input type="text" name="Detalle" class="" placeholder="Detalle Domicilio"></div>
+
+        <div>
+            <Select>
+                <option value="0">->Seleccionar Pais<-</option>
+            </Select>
+>>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
         </div>
         
 
