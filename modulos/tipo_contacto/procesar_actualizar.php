@@ -20,9 +20,4 @@ $barrio->modificarBarrio();
 
 header("Location:barrios.php?idLocalidad=".$idLocalidad);
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 ?>

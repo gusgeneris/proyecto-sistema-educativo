@@ -139,8 +139,9 @@ if(isset($_GET['mj'])){
                <a href="../domicilios/domicilios.php?idPersona=<?php echo $alumno->getIdPersona(); ?>">Ver</a> 
                </td>
                 <td>
-                    <a href="dar_baja.php?id= <?php echo $alumno->getIdPersona(); ?>" class="">Borrar</a>
-                    <a href="modificar.php?id= <?php echo $alumno->getIdAlumno(); ?>" class="">Modificar</a>
+                    <a href="dar_baja.php?id=<?php echo $alumno->getIdPersona();?>" >Borrar</a>|
+                    <a href="modificar.php?id=<?php echo $alumno->getIdAlumno();?>" >Modificar</a>|
+                    <a href="asignarCarrera.php?idAlumno=<?php echo $alumno->getIdAlumno();?>" >Asignar Carrera</a>
                 </td>
 
             </tr>

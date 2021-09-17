@@ -2,11 +2,8 @@ const formulario = document.getElementById('formInsert');
 
 const inputs = document.querySelectorAll('#formInsert input');
 
-<<<<<<< HEAD
 const selects = document.querySelectorAll('#formInsert select');
 
-=======
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -20,13 +17,9 @@ const expresiones = {
     anios: /^\d{1}$/,
     especialidad: /^[a-zA-Z_ ]*$/,
     barrio: /^[a-zA-Z0-9_ ]*$/,
-<<<<<<< HEAD
     contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
     cboSelect: /^[1-9]{1,3}$/
-=======
-    contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 }
 
 const campos = {
@@ -47,7 +40,6 @@ const campos = {
     Pais: false,
     Provincia: false,
     Localidad: false,
-<<<<<<< HEAD
     Contacto: false,
     TipoContacto: false,
     DetalleDomicilio: false,
@@ -56,10 +48,9 @@ const campos = {
     cboLocalidad: false,
     cboBarrio: false,
     cboSexo: false,
-    cboPerfil: false
-=======
-    Contacto: false
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
+    cboPerfil: false,
+    cboCicloLectivo: false,
+    cboCarrera: false
 
 }
 
@@ -126,7 +117,6 @@ const validarFormulario = (e) => {
         case "TipoContacto":
             validarCampo(expresiones.nombre, e.target, 'TipoContacto')
             break;
-<<<<<<< HEAD
         case "DetalleDomicilio":
             validarCampo(expresiones.detalleDomicilio, e.target, 'DetalleDomicilio')
             break;
@@ -148,17 +138,16 @@ const validarFormulario = (e) => {
         case "cboPerfil":
             validarCampo(expresiones.cboSelect, e.target, 'cboPerfil')
             break;
+        case "cboCicloLectivo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboCicloLectivo')
+            break;
+        case "cboCarrera":
+            validarCampo(expresiones.cboSelect, e.target, 'cboCarrera')
+            break;
     }
 }
 
 
-=======
-
-
-    }
-}
-
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 const validarCampo = (expresion, input, campo) => { //expresion hace referencia a las expresiones regulares antes definidas, el input hace referencia al evento que en este caso es target, el campo es el lugar //
     if (expresion.test(input.value)) { //e.target.valu (es el valor)- comparamos de este modo la constante expreciones del tipo nombre adjuntando .test para saber si cumple con la EXR
         document.getElementById(`Grupo${campo}`).classList.remove("formGrupIncorrect"); //Grupo${campo}== a GrupoNombre en el primer input|Se elimina la clase de icorrecto al refrescar
@@ -193,7 +182,6 @@ const validarContrasenia2 = () => {
 }
 
 inputs.forEach((input) => {
-<<<<<<< HEAD
     input.addEventListener('keyup', (validarFormulario));
     input.addEventListener('blur', (validarFormulario));
 })
@@ -201,12 +189,6 @@ inputs.forEach((input) => {
 selects.forEach((select) => {
     select.addEventListener('change', (validarFormulario));
 })
-=======
-    input.addEventListener('keyup', (validarFormulario))
-    input.addEventListener('blur', (validarFormulario))
-})
-
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
 
 
@@ -216,33 +198,21 @@ formulario.addEventListener('submit', (e) => {
     switch (document.getElementById('Guardar').value) {
         case 'FormInsertAlumnos':
 
-<<<<<<< HEAD
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
-=======
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo) {
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertDocente':
-<<<<<<< HEAD
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
-=======
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula) {
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
 
                 formulario.submit();
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
-<<<<<<< HEAD
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
-=======
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario) {
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
                 formulario.submit();
             } else {
 
@@ -325,7 +295,6 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-<<<<<<< HEAD
         case 'FormInsertDetalleDomicilio':
             if (campos.DetalleDomicilio) {
 
@@ -333,8 +302,14 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-=======
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
+        case 'FormInsertAsignarCarrera':
+            if (campos.cboCarrera && campos.cboCicloLectivo) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+
     }
 
 })

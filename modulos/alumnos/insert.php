@@ -116,7 +116,6 @@
 
         <!--Grupo de Sexo-->
 
-<<<<<<< HEAD
         <div class="formGrup" id="GrupocboSexo">
             <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
             <div class="formGrupInput">
@@ -132,18 +131,6 @@
                 </select>
             </div>
             <p class="formularioInputError"> Debe seleccionar una opcion </p> 
-=======
-        <div class="formGrup" id="GrupoSexo">
-            <label for="Sexo" class="formLabel labelSexo">Sexo</label>
-            <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
-            <select id="cboSexo" class="cboSexo" required="required" name="cboSexo">
-                <option value="NULL" class="" name="opSexo">-> Seleccione Sexo <-</option>
-                <?php foreach($listado as $sexo):?>
-                <option value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php  echo $sexo->getDescripcion(); ?></option>
-                <?php endforeach?>
-            </select>
-            
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
         </div>
 
         <!--Grupo de Mensaje-->

@@ -6,9 +6,6 @@ require_once "../../class/CicloLectivo.php";
 
 $carrera=new Carrera();
 
-
-
-
 if(isset($_GET["cboFiltroEstado"])){
     $filtroEstado=$_GET["cboFiltroEstado"];
     $idCicloLectivo=$_GET["idCiclo"];
@@ -51,8 +48,8 @@ if(isset($_GET['mj'])){
     }
 };
 
-$cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
 $idCicloLectivo=$_GET["idCiclo"];
+$cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
 
 ?>
 

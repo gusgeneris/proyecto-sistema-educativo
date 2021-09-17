@@ -97,11 +97,9 @@ class Alumno extends Persona{
 
         $alumno=new Alumno();
         $alumno->crear_alumno($alumno,$registro);
-
-        $listadoAlumnos[]=$alumno;
         }
 
-        return $listadoAlumnos;
+        return $alumno;
 
     }
 
@@ -115,6 +113,15 @@ class Alumno extends Persona{
         $database->insertarRegistro($sql);
         
         return true;
+    }
+
+    static public function asignarCicloLectivoCarrera($idAlumno,$idCicloLectivoCarrera){
+        $sql="INSERT INTO `ciclo_lectivo_carrera_alumno` (`alumno_id_alumno`, `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera`) VALUES ('{$idAlumno}','{$idCicloLectivoCarrera}')";
+        
+        $database= new Mysql();
+
+        $database->insertarRegistro($sql);
+    
     }
 
     public function actualizarAlumno(){
@@ -134,6 +141,13 @@ class Alumno extends Persona{
         $db = new MySql();
         $id=$db->consultar($sql);
       
+    }
+
+    static public function eliminarRelacionCicloLecticoCarreraAlumno($idCicloLectivoCarreraAlumno){
+        $sql="DELETE FROM `ciclo_lectivo_carrera_alumno` WHERE (`id_ciclo_lectivo_carrera_alumno` = '{$idCicloLectivoCarreraAlumno}')";
+        $database = new Mysql();
+        $database->eliminarRegistro($sql);
+    
     }
 }
 

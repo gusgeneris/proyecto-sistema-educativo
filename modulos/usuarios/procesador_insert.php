@@ -59,11 +59,7 @@ if (ctype_alpha($personaApellido) == false){
 
 #TODO: PERMITIR QUE ACEPTE ESPACIOS
 
-<<<<<<< HEAD
 if((!preg_match("/^[a-zA-Z´_ ]+$/",$personaApellido))){
-=======
-if((!preg_match("/^[a-zA-Z´]+$/",$personaApellido))){
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
     header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
     exit;
 } 
@@ -73,15 +69,10 @@ if((!preg_match("/^.{4,12}$/",$contrasenia))){
     exit;
 } 
 
-<<<<<<< HEAD
 if((!preg_match("/^[a-zA-Z0-9_.-]{3,40}$/,",$nombreUser))){
     header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
     exit;
 } 
-
-=======
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
-
 
 #COMPRUEBA QUE EL CAMPO SEXO NO ESTE VACIO
 if ($personaSexo=='NULL'){
