@@ -244,7 +244,7 @@ Class Carrera{
     }
 
     static public function listadoCicloLectivoCarreraPorIdAlumno($idAlumno){
-        $sql="SELECT carrera_nombre, ciclo_lectivo_anio,id_ciclo_lectivo_carrera_alumno FROM ciclo_lectivo_carrera_alumno 
+        $sql="SELECT carrera_nombre, ciclo_lectivo_anio,id_ciclo_lectivo_carrera_alumno,id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera_alumno 
         JOIN ciclo_lectivo_carrera ON ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = id_ciclo_lectivo_carrera
         JOIN carrera ON carrera_id_carrera = id_carrera 
         JOIN ciclo_lectivo ON ciclo_lectivo_id_ciclo_lectivo = id_ciclo_lectivo
@@ -258,7 +258,8 @@ Class Carrera{
                 $cicloLectivo=$registro['ciclo_lectivo_anio'];
                 $carrera=$registro['carrera_nombre'];
                 $idCicloLectivoCarreraAlumno=$registro['id_ciclo_lectivo_carrera_alumno'];
-                array_push($listado,array($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno));
+                $cicloLectivoCarrera=$registro['id_ciclo_lectivo_carrera'];
+                array_push($listado,array($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno,$cicloLectivoCarrera));
         }
         return $listado;
     }

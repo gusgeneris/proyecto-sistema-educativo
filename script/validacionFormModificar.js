@@ -46,7 +46,8 @@ const campos = {
     cboLocalidad: false,
     cboBarrio: false,
     cboSexo: false,
-    cboPerfil: false
+    cboPerfil: false,
+    DetalleAnio: false
 }
 
 const validarFormulario = (e) => {
@@ -123,6 +124,9 @@ const validarFormulario = (e) => {
             break;
         case "cboPerfil":
             validarCampo(expresiones.cboSelect, e.target, 'cboPerfil')
+            break;
+        case "DetalleAnio":
+            validarCampo(expresiones.nombre, e.target, 'DetalleAnio')
             break;
     }
 }
@@ -267,6 +271,13 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertDetalleDomicilio':
             if (campos.DetalleDomicilio) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAnioDesarrollo':
+            if (campos.DetalleAnio) {
 
                 formulario.submit();
             } else {

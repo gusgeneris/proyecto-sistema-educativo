@@ -74,7 +74,7 @@ class cicloLectivo{
     }
 
     public static function listaTodos(){
-        $sql=" SELECT id_ciclo_lectivo, ciclo_lectivo_anio, estado FROM ciclo_lectivo";
+        $sql= "SELECT id_ciclo_lectivo, ciclo_lectivo_anio, estado FROM ciclo_lectivo";
         $database=new Mysql();
         $datos=$database->consultar($sql);
         $listadoCicloLectivo=[];
@@ -122,7 +122,7 @@ class cicloLectivo{
     public function actualizarCicloLectivo(){
 
         $database = new MySql();
-        $sql = "UPDATE `ciclo_lectivo` SET `ciclo_lectivo_anio` = '{$this->_anio}'WHERE (`id_ciclo_lectivo` = '{$this->_idCicloLectivo}')";
+        $sql = "UPDATE `ciclo_lectivo` SET `ciclo_lectivo_anio` = '{$this->_anio}' WHERE (`id_ciclo_lectivo` = '{$this->_idCicloLectivo}')";
 
         $database->actualizar($sql);
 

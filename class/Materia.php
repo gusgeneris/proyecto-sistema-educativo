@@ -217,6 +217,31 @@ Class Materia{
         return "{$this->_nombre}";
 
     }
+
+    static public function listadoMateriasParaMatricularAlumno($idCicloLectivoCarrera){
+        $sql="SELECT materia_nombre , id_materia from ciclo_lectivo_carrera
+        join curricula_carrera on id_ciclo_lectivo_carrera=ciclo_lectivo_carrera_id_ciclo_lectivo_carrera
+        join materia on materia_id_materia = id_materia
+        where id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
+    
+
+        $database =new Mysql();
+        $datos=$database->consultar($sql);
+
+        $listado=array();
+        
+        while ($registro = $datos->fetch_assoc()){
+            
+                $idMateria=$registro['id_materia']; 
+                $nombreMateria=$registro['materia_nombre'];
+                array_push($listado,array($idMateria,$nombreMateria));
+        }
+        return $listado;
+
+
+
+
+    }
     
 
 

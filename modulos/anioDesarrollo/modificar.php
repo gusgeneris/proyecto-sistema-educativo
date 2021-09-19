@@ -1,12 +1,12 @@
 <?php
-require_once "../../class/CicloLectivo.php";
+require_once "../../class/AnioDesarrollo.php";
 require_once "../../configs.php";
 
 if(isset($_GET['id'])){
     $id=$_GET['id'];    
 }
 
-$CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
+$anioDesarrollo= AnioDesarrollo::obtenerTodoPorId($id);
 
 ?>
 
@@ -28,13 +28,13 @@ $CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
     <form action="procesar_actualizar.php" method=POST class="formInsertUnaColumna" id="formModificar" name="formInsert">
         
         <div class=""> 
-                <input name="idCicloLectivo" type="hidden" class="" value="<?php echo $CicloLectivo->getIdCicloLectivo(); ?>">
+                <input name="idAnioDesarrollo" type="hidden" class="" value="<?php echo $anioDesarrollo->getIdAnioDesarrollo(); ?>">
             </div>
-            <div class="formGrup" id="GrupoCicloLectivo" > 
-                <label for="CicloLectivo" class="formLabel">Año</label> 
+            <div class="formGrup" id="GrupoDetalleAnio" > 
+                <label for="DetalleAnio" class="formLabel">Detalle Año de Desarrollo</label> 
                 
                 <div class="formGrupInput">
-                    <input name="CicloLectivo" type="text" class="formInput" id="CicloLectivo" value="<?php echo $CicloLectivo->getAnio(); ?>">
+                    <input name="DetalleAnio" type="text" class="formInput" id="DetalleAnio" value="<?php echo $anioDesarrollo->getDetalleAnio(); ?>">
                 </div>
                 <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
@@ -50,7 +50,7 @@ $CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
         <!--Grupo de Boton Enviar-->
 
         <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" id='Guardar' value='FormInsertCicloLectivo'> Guardar</button>
+            <button type="submit" class="formButton" id='Guardar' value='FormInsertAnioDesarrollo'> Guardar</button>
         </div>
         <br>
         <div class="formGrupBtnEnviar">

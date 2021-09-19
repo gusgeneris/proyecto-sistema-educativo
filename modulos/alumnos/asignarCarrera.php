@@ -91,7 +91,7 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                 <th>Accion</th>
             </tr>
 
-            <?php foreach ($listadoCicloLectivoCarrera as list($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno)): ?>
+            <?php foreach ($listadoCicloLectivoCarrera as list($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno,$idCicloLectivoCarrera)): ?>
 
             <tr>
                 <td><?php echo $cicloLectivo ?></td>
@@ -99,6 +99,9 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                 <td>
                     <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
                         Eliminar
+                    </a>|
+                    <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
+                        Materias Asociadas
                     </a>
                 </td>
             </tr>
