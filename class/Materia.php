@@ -86,7 +86,7 @@ Class Materia{
 
     }
 
-    public static function crearRelacionConCarrera($idMateria,$idCarrera,$idCicloLectivo){
+    public static function crearRelacionConCarrera($idMateria,$idCarrera,$idCicloLectivo,$periodoDesarrollo,$anioDesarrollo){
 
         $sqlIdCicloLectivoCarrera="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera} ;";
 
@@ -95,8 +95,8 @@ Class Materia{
         $registro=$dato->fetch_assoc();
         $idCicloLectivoCarrera=$registro['id_ciclo_lectivo_carrera'];
 
-        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera`) VALUES ($idMateria, {$idCicloLectivoCarrera})";
-        
+        $sql="INSERT INTO `curricula_carrera` (`materia_id_materia`, `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera`,`periodo_desarrollo_id_periodo_desarrollo`,`anio_desarrollo_id_anios_desarrollo`) VALUES ($idMateria, {$idCicloLectivoCarrera},{$periodoDesarrollo},{$anioDesarrollo})";
+
         $database->insertarRegistro($sql);
         return true;
     }
@@ -219,9 +219,11 @@ Class Materia{
     }
 
     static public function listadoMateriasParaMatricularAlumno($idCicloLectivoCarrera){
-        $sql="SELECT materia_nombre , id_materia from ciclo_lectivo_carrera
+        $sql="SELECT materia_nombre , id_materia, detalle_periodo, detalle_anio from ciclo_lectivo_carrera
         join curricula_carrera on id_ciclo_lectivo_carrera=ciclo_lectivo_carrera_id_ciclo_lectivo_carrera
         join materia on materia_id_materia = id_materia
+        join anio_desarrollo on id_anio_desarrollo = curricula_carrera.anio_desarrollo_id_anios_desarrollo
+        join periodo_desarrollo on id_periodo_desarrollo = curricula_carrera.periodo_desarrollo_id_periodo_desarrollo
         where id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
     
 
@@ -234,16 +236,59 @@ Class Materia{
             
                 $idMateria=$registro['id_materia']; 
                 $nombreMateria=$registro['materia_nombre'];
-                array_push($listado,array($idMateria,$nombreMateria));
+                $periodoDetalle=$registro['detalle_periodo'];
+                $anioDetalle=$registro['detalle_anio'];
+                array_push($listado,array($idMateria,$nombreMateria,$periodoDetalle,$anioDetalle));
         }
         return $listado;
-
-
-
-
     }
     
+    
+    public function eliminarTodaRelacion($idAlumno){
+        $sql="DELETE FROM alumno_materia WHERE alumno_id_alumno={$idAlumno}";
+    
+        $database=new Mysql();
+        $database->eliminarRegistro($sql);
+    
+    }
+    
+    public static function eliminarRelacionMateria($idMateria,$idAlumno){
+        $sqlId="SELECT id_alumno_materia FROM alumno_materia WHERE alumno_id_alumno={$idAlumno} AND materia_id_materia={$idMateria};";
+    
+        $database=new Mysql();
+        $dato=$database->consultar($sqlId);
+        $registro=$dato->fetch_assoc();
+        $idAlumnoMateria=$registro["id_alumno_materia"];
+    
+        $sql="DELETE FROM `alumno_materia` WHERE (`id_alumno_materia` = {$idAlumnoMateria});";
+    
+        $database->eliminarRegistro($sql);
+    
+    }
 
+    static public function listadoPorAlumno($idAlumno){
+        $sql="SELECT id_materia from materia join alumno_materia on id_materia=materia_id_materia join alumno on id_alumno = alumno_id_alumno where id_alumno= $idAlumno";
+        
+        $database= new Mysql();
+        $datos=$database->consultar($sql);
+
+        $listadoMatriculas= [];
+        while ($registro = $datos->fetch_assoc()){  
+            $matricula=new Materia();
+            $matricula->_idMateria=$registro['id_materia'];
+            #$especialidad->_estado=$registro['estado_id_estado'];
+            $listadoMatriculas[]=$matricula;
+        }
+        return $listadoMatriculas;
+
+    }
+
+
+    public function matricularAlumno($idAlumno){
+        $sql="INSERT INTO `sistema_educativo`.`alumno_materia` (`alumno_id_alumno`, `materia_id_materia`) VALUES ($idAlumno, {$this->_idMateria})";
+        $database= new Mysql();
+        $database->insertarRegistro($sql);
+    }
 
 
 

@@ -108,6 +108,7 @@ class Alumno extends Persona{
 
         $sql = "INSERT INTO `alumno` (`persona_id_persona`, `alumno_num_legajo`) VALUES ('{$this->_idPersona}', '{$this->_numLegajo}');";
 
+        
         $database= new Mysql();
 
         $database->insertarRegistro($sql);
@@ -148,7 +149,8 @@ class Alumno extends Persona{
         $database = new Mysql();
         $database->eliminarRegistro($sql);
     
-    }
+    }    
+
 }
 
 

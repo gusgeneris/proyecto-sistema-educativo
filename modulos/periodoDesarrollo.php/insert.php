@@ -1,6 +1,6 @@
 <?php
     require_once '../../class/MySql.php'; 
-    require_once "../../class/AnioDesarrollo.php";
+    require_once "../../class/PeriodoDesarrollo.php";
     
     $mensaje='';
     
@@ -35,11 +35,11 @@
     <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
     
        
-        <div class="formGrup" id="GrupoDetalleAnio">
+        <div class="formGrup" id="GrupoDetallePeriodo">
         
-        <label for="DetalleAnio" class="formLabel">Año de Desarrollo</label>    
+        <label for="DetallePeriodo" class="formLabel">Periodo de Desarrollo</label>    
             <div class="formGrupInput">
-                <input autofocus type="text"  id="DetalleAnio" name="DetalleAnio" class="formInput" placeholder="Año de Desarrollo" >
+                <input autofocus type="text"  id="DetallePeriodo" name="DetallePeriodo" class="formInput" placeholder="Año de Desarrollo" >
                 <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
             </div> 
             <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
@@ -56,7 +56,7 @@
         <!--Grupo de Boton Enviar-->
 
         <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" id='Guardar' value='FormInsertAnioDesarrollo'> Guardar</button>
+            <button type="submit" class="formButton" id='Guardar' value='FormInsertPeriodoDesarrollo'> Guardar</button>
         </div>
         <br>
         <div class="formGrupBtnEnviar">

@@ -50,7 +50,9 @@ const campos = {
     cboSexo: false,
     cboPerfil: false,
     cboCicloLectivo: false,
-    cboCarrera: false
+    cboCarrera: false,
+    DetalleAnio: false,
+    DetallePeriodo: false
 
 }
 
@@ -143,6 +145,12 @@ const validarFormulario = (e) => {
             break;
         case "cboCarrera":
             validarCampo(expresiones.cboSelect, e.target, 'cboCarrera')
+            break;
+        case "DetalleAnio":
+            validarCampo(expresiones.nombre, e.target, 'DetalleAnio')
+            break;
+        case "DetallePeriodo":
+            validarCampo(expresiones.nombre, e.target, 'DetallePeriodo')
             break;
     }
 }
@@ -309,6 +317,21 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
+        case 'FormInsertAnioDesarrollo':
+            if (campos.DetalleAnio) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertPeriodoDesarrollo':
+            if (campos.DetallePeriodo) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+
 
     }
 

@@ -112,7 +112,6 @@ Class Carrera{
         
         if($dato->num_rows == 0){
             $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,$idCarrera)";
-            
             $database->insertarRegistro($sql);
             return 1;
             

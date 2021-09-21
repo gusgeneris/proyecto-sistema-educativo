@@ -21,7 +21,7 @@ if((!preg_match("/^[a-zA-ZÀ-ÿ\s]{3,40}$/",$detalleAnio))){
 
 $anioDesarrollo=new AnioDesarrollo;
 $anioDesarrollo->setIdAnioDesarrollo($idAnioDesarrollo);
-$anioDesarrollo->setDetalleAnio($anioDesarrollo);
+$anioDesarrollo->setDetalleAnio($detalleAnio);
 
 $anioDesarrollo->actualizarAnioDesarrollo();
 

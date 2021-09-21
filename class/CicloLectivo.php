@@ -67,7 +67,7 @@ class cicloLectivo{
     
     
     public function insert(){
-        $sql = "INSERT INTO `ciclo_lectivo` (`ciclo_lectivo_anio`) VALUES ('$this->_anio')";
+        $sql = "INSERT INTO `ciclo_lectivo` (`ciclo_lectivo_anio`) VALUES ('{$this->_anio}')";
         $database=new Mysql();
 
         $database->insertarRegistro($sql);
@@ -113,9 +113,7 @@ class cicloLectivo{
         $cicloLectivo->crearCicloLectivo($cicloLectivo,$registro);
 
         }
-
         return $cicloLectivo;
-
 
     }
 

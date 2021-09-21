@@ -6,16 +6,17 @@ require_once "../../class/Carrera.php";
 
 
 $idCicloLectivoCarrera=$_GET["id"];
+$idAlumno=$_GET["idAlumno"];
 
-$listadoMateria=Materia::listadoMateriasParaMatricularAlumno($idCicloLectivoCarrera)
+$listadoMateria=Materia::listadoMateriasParaMatricularAlumno($idCicloLectivoCarrera);
+$matricula=Materia::listadoPorAlumno($idAlumno);
 
+$listadoMatriculasActuales=[];
 
-
-
-
-
-
-
+    foreach ($matricula as $i ){
+       
+            array_push($listadoMatriculasActuales, $i->getIdMateria()); 
+    }
 
 ?>
 
@@ -31,7 +32,11 @@ $listadoMateria=Materia::listadoMateriasParaMatricularAlumno($idCicloLectivoCarr
     <h1>Matriculacion a Materias</h1>
 
 
-    <form action="">
+    <form action="procesarMatricula.php" method="POST">
+        
+    <input type="hidden" name="IdAlumno" value="<?php echo $idAlumno?>">
+    <input type="hidden" name="IdCicloLectivoCarrera" value="<?php echo $idCicloLectivoCarrera?>">
+
         <table border="1">
             <tr>
                 <td>Matricula</td>
@@ -39,26 +44,32 @@ $listadoMateria=Materia::listadoMateriasParaMatricularAlumno($idCicloLectivoCarr
                 <td>Tiempo de Desarrollo</td>
                 <td>Año de Desarrollo</td>
             </tr>
-        <?php foreach ($listadoMateria as list($idMateria,$nombreMateria) ): ?> 
+        <?php foreach ($listadoMateria as list($idMateria,$nombreMateria,$periodoDetalle,$anioDetalle) ): ?> 
                                     
             <tr>
                 <label for="">
-                <td><input type="checkbox" name="check_lista[]" value="<?php echo $idMateria?>"></td>
+                <td><input type="checkbox" name="check_lista[]" value="<?php echo $idMateria?>"
+                <?php 
+                    foreach ($listadoMatriculasActuales as $i ){          
+                        if ($i==$idMateria){echo "checked";}
+                    }
+                ?>>
+                </td>
                 <td>
                     <?php echo $nombreMateria ?>
                 </td>
                 <td>
-
+                    <?php echo $periodoDetalle ?>
                 </td>
                 <td>
-                    
+                    <?php echo $anioDetalle ?>
                 </td>
             </tr>
         <?php endforeach;?>
         </table>
         <br>
-        <button>Guardar Cambios</button>
-        <button>Cancelar Cambios</button>
+        <input type="submit" class="" name="guardar" value="Guardar">
+        <input name="Cancelar" type="submit" value="Cancelar">
     </form>
     
 </body>

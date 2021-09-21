@@ -45,21 +45,15 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
         <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
         <script src ="../../jquery3.6.js"></script>
         <script src ="../../script/comboDomicilio.js"></script>
-=======
-        <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
         <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar domicilio</title>
     </head>
     <?php require_once "../../menu.php";?>
 
     <body class="modif-user">
-<<<<<<< HEAD
         <h1 class="titulo">Ingrese los nuevos datos</h1>
         
         <form action="procesar_actualizar.php" method="POST"class="formModificar" id="formModificar" name="formModificar">
@@ -158,28 +152,3 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
 <script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 
 </html>
-=======
-        
-        <form action="procesar_actualizar.php" method="POST"class="formulario">
-                <h1 class="titulo">Ingrese los nuevos datos</h1>
-
-                <div class=""> 
-                    <input name="IdPersona" type="hidden" class="" value="<?php echo $idPersona; ?>">
-                </div>
-                <div class=""> 
-                    <input name="IdDomicilio" type="hidden" class="" value="<?php echo $domicilio->getIdDomicilio(); ?>">
-                </div>
-                <div class=""> 
-                    <input name="Detalle" type="text" class="" value="<?php echo $domicilio->getDetalle(); ?>">
-                </div>
-                <div> 
-                    <input name="Guardar" type="submit" value="Actualizar" >
-                    <input name="Cancelar" type="submit" value="Cancelar">
-                </div>
-        </form>
-
-
-    </body>
-
-</html>
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780

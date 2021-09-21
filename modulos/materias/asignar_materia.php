@@ -1,5 +1,7 @@
 <?php
     require_once '../../class/CicloLectivo.php';
+    require_once '../../class/PeriodoDesarrollo.php';
+    require_once '../../class/AnioDesarrollo.php';
     require_once '../../class/Materia.php';
     require_once '../../class/Carrera.php';
     require_once '../../class/MySql.php'; 
@@ -11,6 +13,8 @@
     $listado=$materia->listadoMaterias();
     
     $idCicloLectivo=$_GET["idCiclo"];
+    $listaAnioDesarrollo=AnioDesarrollo::listaTodos();
+    $listaPeriodoDesarrollo=PeriodoDesarrollo::listaTodos();
 
     $carrera= Carrera::listadoPorId($idCarrera);
 
@@ -33,14 +37,12 @@
 
 <body class="body">
 
-    
+    <h3 class="titulo"> Asignar Materia a la Carrera: <?php echo $carrera ?> </h3>
 
-    <form action="procesar_asignar.php" method=POST class="formulario">
-        <h3 class="titulo"> Asignar Materia a la Carrera: <?php echo $carrera ?> </h3>
-        <br>
+    <form action="procesar_asignar.php" method=POST class="formInsertUnaColumno" id="formInsert" name="formInsert">
 
-        <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera  ?>></div>
-        <div><input type="hidden" name=IdCiclo value=<?php echo $idCicloLectivo  ?>></div>
+        <input type="hidden" name=IdCarrera value=<?php echo $idCarrera  ?>>
+        <input type="hidden" name=IdCiclo value=<?php echo $idCicloLectivo  ?>>
 
         <br>
 
@@ -51,6 +53,40 @@
                 <option value="<?php echo $materia->getIdMateria(); ?>" class=""><?php echo $materia?></option>
                 <?php endforeach?>
             </select>
+        </div>
+        
+        <div class="formGrup" id="GrupocboAnioDesarrollo">
+            <label for="cboAnioDesarrollo" class="formLabel">Anio Desarrollo</label>
+            <div class="formGrupInput">
+                <Select name="cboAnioDesarrollo" id="cboAnioDesarrollo" class="formInput">
+                    <option value="0">
+                        ->Seleccionar Año de Desarrollo<-
+                    </option>
+                    <?php foreach($listaAnioDesarrollo as $anioDesarrollo):?>
+                    <option value="<?php echo $anioDesarrollo->getIdAnioDesarrollo()?>">
+                        <?php echo $anioDesarrollo->getDetalleAnio()?>
+                    </option>
+                    <?php endforeach?>
+                </Select>
+            </div>
+        <p class="formularioInputError"> Debe seleccionar una opcion.</p> 
+        </div>
+
+        <div class="formGrup" id="GrupocboPeriodoDesarrollo">
+            <label for="cboPeriodoDesarrollo" class="formLabel">Periodo Desarrollo</label>
+            <div class="formGrupInput">
+                <Select name="cboPeriodoDesarrollo" id="cboPeriodoDesarrollo" class="formInput">
+                    <option value="0">
+                        ->Seleccionar Año de Desarrollo<-
+                    </option>
+                    <?php foreach($listaPeriodoDesarrollo as $periodoDesarrollo):?>
+                    <option value="<?php echo $periodoDesarrollo->getIdPeriodoDesarrollo()?>">
+                        <?php echo $periodoDesarrollo->getDetallePeriodo()?>
+                    </option>
+                    <?php endforeach?>
+                </Select>
+            </div>
+        <p class="formularioInputError"> Debe seleccionar una opcion.</p> 
         </div>
 
         <br>

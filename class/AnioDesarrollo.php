@@ -7,7 +7,7 @@ class AnioDesarrollo{
     private $_detalleAnio;
     private $_estado;
 
-    /**
+        /**
      * Get the value of _idAnioDesarrollo
      */ 
     public function getIdAnioDesarrollo()
@@ -20,9 +20,9 @@ class AnioDesarrollo{
      *
      * @return  self
      */ 
-    public function setIdAnioDesarrollo($idAnioDesarrollo)
+    public function setIdAnioDesarrollo($_idAnioDesarrollo)
     {
-        $this->_idAnioDesarrollo = $idAnioDesarrollo;
+        $this->_idAnioDesarrollo = $_idAnioDesarrollo;
 
         return $this;
     }
@@ -40,12 +40,14 @@ class AnioDesarrollo{
      *
      * @return  self
      */ 
-    public function setDetalleAnio($detalleAnio)
+    public function setDetalleAnio($_detalleAnio)
     {
-        $this->_detalleAnio = $detalleAnio;
+        $this->_detalleAnio = $_detalleAnio;
 
         return $this;
     }
+
+  
 
     public function crearAnioDesarrollo($anioDesarrollo,$registro){
         $anioDesarrollo->_idAnioDesarrollo= $registro['id_anio_desarrollo'];
@@ -57,7 +59,9 @@ class AnioDesarrollo{
     
     
     public function insert(){
-        $sql = "INSERT INTO `anio_desarrollo` (`detalle_anio`) VALUES ('$this->_detalleAnio')";
+        $sql = "INSERT INTO `anio_desarrollo` (`detalle_anio`) VALUES ('{$this->_detalleAnio}')";
+
+        
         $database=new Mysql();
 
         $database->insertarRegistro($sql);
@@ -65,6 +69,7 @@ class AnioDesarrollo{
 
     public static function listaTodos(){
         $sql= "SELECT id_anio_desarrollo, detalle_anio, estado FROM anio_desarrollo";
+        
         $database=new Mysql();
         $datos=$database->consultar($sql);
         $listadoAnioDesarrollo=[];
@@ -118,6 +123,8 @@ class AnioDesarrollo{
 
         
     }
+
+
 
 }
 

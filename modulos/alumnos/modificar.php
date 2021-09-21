@@ -52,15 +52,6 @@ $listadoSexo=Sexo::sexoTodos();
                     <input name="PersonaNom" type="text" class="formInput" value="<?php echo $alumno->getNombre(); ?>">            
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-<<<<<<< HEAD
-            </div>
-
-            <div class="formGrup" id="GrupoApellido" > 
-                <label for="Apellido" class="formLabel">Apellido</label>
-                
-                <div class="formGrupInput"> 
-                    <input name="Apellido" type="text" class="formInput" value="<?php echo $alumno->getApellido(); ?>">
-=======
             </div>
 
             <div class="formGrup" id="GrupoApellido" > 
@@ -77,23 +68,10 @@ $listadoSexo=Sexo::sexoTodos();
                 
                 <div class="formGrupInput">
                     <input name="FechaNac" type="date" class="formInput" value="<?php echo $alumno->getFechaNacimiento(); ?>">
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
 
-<<<<<<< HEAD
-            <div class="formGrup" id="GrupoFechaNacimiento" > 
-                <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
-                
-                <div class="formGrupInput">
-                    <input name="FechaNac" type="date" class="formInput" value="<?php echo $alumno->getFechaNacimiento(); ?>">
-                </div>
-                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-            </div>
-
-=======
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             <div class="formGrup" id="GrupoDni" > 
                 <label for="Dni" class="formLabel">Dni</label> 
                 
@@ -122,7 +100,6 @@ $listadoSexo=Sexo::sexoTodos();
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
 
-<<<<<<< HEAD
             <div class="formGrup" id="GrupocboSexo">
                 <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
                 <div class="formGrupInput">
@@ -138,19 +115,6 @@ $listadoSexo=Sexo::sexoTodos();
                     </select>
                 </div>
                 <p class="formularioInputError"> Debe seleccionar una opcion </p> 
-=======
-            <div class="formGrup" id="GrupoSexo">
-                <label for="Sexo" class="formLabel labelSexo">Sexo</label>
-
-                    <p class="MnsjSexo"> *Es obligatorio seleccionar alguna opcion </p>
-
-                <select id="cboSexo" class="cboSexo" required="required" name="cboSexo" >
-                    <option value="NULL" class="">seleccione sexo</option>
-                        <?php foreach($listadoSexo as $sexo):?>
-                    <option <?php if($sexo->getIdSexo()==$alumno->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo(); ?>" class=""><?php echo $sexo->getDescripcion(); ?></option>
-                        <?php endforeach?>
-                </select>
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
             </div>
 
             <!--Grupo de Mensaje-->
@@ -164,21 +128,12 @@ $listadoSexo=Sexo::sexoTodos();
             <div> 
             <div class="formGrupBtnEnviar">
                 <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
-<<<<<<< HEAD
             </div>
 
             <div class="formGrupBtnEnviar">
                 <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
 
-=======
-            </div>
-
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
-            </div>
-
->>>>>>> 9dbcb0807d65d560263e4aeb0ec99bfaaca0b780
     <?php endforeach ?>
     
     

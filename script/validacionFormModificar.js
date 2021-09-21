@@ -47,7 +47,8 @@ const campos = {
     cboBarrio: false,
     cboSexo: false,
     cboPerfil: false,
-    DetalleAnio: false
+    DetalleAnio: false,
+    DetallePeriodo: false
 }
 
 const validarFormulario = (e) => {
@@ -127,6 +128,9 @@ const validarFormulario = (e) => {
             break;
         case "DetalleAnio":
             validarCampo(expresiones.nombre, e.target, 'DetalleAnio')
+            break;
+        case "DetallePeriodo":
+            validarCampo(expresiones.nombre, e.target, 'DetallePeriodo')
             break;
     }
 }
@@ -283,7 +287,13 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
+        case 'FormInsertPeriodoDesarrollo':
+            if (campos.DetallePeriodo) {
 
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
 
     }
 
