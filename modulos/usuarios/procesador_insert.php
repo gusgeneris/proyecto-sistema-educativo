@@ -11,7 +11,7 @@ if($cancelar==true){
     exit;
 }
 
-$nombreUser = $_POST['Nombre'];
+$nombreUser = $_POST['NombreUsuario'];
 $contrasenia = $_POST['Contrasenia'];
 $personaNombre = $_POST['Nombre'];
 $personaApellido = $_POST['Apellido'];
@@ -95,6 +95,7 @@ $user->setEstado('1');
 $user->perfil=$usuarioPerfil;
 
 $user->insertUser();
+
 
 if ($user){
     header("Location:listado.php?mj=".CORRECT_INSERT_CODE);

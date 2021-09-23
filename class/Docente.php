@@ -120,6 +120,8 @@ class Docente extends Persona{
 
         $database->insertarRegistro($sql);
 
+        return ;
+
 
     }
 

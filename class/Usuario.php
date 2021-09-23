@@ -203,6 +203,12 @@ class Usuario extends Persona {
 
     }
 
+    public function insertUserDocente($idPersona){
+        $sql="INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contrasenia}','{$this->_idPerfil}','$idPersona')";
+        $database=new MySql();
+        $database->insertarRegistro($sql);
+    }
+
     public static function obtenerTodoPorId($id){
         $sql = "SELECT usuario.id_usuario,usuario.usuario_nombre,usuario.usuario_contrasenia,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,

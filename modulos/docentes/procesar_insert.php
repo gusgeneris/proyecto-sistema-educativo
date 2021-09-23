@@ -1,6 +1,7 @@
 <?php
 require_once "../../class/Persona.php";
 require_once "../../class/Docente.php";
+require_once "../../class/Usuario.php";
 require_once "../../class/Mysql.php";
 require_once "../../configs.php";
 
@@ -18,6 +19,12 @@ $personaFechaNac = $_POST['FechaNacacimiento'];
 $personaNacionalidad= $_POST['Nacionalidad'];
 $docenteNumMatricula= $_POST['NumeroMatricula'];
 $personaSexo= $_POST['cboSexo'];
+
+$nombreUser = $_POST['NombreUsuario'];
+$contrasenia = $_POST['Contrasenia'];
+$perfilUsuario = $_POST['PerfilUsuario'];
+
+
 
 if ($personaDni == ''){
     $personaDni = 'NULL';
@@ -79,7 +86,16 @@ $docente->setIdSexo($personaSexo);
 
 $docente->insertDocente();
 
-if ($docente){
+$idPersona=$docente->getIdPersona();
+
+$usuario=new Usuario();
+$usuario->setNombreUsuario($nombreUser);
+$usuario->setContrasenia($contrasenia);
+$usuario->setIdPerfil($perfilUsuario);
+
+$usuario->insertUserDocente($idPersona);
+
+if ($docente && $usuario){
     header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
 } 
 ?>

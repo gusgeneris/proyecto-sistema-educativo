@@ -95,7 +95,7 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
             </td>
             <td>
                 <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">borrar</a> |  
-                <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">Listado de Materias</a>
+                <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">Listado de Materias</a> |
             </td>
             <?php endforeach?>
         </tr>

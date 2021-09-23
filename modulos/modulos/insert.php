@@ -13,6 +13,14 @@
     };
     $idPerfil=$_GET["idPerfil"];
     $lista=Modulo::obtenerTodos();
+    $modulos=Modulo::obtenerPorIdPerfil($idPerfil);
+
+    $listadoModulosActuales=[];
+    foreach ($modulos as $i ){
+       
+        array_push($listadoModulosActuales, $i->getIdModulo()); 
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -31,16 +39,18 @@
 <?php require_once "../../menu.php";?>
 
 <body class="body">
-
+    <h1 class="titulo"> Seleccione el modulo</h1>
     <form action="procesar_insert.php" method=POST class="formulario">
-        <h1 class="titulo"> Seleccione el modulo</h1>
-
         <?php foreach ($lista as $modulo):?>
-        <tr>
-            <td><input type="hidden" name="idPerfil" value="<?php echo $idPerfil ?>"></td>
-            <td>
-                <label for=""><input type="checkbox" name="check_lista[]" value="<?php echo $modulo->getIdModulo()?>"><?php echo $modulo->getNombre()?> </label>
-            </td>
+        
+        <input type="hidden" name="idPerfil" value="<?php echo $idPerfil ?>" <?php 
+                foreach ($listadoModulosActuales as $i ): 
+                                
+                    if ($i==$modulo->getIdModulo()){echo "checked";}
+                endforeach;
+            ?>>
+           
+            <label for=""><input type="checkbox" name="check_lista[]" value="<?php echo $modulo->getIdModulo()?>"><?php echo $modulo->getNombre()?> </label>
             <br>
             <?php endforeach?>
         <div class="">

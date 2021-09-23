@@ -26,13 +26,16 @@ $listadoMatriculasActuales=[];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <title>Document</title>
 </head>
 <body>
+    <?php require_once "../../menu.php";?>
     <h1>Matriculacion a Materias</h1>
 
 
-    <form action="procesarMatricula.php" method="POST">
+    <form action="procesarMatricula.php" method="POST" class="formInsert" id="formInsert" name="formInsert">
         
     <input type="hidden" name="IdAlumno" value="<?php echo $idAlumno?>">
     <input type="hidden" name="IdCicloLectivoCarrera" value="<?php echo $idCicloLectivoCarrera?>">

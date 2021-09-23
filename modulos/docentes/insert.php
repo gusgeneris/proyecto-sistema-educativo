@@ -63,6 +63,7 @@
                     <p class="formularioInputError"> El Apellido no debe contener numeros ni simbolos.</p>
             </div>    
 
+
             <!--Grupo de Dni-->
                 
             <div class="formGrup" id="GrupoDni">
@@ -125,6 +126,43 @@
                 </div>
                 <p class="formularioInputError"> Debe seleccionar una opcion </p> 
             </div>
+
+            <!--Grupo de NombreUsuario-->
+            
+            <div class="formGrup" id="GrupoNombreUsuario" >
+                <label for="NombreUsuario" class="formLabel">Nombre Usuario</label>
+                <div class="formGrupInput">
+                    <input type="text" id='NombreUsuario' name="NombreUsuario" class="formInput" placeholder="NombreUsuario">
+                    
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+            </div>
+            <!--Grupo de Contraseña-->
+            
+            <div class="formGrup" id="GrupoContrasenia" >
+                <label for="Contrasenia" class="formLabel">Contrasenia</label>
+                <div class="formGrupInput">
+                    <input type="text" id='Contrasenia' name="Contrasenia" class="formInput" placeholder="Contraseña">
+        
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div>
+                <p class="formularioInputError"> El Contrasenia no debe contener numeros ni simbolos.</p>
+            </div>
+
+            <!--Grupo de Contrasenia2-->
+            
+            <div class="formGrup" id="GrupoContrasenia2" >
+                <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
+                <div class="formGrupInput">
+                    <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" placeholder="Contraseña">
+                    
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div>
+                <p class="formularioInputError"> Las Contraseñas deben coincidir.</p>
+            </div>
+
+            <input type="hidden" value="3" name="PerfilUsuario">
 
             <!--Grupo de Mensaje-->
                 
