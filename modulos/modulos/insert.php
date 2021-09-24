@@ -41,16 +41,20 @@
 <body class="body">
     <h1 class="titulo"> Seleccione el modulo</h1>
     <form action="procesar_insert.php" method=POST class="formulario">
+
+
+        <input type="hidden" value="<?php echo $idPerfil ?>" name="idPerfil">
+       
         <?php foreach ($lista as $modulo):?>
         
-        <input type="hidden" name="idPerfil" value="<?php echo $idPerfil ?>" <?php 
+            <input type="checkbox" name="check_lista[]" value="<?php echo $modulo->getIdModulo() ?>" <?php 
                 foreach ($listadoModulosActuales as $i ): 
                                 
                     if ($i==$modulo->getIdModulo()){echo "checked";}
                 endforeach;
             ?>>
            
-            <label for=""><input type="checkbox" name="check_lista[]" value="<?php echo $modulo->getIdModulo()?>"><?php echo $modulo->getNombre()?> </label>
+            <label for=""><?php echo $modulo->getNombre()?> </label>
             <br>
             <?php endforeach?>
         <div class="">

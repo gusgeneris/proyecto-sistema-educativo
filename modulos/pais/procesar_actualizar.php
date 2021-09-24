@@ -17,7 +17,7 @@ $pais->setNombre($nombre);
 
 $pais->modificarPais();
 
-header("Location:paises.php")
+header("Location:listado.php")
 
 
 

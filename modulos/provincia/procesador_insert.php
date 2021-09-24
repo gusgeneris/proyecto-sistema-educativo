@@ -27,7 +27,7 @@ $provincia->setIdPais($idPais);
 $provincia->insertarProvincia();
 
 if ($provincia){
-    header("Location:provincia.php?mj=".CORRECT_INSERT_CODE."&idPais=".$idPais);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idPais=".$idPais);
 }
 
 ?>

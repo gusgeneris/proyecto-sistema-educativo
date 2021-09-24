@@ -6,7 +6,7 @@ require_once "../../configs.php";
 $cancelar= $_POST['Cancelar'];
 
 if($cancelar==true){
-    header("Location:barrios.php");
+    header("Location:listado.php");
     exit;
 }
 
@@ -27,7 +27,7 @@ $barrio->setIdLocalidad($idLocalidad);
 $barrio->insertarBarrio();
 
 if ($barrio){
-    header("Location:barrios.php?mj=".CORRECT_INSERT_CODE."&idLocalidad=".$idLocalidad);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idLocalidad=".$idLocalidad);
 }
 
 ?>

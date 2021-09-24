@@ -5,13 +5,16 @@ require_once "../../configs.php";
 $cancelar= $_POST['Cancelar'];
 $idPerfil=$_POST["idPerfil"];
 
+
 if($cancelar==true){
     header("Location:listado.php?idPerfil=".$idPerfil);
     exit;
 }
+$modulo=new Modulo();
+$modulo->eliminarTodaRelacionPerfiles($idPerfil);
 
 foreach ($_POST["check_lista"] as $idModulo){
-    $modulo=new Modulo();
+    
     $modulo->setIdModulo($idModulo);
     $modulo->asignarModuloAPerfil($idPerfil);
   

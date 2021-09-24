@@ -46,7 +46,7 @@ class Alumno extends Persona{
 
         return $this;
     }
-    static private function crear_alumno($alumno,$registro) {
+    static private function crearAlumno ($alumno,$registro) {
         $alumno->_idAlumno= $registro['id_alumno'];
         $alumno->_idPersona= $registro['id_persona'];
         $alumno->_nombre= $registro['persona_nombre'];
@@ -75,7 +75,7 @@ class Alumno extends Persona{
     while ($registro = $datos->fetch_assoc()){
         if($registro['estado_id_estado']==1){
             $alumno=new Alumno();
-            $alumno->crear_alumno($alumno,$registro);
+            $alumno->crearAlumno ($alumno,$registro);
 
             $listadoAlumnos[]=$alumno;
     }}
@@ -96,7 +96,7 @@ class Alumno extends Persona{
         while ($registro = $datos->fetch_assoc()){
 
         $alumno=new Alumno();
-        $alumno->crear_alumno($alumno,$registro);
+        $alumno->crearAlumno ($alumno,$registro);
         }
 
         return $alumno;
@@ -149,7 +149,41 @@ class Alumno extends Persona{
         $database = new Mysql();
         $database->eliminarRegistro($sql);
     
-    }    
+    }  
+    
+    
+    static public function listadoAlumnosAsignados($idCicloLectivoCarrera){
+        $sql="SELECT id_alumno,id_persona, persona_nombre, persona_apellido, persona_fecha_nac, persona_dni, persona_nacionalidad, alumno_num_legajo, sexo_id_sexo, persona.estado_id_estado 
+        from persona join alumno on id_persona=persona_id_persona 
+        join ciclo_lectivo_carrera_alumno on id_alumno = alumno_id_alumno 
+        join ciclo_lectivo_carrera on id_ciclo_lectivo_carrera = ciclo_lectivo_carrera_id_ciclo_lectivo_carrera 
+        where id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
+
+   
+        
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+
+        $listadoAlumnos = [];
+
+        while ($registro = $datos->fetch_assoc()){
+            if($registro['estado_id_estado']==1){
+                $alumno=new Alumno();
+                $alumno->crearAlumno ($alumno,$registro);
+
+                $listadoAlumnos[]=$alumno;
+        }}
+
+        return $listadoAlumnos;      
+        
+    }
+
+    static public function eliminarTodaRelacionCicloLecticoCarrera($idCicloLectivoCarrera){
+        $sql="DELETE FROM `ciclo_lectivo_carrera_alumno` WHERE (`ciclo_lectivo_carrera_id_ciclo_lectivo_carrera` = '{$idCicloLectivoCarrera}')";
+        $database = new Mysql();
+        $database->eliminarRegistro($sql);
+    
+    }  
 
 }
 

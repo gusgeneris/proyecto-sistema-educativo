@@ -285,7 +285,7 @@ Class Materia{
 
 
     public function matricularAlumno($idAlumno){
-        $sql="INSERT INTO `sistema_educativo`.`alumno_materia` (`alumno_id_alumno`, `materia_id_materia`) VALUES ($idAlumno, {$this->_idMateria})";
+        $sql="INSERT INTO `alumno_materia` (`alumno_id_alumno`, `materia_id_materia`) VALUES ($idAlumno, {$this->_idMateria})";
         $database= new Mysql();
         $database->insertarRegistro($sql);
     }

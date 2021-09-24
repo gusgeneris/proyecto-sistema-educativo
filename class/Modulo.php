@@ -122,6 +122,15 @@ class Modulo{
 
     }
 
+    public function eliminarTodaRelacionPerfiles($idPerfil){
+        $sql="DELETE FROM perfil_modulo WHERE perfil_id_perfil={$idPerfil}";
+    
+        $database=new Mysql();
+        $database->eliminarRegistro($sql);
+    
+    }
+    
+
 
 
 

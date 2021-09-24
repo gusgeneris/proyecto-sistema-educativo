@@ -20,7 +20,7 @@ $barrio->setNombre($nombre);
 
 $barrio->modificarBarrio();
 
-header("Location:barrios.php?idLocalidad=".$idLocalidad);
+header("Location:listado.php?idLocalidad=".$idLocalidad);
 
 
 

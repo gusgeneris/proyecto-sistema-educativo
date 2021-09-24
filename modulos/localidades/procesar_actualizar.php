@@ -20,7 +20,7 @@ $localidad->setNombre($nombre);
 
 $localidad->modificarLocalidad();
 
-header("Location:localidades.php?idProvincia=".$idProvincia);
+header("Location:listado.php?idProvincia=".$idProvincia);
 
 
 

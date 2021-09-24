@@ -296,7 +296,7 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-        case 'FormInserTipoContacto':
+        case 'FormInsertTipoContacto':
             if (campos.Nombre) {
 
                 formulario.submit();

@@ -28,7 +28,7 @@ $localidad->setIdProvincia($idProvincia);
 $localidad->insertarlocalidad();
 
 if ($localidad){
-    header("Location:localidades.php?mj=".CORRECT_INSERT_CODE."&idProvincia=".$idProvincia);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idProvincia=".$idProvincia);
 }
 
 ?>

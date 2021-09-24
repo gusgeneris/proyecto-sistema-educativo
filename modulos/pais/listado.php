@@ -64,7 +64,7 @@ if(isset($_GET['mj'])){
                 <td>
                     <a href="eliminar.php?idPais=<?php echo $pais->getIdPais(); ?>" class="">Borrar</a> | 
                     <a href="modificar.php?idPais=<?php echo $pais->getIdPais(); ?>" class="">Modificar</a> | 
-                    <a href="../../modulos/provincia/provincias.php?idPais=<?php echo $pais->getIdPais(); ?>" class="">Provincias/Estados</a>
+                    <a href="../../modulos/provincia/listado.php?idPais=<?php echo $pais->getIdPais(); ?>" class="">Provincias/Estados</a>
                 </td>
 
             </tr>

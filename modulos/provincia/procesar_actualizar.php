@@ -21,7 +21,7 @@ $provincia->setNombre($nombre);
 
 $provincia->modificarProvincia();
 
-header("Location:provincias.php?idPais=".$idPais);
+header("Location:listado.php?idPais=".$idPais);
 
 
 

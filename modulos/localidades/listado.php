@@ -1,10 +1,10 @@
 <?php
-require_once "../../class/Provincia.php";
+require_once "../../class/Localidad.php";
 require_once "../../configs.php";
 
-$idPais=$_GET['idPais'];
+$idProvincia=$_GET['idProvincia'];
 
-$lista = Provincia::listadoPorPais($idPais);
+$lista = Localidad::listadoPorProvincia($idProvincia);
 
 $mensaje='';
     
@@ -38,33 +38,33 @@ if(isset($_GET['mj'])){
 <body class="body-listuser">
     <br>
     <br>
-    <h1 class="titulo">Lista de Provincias</h1>
+    <h1 class="titulo">Lista de Localidades</h1>
     <br>
     <br>
 
-    <a href="insert.php?idPais=<?php echo $idPais ?>">Agregar Provincia</a>
+    <a href="insert.php?idProvincia=<?php echo $idProvincia ?>">Agregar Localidad</a>
  
     <table class="tabla" method="GET">
         <tr >
-            <th> ID Provincia </th>
-            <th> Nombre</th>
 
+            <th> ID Localidad </th>
+            <th> Nombre</th>
             <th> Acciones</th>
 
         </tr>
-        <?php foreach ($lista as $provincia ):?> 
+        <?php foreach ($lista as $localidad ):?> 
             <tr >
                 <td >
-                    <?php echo $provincia->getIdProvincia(); ?>
+                    <?php echo $localidad->getIdLocalidad(); ?>
                 </td>
                 <td>
-                    <?php echo $provincia->getNombre(); ?>
+                    <?php echo $localidad->getNombre(); ?>
                 </td>
 
                 <td>
-                    <a href="eliminar.php?idProvincia=<?php echo $provincia->getIdProvincia();?>&idPais=<?php echo $provincia->getIdPais();?>" class="">Borrar</a>
-                    <a href="modificar.php?idProvincia=<?php echo $provincia->getIdProvincia(); ?>&idPais=<?php echo $provincia->getIdPais();?>" class="">Modificar</a>
-                    <a href="../localidades/localidades.php?idProvincia=<?php echo $provincia->getIdProvincia(); ?>&idPais=<?php echo $provincia->getIdPais();?>" class="">Localidades</a>
+                    <a href="eliminar.php?idLocalidad=<?php echo $localidad->getIdLocalidad();?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class="">Borrar</a> | 
+                    <a href="modificar.php?idLocalidad=<?php echo $localidad->getIdLocalidad(); ?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class="">Modificar</a> | 
+                    <a href="../barrio/listado?idLocalidad=<?php echo $localidad->getIdLocalidad(); ?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class="">Barrios</a>
                 </td>
 
             </tr>

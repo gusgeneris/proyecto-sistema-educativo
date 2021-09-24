@@ -23,7 +23,7 @@ $pais->setNombre($nombre);
 $pais->insertarPais();
 
 if ($pais){
-    header("Location:paises.php?mj=".CORRECT_INSERT_CODE);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
 }
 
 ?>
