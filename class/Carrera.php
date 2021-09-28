@@ -109,6 +109,7 @@ Class Carrera{
         $sqlComprobarExistencia="select * from ciclo_lectivo_carrera where ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} and carrera_id_carrera={$idCarrera}";
         $database=new Mysql();
         $dato=$database->consultar($sqlComprobarExistencia);
+
         
         if($dato->num_rows == 0){
             $sql="INSERT INTO `ciclo_lectivo_carrera` (`ciclo_lectivo_id_ciclo_lectivo`, `carrera_id_carrera`) VALUES ($idCicloLectivo,$idCarrera)";
@@ -234,7 +235,9 @@ Class Carrera{
     }
 
     static public function idCicloLectivoCarrera($idCicloLectivo,$idCarrera){
-        $sql="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera}";        $database =new Mysql();
+        $sql="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera}"; 
+                
+        $database =new Mysql();
         $dato=$database->consultar($sql);
         $registro=$dato->fetch_assoc();
         $idCicloLectivoCarrera=$registro["id_ciclo_lectivo_carrera"];
@@ -263,7 +266,17 @@ Class Carrera{
         return $listado;
     }
 
-    
+    static public function idCurriculaCarrera($idCicloLectivoCarrera,$idMateria){
+        $sql="SELECT id_curricula_carrera from curricula_carrera join ciclo_lectivo_carrera on ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = id_ciclo_lectivo_carrera where id_ciclo_lectivo_carrera= {$idCicloLectivoCarrera} and materia_id_materia= {$idMateria}";  
+
+        $database =new Mysql();
+        $dato=$database->consultar($sql);
+        $registro=$dato->fetch_assoc();
+        $idCurriculaCarrera=$registro["id_curricula_carrera"];
+
+        return $idCurriculaCarrera;
+    }
+
 
     
 

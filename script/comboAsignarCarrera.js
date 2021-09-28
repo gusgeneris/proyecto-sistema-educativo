@@ -20,3 +20,29 @@ function cargarCarrera() {
         alert('error');
     })
 }
+
+function cargarMateria() {
+    var cboCicloLectivo = $("#cboCicloLectivo");
+    var cboCarrera = $("#cboCarrera");
+
+
+    var idcboCiclo = (cboCicloLectivo.val());
+
+    var idcboCarrera = (cboCarrera.val());
+
+
+    $.ajax({
+        type: "GET",
+        url: "cargarMateria.php",
+        //data: {"selected=" + selected, "selected2=" + selected},
+        data: { idCiclo: idcboCiclo, idCarrera: idcboCarrera }
+    })
+
+    .done(function(respuesta) {
+        $('#cboMateria').html(respuesta);
+    })
+
+    .fail(function() {
+        alert('error');
+    })
+}

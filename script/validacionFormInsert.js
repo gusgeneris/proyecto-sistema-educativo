@@ -331,6 +331,13 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
+        case 'FormInsertBuscarCalendarizacion':
+            if (campos.cboCarrera && campos.cboCicloLectivo) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
 
 
     }

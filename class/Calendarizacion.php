@@ -1,19 +1,17 @@
 <?php
+
+require_once "Mysql.php";
+require_once "DetalleCalendarizacion.php";
+
 Class Calendarizacion{
     private $_idCalendarizacion;
     private $_idCurriculaCarreraCiclo;
-    private $_numeroClase;
-    private $_fechaClase;
-    private $_actividad;
-    private $_contenidoPriorizado;
-
-    
 
 
     /**
      * Get the value of _idCalendarizacion
      */ 
-    public function get_idCalendarizacion()
+    public function getIdCalendarizacion()
     {
         return $this->_idCalendarizacion;
     }
@@ -23,7 +21,7 @@ Class Calendarizacion{
      *
      * @return  self
      */ 
-    public function set_idCalendarizacion($_idCalendarizacion)
+    public function setIdCalendarizacion($_idCalendarizacion)
     {
         $this->_idCalendarizacion = $_idCalendarizacion;
 
@@ -33,7 +31,7 @@ Class Calendarizacion{
     /**
      * Get the value of _idCurriculaCarreraCiclo
      */ 
-    public function get_idCurriculaCarreraCiclo()
+    public function getIdCurriculaCarreraCiclo()
     {
         return $this->_idCurriculaCarreraCiclo;
     }
@@ -43,92 +41,45 @@ Class Calendarizacion{
      *
      * @return  self
      */ 
-    public function set_idCurriculaCarreraCiclo($_idCurriculaCarreraCiclo)
+
+    public function crearCalendarizacion($calendarizacion,$registro){
+        $calendarizacion->_idcalendarizacion = $registro['id_calendarizacion'];
+        $calendarizacion->_idCurriculaCarreraCiclo = $registro['localidad_id_localidad'];
+        return $calendarizacion;
+    }
+
+
+    public function setIdCurriculaCarreraCiclo($_idCurriculaCarreraCiclo)
     {
         $this->_idCurriculaCarreraCiclo = $_idCurriculaCarreraCiclo;
 
         return $this;
     }
 
-    /**
-     * Get the value of _numeroClase
-     */ 
-    public function get_numeroClase()
-    {
-        return $this->_numeroClase;
+    static public function existenciaRelacion($idCurricula){
+        $sql="SELECT id_calendarizacion from calendarizacion join curricula_carrera on id_curricula_carrera=curricula_carrera_id_curricula_carrera where id_curricula_carrera = {$idCurricula}";
+
+        $database=new Mysql();
+        $dato=$database->consultar($sql);
+        if($dato->num_rows == 0){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
-    /**
-     * Set the value of _numeroClase
-     *
-     * @return  self
-     */ 
-    public function set_numeroClase($_numeroClase)
-    {
-        $this->_numeroClase = $_numeroClase;
+    public function insert(){
 
-        return $this;
+        $sql="INSERT INTO `sistema_educativo`.`calendarizacion` (`curricula_carrera_id_curricula_carrera`) VALUES ({$this->_idCurriculaCarreraCiclo})";
+       
+        $database=new Mysql();
+        $database->insertarRegistro($sql);
+        
+
     }
 
-    /**
-     * Get the value of _fechaClase
-     */ 
-    public function get_fechaClase()
-    {
-        return $this->_fechaClase;
-    }
 
-    /**
-     * Set the value of _fechaClase
-     *
-     * @return  self
-     */ 
-    public function set_fechaClase($_fechaClase)
-    {
-        $this->_fechaClase = $_fechaClase;
 
-        return $this;
-    }
-
-    /**
-     * Get the value of _actividad
-     */ 
-    public function get_actividad()
-    {
-        return $this->_actividad;
-    }
-
-    /**
-     * Set the value of _actividad
-     *
-     * @return  self
-     */ 
-    public function set_actividad($_actividad)
-    {
-        $this->_actividad = $_actividad;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of _contenidoPriorizado
-     */ 
-    public function get_contenidoPriorizado()
-    {
-        return $this->_contenidoPriorizado;
-    }
-
-    /**
-     * Set the value of _contenidoPriorizado
-     *
-     * @return  self
-     */ 
-    public function set_contenidoPriorizado($_contenidoPriorizado)
-    {
-        $this->_contenidoPriorizado = $_contenidoPriorizado;
-
-        return $this;
-    } 
 }
 
 
