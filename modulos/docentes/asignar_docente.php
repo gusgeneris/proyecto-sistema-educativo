@@ -7,6 +7,8 @@
 
     $idCarrera=$_GET["idCarrera"];
     $idMateria=$_GET["idMateria"];
+    $idCicloLectivo=$_GET["idCicloLectivo"];
+    
 
 
     $listado=Docente::listadoDocente();
@@ -40,6 +42,7 @@
 
         <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera  ?>></div>
         <div><input type="hidden" name=IdMateria value=<?php echo $idMateria  ?>></div>
+        <div><input type="hidden" name=IdCicloLectivo value=<?php echo $idCicloLectivo  ?>></div>
 
         <br>
 

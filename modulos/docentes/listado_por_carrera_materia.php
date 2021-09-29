@@ -8,8 +8,13 @@ require_once "../../configs.php";
 
 $idMateria=$_GET["idMateria"];
 $idCarrera=$_GET["idCarrera"];
+$idCicloLectivo=$_GET["idCicloLectivo"];
 
-$lista = Docente::listadoPorDocenteMateria($idCarrera,$idMateria);
+
+$idCicloLectivoCarrera=Carrera::idCicloLectivoCarrera($idCicloLectivo,$idCarrera);
+
+$lista = Docente::listadoPorDocenteMateria($idCicloLectivoCarrera,$idMateria);
+
 $materia=Materia::listadoPorId($idMateria);
 $carrera=Carrera::listadoPorId($idCarrera);
 
@@ -52,7 +57,7 @@ if(isset($_GET['mj'])){
     <h1 class="titulo">Lista de Docentes de la Materia: <?php echo $materia ?> / <br><?php echo $carrera ?></h1>
     <br>
     <br>
-    <a href="asignar_docente?idCarrera=<?php echo $idCarrera?>&idMateria=<?php echo $idMateria?>">Asignar Docente</a>
+    <a href="asignar_docente?idCarrera=<?php echo $idCarrera?>&idMateria=<?php echo $idMateria?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Asignar Docente</a>
     <table class="tabla" method="GET">
         <tr >
             <th> ID Docente</th>
@@ -64,6 +69,7 @@ if(isset($_GET['mj'])){
             <th> Numero Matricula</th>
             <th> Sexo</th>
             <th> Direccion </th>
+            <th> Contacto </th>
 
             <th> Acciones</th>
 
@@ -107,7 +113,7 @@ if(isset($_GET['mj'])){
                     <a href="../contactos/contactos.php?idPersona=<?php echo $docente->getIdPersona(); ?>">Ver</a> 
                 </td>
                 <td>
-                    <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>" class="">Eliminar</a> |
+                    <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>&idCicloLectivo=<?php echo $idCicloLectivo; ?>" class="">Eliminar</a> |
                     <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class="">Lista de Especialidades</a>
                 </td>
             </tr>
