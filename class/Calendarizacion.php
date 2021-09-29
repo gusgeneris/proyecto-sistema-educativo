@@ -61,6 +61,8 @@ Class Calendarizacion{
 
         $database=new Mysql();
         $dato=$database->consultar($sql);
+        $registro=$dato->fetch_assoc();
+
         if($dato->num_rows == 0){
             return 0;
         }else{
@@ -75,7 +77,17 @@ Class Calendarizacion{
         $database=new Mysql();
         $database->insertarRegistro($sql);
         
+    }
 
+    static public function obtenerIdCalendarizacion($idCurricula){
+        $sql="SELECT id_calendarizacion from calendarizacion join curricula_carrera on id_curricula_carrera=curricula_carrera_id_curricula_carrera where id_curricula_carrera = {$idCurricula}";
+
+        $database=new Mysql();
+        $dato=$database->consultar($sql);
+        $registro=$dato->fetch_assoc();
+        $id=$registro['id_calendarizacion'];
+        
+        return $id;
     }
 
 

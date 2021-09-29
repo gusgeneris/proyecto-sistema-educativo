@@ -30,22 +30,26 @@
 
 <?php require_once "../../menu.php";?>
 
-<body class="body">
-    <h1 class="titulo"> Registro de Pais</h1>
-    <form action="procesador_insert.php" method=POST  class="formInsertUnaColumna" id="formInsert" name="formInsert">
-        
-    <div class="formGrup" id="GrupoPais">
-        
-        <label for="NombrePais" class="formLabel">Nombre Pais</label>    
-        <div class="formGrupInput">
-            <input type="text" name="Pais" class="formInput" placeholder="Nombre Pais"></div>
-        </div>
-        <p class="formularioInputError"> El Nombre de Pais no permite simbolos ni numeros.</p> 
-    </div>
 
- <!--Grupo de Mensaje-->
+
+<body class="body">
+
+    <h1 class="titulo"> Registro de Pais</h1>
+
+    <form action="procesador_insert.php" method="POST"  class="formInsertUnaColumna" id="formInsert" name="formInsert">
+        
+        <div class="formGrup" id="GrupoPais">
+                
+            <label for="Pais" class="formLabel">Nombre Pais</label>    
+            <div class="formGrupInput">
+                <input  type="text" name="Pais" class="formInput" placeholder="Nombre Pais"></div>
+            </div>
+            <p class="formularioInputError"> El Nombre de Pais no permite simbolos ni numeros.</p> 
+        </div>
+
+            <!--Grupo de Mensaje-->
             
- <div class="formMensaje" id="GrupoMensaje">
+            <div class="formMensaje" id="GrupoMensaje">
                 
                 <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
             

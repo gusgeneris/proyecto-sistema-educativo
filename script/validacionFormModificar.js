@@ -18,7 +18,8 @@ const expresiones = {
     barrio: /^[a-zA-Z0-9_ ]*$/,
     contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
-    cboSelect: /^[1-9]{1,3}$/
+    cboSelect: /^[1-9]{1,3}$/,
+    numClase: /^\d{1,100}$/
 }
 
 const campos = {
@@ -48,7 +49,8 @@ const campos = {
     cboSexo: false,
     cboPerfil: false,
     DetalleAnio: false,
-    DetallePeriodo: false
+    DetallePeriodo: false,
+    NumClase: false
 }
 
 const validarFormulario = (e) => {
@@ -131,6 +133,9 @@ const validarFormulario = (e) => {
             break;
         case "DetallePeriodo":
             validarCampo(expresiones.nombre, e.target, 'DetallePeriodo')
+            break;
+        case "NumClase":
+            validarCampo(expresiones.numClase, e.target, 'NumClase')
             break;
     }
 }
@@ -289,6 +294,13 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertPeriodoDesarrollo':
             if (campos.DetallePeriodo) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertDetalleCalendarizacion':
+            if (campos.NumClase) {
 
                 formulario.submit();
             } else {

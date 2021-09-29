@@ -29,15 +29,16 @@ $CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
         
         <div class=""> 
                 <input name="idCicloLectivo" type="hidden" class="" value="<?php echo $CicloLectivo->getIdCicloLectivo(); ?>">
+        </div>
+        
+        <div class="formGrup" id="GrupoCicloLectivo" > 
+            <label for="CicloLectivo" class="formLabel">Año</label> 
+            
+            <div class="formGrupInput">
+                <input name="CicloLectivo" type="text" class="formInput" id="CicloLectivo" value="<?php echo $CicloLectivo->getAnio(); ?>">
             </div>
-            <div class="formGrup" id="GrupoCicloLectivo" > 
-                <label for="CicloLectivo" class="formLabel">Año</label> 
-                
-                <div class="formGrupInput">
-                    <input name="CicloLectivo" type="text" class="formInput" id="CicloLectivo" value="<?php echo $CicloLectivo->getAnio(); ?>">
-                </div>
-                <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
-            </div>
+            <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+        </div>
 
         <!--Grupo de Mensaje-->
             

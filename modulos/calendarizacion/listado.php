@@ -30,7 +30,7 @@ $listadoCicloLectivo= CicloLectivo::listaTodos();
     
         <form action="detalle_calendarizacion.php" method=GET class="formUnaColumna" id="formInsert" name="formInsert">
             <div class="formGrup" id="GrupocboCicloLectivo">
-                <label for="cboCicloLectivo" class="formLabel">Carrera</label>
+                <label for="cboCicloLectivo" class="formLabel">Ciclo Lectivo</label>
                 <div class="formGrupInput">
                     <select name="cboCicloLectivo" id="cboCicloLectivo" class="formInput" onchange="cargarCarrera()">
                         <option value="">
@@ -43,7 +43,7 @@ $listadoCicloLectivo= CicloLectivo::listaTodos();
                         <?php } endforeach; ?>
                     </select>
                 </div>
-                <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                <p class="formularioInputError"> El Nombre de Ciclo Lectivo no permite simbolos ni numeros.</p> 
             </div>
 
 

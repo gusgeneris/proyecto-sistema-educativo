@@ -35,7 +35,7 @@
 <body class="body">
 <h1 class="titulo"> Registro de Provincia</h1>
 
-    <form action="procesador_insert.php" method=POST method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
+    <form action="procesador_insert.php"  method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
         
         
         <input type="hidden" name="IdPais" value="<?php echo $idPais ?>">

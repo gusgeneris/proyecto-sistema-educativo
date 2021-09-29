@@ -17,9 +17,12 @@ const expresiones = {
     anios: /^\d{1}$/,
     especialidad: /^[a-zA-Z_ ]*$/,
     barrio: /^[a-zA-Z0-9_ ]*$/,
+    localidad: /^[a-zA-Z0-9_ ]*$/,
+    pais: /^[a-zA-ZÀ-ÿ\s]{3,40}$/,
     contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
-    cboSelect: /^[1-9]{1,3}$/
+    cboSelect: /^[1-9]{1,3}$/,
+    numClase: /^\d{1,100}$/
 }
 
 const campos = {
@@ -52,7 +55,8 @@ const campos = {
     cboCicloLectivo: false,
     cboCarrera: false,
     DetalleAnio: false,
-    DetallePeriodo: false
+    DetallePeriodo: false,
+    NumClase: false
 
 }
 
@@ -105,13 +109,13 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.barrio, e.target, 'Barrio')
             break;
         case "Pais":
-            validarCampo(expresiones.nombre, e.target, 'Pais')
+            validarCampo(expresiones.pais, e.target, 'Pais')
             break;
         case "Provincia":
             validarCampo(expresiones.nombre, e.target, 'Provincia')
             break;
         case "Localidad":
-            validarCampo(expresiones.nombre, e.target, 'Localidad')
+            validarCampo(expresiones.localidad, e.target, 'Localidad')
             break;
         case "Contacto":
             validarCampo(expresiones.contacto, e.target, 'Contacto')
@@ -152,6 +156,11 @@ const validarFormulario = (e) => {
         case "DetallePeriodo":
             validarCampo(expresiones.nombre, e.target, 'DetallePeriodo')
             break;
+        case "NumClase":
+            validarCampo(expresiones.numClase, e.target, 'NumClase')
+            break;
+
+
     }
 }
 
@@ -161,13 +170,13 @@ const validarCampo = (expresion, input, campo) => { //expresion hace referencia 
         document.getElementById(`Grupo${campo}`).classList.remove("formGrupIncorrect"); //Grupo${campo}== a GrupoNombre en el primer input|Se elimina la clase de icorrecto al refrescar
         document.getElementById(`Grupo${campo}`).classList.add("formGrupCorrect");
         /*document.getElementById(`formValidacionEst`).src = "../../image/iconCheck.png";*/
-        document.querySelector(`#Grupo${campo} .formularioInputError`).classList.remove("formularioInputError-activo")
+        document.querySelector(`#Grupo${campo} .formularioInputError`).classList.remove("formularioInputError-activo");
         campos[campo] = true;
 
     } else {
         document.getElementById(`Grupo${campo}`).classList.add("formGrupIncorrect") //con classList.add pedimos agregar una clase definida ya en nuestra hoja de css
             /*document.getElementById("formValidacionEst").src = "../../image/iconError.png";*/
-        document.querySelector(`#Grupo${campo} .formularioInputError`).classList.add("formularioInputError-activo")
+        document.querySelector(`#Grupo${campo} .formularioInputError`).classList.add("formularioInputError-activo");
         campos[campo] = false;
     }
 }
@@ -282,7 +291,7 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-        case 'FormInserLocalidad':
+        case 'FormInsertLocalidad':
             if (campos.Localidad) {
 
                 formulario.submit();
@@ -333,6 +342,13 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertBuscarCalendarizacion':
             if (campos.cboCarrera && campos.cboCicloLectivo) {
+
+                formulario.submit();
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertDetalleCalendarizacion':
+            if (campos.NumClase) {
 
                 formulario.submit();
             } else {
