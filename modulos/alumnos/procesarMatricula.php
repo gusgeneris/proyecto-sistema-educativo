@@ -12,19 +12,35 @@ if($cancelar==true){
     exit;
 }
 
+$checkLista=$_POST["check_lista"];
 
-$materia=new Materia();
-$materia->eliminarTodaRelacion($idAlumno);
+if (empty($checkLista)){
+    $materia=new Materia();
+    $materia->eliminarTodaRelacion($idCicloLectivoCarrera,$idAlumno);
+    header("Location:listado.php?idAlumno=".$idAlumno."&id=".$idCicloLectivoCarrera);
+}
+
+
+
+$listadoIdCurriculaCarrera=[];
 
 foreach ($_POST["check_lista"] as $idMateria){
-    
+    $materia=new Materia();
+    $materia->eliminarTodaRelacion($idCicloLectivoCarrera,$idAlumno);
+
+}
+
+foreach ($_POST["check_lista"] as $idMateria){
+    $materia=new Materia;
     $materia->setIdmateria($idMateria);
-    $materia->matricularAlumno($idAlumno);
+    $materia->matricularAlumno($idCicloLectivoCarrera,$idAlumno);
   
 }
 
+
+
 if ($materia){
-    header("Location:matriculacionAMaterias.php?idAlumno=".$idAlumno."&id=".$idCicloLectivoCarrera);
+    header("Location:listado.php?idAlumno=".$idAlumno."&id=".$idCicloLectivoCarrera);
 }
 
 

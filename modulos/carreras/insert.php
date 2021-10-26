@@ -34,12 +34,12 @@ if(isset($_GET['mj'])){
 
     <form action="procesar_insert.php" method="POST" class="formInsert" id="formInsert" name="formInsert">
 
-        <div class="formGrup" id="GrupoNombre" >
-            <label for="Nombre" class="formLabel">Nombre</label>
+        <div class="formGrup" id="GrupoNombreCarrera" >
+            <label for="NombreCarrera" class="formLabel">NombreCarrera</label>
             <div class="formGrupInput">
-                <input type="text" id='Nombre' name="Nombre" class="formInput" placeholder="Nombre">
+                <input type="text" id='NombreCarrera' name="NombreCarrera" class="formInput" placeholder="NombreCarrera">
             </div>
-            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+            <p class="formularioInputError"> El NombreCarrera no debe contener numeros ni simbolos.</p>
         </div>
 
         <div class="formGrup" id="GrupoAnios" >
@@ -47,7 +47,7 @@ if(isset($_GET['mj'])){
             <div class="formGrupInput">
                 <input type="text" id='Anios' name="Anios" class="formInput" placeholder="Duracion en Años">
             </div>
-            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+            <p class="formularioInputError"> El NombreCarrera no debe contener numeros ni simbolos.</p>
         </div>
 
         <!--Grupo de Mensaje-->

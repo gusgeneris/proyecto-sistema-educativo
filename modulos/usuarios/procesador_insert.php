@@ -69,7 +69,7 @@ if((!preg_match("/^.{4,12}$/",$contrasenia))){
     exit;
 } 
 
-if((!preg_match("/^[a-zA-Z0-9_.-]{3,40}$/,",$nombreUser))){
+if((!preg_match("/^[a-zA-Z0-9_.-]{3,40}$/",$nombreUser))){
     header("Location:listado?mj=".ERROR_LONGITUD_LAST_NAME_CODE );
     exit;
 } 

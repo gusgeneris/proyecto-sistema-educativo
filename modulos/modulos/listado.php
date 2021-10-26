@@ -2,9 +2,9 @@
 require_once "../../class/Modulo.php";
 require_once "../../configs.php";
 
-$idPerfil=$_GET["idPerfil"];
+$idPerfilDelModulo=$_GET["idPerfil"];
 $modulo=new Modulo();
-$listaModulos=$modulo->obtenerPorIdPerfil($idPerfil);
+$listaModulos=$modulo->obtenerPorIdPerfil($idPerfilDelModulo);
 
 /*highlight_string(var_export($listaModuloes,true));
 $idCicloLectivo=false;
@@ -50,7 +50,8 @@ if(isset($_GET['mj'])){
     <h1 class="titulo">Lista de Modulos</h1>
     <br>
     <br>
-    <div><a href="insert.php?idPerfil=<?php echo $idPerfil?>">Asignar Modulo a este Perfil</a>
+    
+    <div><a href="insert.php?idPerfil=<?php echo $idPerfilDelModulo?>">Asignar Modulo a este Perfil</a>
     <br>
     <br>
     <table class="tabla">
@@ -67,7 +68,7 @@ if(isset($_GET['mj'])){
                 <?php echo $modulo->getNombre()?> 
             </td>
             <td>
-                 <a href="dar_baja.php?id=<?php echo $modulo->getIdModulo()?>&idPerfil=<?php echo $idPerfil?>">borrar</a> 
+                 <a href="dar_baja.php?id=<?php echo $modulo->getIdModulo()?>&idPerfil=<?php echo $idPerfilDelModulo?>">borrar</a> 
             </td>
             <?php endforeach?>
         </tr>

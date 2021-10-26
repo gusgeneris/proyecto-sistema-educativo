@@ -268,13 +268,36 @@ Class Carrera{
 
     static public function idCurriculaCarrera($idCicloLectivoCarrera,$idMateria){
         $sql="SELECT id_curricula_carrera from curricula_carrera join ciclo_lectivo_carrera on ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = id_ciclo_lectivo_carrera where id_ciclo_lectivo_carrera= {$idCicloLectivoCarrera} and materia_id_materia= {$idMateria}";  
-
+        
         $database =new Mysql();
         $dato=$database->consultar($sql);
         $registro=$dato->fetch_assoc();
         $idCurriculaCarrera=$registro["id_curricula_carrera"];
 
         return $idCurriculaCarrera;
+    }
+
+    public static function listaCarrerasPorDocente($idDocente,$anioCicloLectivo){
+        $sql="SELECT DISTINCT  id_carrera, carrera_nombre FROM carrera".
+            " join ciclo_lectivo_carrera on carrera.id_carrera = carrera_id_carrera".
+            " join ciclo_lectivo on id_ciclo_lectivo = ciclo_lectivo_id_ciclo_lectivo".
+            " join docente_carrera on id_carrera=carrera_id_carrera".
+            " join docente on id_docente = docente_id_docente".
+            " where id_docente={$idDocente} and id_ciclo_lectivo={$anioCicloLectivo};";
+            
+        $dataBase = new MySql();
+
+        $dato = $dataBase->consultar($sql);
+        $listaCarreras=[];
+
+        while($registro = $dato->fetch_assoc()){
+            $carrera=new Carrera();
+            $carrera->setIdCarrera($registro['id_carrera']);
+            $carrera->setNombre($registro['carrera_nombre']);
+            $listaCarreras[] = $carrera;
+        }
+
+        return $listaCarreras ;
     }
 
 

@@ -13,7 +13,7 @@ class Persona{
     protected $_estado;
 
     public function __toString() {
-        return "{$this->_nombre},{$this->_apellido}";
+        return "{$this->_nombre}, {$this->_apellido}";
     }
      
         /**

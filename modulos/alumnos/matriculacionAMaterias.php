@@ -9,7 +9,7 @@ $idCicloLectivoCarrera=$_GET["id"];
 $idAlumno=$_GET["idAlumno"];
 
 $listadoMateria=Materia::listadoMateriasParaMatricularAlumno($idCicloLectivoCarrera);
-$matricula=Materia::listadoPorAlumno($idAlumno);
+$matricula=Materia::listadoPorAlumno($idCicloLectivoCarrera,$idAlumno);
 
 $listadoMatriculasActuales=[];
 

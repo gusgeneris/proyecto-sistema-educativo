@@ -11,9 +11,9 @@
             <div class="mensajes"><?php echo $mensaje;?></div><?php
         }
     };
-    $idPerfil=$_GET["idPerfil"];
+    $idPerfilDelModulo=$_GET["idPerfil"];
     $lista=Modulo::obtenerTodos();
-    $modulos=Modulo::obtenerPorIdPerfil($idPerfil);
+    $modulos=Modulo::obtenerPorIdPerfil($idPerfilDelModulo);
 
     $listadoModulosActuales=[];
     foreach ($modulos as $i ){
@@ -43,7 +43,7 @@
     <form action="procesar_insert.php" method=POST class="formulario">
 
 
-        <input type="hidden" value="<?php echo $idPerfil ?>" name="idPerfil">
+        <input type="hidden" value="<?php echo $idPerfilDelModulo ?>" name="idPerfil">
        
         <?php foreach ($lista as $modulo):?>
         

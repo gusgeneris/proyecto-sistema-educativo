@@ -44,7 +44,7 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                             <option value="<?php echo $cicloLectivo->getIdCicloLectivo();?>">
                                 <?php echo $cicloLectivo->getAnio()?>
                             </option>
-                        <?php } endforeach; ?>
+                        <?php } endforeach ; ?>
                     </select>
                 </div>
                 <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 

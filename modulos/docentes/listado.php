@@ -6,8 +6,6 @@ require_once "../../configs.php";
 
 $lista = Docente::listadoDocente();
 
-
-
 #highlight_string(var_export($lista,true));
 
 $mensaje='';

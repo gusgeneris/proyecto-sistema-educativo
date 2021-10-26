@@ -126,6 +126,46 @@ class cicloLectivo{
 
 
     }
+
+    public static function obtenerIdCicloPorAnio($anio){
+        $sql="SELECT id_ciclo_lectivo from ciclo_lectivo where ciclo_lectivo_anio='$anio'";
+        
+        $dataBase=new MySql();
+        $dato=$dataBase->consultar($sql);
+        $registro = $dato->fetch_assoc();
+        $idCiclo=$registro["id_ciclo_lectivo"];
+        
+        return $idCiclo;
+    }
+
+    public static function obtenerIdCicloLectivoCarrera($idCicloLectivo,$idCarrera){
+        $sql="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera} ;";
+        
+        $database= new Mysql();
+        $dato=$database->consultar($sql);
+        
+        $registro=$dato->fetch_assoc();
+
+        $idCicloLectivoCarrera=$registro["id_ciclo_lectivo_carrera"];
+
+        return $idCicloLectivoCarrera;
+    }
+
+    public static function obtenerIdCicloLectivoCarreraPorCurricula($idCurriculaCarrera){
+        $sql="SELECT id_ciclo_lectivo_carrera from ciclo_lectivo_carrera ".
+        "join curricula_carrera on id_ciclo_lectivo_carrera = ciclo_lectivo_carrera_id_ciclo_lectivo_carrera ".
+        "where id_curricula_carrera ={$idCurriculaCarrera}";
+        
+        $database= new Mysql();
+        $dato=$database->consultar($sql);
+        
+        $registro=$dato->fetch_assoc();
+
+        $idCicloLectivoCarrera=$registro["id_ciclo_lectivo_carrera"];
+
+        return $idCicloLectivoCarrera;
+    }
+
 }
 
 ?>

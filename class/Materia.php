@@ -174,7 +174,6 @@ Class Materia{
         JOIN ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera 
         WHERE ciclo_lectivo_carrera.carrera_id_carrera={$idCarrera} AND ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo}";
         
-       
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
@@ -242,32 +241,41 @@ Class Materia{
         }
         return $listado;
     }
-    
-    
-    public function eliminarTodaRelacion($idAlumno){
-        $sql="DELETE FROM alumno_materia WHERE alumno_id_alumno={$idAlumno}";
-    
+
+    public function eliminarTodaRelacion($idCicloLectivoCarrera,$idAlumno){
+        $sql="SELECT id_curricula_carrera from curricula_carrera 
+        join materia on materia_id_materia=id_materia
+        join ciclo_lectivo_carrera on id_ciclo_lectivo_carrera=ciclo_lectivo_carrera_id_ciclo_lectivo_carrera
+        where ciclo_lectivo_carrera_id_ciclo_lectivo_carrera={$idCicloLectivoCarrera};";
+       
+        
         $database=new Mysql();
-        $database->eliminarRegistro($sql);
+        $datos=$database->consultar($sql);
+        $listadoIdCurriculaCarrera=[];
+
+        while ($registro = $datos->fetch_assoc()){
+            
+            $idCurriculaCarrera=$registro['id_curricula_carrera']; 
+            array_push($listadoIdCurriculaCarrera,$idCurriculaCarrera);
+        } 
     
-    }
-    
-    public static function eliminarRelacionMateria($idMateria,$idAlumno){
-        $sqlId="SELECT id_alumno_materia FROM alumno_materia WHERE alumno_id_alumno={$idAlumno} AND materia_id_materia={$idMateria};";
-    
-        $database=new Mysql();
-        $dato=$database->consultar($sqlId);
-        $registro=$dato->fetch_assoc();
-        $idAlumnoMateria=$registro["id_alumno_materia"];
-    
-        $sql="DELETE FROM `alumno_materia` WHERE (`id_alumno_materia` = {$idAlumnoMateria});";
-    
-        $database->eliminarRegistro($sql);
-    
+        foreach ($listadoIdCurriculaCarrera as $idCurriculaCarrera){
+
+            $sql="DELETE FROM alumno_materia WHERE curricula_carrera_id_curricula_carrera='{$idCurriculaCarrera}' and alumno_id_alumno='{$idAlumno}';";
+
+            $database->eliminarRegistro($sql);
+        }
+
+
     }
 
-    static public function listadoPorAlumno($idAlumno){
-        $sql="SELECT id_materia from materia join alumno_materia on id_materia=materia_id_materia join alumno on id_alumno = alumno_id_alumno where id_alumno= $idAlumno";
+
+    static public function listadoPorAlumno($idCicloLectivoCarrera,$idAlumno){
+        $sql="SELECT id_materia from materia ".
+            "join curricula_carrera on id_materia=materia_id_materia ".
+            "join alumno_materia on id_curricula_carrera=curricula_carrera_id_curricula_carrera ".
+            "join ciclo_lectivo_carrera on id_ciclo_lectivo_carrera= ciclo_lectivo_carrera_id_ciclo_lectivo_carrera ".
+            "join alumno on id_alumno = alumno_id_alumno where id_alumno= $idAlumno and id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
         
         $database= new Mysql();
         $datos=$database->consultar($sql);
@@ -284,13 +292,70 @@ Class Materia{
     }
 
 
-    public function matricularAlumno($idAlumno){
-        $sql="INSERT INTO `alumno_materia` (`alumno_id_alumno`, `materia_id_materia`) VALUES ($idAlumno, {$this->_idMateria})";
+    public function matricularAlumno($idCicloLectivoCarrera,$idAlumno){
+        $sql="SELECT id_curricula_carrera FROM curricula_carrera
+        join materia on id_materia=materia_id_materia
+        join ciclo_lectivo_carrera on id_ciclo_lectivo_carrera=ciclo_lectivo_carrera_id_ciclo_lectivo_carrera
+        where id_ciclo_lectivo_carrera={$idCicloLectivoCarrera} and id_materia = {$this->_idMateria};";
+        
         $database= new Mysql();
+        $dato= $database->consultar($sql);
+        $registro=$dato->fetch_assoc();
+        $idCurriculaCarrera=$registro['id_curricula_carrera'];
+
+        $sql="INSERT INTO `alumno_materia` (`alumno_id_alumno`, `curricula_carrera_id_curricula_carrera`) VALUES ('{$idAlumno}','{$idCurriculaCarrera}');";
+        
         $database->insertarRegistro($sql);
+        return true;
+        
     }
 
+    public static function obtenerIdMateriaPorCurricula($idCurriculaCarrera){
+        $sql="SELECT id_materia from materia ".
+            "join curricula_carrera on id_materia=materia_id_materia ".
+            "where id_curricula_carrera = {$idCurriculaCarrera}";
+        
+        $database= new Mysql();
+        $dato=$database->consultar($sql);
+        
+        $registro=$dato->fetch_assoc();
 
+        $idCicloLectivoCarrera=$registro["id_materia"];
+
+        return $idCicloLectivoCarrera;
+    }
+
+    public static function listadoPorIdCicloCarrera($idCicloLectivo,$idCarrera,$idDocente){
+
+        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado, docente_materia_estado
+        FROM curricula_carrera 
+        JOIN materia on curricula_carrera.materia_id_materia=materia.id_materia 
+        JOIN ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera 
+        JOIN docente_materia on docente_materia.materia_id_materia=materia.id_materia
+        JOIN docente on id_docente = docente_id_docente
+        WHERE ciclo_lectivo_carrera.carrera_id_carrera={$idCarrera} AND ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} and id_docente= {$idDocente}";
+        
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+
+        $listadoMaterias= [];
+
+        #if($datos->num_rows > 0){
+ 
+            while ($registro = $datos->fetch_assoc()){
+                if ($registro['docente_materia_estado']==1){
+                    $materia=new Materia();
+                    $materia->_idMateria=$registro['id_materia'];
+                    $materia->_nombre=$registro['materia_nombre'];
+                    $materia->_estado=$registro['estado_id_estado'];
+                    #$materia->_arrEjeContenido=EjeContenido::obtenerPorIdMateria($materia->_idMateria,$idCarrera);
+                    $listadoMaterias[]=$materia;}
+                
+            }
+        
+
+        return $listadoMaterias;
+    }
 
 
 

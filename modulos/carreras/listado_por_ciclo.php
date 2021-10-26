@@ -76,6 +76,7 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
     <div><a href="../carreras/asignar_carrera.php?idCiclo=<?php echo $idCicloLectivo ?>">Asignar Carrera</a>
     <br>
     <br>
+    <div class="contenedor-lista">
     <table class="tabla">
     <th>Id Carrera</th>
     <th>Nombre</th>
@@ -102,10 +103,13 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
             <?php endforeach?>
         </tr>
     </tr>
-
-
-    
     </table>
+    </div>
 
 </body>
+<footer >
+    <div class="footer">
+        <p class="diseñadorPor">Diseñado por Sandoval Gustavo 2021</p>
+    </div>
+</footer>
 </html>

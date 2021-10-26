@@ -10,7 +10,7 @@
         exit;
     }
 
-    $carreraNombre=$_POST["Nombre"];
+    $carreraNombre=$_POST["NombreCarrera"];
     $carreraAnioDuracion=$_POST["Anios"];
     $validacionNombre= "/^[a-zA-Z ]{2,254}$/";
 
@@ -24,7 +24,7 @@
     }
 
 
-    if((!preg_match("/[a-zA-Z ]{2,254}/",$carreraNombre))){
+    if((!preg_match($validacionNombre,$carreraNombre))){
         header("Location:listado.php?mj=errorNombre");
         exit;
     };

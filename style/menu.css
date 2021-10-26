@@ -3,6 +3,22 @@
     margin: 0;
 }
 
+.footer {
+    background-color: #393E46;
+    height: 110px;
+    font-family: 'Times New Roman', Times, serif;
+    color: whitesmoke;
+    padding: 20px
+}
+
+.contenedor-lista {
+    margin-bottom: 320px
+}
+
+.footer p {
+    margin-top: 90px;
+}
+
 .encabezado {
     background-color: #393e46;
     width: 100%;
@@ -51,7 +67,6 @@
 .encabezado nav ul li ul li ul {
     position: absolute;
     top: 0;
-    position: absolute;
 }
 
 .encabezado nav ul li ul {
@@ -60,6 +75,39 @@
 
 .encabezado nav ul li:hover>ul {
     display: block;
+}
+
+.btn-clase-nueva {
+    width: 100px;
+    height: 30px;
+    margin: 15px;
+}
+
+.btn-clase-nueva a {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    outline: none;
+}
+
+.btn-clase-nueva a:link {
+    color: none;
+}
+
+.btn-clase-nueva a:visited {
+    color: #393E46;
+}
+
+.btn-clase-nueva a:hover {
+    background-color: #393E46;
+    color: rgb(255, 255, 255);
+}
+
+.btn-clase-nueva:hover {
+    box-shadow: 3px 2px 2px black;
+    background-color: #393E46;
+    color: rgb(255, 255, 255);
 }
 
 

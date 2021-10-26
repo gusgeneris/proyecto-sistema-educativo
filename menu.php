@@ -6,12 +6,14 @@ session_start();
 
 if(isset($_SESSION['usuario'])){
     $usuario=$_SESSION['usuario'];
+    
 }
 else{header("Location:/proyecto-modulos/login.php?error=".INCORRECT_SESSION_CODE);
 exit;}
 $_SESSION['usuario']=$usuario;
 
 $listadoModulos= $usuario->perfil->getArrModulos();
+$idPerfil=$usuario->getIdPerfil();
 
 ?>
 
@@ -21,7 +23,12 @@ $listadoModulos= $usuario->perfil->getArrModulos();
         <div class="">
             <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
         </div>
+        <?php if ($idPerfil == 3){?>
+                    <button class="btn-clase-nueva"><a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a></button>
+        <?php } ?>
+
         <ul class="">
+            
             <?php foreach($listadoModulos as $modulos): ?>
             <ul class="">
                 <li class=""><a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php" class="a"><?php echo ucwords($modulos->getNombre());?></a>

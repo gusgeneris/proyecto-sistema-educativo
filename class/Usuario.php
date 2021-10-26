@@ -199,6 +199,8 @@ class Usuario extends Persona {
 
         $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contrasenia}','{$this->_idPerfil}','{$this->_idPersona}')";
         
+        echo $sql;
+
         $database->insertarRegistro($sql);
 
     }

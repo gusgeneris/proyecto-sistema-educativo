@@ -138,7 +138,7 @@ class Docente extends Persona{
     }
 
     public static function listadoPorDocenteMateria($idCarrera,$idMateria){
-        $sql="SELECT  docente.id_docente, docente.docente_num_matricula,
+        $sql="SELECT docente.id_docente, docente.docente_num_matricula,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
         persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,persona.estado_id_estado,docente_materia.docente_materia_estado, docente_carrera.docente_carrera_estado FROM docente JOIN persona ON persona.id_persona=docente.persona_id_persona JOIN docente_materia ON docente_materia.docente_id_docente=docente.id_docente JOIN materia ON docente_materia.materia_id_materia=materia.id_materia JOIN docente_carrera ON docente_carrera.docente_id_docente=docente.id_docente JOIN ciclo_lectivo_carrera ON ciclo_lectivo_carrera.id_ciclo_lectivo_carrera=docente_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera WHERE materia.id_materia={$idMateria} AND ciclo_lectivo_carrera.id_ciclo_lectivo_carrera={$idCarrera}";
 
@@ -214,6 +214,20 @@ class Docente extends Persona{
         $idDocenteCarrera=$registro["id_docente_carrera"];
         $sql="UPDATE docente_carrera SET `docente_carrera_estado` = '2' WHERE (`id_docente_carrera` = {$idDocenteCarrera} )";
         $database->eliminarRegistro($sql);
+    }
+
+    public static function obtenerPorIdPersona($idPersona){
+        $sql="SELECT id_docente from docente "
+        ."join persona on id_persona = persona_id_persona "
+        ."where id_persona={$idPersona};";
+        
+
+        $dataBase=new MySql();
+        $dato=$dataBase->consultar($sql);
+        $registro = $dato->fetch_assoc();
+        $idDocente=$registro["id_docente"];
+        
+        return $idDocente;
     }
 
 
