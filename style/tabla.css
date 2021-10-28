@@ -1,0 +1,63 @@
+.conteiner {
+    width: 600px;
+    margin: 40px auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    padding: 30px;
+    border-bottom: 3px solid;
+}
+
+.titulo {
+    font-family: verdana;
+    text-align: center;
+}
+
+table {
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+thead {
+    background-color: #393E46;
+    border-bottom: solid 2px #00ADB5;
+    color: white
+}
+
+tr:nth-child(even) {
+    background-color: #EEEEEE
+}
+
+tr:hover td {
+    background-color: #AAD8D3;
+}
+
+.icon {
+    display: inline-block;
+    margin: 2px;
+    width: 10px auto;
+    height: 15px;
+    position: relative;
+    align-items: center;
+}
+
+.icon-a {
+    width: 20px;
+}
+
+.conteiner-btn-agregar {
+    margin: 20px;
+    padding: 10px;
+}
+
+.btn-agregar {
+    padding: 10px;
+}

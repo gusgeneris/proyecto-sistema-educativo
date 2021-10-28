@@ -24,23 +24,23 @@ $idPerfil=$usuario->getIdPerfil();
             <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
         </div>
         <?php if ($idPerfil == 3){?>
-                    <button class="btn-clase-nueva"><a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a></button>
+                    <ul class="clase-nueva"><li><a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a></li></ul>
         <?php } ?>
-
-        <ul class="">
-            
-            <?php foreach($listadoModulos as $modulos): ?>
+        <div class="listado-menu" id="listado-menu">
             <ul class="">
-                <li class=""><a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php" class="a"><?php echo ucwords($modulos->getNombre());?></a>
-                    <ul>
-                        <li><a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/insert.php"class="a">Agregar nuevo</a></li>
-                    </ul>
-                </li>
+                
+                <?php foreach($listadoModulos as $modulos): ?>
+                <ul class="">
+                    <li class=""><a id="item-menu" href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php" class="a"><?php echo ucwords($modulos->getNombre());?></a>
+                        <ul>
+                            <li><a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/insert.php"class="a">Agregar nuevo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <?php endforeach; ?>
+                <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
             </ul>
-            <?php endforeach; ?>
-            <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
-        </ul>
-
+        </div>
     </nav>
 
 

@@ -91,7 +91,7 @@ class Alumno extends Persona{
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
         persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM alumno 
         JOIN persona on persona.id_persona=alumno.persona_id_persona WHERE id_alumno={$id}";
-
+        
         $db = new MySql();
         $datos = $db->consultar($sql);
 

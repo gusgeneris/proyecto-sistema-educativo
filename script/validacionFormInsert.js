@@ -149,9 +149,7 @@ const validarFormulario = (e) => {
         case "cboPerfil":
             validarCampo(expresiones.cboSelect, e.target, 'cboPerfil')
             break;
-        case "cboCicloLectivo":
-            validarCampo(expresiones.cboSelect, e.target, 'cboCicloLectivo')
-            break;
+
         case "cboCarrera":
             validarCampo(expresiones.cboSelect, e.target, 'cboCarrera')
             break;
@@ -346,7 +344,7 @@ formulario.addEventListener('submit', (e) => {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertBuscarCalendarizacion':
-            if (campos.cboCarrera && campos.cboCicloLectivo) {
+            if (campos.cboCarrera) {
 
                 formulario.submit();
             } else {

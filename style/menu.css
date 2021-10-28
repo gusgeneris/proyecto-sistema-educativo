@@ -22,11 +22,13 @@
 .encabezado {
     background-color: #393e46;
     width: 100%;
+    border-bottom: 5px solid #00ADB5;
 }
 
 .logob {
     align-items: center;
     width: 150px;
+    padding: 1px;
 }
 
 .encabezado nav {
@@ -44,13 +46,16 @@
     text-decoration: none;
     font-size: 20px;
     color: white;
-    padding: 12px 20px;
+    padding: 20px;
     display: block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: 1px solid transparent;
+    border-bottom: 5px solid transparent;
 }
 
 .a:hover {
-    background-color: rgb(44, 44, 44);
+    background-color: #464d58;
+    border-bottom: 5px solid #ffff;
 }
 
 .encabezado nav ul li ul {
@@ -77,37 +82,43 @@
     display: block;
 }
 
-.btn-clase-nueva {
-    width: 100px;
-    height: 30px;
+.clase-nueva {
     margin: 15px;
+    margin-bottom: 19px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: #ffffff;
+    background-color: #393e46;
 }
 
-.btn-clase-nueva a {
+.clase-nueva a {
     font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 15px;
     text-decoration: none;
     font-weight: bold;
     outline: none;
+    display: block;
+    color: #ffffff;
 }
 
-.btn-clase-nueva a:link {
+.clase-nueva a:link {
     color: none;
 }
 
-.btn-clase-nueva a:visited {
-    color: #393E46;
+.clase-nueva:hover {
+    border-color: rgb(0, 0, 0);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    background-color: #ffffff;
 }
 
-.btn-clase-nueva a:hover {
-    background-color: #393E46;
-    color: rgb(255, 255, 255);
+.clase-nueva a:hover {
+    color: #000000;
 }
 
-.btn-clase-nueva:hover {
-    box-shadow: 3px 2px 2px black;
-    background-color: #393E46;
-    color: rgb(255, 255, 255);
+.seleccionado {
+    background-color: #0062ff;
+    border-bottom: 5px solid #ffff;
 }
 
 

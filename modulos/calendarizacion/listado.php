@@ -7,7 +7,9 @@ require_once "../../configs.php";
 require_once "../../class/CicloLectivo.php";
 
 
-$listadoCicloLectivo= CicloLectivo::listaTodos();
+$anio=date("Y");
+$idCicloLectivo=CicloLectivo::obtenerIdCicloPorAnio($anio);
+$listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
 
 ?>
 
@@ -29,22 +31,7 @@ $listadoCicloLectivo= CicloLectivo::listaTodos();
     <body>
     
         <form action="detalle_calendarizacion.php" method=GET class="formUnaColumna" id="formInsert" name="formInsert">
-            <div class="formGrup" id="GrupocboCicloLectivo">
-                <label for="cboCicloLectivo" class="formLabel">Ciclo Lectivo</label>
-                <div class="formGrupInput">
-                    <select name="cboCicloLectivo" id="cboCicloLectivo" class="formInput" onchange="cargarCarrera()">
-                        <option value="">
-                            ->Seleccione un Ciclo Lectivo<-
-                        </option>
-                        <?php foreach($listadoCicloLectivo as $cicloLectivo):{?>
-                            <option value="<?php echo $cicloLectivo->getIdCicloLectivo();?>">
-                                <?php echo $cicloLectivo->getAnio()?>
-                            </option>
-                        <?php } endforeach; ?>
-                    </select>
-                </div>
-                <p class="formularioInputError"> El Nombre de Ciclo Lectivo no permite simbolos ni numeros.</p> 
-            </div>
+            
 
 
             <div class="formGrup" id="GrupocboCarrera">
@@ -54,6 +41,11 @@ $listadoCicloLectivo= CicloLectivo::listaTodos();
                             <option value="0">
                                 ->Seleccionar Carrera<-
                             </option>
+                            <?php foreach($listadoMateria as $carrera):{?>
+                                <option value="<?php echo $carrera->getIdCarrera()?>">
+                                <?php echo $carrera->getNombre()?>
+                            </option>
+                        <?php } endforeach; ?>
                         </Select>
                     </div>
                     <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
@@ -95,5 +87,7 @@ $listadoCicloLectivo= CicloLectivo::listaTodos();
     </body>
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+    
+    <script type="text/javascript" src="../../script/menu.js"  ></script>
 
 </html>

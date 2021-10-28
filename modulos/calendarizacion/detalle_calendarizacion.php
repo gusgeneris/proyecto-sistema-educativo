@@ -1,5 +1,6 @@
 <?php
 require_once "../../class/Carrera.php";
+require_once "../../class/CicloLectivo.php";
 require_once "../../class/Calendarizacion.php";
 require_once "../../class/DetalleCalendarizacion.php";
 require_once "../../configs.php";
@@ -12,7 +13,8 @@ if(isset($_GET['idCurriculaCarrera'])){
     $lista = DetalleCalendarizacion::listado($idCurriculaCarrera);
 }else{
 
-    $idCiclo= $_GET ['cboCicloLectivo'];
+    $anio=date("Y");
+    $idCiclo=CicloLectivo::obtenerIdCicloPorAnio($anio);
     $idCarrera= $_GET ['cboCarrera'];
     $idMateria= $_GET ['cboMateria'];
 

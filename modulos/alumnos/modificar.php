@@ -10,6 +10,7 @@ if(isset($_GET['id'])){
 }
 
 $lista= Alumno::obtenerTodoPorId($id);
+var_dump($lista);exit;
 
 $listadoSexo=Sexo::sexoTodos();
 
@@ -23,7 +24,7 @@ $listadoSexo=Sexo::sexoTodos();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Usuario</title>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Alumno</title>
 </head>
 
 <?php require_once "../../menu.php";?>

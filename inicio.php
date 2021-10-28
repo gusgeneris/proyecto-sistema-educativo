@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style/styleInsert.css">
     <link rel="stylesheet" href="style/menu.css">
     <link rel="stylesheet" href="style/style.css">
+    <script src="jquery3.6.js"></script>
     <link rel="icon" type="image/jpg" href="image/logo.png"><title>Inicio</title>
 </head>
 <body class="body-inicio">
@@ -25,4 +26,6 @@
         <p class="diseñadorPor">Diseñado por Sandoval Gustavo 2021</p>
     </div>
 </footer>
+
+<script type="text/javascript" src="script/menu.js"> </script>
 </html>
