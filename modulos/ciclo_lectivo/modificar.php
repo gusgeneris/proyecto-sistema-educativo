@@ -23,7 +23,10 @@ $CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
 <?php require_once "../../menu.php";?>
 
 <body class="modif-user">
-    <h1 class="titulo">Ingrese el nuevo dato</h1>
+    
+    <div class="titulo">
+        <h1>Ingrese el nuevo dato</h1>
+    </div>
 
     <form action="procesar_actualizar.php" method=POST class="formInsertUnaColumna" id="formModificar" name="formInsert">
         
@@ -53,7 +56,7 @@ $CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
         <div class="formGrupBtnEnviar">
             <button type="submit" class="formButton" id='Guardar' value='FormInsertCicloLectivo'> Guardar</button>
         </div>
-        <br>
+
         <div class="formGrupBtnEnviar">
             <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
         </div>

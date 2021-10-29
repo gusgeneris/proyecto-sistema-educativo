@@ -9,39 +9,53 @@
         background-color: #d1d0d0;
     }
     
-    main {
+    .main {
         max-width: 800px;
         width: 90%;
         margin: auto;
         padding: 45px;
     }
     
+    h1 {
+        padding: 20px;
+        border-bottom: 3px solid;
+    }
+    
     .titulo {
+        font-family: verdana;
         text-align: center;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        color: rgb(0, 0, 0);
-        border: 2px rgb(0, 0, 0) solid;
-        background-color: white;
-        margin-bottom: 0px;
+        background-color: #ffffff;
     }
     /*SE APLICA UN ESTILO GRID QUE CONTENGA DOS COLUMNAS*/
     
     .formInsert {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0px;
         /*espaciado entre cada elemento*/
     }
     
     .formModificar {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0px;
     }
     
     .formInsertUnaColumna {
-        align: center;
+        text-align: center;
         /*espaciado entre cada elemento*/
+    }
+    
+    .formInsert2Columnas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0px;
+    }
+    
+    .formModificar2Columnas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0px;
     }
     
     .formLabel {
@@ -116,7 +130,15 @@
     .formGrupBtnEnviar {
         display: flex;
         flex-direction: column;
+        float: bottom;
         align-items: center;
+        margin: 5px;
+        grid-column: 1/4;
+        row-gap: 0px;
+    }
+    
+    #GrupocboSexo {
+        grid-column: 1/4;
     }
     
     .formButton {
@@ -131,8 +153,20 @@
         cursor: pointer;
     }
     
+    .formGrup {
+        padding: 10px;
+    }
+    
     .formButton:hover {
-        box-shadow: 3px 0px 30px rgba(163, 163, 163, 3);
+        box-shadow: 3px 0px 30px rgba(163, 163, 163, 2);
+    }
+    
+    #Guardar:hover {
+        background-color: #22a322;
+    }
+    
+    #Cancelar:hover {
+        background-color: #a32222;
     }
     
     .formValidacionEstado {

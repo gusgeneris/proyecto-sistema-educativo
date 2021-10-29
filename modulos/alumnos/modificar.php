@@ -9,8 +9,8 @@ if(isset($_GET['id'])){
     $id=$_GET['id'];    
 }
 
-$lista= Alumno::obtenerTodoPorId($id);
-var_dump($lista);exit;
+$alumno= Alumno::obtenerTodoPorId($id);
+
 
 $listadoSexo=Sexo::sexoTodos();
 
@@ -31,20 +31,12 @@ $listadoSexo=Sexo::sexoTodos();
 
 <body class="modif-user">
 
-<h1 class="titulo">Ingrese los nuevos datos</h1>
-    
-<main>
-
-    <form action="procesar_actualizar_alumno.php" method="POST"class="formModificar" id="formModificar" name="formModificar">
-    
-    <?php foreach ($lista as $alumno ):?> 
-            <div> 
-            <input name="IdAlumno" type="hidden" class="" value="<?php echo $alumno->getIdAlumno(); ?>">
-            </div>
-
-            <div> 
-            <input name="IdPersona" type="hidden" class="" value="<?php echo $alumno->getIdPersona(); ?>">
-            </div>
+    <div class="titulo">
+        <h1 class="">Ingrese los nuevos datos</h1>
+    </div>
+    <div class="main">
+        <form action="procesar_actualizar_alumno.php" method="POST"class="formModificar" id="formModificar" name="formModificar">
+            
 
             <div class="formGrup" id="GrupoNombre" > 
                 <label for="Nombre" class="formLabel">Nombre</label>
@@ -118,6 +110,14 @@ $listadoSexo=Sexo::sexoTodos();
                 <p class="formularioInputError"> Debe seleccionar una opcion </p> 
             </div>
 
+            <div> 
+                <input name="IdAlumno" type="hidden" class="" value="<?php echo $alumno->getIdAlumno(); ?>">
+            </div>
+
+            <div> 
+                <input name="IdPersona" type="hidden" class="" value="<?php echo $alumno->getIdPersona(); ?>">
+            </div>
+
             <!--Grupo de Mensaje-->
             
             <div class="formMensaje" id="GrupoMensaje">
@@ -126,20 +126,17 @@ $listadoSexo=Sexo::sexoTodos();
             
             </div>
 
-            <div> 
-            <div class="formGrupBtnEnviar">
+            
+            <div class="formGrupBtnEnviar" >
                 <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
             </div>
 
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
+            <div class="formGrupBtnEnviar" >
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
-
-    <?php endforeach ?>
-    
-    
-    </form>
-    </main>
+                 
+        </form>
+    </div>
     
 </body>
 

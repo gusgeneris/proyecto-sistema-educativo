@@ -32,7 +32,7 @@ if(isset($_GET['mj'])){
 <body>
     <h1 class="titulo"> Registro de Carrera</h1>
 
-    <form action="procesar_insert.php" method="POST" class="formInsert" id="formInsert" name="formInsert">
+    <form action="procesar_insert.php" method="POST" class="formInsert2Columnas" id="formInsert" name="formInsert">
 
         <div class="formGrup" id="GrupoNombreCarrera" >
             <label for="NombreCarrera" class="formLabel">NombreCarrera</label>
@@ -47,7 +47,7 @@ if(isset($_GET['mj'])){
             <div class="formGrupInput">
                 <input type="text" id='Anios' name="Anios" class="formInput" placeholder="Duracion en Años">
             </div>
-            <p class="formularioInputError"> El NombreCarrera no debe contener numeros ni simbolos.</p>
+            <p class="formularioInputError"> Debe ingresar correctamente los datos solicitados.</p>
         </div>
 
         <!--Grupo de Mensaje-->

@@ -26,9 +26,9 @@ $lista=CicloLectivo::listaTodos();
         <h1 class="titulo">Lista de Ciclos Lectivos</h1>
     </div>   
     <div class="conteiner-btn-agregar">
-        <button type="button" class="btn-agregar" > Agregar Nuevo Alumno</button>
+        <button type="button" class="btn-agregar" > <a href="insert.php"> Agregar Nuevo Ciclo </a> </button>
     </div>
-    <div class="conteiner">
+    <div class="conteiner3Columnas">
         <table class="tabla" method="GET">
             <thead>
                 <tr >

@@ -20,50 +20,51 @@
 </head>
 
     <?php require_once "../../menu.php";?>
-    <br>
 
 <body>
-    <h1 class="titulo">Ingrese los nuevos datos</h1>
+    <div class="titulo">
+        <h1>Ingrese los nuevos datos</h1>
+    </div>
 
-    <form action="procesar_actualizar.php" method="post" class="formModificar">
-        
+    <div>
+        <form action="procesar_actualizar.php" method="post" class="formModificar2Columnas" id="formModificar">
+            
+            <input name="IdCarrera" type="hidden" value="<?php echo $carrera->getIdCarrera();?>">
 
-        <input name="IdCarrera" type="hidden" value="<?php echo $carrera->getIdCarrera();?>">
-
-        <div class="formGrup" id="GrupoNombre" >
-            <label for="Nombre" class="formLabel">Nombre</label>
-            <div class="formGrupInput">
-                <input type="text" id='Nombre' name="Nombre" class="formInput" value="<?php echo $carrera->getNombre();?>">
+            <div class="formGrup" id="GrupoNombre" >
+                <label for="Nombre" class="formLabel">Nombre</label>
+                <div class="formGrupInput">
+                    <input type="text" id='Nombre' name="Nombre" class="formInput" value="<?php echo $carrera->getNombre();?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-        </div>
 
-        <div class="formGrup" id="GrupoAnios" >
-            <label for="Anios" class="formLabel">Años de duracion</label>
-            <div class="formGrupInput">
-                <input type="text" id='Anios' name="Anios" class="formInput" value="<?php echo $carrera->getDuracionAnios();?>">
+            <div class="formGrup" id="GrupoAnios" >
+                <label for="Anios" class="formLabel">Años de duracion</label>
+                <div class="formGrupInput">
+                    <input type="text" id='Anios' name="Anios" class="formInput" value="<?php echo $carrera->getDuracionAnios();?>">
+                </div>
+                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
-            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-        </div>
 
 
             <!--Grupo de Mensaje-->
-                
-            <div class="formMensaje" id="GrupoMensaje">
                     
-                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-                
-                </div>
+            <div class="formMensaje" id="GrupoMensaje">
+                        
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                    
+            </div>
 
-                <div> 
-                <div class="formGrupBtnEnviar">
-                    <button type="submit" class="formButton" value ="FormInsertCarrera" id="Guardar"> Guardar</button>
-                </div>
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" value ="FormInsertCarrera" id="Guardar"> Guardar</button>
+            </div>
 
-                <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
-                </div>
-    </form>
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+            </div>
+        </form>
+    </div>
 
 </body>
 

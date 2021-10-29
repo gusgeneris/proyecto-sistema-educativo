@@ -42,7 +42,7 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Carreras</title>
     <title>Document</title>
@@ -51,60 +51,79 @@ if(isset($_GET['mj'])){
 
 
     <?php require_once "../../menu.php";?>
-    <br>
-    <br>
-    <h1 class="titulo">Lista de Carreras </h1>
-    <br>
-    <br>
-    <form >
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label> Estado: </label>
-            <select name="cboFiltroEstado" id="" method="GET">
-                <?php $listadoEstados= Estado::estadoTodos();
-                    foreach($listadoEstados as $estado):?>
-                <option value="<?php echo $estado->getIdEstado(); ?>" name=""><?php echo $estado->getDescripcion() ; ?></option>  
-                <?php endforeach ?>
-                <option value="0" class="">Todos</option>
-            </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label> Apellido: </label>
-            <input type="text" name="txtNombre">
-            <input type="submit" value="Filtrar">
-    </form>
-    <br>
-    <br>
-    <table class="tabla">
-    <th>Id Carrera</th>
-    <th>Nombre</th>
-    <th>Duracion en Años</th>
-    <th>Acciones</th>
-    <tr>
-        <?php foreach ($listadoCarreras as $carrera):?>
-        <tr>
-            <td>
-                <?php echo $carrera->getIdCarrera()?>
-            </td>
-            <td>
-                <?php echo $carrera->getNombre()?> 
-            </td>
-            <td>
-                <?php echo $carrera->getDuracionAnios()?>
-            </td>
+
+    <div class="titulo">
+        <h1 class="titulo">Lista de Carreras</h1>
+    </div>
+
+    <div class="conteiner-btn-agregar">
+        <button type="button" class="btn-agregar" > <a href="insert.php"> Agregar Nueva Carrera</a> </button>
+    </div>
+
+    <div class="conteiner-form-busqueda">
+        <form >
+            <div class="conteiner-form">
+                <div>
+                    <label class="label" for="selectEstado"> Estado: </label>
+                        <select name="cboFiltroEstado" id="selectEstado" method="GET" class="cboSelect">
+                            <?php $listadoEstados= Estado::estadoTodos();
+                                foreach($listadoEstados as $estado):?>
+                            <option value="<?php echo $estado->getIdEstado(); ?>" name=""><?php echo $estado->getDescripcion() ; ?></option>  
+                            <?php endforeach ?>
+                            <option value="0" class="">Todos</option>
+                        </select>
+                </div>
             
-            <td>
-                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>">modificar</a>
-                | <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>">borrar</a> 
-                <?php if (($carrera->getEstado())==2){?>
-                    <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>">| Dar Alta</a>
-                    <?php } ?>
-            </td>
-            <?php endforeach?>
-        </tr>
-    </tr>
+                <div>
+                    <label class="label" for="nombreCarrera"> Nombre Carrera: </label>
+                        <input class="form-input" type="text" name="txtNombre" id="nombreCarrera">
+                </div>
+                <div class="conteiner-btn-filtrar">
+                    <button class="btn-filtrar" type="submit" value="Filtrar"> Filtrar </button>
+                </div>
+            </div>
+        </form>
+    </div>
 
+    <div class="conteiner3Columnas" id=>
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Id Carrera</th>
+                    <th>Nombre</th>
+                    <th>Duracion en Años</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($listadoCarreras as $carrera):?>
+                    <tr>
+                        <td>
+                            <?php echo $carrera->getIdCarrera()?>
+                        </td>
+                        <td>
+                            <?php echo $carrera->getNombre()?> 
+                        </td>
+                        <td>
+                            <?php echo $carrera->getDuracionAnios()?>
+                        </td>
+                        
+                        <td>
+                            <div class="icon">
+                            <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
 
-    
-    </table>
+                                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                                
+                                <?php if (($carrera->getEstado())==2){?>
+                                <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>"> Dar Alta</a>
+                                <?php } ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach?>
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
