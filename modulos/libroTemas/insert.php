@@ -31,47 +31,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Nuevo Detalle Libro Temas</title>
+ 
     <title>Libro de temas</title>
 </head>
-<body>
-    <div>
-        <table>
-            <caption> Clase </caption>
-            <tr>
-                <th>
-                    Numero Clase: <?php echo $clase->getNumeroClase() ?>
-                </th> 
-                <th>
-                    Fecha: <?php echo $clase->getFechaClase() ?>
-                </th>
-                <th>
-                    Tipo de Clase: <?php echo $clase->getTipoClase() ?>
-                </th>
-            </tr>
-        </table>
-    </div>
 
-    <div>
-        <form action="procesar_insert.php" method="POST">
-            <fieldset>
-                <h1>Libro de Temas</h1>
+<?php require_once "../../menu.php";?>
+
+<body>
+
+    <div class="container-detalle-libro">
+        <div class="titulo">
+            <h1>Libro de Temas</h1>
+        </div>
+
+        <div class="conteiner-descripcion-clase">
+            <div class="subtitulo">
+                <h2>Clase Asociada</h2>
+            </div>
+
+            <div class="conteiner-h3">
+                <h3>
+                    Numero Clase: <span><?php echo $clase->getNumeroClase() ?></span>
+                </h3>
+            </div>
+
+            <div class="conteiner-h3">
+                <h3>
+                    Fecha: <span><?php echo $clase->getFechaClase() ?></span>
+                </h3>
+            </div>
+
+            <div class="conteiner-h3">           
+                <h3>
+                    Tipo de Clase: <span><?php echo $clase->getTipoClase() ?></span>
+                </h3>
+            </div>
+                        
+         </div>
+
+        <form action="procesar_insert.php" method="POST"  id="formInsert" class="formInsert2Columnas">
 
                 <input type="hidden" name="idLibroTemas" value="<?php echo $idLibroTemas?>">
                 <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera?>">
                 <input type="hidden" name="idClase" value="<?php echo $idClase?>">
                 
-                <div>
-                    <label for="temaDia">Actividad del dia</label>
-                    <textarea id="temaDia"name="temaDia"></textarea>
+                <div class="formGrup" id="GrupoTemaDia" >
+                    <label for="TemaDia" class="formLabel">Tema del dia</label>
+                    <div class="formGrupInput">
+                        <textarea id="temaDia"name="temaDia"></textarea>
+                    </div>
+                    <p class="formularioInputError"> Error en el campo tema del dia</p>
                 </div>
-                <div>
-                    <label for="observaciones">Observacion</label>
-                    <textarea id="observaciones"name="observaciones"></textarea>
+
+
+                <div class="formGrup" id="GrupoObservaciones" >
+                    <label for="Obsersaciones" class="formLabel">Observaciones</label>
+                    <div class="formGrupInput">
+                        <textarea id="observaciones"name="observaciones"></textarea>
+                    </div>
+                    <p class="formularioInputError"> Error en el campo Observaciones.</p>
                 </div>
-                <div>
-                    <button type="submit" id=""> Guardar Registro </button>
+
+
+                <div class="formGrupBtnEnviar" >
+                    <button type="submit" class="formButton" id="Guardar"> Guardar Registro </button>
                 </div>
-            </fieldset>
         </form>
     </div>
 </body>

@@ -43,82 +43,93 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista Docentes</title>
 </head>
 
 
-<?php require_once "../../menu.php";?>
+
 
 <body class="body-listuser">
-    <br>
-    <br>
-    <h1 class="titulo">Lista de Docentes de la Materia: <?php echo $materia ?> / <br><?php echo $carrera ?></h1>
-    <br>
-    <br>
-    <a href="asignar_docente?idCarrera=<?php echo $idCarrera?>&idMateria=<?php echo $idMateria?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Asignar Docente</a>
-    <table class="tabla" method="GET">
-        <tr >
-            <th> ID Docente</th>
-            <th> ID Persona</th>
-            <th> Nombre</th>
-            <th> Apellido</th>
-            <th> Fecha Nacimiento</th>
-            <th> Nacionalidad</th>
-            <th> Numero Matricula</th>
-            <th> Sexo</th>
-            <th> Direccion </th>
-            <th> Contacto </th>
-
-            <th> Acciones</th>
-
-        </tr>
-        <?php foreach ($lista as $docente ):?> 
-            <tr >
-                <td >
-                    <?php echo $docente->getIdDocente(); ?>
-                </td>
-                <td>
-                    <?php echo $docente->getIdPersona(); ?>
-                </td>
-                <td>
-                    <?php echo $docente->getNombre(); ?>
-                </td>
-                <td>
-                    <?php echo $docente->getApellido(); ?>
-                </td>
-                <td>
-                    <?php echo $docente->getFechaNacimiento(); ?>
-                </td>
-                <td>
-                    <?php echo $docente->getNacionalidad(); ?>
-                </td>
-                <td>
-                    <?php echo $docente->getNumMatricula(); ?>
-                </td>
-                <td>
-                    <?php
-                        $listadoSexo= Sexo::sexoTodoPorId($docente->getIdSexo());
-                        foreach($listadoSexo as $sexo):
-                            echo $sexo->getDescripcion(); 
-                        endforeach
-                        #echo $docente->getIdSexo();
-                    ?>
-                </td>
-                <td>
-                    <a href="../domicilios/domicilios.php?idPersona=<?php echo $docente->getIdPersona(); ?>">Ver</a> 
-                </td>
-                <td>
-                    <a href="../contactos/contactos.php?idPersona=<?php echo $docente->getIdPersona(); ?>">Ver</a> 
-                </td>
-                <td>
-                    <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>&idCicloLectivo=<?php echo $idCicloLectivo; ?>" class="">Eliminar</a> |
-                    <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class="">Lista de Especialidades</a>
-                </td>
-            </tr>
-        <?php endforeach ?>
+    <?php require_once "../../menu.php";?>
     
+    <div class="titulo">
+        <h1>Lista de Docentes de la Materia: <?php echo $materia ?> <br> 
+        Carrera: <?php echo $carrera ?></h1>
+    </div>
+    
+    <div class="conteiner-btn-agregar">
+        <button type="button" class="btn-agregar" >
+             <a href="asignar_docente?idCarrera=<?php echo $idCarrera?>&idMateria=<?php echo $idMateria?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Asignar Docente</a>
+         </button>
+    </div>
+    
+    <div class="conteiner" id=>
+        <table class="tabla" method="GET">
+            <thead>
+                <tr >
+                    <th> ID Docente</th>
+                    <th> ID Persona</th>
+                    <th> Nombre</th>
+                    <th> Apellido</th>
+                    <th> Fecha Nacimiento</th>
+                    <th> Nacionalidad</th>
+                    <th> Numero Matricula</th>
+                    <th> Sexo</th>
+                    <th> Direccion </th>
+                    <th> Contacto </th>
+                    <th> Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($lista as $docente ):?> 
+                <tr >
+                    <td >
+                        <?php echo $docente->getIdDocente(); ?>
+                    </td>
+                    <td>
+                        <?php echo $docente->getIdPersona(); ?>
+                    </td>
+                    <td>
+                        <?php echo $docente->getNombre(); ?>
+                    </td>
+                    <td>
+                        <?php echo $docente->getApellido(); ?>
+                    </td>
+                    <td>
+                        <?php echo $docente->getFechaNacimiento(); ?>
+                    </td>
+                    <td>
+                        <?php echo $docente->getNacionalidad(); ?>
+                    </td>
+                    <td>
+                        <?php echo $docente->getNumMatricula(); ?>
+                    </td>
+                    <td>
+                        <?php
+                            $listadoSexo= Sexo::sexoTodoPorId($docente->getIdSexo());
+                            foreach($listadoSexo as $sexo):
+                                echo $sexo->getDescripcion(); 
+                            endforeach
+                            #echo $docente->getIdSexo();
+                        ?>
+                    </td>
+                    <td>
+                        <a href="../domicilios/domicilios.php?idPersona=<?php echo $docente->getIdPersona(); ?>"><img class="icon-a" src="../../icon/ver.png" title="Ver" alt="Ver"></a> 
+                    </td>
+                    <td>
+                        <a href="../contactos/contactos.php?idPersona=<?php echo $docente->getIdPersona(); ?>"><img class="icon-a" src="../../icon/ver.png" title="Ver" alt="Ver"></a> 
+                    </td>
+                    <td>
+                        <div class="icon">
+                            <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>&idCicloLectivo=<?php echo $idCicloLectivo; ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                            <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de Especialidades" alt="Lista de Especialidades"></a>
+                        </div>
+                    </td>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
     </table>
 
 

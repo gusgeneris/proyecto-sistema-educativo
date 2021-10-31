@@ -27,92 +27,119 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Asistencia</title>
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+    <link rel="icon" type="image/jpg" href="../../image/logo.png">
+    <title>Nueva Asitencia</title>
 </head>
+
+<?php require_once "../../menu.php";?>
+
 <body>
+    <div class="titulo">
+        <h1>Asistencia</h1>
+    </div>
+    <div class="conteiner-descripcion-clase">
+        <div class="subtitulo">
+            <h2>Clase Asociada</h2>
+        </div>
 
-    
-    <div>
-        <table>
-            <caption> Libro de Temas </caption>
-            <tr>
-                <th>
-                    Tema del dia: <?php echo $detalleLibro->getTemaDia() ?>
-                </th> 
-                <th>
-                   || Observaciones: <?php echo $detalleLibro->getObservaciones() ?>
-                </th>
-                <th>
-                   || Firma observante: 
-                </th>
-            </tr>
-        </table>
+        <div class="conteiner-h3">
+            <h3>
+                 Numero Clase: <span><?php echo $clase->getNumeroClase() ?></span>
+            </h3>
+        </div>
+
+        <div class="conteiner-h3">
+            <h3>
+                 Fecha: <span><?php echo $clase->getFechaClase() ?></span>
+            </h3>
+        </div>
+
+        <div class="conteiner-h3">           
+            <h3>
+                Tipo de Clase: <span><?php echo $clase->getTipoClase() ?></span>
+            </h3>
+        </div>
+                        
+    </div>
+    <div class="conteiner-descripcion-clase">
+
+        <div class="subtitulo">
+            <h2>Detalle libro de temas Asociado</h2>
+        </div>
+
+        <div class="conteiner-h3">
+            <h3>
+                Tema del dia:<span> <?php echo $detalleLibro->getTemaDia() ?></span>
+            </h3>
+        </div>
+        
+        <div class="conteiner-h3">
+            <h3>
+                Observaciones:<span> <?php echo $detalleLibro->getObservaciones() ?></span>
+           </h3>
+        </div>
+        <div class="conteiner-h3">
+            <h3>
+               Firma observante: 
+           </h3>
+        </div>
     </div>
 
-    <div>
-        <table>
-            <caption> Clase </caption>
-            <tr>
-                <th>
-                    Numero Clase: <?php echo $clase->getNumeroClase() ?>
-                </th> 
-                <th>
-                    Fecha: <?php echo $clase->getFechaClase() ?>
-                </th>
-                <th>
-                    Tipo de Clase: <?php echo $clase->getTipoClase() ?>
-                </th>
-            </tr>
-        </table>
-    </div>
-    
+
     <form action="procesar_insert.php" method="POST">
 
     <input type="hidden" name="idClase" value="<?php echo $idClase ?>">
     <input type="hidden" name="idMateria" value="<?php echo $idMateria ?>">
     <input type="hidden" name="idCicloLectivoCarrera" value="<?php echo $idCicloLectivoCarrera ?>">
     <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera ?>">
-
-    <table style="border: 1px;">
-        <tr>
-            <th>Asistencia</th>
-            <th>id Alumno</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Dni</th>
-            <th>Acciones</th>
-        </tr>
-
-        <?php foreach ($listado as $alumno):?>
-            
-            <tr>
-                <td>
-                    <input type="checkbox" name="check_lista[]" value="<?php  echo $alumno->getIdAlumno() ?>">
-                </td>
-                <td>
-                    <?php echo $alumno->getIdAlumno()?>
-                </td>
-                <td>
-                    <?php echo $alumno->getNombre()?>
-                </td>
-                <td>
-                    <?php echo $alumno->getApellido()?>
-                </td>
-                <td>
-                    <?php echo $alumno->getDni()?>
-                </td>
-                <td>
-                    ghdf
-                </td>
-            </tr>
-        <?php endforeach?>
-    </table>
-        <button type="submit"> Guardar Registro </button>
-    </form>
-
-   
-
-
     
+    <div class="subtitulo">
+        <h2 class="">Lista de Alumnos</h2>
+    </div>
+
+    <div class="conteinerAsistencia" id=>
+        <table class="tabla" id="table">
+
+        <thead>
+            <tr>
+                <th>Asistencia</th>
+                <th>id Alumno</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dni</th>
+            </tr>
+        </thead>
+
+            <?php foreach ($listado as $alumno):?>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="check_lista[]" value="<?php  echo $alumno->getIdAlumno() ?>">
+                        </td>
+                        <td>
+                            <?php echo $alumno->getIdAlumno()?>
+                        </td>
+                        <td>
+                            <?php echo $alumno->getNombre()?>
+                        </td>
+                        <td>
+                            <?php echo $alumno->getApellido()?>
+                        </td>
+                        <td>
+                            <?php echo $alumno->getDni()?>
+                        </td>
+                    </tr>
+                </tbody>
+            <?php endforeach?>
+        </table>
+        <div class="formGrupBtnEnviar" >
+            <button type="submit"  class="formButton" id="Guardar"> Guardar Registro </button>
+        </div>
+        </form>
+    </div>
+
 </body>
 </html>

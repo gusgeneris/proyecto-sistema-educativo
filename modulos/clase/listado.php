@@ -16,6 +16,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/style.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
+    <script type="text/javascript" src="../../script/validacion.js"></script>
     <script src ="../../jquery3.6.js"></script>
     <script src ="../../script/comboCarrera.js"></script>
     <title>Busqueda de Clases</title>
@@ -33,32 +38,44 @@
     
 
 <div>
-    <form action="procesar_busqueda_clase.php" method="POST">
+    <form action="procesar_busqueda_clase.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
 
-    <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+        <div class="formGrup" id="GrupocboCarrera">
+                <label for="cboCarrera" class="formLabel">Carrera</label>
+                    <div class="formGrupInput">
+                        <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
 
-        <option value="0">
-            ->Seleccionar Carrera<-
-        </option>
-            <?php foreach ($listaCarreras as $carrera): ?>
-        <option value="<?php echo $carrera->getIdCarrera() ?>">
-            <?php echo $carrera->getNombre() ?>
-        </option>
-            <?php endforeach; ?>
+                            <option value="0">
+                                ->Seleccionar Carrera<-
+                            </option>
+                                <?php foreach ($listaCarreras as $carrera): ?>
+                            <option value="<?php echo $carrera->getIdCarrera() ?>">
+                                <?php echo $carrera->getNombre() ?>
+                            </option>
+                                <?php endforeach; ?>
 
-    </select>
-
-    <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
-
-        <option value="0">
-            ->Seleccionar Materia<-
-        </option>
-
-    </select>
-
+                        </select>
         
-    <button type="submit" > Buscar Clases </button>
+                        </div>
+            <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+        </div>
 
+        <div class="formGrup" id="GrupocboMateria">
+            <label for="cboMateria" class="formLabel">Materia</label>
+            <div class="formGrupInput">
+                <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
+
+                    <option value="0">
+                        ->Seleccionar Materia<-
+                    </option>
+                </select>
+            </div>
+                <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+        </div>
+
+        <div class="formGrupBtnEnviar">    
+            <button type="submit" id="Guardar" class="formButton"> Buscar Clases </button>
+        </div>                            
     </form>
 
 </div>

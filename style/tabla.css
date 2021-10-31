@@ -8,6 +8,13 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.conteinerAsistencia {
+    width: 400px;
+    margin: 10px 180px;
+    margin-left: 30%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 .conteiner3Columnas {
     width: 500px;
     margin: 30px auto;
@@ -76,7 +83,7 @@ tr:hover td {
 .btn-agregar {
     height: 45px;
     line-height: 45px;
-    width: 30%;
+    width: 20%;
     background: rgb(49, 49, 49);
     color: #fff;
     font-weight: bold;
@@ -90,6 +97,7 @@ tr:hover td {
     color: white;
     text-decoration: none;
     flex: auto;
+    text-align: center;
 }
 
 .btn-agregar:hover {

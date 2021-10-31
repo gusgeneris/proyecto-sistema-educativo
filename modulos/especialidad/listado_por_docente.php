@@ -13,8 +13,6 @@ if(isset($_GET['idDocente'])){
 
 
 $lista=Especialidad::listarPorDocente($idDocente);
-#$lista=$especialidad->listaTodos();
-#highlight_string(var_export($lista,true));
 
 $docente=Docente::obtenerTodoPorId($idDocente);
 
@@ -27,47 +25,53 @@ $docente=Docente::obtenerTodoPorId($idDocente);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista especialidads</title>
 
 </head>
 <?php require_once "../../menu.php";?>
 <body class="body-listuser">
-    <br>
-    <br>
-    <h1 class="titulo">Lista de Especialidades de <?php echo $docente?> </h1>
-    <br>
-    <br>
-    <div><a href="../especialidad/asignar_especialidad.php?idDocente=<?php echo $idDocente?>">Asignar una Especialidad</a></div>
-    <br>
-    <br>
+    <div class="titulo">
+        <h1 class="titulo">Lista de Especialidades de <?php echo $docente?> </h1>
+    </div>
 
-    <form >
+    <div class="conteiner-btn-agregar">
+        <button type="button" class="btn-agregar" > 
+            <a href="../especialidad/asignar_especialidad.php?idDocente=<?php echo $idDocente?>">Asignar una Especialidad</a>
+        </button>
+    </div>
 
-    <table class="tabla" method="GET">
-        <tr >
-            <th> ID especialidad</th>
-            <th> Descripcion</th>
-            <th> Acciones</th>
+    <div class="conteiner3Columnas" id=>
+        <table class="tabla">
+            <thead>
+                <tr >
+                    <th> ID especialidad</th>
+                    <th> Descripcion</th>
+                    <th> Acciones</th>
 
-        </tr>
-        <?php foreach ($lista as $especialidad ):?> 
-            <tr >
-                <td >
-                    <?php echo $especialidad->getIdEspecialidad(); ?>
-                </td>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($lista as $especialidad ):?> 
+                <tr >
+                    <td >
+                        <?php echo $especialidad->getIdEspecialidad(); ?>
+                    </td>
 
-                <td>
-                    <?php echo $especialidad->getDescripcion(); ?>
-                </td>
-                <td>
-                    <a href="eliminar_relacion.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>&idDocente=<?php echo $idDocente?>" class="">borrar</a>
-                </td>
-            </tr>
-        <?php endforeach ?>
-    
-    </table>
+                    <td>
+                        <?php echo $especialidad->getDescripcion(); ?>
+                    </td>
+                    <td>
+                        <div class="icon">
+                            <a href="eliminar_relacion.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>&idDocente=<?php echo $idDocente?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                            <a href="modificar.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                        </div>    
+                    </td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
 
 </body>
 </html>

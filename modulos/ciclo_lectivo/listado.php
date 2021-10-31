@@ -52,7 +52,7 @@ $lista=CicloLectivo::listaTodos();
                                 
                                 <a href="modificar.php?id=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                                 
-                                <a href="../carreras/listado_por_ciclo.php?idCiclo=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class=""><img class="icon-a" src="../../icon/asignar.png" title="Asignar" alt="Asignar Carrera"></a>
+                                <a href="../carreras/listado_por_ciclo.php?idCiclo=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class=""><img class="icon-a" src="../../icon/listado.png" title="Lista Carreras Asociadas" alt="Lista Carreras Asociadas"></a>
                             </div>
                         </td>
                     </tr>

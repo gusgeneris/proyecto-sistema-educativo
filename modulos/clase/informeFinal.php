@@ -29,87 +29,121 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+    <script src ="../../jquery3.6.js"></script>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png">
     <title>Listado de Asistencia</title>
 </head>
+
+<?php require_once "../../menu.php";?>
+
 <body>
 
-    
-    <div>
-        <table>
-            <caption> Libro de Temas </caption>
-            <tr>
-                <th>
-                    Tema del dia: <?php echo $detalleLibro->getTemaDia() ?>
-                </th> 
-                <th>
-                   || Observaciones: <?php echo $detalleLibro->getObservaciones() ?>
-                </th>
-                <th>
-                   || Firma observante: 
-                </th>
-            </tr>
-        </table>
-    </div>
+    <div class="conteiner-descripcion-clase">
+        <div class="subtitulo">
+            <h2>Clase Asociada</h2>
+        </div>
 
-    <div>
-        <table>
-            <caption> Clase </caption>
-            <tr>
-                <th>
-                    Numero Clase: <?php echo $clase->getNumeroClase() ?>
-                </th> 
-                <th>
-                    Fecha: <?php echo $clase->getFechaClase() ?>
-                </th>
-                <th>
-                    Tipo de Clase: <?php echo $clase->getTipoClase() ?>
-                </th>
-            </tr>
-        </table>
-    </div>
+        <div class="conteiner-h3">
+            <h3>
+                 Numero Clase: <span><?php echo $clase->getNumeroClase() ?></span>
+            </h3>
+        </div>
+
+        <div class="conteiner-h3">
+            <h3>
+                 Fecha: <span><?php echo $clase->getFechaClase() ?></span>
+            </h3>
+        </div>
+
+        <div class="conteiner-h3">           
+            <h3>
+                Tipo de Clase: <span><?php echo $clase->getTipoClase() ?></span>
+            </h3>
+        </div>
     
+        </div>
+        <div class="conteiner-descripcion-clase">
+
+            <div class="subtitulo">
+                <h2>Detalle libro de temas Asociado</h2>
+            </div>
+
+            <div class="conteiner-h3">
+                <h3>
+                    Tema del dia:<span> <?php echo $detalleLibro->getTemaDia() ?></span>
+                </h3>
+            </div>
+            
+            <div class="conteiner-h3">
+                <h3>
+                    Observaciones:<span> <?php echo $detalleLibro->getObservaciones() ?></span>
+            </h3>
+            </div>
+            <div class="conteiner-h3">
+                <h3>
+                Firma observante: 
+            </h3>
+            </div>
+        </div>
     
 
     <input type="hidden" name="idClase" value="<?php echo $idClase ?>">
     <input type="hidden" name="idMateria" value="<?php echo $idMateria ?>">
     <input type="hidden" name="idCicloLectivoCarrera" value="<?php echo $idCicloLectivoCarrera ?>">
 
-    <table style="border: 1px;">
-        <tr>
-            <th>Asistencia</th>
-            <th>id Alumno</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Dni</th>
-        </tr>
+    <div class="subtitulo">
+        <h2 class="">Asistencia del Alumnado</h2>
+    </div>
 
-        <?php foreach ($listado as $alumno):?>
+    <div class="conteinerAsistencia" id=>
+        <table class="tabla" id="table">
+            <thead>
+                <tr>
+                    <th>Asistencia</th>
+                    <th>id Alumno</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($listado as $alumno):?>
             
-            <tr>
-                <td>
-                    <?php  
-                        $idAlumno= $alumno->getIdAlumno();
-                        $estadoAsistencia=EstadoAsistencia::descripcionEstadoAsistencia($idClase,$idAlumno);
-                        echo $estadoAsistencia->getDescripcion();
-                    ?>
-                </td>
-                <td>
-                    <?php echo $alumno->getIdAlumno()?>
-                </td>
-                <td>
-                    <?php echo $alumno->getNombre()?>
-                </td>
-                <td>
-                    <?php echo $alumno->getApellido()?>
-                </td>
-                <td>
-                    <?php echo $alumno->getDni()?>
-                </td>
-            </tr>
-        <?php endforeach?>
-    </table>
-    <button type="button"><a href="../../inicio.php">  Listo </a> </button>
-
+                <tr>
+                    <td id="estado" >
+                        <?php  
+                            $idAlumno= $alumno->getIdAlumno();
+                            $estadoAsistencia=EstadoAsistencia::descripcionEstadoAsistencia($idClase,$idAlumno);
+                            echo $estadoAsistencia->getDescripcion();
+                            
+                        ?>
+                    </td>
+                    <td>
+                        <?php echo $alumno->getIdAlumno()?>
+                    </td>
+                    <td>
+                        <?php echo $alumno->getNombre()?>
+                    </td>
+                    <td>
+                        <?php echo $alumno->getApellido()?>
+                    </td>
+                    <td>
+                        <?php echo $alumno->getDni()?>
+                    </td>
+                </tr>
+                <?php endforeach?>
+            </tbody>       
+        </table>
+    <div class="formGrupBtnEnviar" >
+        <button type="button" class="formButton" id="Guardar">
+            <a href="../../inicio.php">  Listo </a> 
+        </button>
+    </div>                
 
 </body>
+<script src="../../script/estadoAsistencia.js">
+</script>
 </html>

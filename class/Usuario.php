@@ -220,17 +220,13 @@ class Usuario extends Persona {
         $db = new MySql();
         $datos = $db->consultar($sql);
 
-        $listadoUsuarios = [];
-
-        while ($registro = $datos->fetch_assoc()){
+        $registro = $datos->fetch_assoc();
 
         $user=new Usuario();
         $user->crear_usuario($user,$registro);
 
-        $listadoUsuarios[]=$user;
-        }
+        return $user;
 
-        return $listadoUsuarios;
 
 
     }

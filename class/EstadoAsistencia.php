@@ -46,7 +46,7 @@ class EstadoAsistencia{
 
     
     public static function descripcionEstadoAsistencia($idClase,$idAlumno){
-        $sql="SELECT estado_asistencia_detalle from estado_asistencia ".
+        $sql="SELECT id_estado_asistencia, estado_asistencia_detalle from estado_asistencia ".
         "join asistencia on id_estado_asistencia = estado_asistencia_id_estado_asistencia ".
         "join clase on id_clase = clase_id_clase ".
         "where id_clase = {$idClase} and alumno_id_alumno={$idAlumno}";
@@ -56,6 +56,7 @@ class EstadoAsistencia{
         $dato=$dataBase->consultar($sql);
         $registro = $dato->fetch_assoc();
         $estadoAsistencia= new EstadoAsistencia();
+        $estadoAsistencia->setIdEstadoAsistencia($registro['id_estado_asistencia']);
         $estadoAsistencia->setDescripcion($registro['estado_asistencia_detalle']);
         
         return $estadoAsistencia;

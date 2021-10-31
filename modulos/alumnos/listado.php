@@ -69,7 +69,6 @@ if(isset($_GET['mj'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-    <link rel="stylesheet" href="/proyecto-modulos/style/style.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
     <script type="text/javascript" src="../../script/validacion.js"></script>
@@ -84,7 +83,7 @@ if(isset($_GET['mj'])){
     </div>
 
     <div class="conteiner-btn-agregar">
-        <button type="button" class="btn-agregar" > <a href="insert.php"> Agregar Nuevo Alumno</a> </button>
+        <button type="button" class="btn-agregar" > <a href="insert.php">Agregar Nuevo Alumno</a> </button>
     </div>
     
     <div class="conteiner" id=>

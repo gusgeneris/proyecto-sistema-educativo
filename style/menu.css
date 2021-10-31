@@ -83,6 +83,12 @@
 }
 
 .clase-nueva {
+    display: flex;
+    float: bottom;
+}
+
+.btn-clase-nueva {
+    display: flex;
     margin: 15px;
     margin-bottom: 19px;
     padding: 5px;
@@ -92,27 +98,27 @@
     background-color: #393e46;
 }
 
-.clase-nueva a {
+.btn-clase-nueva a {
     font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 15px;
     text-decoration: none;
     font-weight: bold;
     outline: none;
-    display: block;
     color: #ffffff;
+    flex: auto;
 }
 
 .clase-nueva a:link {
     color: none;
 }
 
-.clase-nueva:hover {
+.btn-clase-nueva:hover {
     border-color: rgb(0, 0, 0);
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
     background-color: #ffffff;
 }
 
-.clase-nueva a:hover {
+.btn-clase-nueva a:hover {
     color: #000000;
 }
 

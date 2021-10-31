@@ -15,6 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <script src ="../../jquery3.6.js"></script>
     <script src ="../../script/comboCarrera.js"></script>
     <title>Busqueda de Clases</title>
@@ -32,33 +34,49 @@
     
 
 <div>
-    <form action="procesar_listado.php" method="POST">
+    <div class="titulo">
+        <h1 class="titulo">Buscar Libro de Temas</h1>
+    </div>
 
-    <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+    <form action="procesar_listado.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
 
-        <option value="0">
-            ->Seleccionar Carrera<-
-        </option>
-            <?php foreach ($listaCarreras as $carrera): ?>
-        <option value="<?php echo $carrera->getIdCarrera() ?>">
-            <?php echo $carrera->getNombre() ?>
-        </option>
-            <?php endforeach; ?>
+        <div class="formGrup" id="GrupocboCarrera">
+            <label for="cboCarrera" class="formLabel">Carrera</label>
+                <div class="formGrupInput">
+                    <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
 
-    </select>
+                        <option value="0">
+                            ->Seleccionar Carrera<-
+                        </option>
+                            <?php foreach ($listaCarreras as $carrera): ?>
+                        <option value="<?php echo $carrera->getIdCarrera() ?>">
+                            <?php echo $carrera->getNombre() ?>
+                        </option>
+                            <?php endforeach; ?>
 
-    <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
+                    </select>
+                </div>
+                    <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+        </div>
+        
+        <div class="formGrup" id="GrupocboMateria">
+            <label for="cboMateria" class="formLabel">Materia</label>
+                <div class="formGrupInput">
 
-        <option value="0">
-            ->Seleccionar Materia<-
-        </option>
+                    <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
 
-    </select>
+                        <option value="0">
+                            ->Seleccionar Materia<-
+                        </option>
 
-
-
-    <button type="submit" > Buscar Libro </button>
-
+                    </select>
+                </div>
+                <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+        </div>           
+                
+        <div class="formGrupBtnEnviar">                       
+            <button class="formButton" id="Guardar" type="submit" > Buscar Libro </button>
+        </div>                        
     </form>
 
 </div>
@@ -68,9 +86,11 @@
             
             $listadoDetalleLibro= DetalleLibroTemas::detalleLibroPorCurriculaCarrera($idCurriculaCarrera);
 ?>
-        
-
-<table border="1" cellspacing="0" cellpadding="">
+    <div class="subtitulo">     
+        <h2>Detalle Libro Temas</h2>
+    </div>
+    <div class="conteiner-" id=> 
+        <table lass="tabla" id="table">
             <tr>
                 <th>Actividad del dia</th>
                 <th>Observaciones</th>    
@@ -113,7 +133,8 @@
             </tr>
             <?php endforeach;?>
         </table>
-    <?php }; ?>
+        <?php }; ?>
+    </div>
 
 </body>
 </html>

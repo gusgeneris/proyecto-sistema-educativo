@@ -34,6 +34,7 @@ $listadoSexo=Sexo::sexoTodos();
     <div class="titulo">
         <h1 class="">Ingrese los nuevos datos</h1>
     </div>
+    
     <div class="main">
         <form action="procesar_actualizar_alumno.php" method="POST"class="formModificar" id="formModificar" name="formModificar">
             
