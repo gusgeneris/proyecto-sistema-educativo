@@ -35,8 +35,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Especialidad</title>
     <title>Insertar</title>
 </head>
@@ -44,42 +45,56 @@
 <?php require_once "../../menu.php";?>
 
 <body class="body">
+    <div class="titulo"><h1>Asignar epecialidad al docente</h1></div>
 
+    <div class="conteiner-btn-agregar">
+            <button type="button" class="btn-agregar" >
+                <a href="insert.php?idDocente=<?php echo $idDocente?>">Agregar nueva especialidad</a>
+            </button>
+        </div>
     
+    <div class="main">
+        <form action="procesar_asignar.php" method=POST class="formulario">
 
-    <form action="procesar_asignar.php" method=POST class="formulario">
-        <h1 class="titulo"> Registro de Especialidad</h1>
-        <br>
+            <div><input type="hidden" name=IdDocente value=<?php echo $idDocente ?>></div>
 
-        <div><a href="insert.php?idDocente=<?php echo $idDocente?>">Agregar nueva especialidad</a></div>
+            <div class="conteiner3Columnas" >
+                <table class="tabla" id="table">
+                    <thead>
+                        <tr>
+                            <th>Asignado</th>
+                            <th>Nombre de Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($listado as $especialidad):?>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="check_lista[]" value="<?php echo $especialidad->getIdEspecialidad()?>" 
+                                    <?php 
+                                        foreach ($listadoEspecialidadesActuales as $i ){ 
+                                            
+                                            if ($i==$especialidad->getIdEspecialidad()){echo "checked";}
+                                        }
+                                    ?>> 
+                            </td>
+                            <td>
+                                <?php echo $especialidad->getDescripcion()?> 
+                            </td>
+                        <tr>
+                        <?php endforeach?>
+                    </tbody>              
+                </table>                        
 
-        <div><input type="hidden" name=IdDocente value=<?php echo $idDocente ?>></div>
+            <div class="formGrupBtnEnviar" >
+                <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
+            </div>
 
-        <br>
-
-        <?php foreach ($listado as $especialidad):?>
-        <tr>
-            <td>
-                <label for="">
-                    <input type="checkbox" name="check_lista[]" value="<?php echo $especialidad->getIdEspecialidad()?>" 
-                        <?php 
-                            foreach ($listadoEspecialidadesActuales as $i ){ 
-                                
-                                if ($i==$especialidad->getIdEspecialidad()){echo "checked";}
-                            }
-                            ?>> 
-                        <?php echo $especialidad->getDescripcion()?> 
-                </label>
-            </td>
-            <br>
-        <?php endforeach?>
-
-        <br>
-
-        <div class=""><input type="submit" class="" name="guardar" value="Guardar">
-            <input name="Cancelar" type="submit" value="Cancelar">
-        </div>               
-    </form>
+            <div class="formGrupBtnEnviar" >
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+            </div>           
+        </form>
+    </div>
 
 </body>
 

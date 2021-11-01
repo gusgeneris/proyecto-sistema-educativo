@@ -83,10 +83,12 @@ if(isset($_GET['mj'])){
     </div>
 
     <div class="conteiner-btn-agregar">
-        <button type="button" class="btn-agregar" > <a href="insert.php">Agregar Nuevo Alumno</a> </button>
+        <button type="button" class="btn-agregar" > 
+            <a href="insert.php">Agregar Nuevo Alumno</a> 
+        </button>
     </div>
     
-    <div class="conteiner" id=>
+    <div class="conteiner" >
         <table class="tabla" id="table">
             <thead>
                 <tr >

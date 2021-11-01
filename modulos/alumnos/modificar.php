@@ -43,7 +43,7 @@ $listadoSexo=Sexo::sexoTodos();
                 <label for="Nombre" class="formLabel">Nombre</label>
                 
                 <div class="formGrupInput"> 
-                    <input name="PersonaNom" type="text" class="formInput" value="<?php echo $alumno->getNombre(); ?>">            
+                    <input id="Nombre" name="PersonaNom" type="text" class="formInput" value="<?php echo $alumno->getNombre(); ?>">            
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>

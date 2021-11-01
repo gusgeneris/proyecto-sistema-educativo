@@ -1,11 +1,17 @@
 <?php
 require_once "../../class/EjeContenido.php";
+require_once "../../class/CicloLectivo.php";
+require_once "../../class/Carrera.php";
 require_once "../../configs.php";
 
 $cancelar= $_POST['Cancelar'];
 $idCarrera=$_POST["IdCarrera"];
 $idMateria=$_POST["IdMateria"];
 $idCicloLectivo=$_POST["IdCicloLectivo"];
+
+$idCicloLectivoCarrera=CicloLectivo::obtenerIdCicloLectivoCarrera($idCicloLectivo,$idCarrera);
+
+$idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
 
 
 if($cancelar==true){
@@ -23,7 +29,7 @@ $descripcion = $_POST['Descripcion'];
         exit;
     }
 
-    if (ctype_alpha($descripcion) == false){
+    if((!preg_match("/^[a-zA-Z0-9_ ]*$/",$descripcion))){
         header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
         exit;
     }
@@ -42,7 +48,7 @@ $ejeContenido->insert();
 $ejeContenido-> crearRelacionConCurriculaCarrera($idCarrera,$idMateria,$idCicloLectivo);
 
 if ($ejeContenido){
-    header("Location:listado.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&idCicloLectivo=".$idCicloLectivo."&mj=".CORRECT_INSERT_CODE);
+    header("Location:listado.php?idCurriculaCarrera=".$idCurriculaCarrera."&idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_INSERT_CODE);
 }
 
 ?>

@@ -22,7 +22,7 @@ if (strlen($descripcion) < 3 ){
     exit;
 }
 
-if (ctype_alpha($descripcion) == false){
+if((!preg_match("/^[a-zA-Z0-9_ ]*$/",$descripcion))){
     header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
     exit;
 }

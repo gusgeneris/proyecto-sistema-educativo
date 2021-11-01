@@ -29,60 +29,62 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
     <?php require_once "../../menu.php";?>
 
     <body>
+
+        <div class="titulo"><h1>Busqueda Calendarizacion</h1></div>
     
-        <form action="detalle_calendarizacion.php" method=GET class="formUnaColumna" id="formInsert" name="formInsert">
-            
-
-
-            <div class="formGrup" id="GrupocboCarrera">
-                    <label for="cboCarrera" class="formLabel">Carrera</label>
-                    <div class="formGrupInput">
-                        <Select name="cboCarrera" id="cboCarrera" class="formInput" onchange="cargarMateria()">
-                            <option value="0">
-                                ->Seleccionar Carrera<-
-                            </option>
-                            <?php foreach($listadoMateria as $carrera):{?>
-                                <option value="<?php echo $carrera->getIdCarrera()?>">
-                                <?php echo $carrera->getNombre()?>
-                            </option>
-                        <?php } endforeach; ?>
-                        </Select>
-                    </div>
-                    <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
-            </div>
-
-            <div class="formGrup" id="GrupocboMateria">
-                    <label for="cboMateria" class="formLabel">Materia</label>
-                    <div class="formGrupInput">
-                        <Select name="cboMateria" id="cboMateria" class="formInput" onchange="">
-                            <option value="0">
-                                ->Seleccionar Materia<-
-                            </option>
-                        </Select>
-                    </div>
-                    <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
-            </div>
-
-            <!--Grupo de Mensaje-->
+        <div class="main">
+            <form action="detalle_calendarizacion.php" method=GET class="formUnaColumna" id="formInsert" name="formInsert">
                 
-            <div class="formMensaje" id="GrupoMensaje">
+                <div class="formGrup" id="GrupocboCarrera">
+                        <label for="cboCarrera" class="formLabel">Carrera</label>
+                        <div class="formGrupInput">
+                            <Select name="cboCarrera" id="cboCarrera" class="formInput" onchange="cargarMateria()">
+                                <option value="0">
+                                    ->Seleccionar Carrera<-
+                                </option>
+                                <?php foreach($listadoMateria as $carrera):{?>
+                                    <option value="<?php echo $carrera->getIdCarrera()?>">
+                                    <?php echo $carrera->getNombre()?>
+                                </option>
+                            <?php } endforeach; ?>
+                            </Select>
+                        </div>
+                        <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                </div>
+
+                <div class="formGrup" id="GrupocboMateria">
+                        <label for="cboMateria" class="formLabel">Materia</label>
+                        <div class="formGrupInput">
+                            <Select name="cboMateria" id="cboMateria" class="formInput" onchange="">
+                                <option value="0">
+                                    ->Seleccionar Materia<-
+                                </option>
+                            </Select>
+                        </div>
+                        <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                </div>
+
+                <!--Grupo de Mensaje-->
                     
-                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-            
-            </div>
+                <div class="formMensaje" id="GrupoMensaje">
+                        
+                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+                </div>
 
-            <!--Grupo de Boton Enviar-->
+                <!--Grupo de Boton Enviar-->
 
-            <div class="formGrupBtnEnviar">
-                <button type="submit" class="formButton" value ="FormInsertBuscarCalendarizacion" id="Guardar"> Buscar</button>
-            </div>
+                <div class="formGrupBtnEnviar">
+                    <button type="submit" class="formButton" value ="FormInsertBuscarCalendarizacion" id="Guardar"> Buscar</button>
+                </div>
 
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
-            </div>
+                <div class="formGrupBtnEnviar">
+                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+                </div>
 
 
-        </form>        
+            </form>    
+        </div>    
 
     </body>
 

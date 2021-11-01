@@ -38,46 +38,48 @@
         <h1 class="titulo">Buscar Libro de Temas</h1>
     </div>
 
-    <form action="procesar_listado.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+    <div class="main">
+        <form action="procesar_listado.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
 
-        <div class="formGrup" id="GrupocboCarrera">
-            <label for="cboCarrera" class="formLabel">Carrera</label>
-                <div class="formGrupInput">
-                    <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+            <div class="formGrup" id="GrupocboCarrera">
+                <label for="cboCarrera" class="formLabel">Carrera</label>
+                    <div class="formGrupInput">
+                        <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
 
-                        <option value="0">
-                            ->Seleccionar Carrera<-
-                        </option>
-                            <?php foreach ($listaCarreras as $carrera): ?>
-                        <option value="<?php echo $carrera->getIdCarrera() ?>">
-                            <?php echo $carrera->getNombre() ?>
-                        </option>
-                            <?php endforeach; ?>
+                            <option value="0">
+                                ->Seleccionar Carrera<-
+                            </option>
+                                <?php foreach ($listaCarreras as $carrera): ?>
+                            <option value="<?php echo $carrera->getIdCarrera() ?>">
+                                <?php echo $carrera->getNombre() ?>
+                            </option>
+                                <?php endforeach; ?>
 
-                    </select>
-                </div>
+                        </select>
+                    </div>
+                        <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+            </div>
+            
+            <div class="formGrup" id="GrupocboMateria">
+                <label for="cboMateria" class="formLabel">Materia</label>
+                    <div class="formGrupInput">
+
+                        <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
+
+                            <option value="0">
+                                ->Seleccionar Materia<-
+                            </option>
+
+                        </select>
+                    </div>
                     <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
-        </div>
-        
-        <div class="formGrup" id="GrupocboMateria">
-            <label for="cboMateria" class="formLabel">Materia</label>
-                <div class="formGrupInput">
-
-                    <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
-
-                        <option value="0">
-                            ->Seleccionar Materia<-
-                        </option>
-
-                    </select>
-                </div>
-                <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
-        </div>           
-                
-        <div class="formGrupBtnEnviar">                       
-            <button class="formButton" id="Guardar" type="submit" > Buscar Libro </button>
-        </div>                        
-    </form>
+            </div>           
+                    
+            <div class="formGrupBtnEnviar">                       
+                <button class="formButton" id="Guardar" type="submit" > Buscar Libro </button>
+            </div>                        
+        </form>
+    </div>
 
 </div>
 
@@ -89,49 +91,47 @@
     <div class="subtitulo">     
         <h2>Detalle Libro Temas</h2>
     </div>
-    <div class="conteiner-" id=> 
-        <table lass="tabla" id="table">
-            <tr>
-                <th>Actividad del dia</th>
-                <th>Observaciones</th>    
-                <th>Numero clase</th>
-                <th>Fecha Clase</th>
-            </tr>
+    <div class="conteiner3Columnas" > 
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Actividad del dia</th>
+                    <th>Observaciones</th>    
+                    <th>Numero Clase</th>
+                    <th>Fecha Clase</th>
+                </tr>
+            </thead>
 
             <?php foreach ($listadoDetalleLibro as $detalleLibro): ?>
+            <tbody>    
+                <tr>
+                    <td>
+                        <?php echo $detalleLibro->getTemaDia(); ?>
+                    </td>
+                    <td>
+                        <?php echo $detalleLibro->getObservaciones(); ?>
+                    </td>
+                    <td>
+                        <?php  
+                            $idClase= $detalleLibro->getIdClase();
+                            
+                            $clase=Clase::detalleNumeroFechaClase($idClase);
 
-            <tr>
-                <td>
-                    <?php echo $detalleLibro->getTemaDia(); ?>
-                </td>
-                <td>
-                    <?php echo $detalleLibro->getObservaciones(); ?>
-                </td>
-                <td>
-                    <?php  
-                        $idClase= $detalleLibro->getIdClase();
-                        
-                        $clase=Clase::detalleNumeroFechaClase($idClase);
+                            echo $clase->getNumeroClase();
+                        ?>
+                    </td>
+                    <td>
+                        <?php  
+                            $idClase= $detalleLibro->getIdClase();
+                            
+                            $clase=Clase::detalleNumeroFechaClase($idClase);
 
-                        echo $clase->getNumeroClase();
-                    ?>
-                </td>
-                <td>
-                    <?php  
-                        $idClase= $detalleLibro->getIdClase();
-                        
-                        $clase=Clase::detalleNumeroFechaClase($idClase);
-
-                        echo $clase->getFechaClase();
-                    ?>
-                </td>
-                <td>
-                    <a href="detalle_libro_clase.php?idClase=<?php  ?>">
-                        Modificar
-                    </a>
-                </td>
-            </tr>
+                            echo $clase->getFechaClase();
+                        ?>
+                    </td>
+                </tr>
             <?php endforeach;?>
+            </tbody>
         </table>
         <?php }; ?>
     </div>

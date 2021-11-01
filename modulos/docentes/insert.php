@@ -21,199 +21,201 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar nuevo Docente</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../style/styleFormInsert.css">
+        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+        <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar nuevo Docente</title>
+    </head>
 
-<?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";?>
 
-<body class="body">
+    <body class="body">
 
-<h1 class="titulo"> Registro de Docente</h1>
+    <div class="titulo"> 
+        <h1> Registro de Docente</h1>
+    </div>
 
-<main>
-    <form action="procesar_insert.php" method=POST class="formInsert" id="formInsert" name="formInsert">
-            
-            <!--Grupo de Nombre-->
-            
-            <div class="formGrup" id="GrupoNombre" >
-                <label for="Nombre" class="formLabel">Nombre</label>
-                <div class="formGrupInput">
-                    <input type="text" id='Nombre' name="Nombre" class="formInput" placeholder="Nombre">
+    <div class="main">
+        <form action="procesar_insert.php" method=POST class="formInsert" id="formInsert" name="formInsert">
+                
+                <!--Grupo de Nombre-->
+                
+                <div class="formGrup" id="GrupoNombre" >
+                    <label for="Nombre" class="formLabel">Nombre</label>
+                    <div class="formGrupInput">
+                        <input type="text" id='Nombre' name="Nombre" class="formInput" placeholder="Nombre">
+                        
+                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                    </div>
+                    <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+                </div>
+
+                <!--Grupo de Apellido-->
                     
-                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                </div>
-                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-            </div>
+                <div class="formGrup" id="GrupoApellido">
+                        <label for="Apellido" class="formLabel">Apellido</label>
+                        <div class="formGrupInput">
+                            <input type="text" id='Apellido' name="Apellido" class="formInput" placeholder="Apellido">
 
-            <!--Grupo de Apellido-->
-                
-            <div class="formGrup" id="GrupoApellido">
-                    <label for="Apellido" class="formLabel">Apellido</label>
-                    <div class="formGrupInput">
-                        <input type="text" id='Apellido' name="Apellido" class="formInput" placeholder="Apellido">
-
-                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                    </div>
-                    <p class="formularioInputError"> El Apellido no debe contener numeros ni simbolos.</p>
-            </div>    
+                            <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                        </div>
+                        <p class="formularioInputError"> El Apellido no debe contener numeros ni simbolos.</p>
+                </div>    
 
 
-            <!--Grupo de Dni-->
-                
-            <div class="formGrup" id="GrupoDni">
-                    <label for="Dni" class="formLabel">Dni</label>
-                    <div class="formGrupInput">
-                        <input type="text" id='Dni' name="Dni" class="formInput" placeholder="Dni">
-                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                    </div>
-                    <p class="formularioInputError"> El Dni no debe contener letras ni simbolos.</p>
-            </div>  
-
-            <!--Grupo de Fecha-->
-                
-            <div class="formGrup" id="GrupoFecha">
-                    <label for="Fecha" class="formLabel">Fecha Nacimiento</label>
-                    <div class="formGrupInput">
-                        <input type="date" id='FechaNacimiento' name="FechaNacimiento" class="formInput" placeholder="Fecha">
-                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                    </div>
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
-            </div>
-            
-            <!--Grupo de Nacionalidad-->
-                
-            <div class="formGrup" id="GrupoNacionalidad">
-                    <label for="Nacionalidad" class="formLabel">Nacionalidad</label>
-                    <div class="formGrupInput">
-                        <input type="text" id='Nacionalidad' name="Nacionalidad" class="formInput" placeholder="Nacionalidad">
-                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                    </div>
-                    <p class="formularioInputError"> La Nacionalidad no es necesariamente obligatoria.</p>
-            </div>
-
-            <!--Grupo de Numero Matricula-->
-                
-            <div class="formGrup" id="GrupoNumeroMatricula">
-                    <label for="NumeroMatricula" class="formLabel">Numero Matricula</label>
-                    <div class="formGrupInput">
-                        <input type="text" id='NumeroMatricula' name="NumeroMatricula" class="formInput" placeholder="NumeroMatricula">
-                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                    </div>
-                    <p class="formularioInputError"> El NumeroMatricula no es necesariamente obligatoria.</p>
-            </div>
-
-            <!--Grupo de Sexo-->
-
-            <div class="formGrup" id="GrupocboSexo">
-                <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
-                <div class="formGrupInput">
-                    <select id="cboSexo" class="formInput" required="required" name="cboSexo">
-                        <option value="0">
-                            -> Seleccione Sexo <-
-                        </option>
-                        <?php foreach($listado as $sexo):?>
-                        <option value="<?php echo $sexo->getIdSexo(); ?>">
-                            <?php echo $sexo->getDescripcion(); ?>
-                        </option>
-                        <?php endforeach?>
-                    </select>
-                </div>
-                <p class="formularioInputError"> Debe seleccionar una opcion </p> 
-            </div>
-
-            <!--Grupo de NombreUsuario-->
-            
-            <div class="formGrup" id="GrupoNombreUsuario" >
-                <label for="NombreUsuario" class="formLabel">Nombre Usuario</label>
-                <div class="formGrupInput">
-                    <input type="text" id='NombreUsuario' name="NombreUsuario" class="formInput" placeholder="NombreUsuario">
+                <!--Grupo de Dni-->
                     
-                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                </div>
-                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-            </div>
-            <!--Grupo de Contraseña-->
-            
-            <div class="formGrup" id="GrupoContrasenia" >
-                <label for="Contrasenia" class="formLabel">Contrasenia</label>
-                <div class="formGrupInput">
-                    <input type="text" id='Contrasenia' name="Contrasenia" class="formInput" placeholder="Contraseña">
-        
-                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-                </div>
-                <p class="formularioInputError"> El Contrasenia no debe contener numeros ni simbolos.</p>
-            </div>
+                <div class="formGrup" id="GrupoDni">
+                        <label for="Dni" class="formLabel">Dni</label>
+                        <div class="formGrupInput">
+                            <input type="text" id='Dni' name="Dni" class="formInput" placeholder="Dni">
+                            <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                        </div>
+                        <p class="formularioInputError"> El Dni no debe contener letras ni simbolos.</p>
+                </div>  
 
-            <!--Grupo de Contrasenia2-->
-            
-            <div class="formGrup" id="GrupoContrasenia2" >
-                <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
-                <div class="formGrupInput">
-                    <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" placeholder="Contraseña">
+                <!--Grupo de Fecha-->
                     
-                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                <div class="formGrup" id="GrupoFecha">
+                        <label for="Fecha" class="formLabel">Fecha Nacimiento</label>
+                        <div class="formGrupInput">
+                            <input type="date" id='FechaNacimiento' name="FechaNacimiento" class="formInput" placeholder="Fecha">
+                            <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                        </div>
+                        <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
                 </div>
-                <p class="formularioInputError"> Las Contraseñas deben coincidir.</p>
-            </div>
-
-            <input type="hidden" value="3" name="PerfilUsuario">
-
-            <!--Grupo de Mensaje-->
                 
-            <div class="formMensaje" id="GrupoMensaje">
+                <!--Grupo de Nacionalidad-->
                     
-                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                <div class="formGrup" id="GrupoNacionalidad">
+                        <label for="Nacionalidad" class="formLabel">Nacionalidad</label>
+                        <div class="formGrupInput">
+                            <input type="text" id='Nacionalidad' name="Nacionalidad" class="formInput" placeholder="Nacionalidad">
+                            <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                        </div>
+                        <p class="formularioInputError"> La Nacionalidad no es necesariamente obligatoria.</p>
+                </div>
+
+                <!--Grupo de Numero Matricula-->
+                    
+                <div class="formGrup" id="GrupoNumeroMatricula">
+                        <label for="NumeroMatricula" class="formLabel">Numero Matricula</label>
+                        <div class="formGrupInput">
+                            <input type="text" id='NumeroMatricula' name="NumeroMatricula" class="formInput" placeholder="NumeroMatricula">
+                            <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                        </div>
+                        <p class="formularioInputError"> El NumeroMatricula no es necesariamente obligatoria.</p>
+                </div>
+
+                <!--Grupo de Sexo-->
+
+                <div class="formGrup" id="GrupocboSexo">
+                    <label for="cboSexo" class="formLabel labelSexo">Sexo</label>
+                    <div class="formGrupInput">
+                        <select id="cboSexo" class="formInput" required="required" name="cboSexo">
+                            <option value="0">
+                                -> Seleccione Sexo <-
+                            </option>
+                            <?php foreach($listado as $sexo):?>
+                            <option value="<?php echo $sexo->getIdSexo(); ?>">
+                                <?php echo $sexo->getDescripcion(); ?>
+                            </option>
+                            <?php endforeach?>
+                        </select>
+                    </div>
+                    <p class="formularioInputError"> Debe seleccionar una opcion </p> 
+                </div>
+
+                <!--Grupo de NombreUsuario-->
+                
+                <div class="formGrup" id="GrupoNombreUsuario" >
+                    <label for="NombreUsuario" class="formLabel">Nombre Usuario</label>
+                    <div class="formGrupInput">
+                        <input type="text" id='NombreUsuario' name="NombreUsuario" class="formInput" placeholder="NombreUsuario">
+                        
+                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                    </div>
+                    <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+                </div>
+                <!--Grupo de Contraseña-->
+                
+                <div class="formGrup" id="GrupoContrasenia" >
+                    <label for="Contrasenia" class="formLabel">Contrasenia</label>
+                    <div class="formGrupInput">
+                        <input type="text" id='Contrasenia' name="Contrasenia" class="formInput" placeholder="Contraseña">
             
+                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                    </div>
+                    <p class="formularioInputError"> El Contrasenia no debe contener numeros ni simbolos.</p>
+                </div>
+
+                <!--Grupo de Contrasenia2-->
+                
+                <div class="formGrup" id="GrupoContrasenia2" >
+                    <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
+                    <div class="formGrupInput">
+                        <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" placeholder="Contraseña">
+                        
+                        <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                    </div>
+                    <p class="formularioInputError"> Las Contraseñas deben coincidir.</p>
+                </div>
+
+                <input type="hidden" value="3" name="PerfilUsuario">
+
+                <!--Grupo de Mensaje-->
+                    
+                <div class="formMensaje" id="GrupoMensaje">
+                        
+                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+                </div>
+
+                <!--Grupo de Boton Enviar-->
+
+                <div class="formGrupBtnEnviar">
+                    <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
+                </div>
+
+                <div class="formGrupBtnEnviar">
+                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+                </div>
+                
+            </form>
+        </main>
+
+        <!--
+
+        <form action="procesar_insert.php" method=POST class="formulario">
+            <h1 class="titulo"> Registro de Docente</h1>
+            <br><br>
+            <div class=""><input type="text" name="NombrePers" class="" placeholder="Nombre"></div>
+            <div class=""><input type="text" name="Apellido" class="" placeholder="Apellido"></div>
+            <div class=""><input type="text" name="Dni" class="" placeholder="Dni"></div>
+            <div class=""><input type="date" name="FechaNac" class="" placeholder="Fecha de Nacimiento"></div>
+            <div class=""><input type="text" name="Nacionalidad" class="" placeholder="Nacionalidad"></div>
+            <div class=""><input type="text" name="NumMatricula" class="" placeholder="Numero Matricula"></div>
+            <div class="">
+            <select name="Sexo" id="" class="">
+                    <option value="NULL" class="">seleccione sexo</option>
+                    <?php #foreach($listado as $sexo):?>
+                    <option value="<?php #echo $sexo->getIdSexo(); ?>" class=""><?php #echo $sexo->getDescripcion(); ?></option>
+                    <?php #endforeach?>
+                </select>
             </div>
 
-            <!--Grupo de Boton Enviar-->
+            <div class=""><input type="submit" class="" name="guardar" value="Guardar">
+            <input name="Cancelar" type="submit" value="Cancelar">
 
-            <div class="formGrupBtnEnviar">
-                <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
             </div>
 
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
-            </div>
-            
         </form>
-    </main>
+        -->
+    </body>
 
-    <!--
-
-    <form action="procesar_insert.php" method=POST class="formulario">
-        <h1 class="titulo"> Registro de Docente</h1>
-        <br><br>
-        <div class=""><input type="text" name="NombrePers" class="" placeholder="Nombre"></div>
-        <div class=""><input type="text" name="Apellido" class="" placeholder="Apellido"></div>
-        <div class=""><input type="text" name="Dni" class="" placeholder="Dni"></div>
-        <div class=""><input type="date" name="FechaNac" class="" placeholder="Fecha de Nacimiento"></div>
-        <div class=""><input type="text" name="Nacionalidad" class="" placeholder="Nacionalidad"></div>
-        <div class=""><input type="text" name="NumMatricula" class="" placeholder="Numero Matricula"></div>
-        <div class="">
-        <select name="Sexo" id="" class="">
-                <option value="NULL" class="">seleccione sexo</option>
-                <?php #foreach($listado as $sexo):?>
-                <option value="<?php #echo $sexo->getIdSexo(); ?>" class=""><?php #echo $sexo->getDescripcion(); ?></option>
-                <?php #endforeach?>
-            </select>
-        </div>
-
-        <div class=""><input type="submit" class="" name="guardar" value="Guardar">
-        <input name="Cancelar" type="submit" value="Cancelar">
-
-        </div>
-
-    </form>
-    -->
-</body>
-
-<script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+    <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 
 </html>

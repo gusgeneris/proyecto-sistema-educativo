@@ -46,10 +46,9 @@ if(isset($_GET['idCurriculaCarrera'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-    <link rel="stylesheet" href="/proyecto-modulos/style/style.css">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
     <script type="text/javascript" src="../../script/validacion.js"></script>
 </head>
@@ -57,11 +56,10 @@ if(isset($_GET['idCurriculaCarrera'])){
     <?php require_once "../../menu.php";?>
 
     <body class="body-listuser">
-        <br>
         
-        <div><h1 class="titulo">Calendarizacion</h1></div>
-        <br>
-
+        <div class="titulo">
+            <h1>Calendarizacion</h1>
+        </div>
         
         <form method="POST" action="procesar_insert.php" method=POST class="formInsert" id="formInsert" name="formInsert">
 
@@ -119,45 +117,54 @@ if(isset($_GET['idCurriculaCarrera'])){
 
             </form>
             <br>
-        
-        <table class="tabla" method="GET" id="table">
-            <caption>Registros Cargados</caption>
-            <tr >
-                <th> ID Detalle</th>
-                <th> Numero de Clase</th>
-                <th> Fecha Clase</th>
-                <th> Actividad</th>
-                <th> Contenido Priorizado</th>
 
-                <th> Acciones</th>
+        <div class="subtitulo" style="border-bottom: 1px solid">
+            <h2>Detalles Cargados</h2>
+        </div>
 
-            </tr>
-            <?php foreach ($lista as $detalle ):?> 
-                <tr >
-                    <td >
-                        <?php echo $detalle->getIdDetalleCalendarizacion(); ?>
-                    </td>
-                    <td>
-                        <?php echo $detalle->getNumeroClase(); ?>
-                    </td>
-                    <td>
-                        <?php echo $detalle->getFechaClase(); ?>
-                    </td>
-                    <td>
-                        <?php echo $detalle->getActividad(); ?>
-                    </td>
-                    <td>
-                        <?php echo $detalle->getContenidoPriorizado(); ?>
-                    </td>
-                    
-                    <td>
-                        <a href="eliminar.php?idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>">Borrar</a>|
-                        <a href="modificar.php??idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>&idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>" >Modificar</a>
-                    </td>
+        <div class="conteiner3Columnas" >
+            <table class="tabla" id="table">
+                <thead>
+                    <tr >
+                        <th> ID Detalle</th>
+                        <th> Numero de Clase</th>
+                        <th> Fecha Clase</th>
+                        <th> Actividad</th>
+                        <th> Contenido Priorizado</th>
+                        <th> Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($lista as $detalle ):?> 
+                    <tr >
+                        <td >
+                            <?php echo $detalle->getIdDetalleCalendarizacion(); ?>
+                        </td>
+                        <td>
+                            <?php echo $detalle->getNumeroClase(); ?>
+                        </td>
+                        <td>
+                            <?php echo $detalle->getFechaClase(); ?>
+                        </td>
+                        <td>
+                            <?php echo $detalle->getActividad(); ?>
+                        </td>
+                        <td>
+                            <?php echo $detalle->getContenidoPriorizado(); ?>
+                        </td>
+                        <td>
+                            <div class="icon">
+                                <a href="eliminar.php?idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                <a href="modificar.php??idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>&idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>" ><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>    
+            </table>
+        </div>
 
-                </tr>
-            <?php endforeach ?>    
-        </table>
+
     </body>
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>

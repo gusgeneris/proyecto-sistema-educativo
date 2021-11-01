@@ -40,6 +40,7 @@
 <?php require_once "../../menu.php";?>
 
 <body>
+    <div class="titulo"><h1>Informe Final</h1></div>
 
     <div class="conteiner-descripcion-clase">
         <div class="subtitulo">

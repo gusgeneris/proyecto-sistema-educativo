@@ -148,6 +148,7 @@
         margin: 5px;
         grid-column: 1/4;
         row-gap: 0px;
+        margin-bottom: 30px
     }
     
     #GrupocboSexo {
@@ -282,6 +283,11 @@
         text-decoration: none;
         color: white;
         flex: auto;
+    }
+    
+    #GrupoDetalleAnio,
+    #GrupoCicloLectivo {
+        grid-column: 1/4;
     }
     /*Mediaqueries*/
     

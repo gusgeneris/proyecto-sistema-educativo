@@ -82,6 +82,7 @@ class EjeContenido{
     
     public function insert(){
         $sql = "INSERT INTO `eje_contenido` (`eje_descripcion`, `eje_numero`) VALUES ('$this->_descripcion', '$this->_numero')";
+  
         $database=new Mysql();
 
         $idEjeContenido=$database->insertarRegistro($sql);
@@ -104,8 +105,10 @@ class EjeContenido{
 
         $sql = "INSERT INTO `curricula_carrera_contenido` (`eje_contenido_id_eje_contenido`, `curricula_carrera_id_curricula_carrera`) VALUES ('$this->_idEjeContenido', $idCurriculaCarrera);";
 
+        
         $database->insertarRegistro($sql);
         
+
     }
 
     public function consultaId($idCarrera,$idMateria){
@@ -197,7 +200,7 @@ class EjeContenido{
     }
 
     public static function obtenerPorIdCurriculaCarrera($idCurriculaCarrera){
-        $sql ="SELECT eje_contenido.id_eje_contenido,eje_contenido.eje_numero, eje_contenido.eje_descripcion, materia.materia_nombre from curricula_carrera_contenido 
+        $sql ="SELECT eje_contenido.estado, eje_contenido.id_eje_contenido,eje_contenido.eje_numero, eje_contenido.eje_descripcion, materia.materia_nombre from curricula_carrera_contenido 
         join curricula_carrera on curricula_carrera.id_curricula_carrera = curricula_carrera_contenido.curricula_carrera_id_curricula_carrera 
         join ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = ciclo_lectivo_carrera.id_ciclo_lectivo_carrera
         join eje_contenido on eje_contenido.id_eje_contenido=curricula_carrera_contenido.eje_contenido_id_eje_contenido 
@@ -212,9 +215,12 @@ class EjeContenido{
 
         while ($registro = $datos->fetch_assoc()){
 
-            $ejeContenido=new EjeContenido();
-            $ejeContenido->crearEjeContenido($ejeContenido,$registro);
-            $listadoEjeContenido[]=$ejeContenido;
+            if($registro['estado']==1){
+
+                $ejeContenido=new EjeContenido();
+                $ejeContenido->crearEjeContenido($ejeContenido,$registro);
+                $listadoEjeContenido[]=$ejeContenido;
+            }
         }
 
         return $listadoEjeContenido;

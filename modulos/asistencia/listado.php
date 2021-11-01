@@ -36,51 +36,53 @@
 
         <div>
             <div class="titulo">
-                <h1 class="titulo">Buscar Asistencia</h1>
+                <h1 class="titulo">Busqueda de Asistencia</h1>
             </div>
 
-            <form action="procesar_busqueda_clase.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+            <div class="main">
+                <form action="procesar_busqueda_clase.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
 
-                <input type="hidden" value="<?php echo $idDocente ?>">
+                    <input type="hidden" value="<?php echo $idDocente ?>">
 
-                <div class="formGrup" id="GrupocboCarrera">
-                    <label for="cboCarrera" class="formLabel">Carrera</label>
-                    <div class="formGrupInput">
-                        <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
-                            
-                            <option value="0">
-                                ->Seleccionar Carrera<-
-                            </option>
-                        <?php foreach ($listaCarreras as $carrera): ?>
-                            <option value="<?php echo $carrera->getIdCarrera() ?>">
-                                <?php echo $carrera->getNombre() ?>
-                            </option>
-                        <?php endforeach; ?>
-
-                        </select>
-                    </div>
-                        <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
-                </div>
-                
-                <div class="formGrup" id="GrupocboMateria">
-                    <label for="cboMateria" class="formLabel">Materia</label>
+                    <div class="formGrup" id="GrupocboCarrera">
+                        <label for="cboCarrera" class="formLabel">Carrera</label>
                         <div class="formGrupInput">
-                            <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
-
+                            <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+                                
                                 <option value="0">
-                                    ->Seleccionar Materia<-
+                                    ->Seleccionar Carrera<-
                                 </option>
+                            <?php foreach ($listaCarreras as $carrera): ?>
+                                <option value="<?php echo $carrera->getIdCarrera() ?>">
+                                    <?php echo $carrera->getNombre() ?>
+                                </option>
+                            <?php endforeach; ?>
 
                             </select>
                         </div>
-                        <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
-                </div>                  
-                
-                <div class="formGrupBtnEnviar"> 
-                    <button class="formButton" id="Guardar" type="submit" > Buscar Clases </button>
-                </div> 
+                            <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+                    </div>
+                    
+                    <div class="formGrup" id="GrupocboMateria">
+                        <label for="cboMateria" class="formLabel">Materia</label>
+                            <div class="formGrupInput">
+                                <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
 
-            </form>
+                                    <option value="0">
+                                        ->Seleccionar Materia<-
+                                    </option>
+
+                                </select>
+                            </div>
+                            <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+                    </div>                  
+                    
+                    <div class="formGrupBtnEnviar"> 
+                        <button class="formButton" id="Guardar" type="submit" > Buscar Clases </button>
+                    </div> 
+
+                </form>
+            </div>
 
         </div>
 
@@ -90,28 +92,31 @@
                     $listaDeClases= Clase::listadoPorIdCurriculaCarrera($idCurriculaCarrera);
         ?>
                 
-
-        <table class="table">
+        <div class="conteiner3Columnas">
+            <table class="tabla">
+                <thead>
                     <tr>
                         <th>Numero de Clase</th>
                         <th>Fecha</th>    
-                        <th>Tipo de clase</th>
+                        <th>Listado de Asistencia</th>
                     </tr>
-
+                </thead>
+                <tbody>
                     <?php foreach ($listaDeClases as $clase): ?>
-
                     <tr>
                         <td><?php echo $clase->getNumeroClase(); ?></td>
                         <td><?php echo $clase->getFechaClase(); ?></td>
                         <td>
                             <a href="listado.php?idClaseAsistencia=<?php echo $clase->getIdClase(); ?>">
-                                Asitencia
+                                <img class="icon-a" src="../../icon/listado.png" title="Asistencia" alt="Asistencia">
                             </a>                    
                         </td>
                     </tr>
                     <?php endforeach;?>
-                </table>
-            <?php }; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php }; ?>
 
 
             <?php if (isset($_GET['idClaseAsistencia'])){
@@ -120,32 +125,36 @@
                     $listado= Alumno::listadoPorIdClase($idClase);
             ?>
                 
-
+            <div class="conteiner3Columnas">
                 <table class="tabla" id="table">
-                    <tr>
-                        <th>Estado de Asistencia</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>    
-                        <th>Dni</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Estado de Asistencia</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>    
+                            <th>Dni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($listado as $alumno): ?>
 
-                    <?php foreach ($listado as $alumno): ?>
-
-                    <tr>
-                        <td>
-                            <?php  
-                                $idAlumno= $alumno->getIdAlumno();
-                                $estadoAsistencia=EstadoAsistencia::descripcionEstadoAsistencia($idClase,$idAlumno);
-                                echo $estadoAsistencia->getDescripcion();
-                            ?>
-                        </td>
-                        <td><?php echo $alumno->getNombre(); ?></td>
-                        <td><?php echo $alumno->getApellido(); ?></td>
-                        <td><?php echo $alumno->getDni(); ?></td>
-                        
-                    </tr>
-                    <?php endforeach;?>
+                        <tr>
+                            <td>
+                                <?php  
+                                    $idAlumno= $alumno->getIdAlumno();
+                                    $estadoAsistencia=EstadoAsistencia::descripcionEstadoAsistencia($idClase,$idAlumno);
+                                    echo $estadoAsistencia->getDescripcion();
+                                ?>
+                            </td>
+                            <td><?php echo $alumno->getNombre(); ?></td>
+                            <td><?php echo $alumno->getApellido(); ?></td>
+                            <td><?php echo $alumno->getDni(); ?></td>
+                            
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
                 </table>
+            </div>
             <?php }; ?>
     </body>
 

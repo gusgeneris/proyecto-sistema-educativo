@@ -16,9 +16,11 @@ require_once "../../class/Docente.php";
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src ="../../jquery3.6.js"></script>
         <script src ="../../script/comboCarrera.js"></script>
-        <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+        <link rel="stylesheet" href="../../style/styleFormInsert.css">
+        <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
         <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-        <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista ejes</title>
+        <link rel="icon" type="image/jpg" href="../../image/logo.png">
+        <title>Busqueda Ejes de COntenido</title>
 
     </head>
     <?php require_once "../../menu.php";
@@ -36,53 +38,57 @@ require_once "../../class/Docente.php";
         ?>
             
             
-            <div>
+        <div>
             <div class="titulo">
-                <h1>Buscar Asistencia</h1>
+                <h1>Buscar Eje de Contenido</h1>
             </div>
+            <div class="main">  
+                <form action="procesar_busqueda.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
 
-            <form action="procesar_busqueda.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+                    <input type="hidden" value="<?php echo $idDocente ?>">
 
-                <input type="hidden" value="<?php echo $idDocente ?>">
-
-                <div class="formGrup" id="GrupocboCarrera">
-                    <label for="cboCarrera" class="formLabel">Carrera</label>
-                    <div class="formGrupInput">
-                        <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
-                            
-                            <option value="0">
-                                ->Seleccionar Carrera<-
-                            </option>
-                        <?php foreach ($listaCarreras as $carrera): ?>
-                            <option value="<?php echo $carrera->getIdCarrera() ?>">
-                                <?php echo $carrera->getNombre() ?>
-                            </option>
-                        <?php endforeach; ?>
-
-                        </select>
-                    </div>
-                        <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
-                </div>
-                
-                <div class="formGrup" id="GrupocboMateria">
-                    <label for="cboMateria" class="formLabel">Materia</label>
+                    <div class="formGrup" id="GrupocboCarrera">
+                        <label for="cboCarrera" class="formLabel">Carrera</label>
                         <div class="formGrupInput">
-                            <select name="cboMateria" id="cboMateria">
-
+                            <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+                                
                                 <option value="0">
-                                    ->Seleccionar Materia<-
+                                    ->Seleccionar Carrera<-
                                 </option>
+                            <?php foreach ($listaCarreras as $carrera): ?>
+                                <option value="<?php echo $carrera->getIdCarrera() ?>">
+                                    <?php echo $carrera->getNombre() ?>
+                                </option>
+                            <?php endforeach; ?>
 
                             </select>
-                        </div>
-                        <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
-                </div>                  
-                
-                <div class="formGrupBtnEnviar"> 
-                    <button class="formButton" id="Guardar" type="submit" > Buscar Clases </button>
-                </div> 
 
-            </form>
+                            
+
+                        </div>
+                            <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+                    </div>
+                    
+                    <div class="formGrup" id="GrupocboMateria">
+                        <label for="cboMateria" class="formLabel">Materia</label>
+                            <div class="formGrupInput">
+                                <select name="cboMateria" id="cboMateria">
+
+                                    <option value="0">
+                                        ->Seleccionar Materia<-
+                                    </option>
+
+                                </select>
+                            </div>
+                            <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
+                    </div>                  
+                    
+                    <div class="formGrupBtnEnviar"> 
+                        <button class="formButton" id="Guardar" type="submit" > Buscar Clases </button>
+                    </div> 
+
+                </form>
+            </div>  
 
         </div>
         
@@ -96,43 +102,49 @@ require_once "../../class/Docente.php";
             $idMateria=$_GET["idMateria"];
             $idCarrera=$_GET["idCarrera"];
             
-            $lista=EjeContenido::obtenerPorIdCurriculaCarrera($idCurriculaCarrera);
-            
             $materia=Materia::listadoPorId($idMateria);
         ?>
             <div class="titulo">
                 <h1>Lista de Eje Contenido de la Materia:  <?php echo $materia?></h1>
             </div>
-            <div>
-                <a href="../eje_contenido/insert.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Agregar Eje Contenido</a>
-            </div>
-            <table class="tabla" method="GET">
-                <tr >
-                    <th> ID Eje</th>
-                    <th> Numero de Eje</th>
-                    <th> Descripcion</th>
-                    <th> Acciones</th>
 
-                </tr>
-                <?php foreach ($lista as $contenido ):?> 
-                    <tr >
-                        <td >
-                            <?php echo $contenido->getIdEjeContenido(); ?>
-                        </td>
-                        <td>
-                            <?php echo $contenido->getNumero(); ?>                
-                        </td>
-                        <td>
-                            <?php echo $contenido->getDescripcion(); ?>
-                        </td>
-                        <td>
-                            <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">borrar</a>
-                            <a href="modificar.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">modificar</a>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-            
-            </table>
+            <div class="conteiner-btn-agregar">
+                <button type="button" class="btn-agregar" >
+                    <a href="../eje_contenido/insert.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>">Agregar Eje Contenido</a>
+                </button>
+            </div>
+
+            <div class="conteiner3Columnas" >
+                <table class="tabla" method="GET">
+                    <thead>
+                        <tr>
+                            <th> ID Eje</th>
+                            <th> Numero de Eje</th>
+                            <th> Descripcion</th>
+                            <th> Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($lista as $contenido ):?> 
+                        <tr >
+                            <td >
+                                <?php echo $contenido->getIdEjeContenido(); ?>
+                            </td>
+                            <td>
+                                <?php echo $contenido->getNumero(); ?>                
+                            </td>
+                            <td>
+                                <?php echo $contenido->getDescripcion(); ?>
+                            </td>
+                            <td>
+                                <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">borrar</a>
+                                <a href="modificar.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">modificar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
         <?php endif; ?>
         
         
