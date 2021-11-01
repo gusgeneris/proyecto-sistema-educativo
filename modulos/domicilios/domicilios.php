@@ -31,7 +31,7 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">    
     <script src ="../../jquery3.6.js"></script>
     <script src ="../../script/comboDomicilio.js"></script>
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
@@ -41,45 +41,52 @@ if(isset($_GET['mj'])){
 <?php require_once "../../menu.php";?>
 
 <body class="body-listuser">
-    <br>
-    <br>
-    <h1 class="titulo">Lista de Domicilios</h1>
-    <br>
-    <br>
 
-    <a href="insertar.php?idPersona=<?php echo $idPersona; ?>">Agregar Domicilio</a>
- 
-    <table class="tabla" method="GET">
-        <tr >
-            <th> ID Domicilio</th>
-            <th> ID Barrio</th>
-            <th> ID Persona</th>
-            <th> Detalle</th>
+    <div class="titulo">
+        <h1>Lista de Domicilios</h1>
+    </div>
 
-            <th> Acciones</th>
+    <div class="conteiner-btn-agregar">
+        <button type="button" class="btn-agregar" >         
+            <a href="insertar.php?idPersona=<?php echo $idPersona; ?>">Agregar Domicilio</a>
+        </button>
+    </div>
 
-        </tr>
-        <?php foreach ($lista as $domicilio ):?> 
-            <tr >
-                <td >
-                    <?php echo $domicilio->getIdDomicilio(); ?>
-                </td>
-                <td>
-                    <?php echo $domicilio->getIdBarrio(); ?>
-                </td>
-                <td>
-                    <?php echo $domicilio->getIdPersona(); ?>
-                </td>
-                <td>
-                    <?php echo $domicilio->getDetalle(); ?>
-                </td>
-                <td>
-                    <a href="eliminar.php?idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class="">Borrar</a>
-                    <a href="modificar.php?idBarrio=<?php echo $domicilio->getIdBarrio();?>&idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class="">Modificar</a>
-                </td>
+    <div class="conteiner3Columnas">
+        <table class="tabla" method="GET">
+            <thead>
+                <tr >
+                    <th> ID Domicilio</th>
+                    <th> ID Barrio</th>
+                    <th> ID Persona</th>
+                    <th> Detalle</th>
+                    <th> Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($lista as $domicilio ):?> 
+                    <tr >
+                        <td >
+                            <?php echo $domicilio->getIdDomicilio(); ?>
+                        </td>
+                        <td>
+                            <?php echo $domicilio->getIdBarrio(); ?>
+                        </td>
+                        <td>
+                            <?php echo $domicilio->getIdPersona(); ?>
+                        </td>
+                        <td>
+                            <?php echo $domicilio->getDetalle(); ?>
+                        </td>
+                        <td>
+                            <a href="eliminar.php?idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                            <a href="modificar.php?idBarrio=<?php echo $domicilio->getIdBarrio();?>&idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                        </td>
 
-            </tr>
-        <?php endforeach ?>    
-    </table>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>    
+        </table>
+    </div>
 </body>
 </html>

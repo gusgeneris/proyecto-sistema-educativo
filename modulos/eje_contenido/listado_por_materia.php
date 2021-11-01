@@ -39,36 +39,39 @@
             <h1>Lista de Eje Contenido de la Materia:  <?php echo $materia?></h1>
         </div>
 
-        <table class="tabla" method="GET">
-            <thead >
-                <tr>
-                    <th> ID Eje</th>
-                    <th> Numero de Eje</th>
-                    <th> Descripcion</th>
-                    <th> Acciones</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach ($lista as $contenido ):?> 
-                    <tr >
-                        <td >
-                            <?php echo $contenido->getIdEjeContenido(); ?>
-                        </td>
-                        <td>
-                            <?php echo $contenido->getNumero(); ?>                
-                        </td>
-                        <td>
-                            <?php echo $contenido->getDescripcion(); ?>
-                        </td>
-                        <td>
-                            <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">borrar</a>
-                            <a href="modificar.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class="">modificar</a>
-                        </td>
+        <div class="conteiner3Columnas">
+            <table class="tabla" method="GET">
+                <thead >
+                    <tr>
+                        <th> ID Eje</th>
+                        <th> Numero de Eje</th>
+                        <th> Descripcion</th>
+                        <th> Acciones</th>
                     </tr>
-                <?php endforeach ?>
-            </tbody>
-            </table>   
+                </thead>
+
+                <tbody>
+                    <?php foreach ($lista as $contenido ):?> 
+                        <tr >
+                            <td >
+                                <?php echo $contenido->getIdEjeContenido(); ?>
+                            </td>
+                            <td>
+                                <?php echo $contenido->getNumero(); ?>                
+                            </td>
+                            <td>
+                                <?php echo $contenido->getDescripcion(); ?>
+                            </td>
+                            <td>
+                                <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                <a href="modificar.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>   
+        
     </body>
 
 </html>

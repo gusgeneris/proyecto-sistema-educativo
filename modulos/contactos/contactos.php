@@ -20,91 +20,100 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">    
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista Docentes</title>
 </head>
+
 <body>
 
 <?php require_once "../../menu.php";?>
 
+<div class="titulo"><h1>Agregar contacto</h1></div>
 
-<br>
-<br>
+<div class="main">
+	<form method="POST" action="procesar_alta.php" method=POST class="formInsert" id="formInsert" name="formInsert">
 
-<form method="POST" action="procesar_alta.php" method=POST class="formInsert" id="formInsert" name="formInsert">
+		<input type="hidden" name="txtIdPersona" value="<?php echo $idPersona; ?>">
 
-	<input type="hidden" name="txtIdPersona" value="<?php echo $idPersona; ?>">
+		<div class="formGrup" id="GrupoBarrio">
+			<label for="cboTipoContacto" class="formLabel">Tipo Contacto</label>
 
-	<div class="formGrup" id="GrupoBarrio">
-		<label for="cboTipoContacto" class="formLabel">Tipo Contacto</label>
+			<select name="cboTipoContacto">
+				<option value=0>-- Seleccionar --</option>
 
-		<select name="cboTipoContacto">
-			<option value=0>-- Seleccionar --</option>
+				<?php foreach ($listadoTipoContactos as $tipoContacto): ?>
 
-			<?php foreach ($listadoTipoContactos as $tipoContacto): ?>
+					<option value="<?php echo $tipoContacto->getIdTipoContacto(); ?>">
+						<?php echo $tipoContacto->getDescripcion(); ?>
+					</option>
+					
+				<?php endforeach ?>
 
-				<option value="<?php echo $tipoContacto->getIdTipoContacto(); ?>">
-					<?php echo $tipoContacto->getDescripcion(); ?>
-				</option>
+			</select>
+		</div> <br>
+
+		
+		<div class="formGrup" id="GrupoContacto">
+			
+			<label for="Contacto" class="formLabel">Valor</label>    
+			<div class="formGrupInput">
+				<input type="text" name="Contacto" id="Contacto" class="formInput">
+			</div>
+			<p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
+		</div> 
+		
+		&nbsp;&nbsp;&nbsp;
+			<!--Grupo de Mensaje-->
 				
-			<?php endforeach ?>
-
-		</select>
-	</div> 
-	
-	<div class="formGrup" id="GrupoContacto">
-        
-        <label for="Contacto" class="formLabel">Valor</label>    
-        <div class="formGrupInput">
-			<input type="text" name="Contacto" id="Contacto" class="formInput">
+		<div class="formMensaje" id="GrupoMensaje">
+					
+			<p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+			
 		</div>
-        <p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
-    </div> 
-	
-	&nbsp;&nbsp;&nbsp;
-        <!--Grupo de Mensaje-->
-            
-    <div class="formMensaje" id="GrupoMensaje">
-                
-        <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-        
-    </div>
 
-        <!--Grupo de Boton Enviar-->
+			<!--Grupo de Boton Enviar-->
 
-    <div class="formGrupBtnEnviar">
-        <button type="submit" class="formButton" id='Guardar' value='FormInsertContacto'> Guardar</button>
-    </div>
+		<div class="formGrupBtnEnviar">
+			<button type="submit" class="formButton" id='Guardar' value='FormInsertContacto'> Guardar</button>
+		</div>
+		
+		<div class="formGrupBtnEnviar">
+            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+        </div>
 
-
-</form>
+	</form>
+</div>
 
 
 
-<br>
-<br>
+<div class="subtitulo" style="border-bottom:1px solid"><h2>Listado de Contacto</h2></div>
 
-<table border=1>
-	<tr>
-		<th>Descripcion</th>
-		<th>Valor</th>
-		<th>Accion</th>
-	</tr>
+<div class="conteiner3Columnas">
 
-	<?php foreach  ($listadoContactos as $contacto): ?>
+	<table class="tabla">
+		<thead>		
+			<tr>
+				<th>Descripcion</th>
+				<th>Valor</th>
+				<th>Accion</th>
+			</tr>
+		</thead>
 
-		<tr>
-			<td><?php echo $contacto->getDescripcion(); ?></td>
-			<td><?php echo $contacto->getValor(); ?></td>
-			<td>
-				<a href="eliminar.php?idPersonaContacto=<?php echo $contacto->getIdContactoPersona(); ?>&idPersona=<?php echo $contacto->getIdPersona(); ?>">
-					Eliminar
-				</a>
-			</td>
-		</tr>
-
-	<?php endforeach ?>
-
-</table>
+		<tbody>
+			<?php foreach  ($listadoContactos as $contacto): ?>
+			<tr>
+				<td><?php echo $contacto->getDescripcion(); ?></td>
+				<td><?php echo $contacto->getValor(); ?></td>
+				<td>
+					<a href="eliminar.php?idPersonaContacto=<?php echo $contacto->getIdContactoPersona(); ?>&idPersona=<?php echo $contacto->getIdPersona(); ?>">
+						Eliminar
+					</a>
+				</td>
+			</tr>
+			<?php endforeach ?>
+		</tbody>	
+	</table>
+</div>
 
 </body>
 
