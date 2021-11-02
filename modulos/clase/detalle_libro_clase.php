@@ -35,8 +35,11 @@
             $idClase = $_GET['idClase'];
             
             $detalle= DetalleLibroTemas::detalleLibroPorClase($idClase);
+            
         }else {
             header("Location:inicio.php");}
+
+            
     ?>
     <div class="titulo">
         <h1>Actividad realizada en la clase</h1>
@@ -60,6 +63,8 @@
             </tbody>
         </table>
     </div>
+
+    
 
     <div class="formGrupBtnEnviar">
         <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Atras</button>

@@ -50,6 +50,11 @@
                  Numero Clase: <span><?php echo $clase->getNumeroClase() ?></span>
             </h3>
         </div>
+        <div class="conteiner-btn-modificar">
+            <button class="btn-modificar">
+                <a href="../clase/modificar.php?id=3&idClase=<?php echo $idClase ?>&idMateria=<?php echo $idMateria?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>">Modificar</a>
+            </button>
+        </div>
 
         <div class="conteiner-h3">
             <h3>
@@ -80,6 +85,12 @@
             <h3>
                 Observaciones:<span> <?php echo $detalleLibro->getObservaciones() ?></span>
            </h3>
+        </div>
+
+        <div class="conteiner-btn-modificar">
+            <button class="btn-modificar">
+                <a href="../libroTemas/modificar.php?id=1&idClase=<?php echo $idClase ?>&idDetalleLibro=<?php echo $detalleLibro->getIdDetalleLibroTemas()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>">Modificar</a>
+            </button>
         </div>
         <div class="conteiner-h3">
             <h3>

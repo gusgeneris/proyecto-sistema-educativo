@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
+    <link rel="icon" type="image/jpg" href="../../image/logo.png">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <script src ="../../jquery3.6.js"></script>
     <script src ="../../script/comboCarrera.js"></script>
@@ -99,6 +100,7 @@
                     <th>Observaciones</th>    
                     <th>Numero Clase</th>
                     <th>Fecha Clase</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
 
@@ -128,6 +130,9 @@
 
                             echo $clase->getFechaClase();
                         ?>
+                    </td>
+                    <td>
+                        <a href="modificar.php?idDetalleLibro=<?php echo $detalleLibro->getIdDetalleLibroTemas() ?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                     </td>
                 </tr>
             <?php endforeach;?>

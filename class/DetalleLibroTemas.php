@@ -135,7 +135,7 @@ Class DetalleLibroTemas{
         $sql="SELECT id_detalle_libro_temas, detalle_libro_tema_del_dia, detalle_libro_tema_observaciones,clase_id_clase, libro_temas_id_libro_temas from detalle_libro_temas
         join libro_temas on id_libro_temas = libro_temas_id_libro_temas
         join curricula_carrera on id_curricula_carrera=curricula_carrera_id_curricula_carrera
-        join clase on curricula_carrera.id_curricula_carrera = clase.curricula_carrera_id_curricula_carrera
+        join clase on id_clase = clase_id_clase
         where id_curricula_carrera = {$idCurriculaCarrera} and id_clase={$idClase};";
 
         $db = new MySql();
@@ -171,6 +171,7 @@ Class DetalleLibroTemas{
             "join clase on clase_id_clase = id_clase ".
             "where id_curricula_carrera={$idCurriculaCarrera}";
         
+           
         
         $db = new MySql();
         $datos = $db->consultar($sql);
@@ -189,6 +190,30 @@ Class DetalleLibroTemas{
 
     }
 
+    public function modificar(){
+        $sql="UPDATE `detalle_libro_temas` SET `detalle_libro_tema_del_dia` = '{$this->_temaDia}', `detalle_libro_tema_observaciones` = '{$this->_observaciones}' WHERE (`id_detalle_libro_temas` = '{$this->_idDetalleLibroTemas}');
+        ";
+
+        $db= new MySql();
+        $db->actualizar($sql);
+
+    }
+
+
+    public static function obtenerPorId($idDetalleLibroTemas){
+        $sql="SELECT id_detalle_libro_temas,detalle_libro_tema_del_dia, detalle_libro_tema_observaciones, clase_id_clase,libro_temas_id_libro_temas FROM detalle_libro_temas ".
+            "WHERE id_detalle_libro_temas={$idDetalleLibroTemas}";
+        
+        $db= new MySql();
+        $datos =$db->consultar($sql);
+
+        $registro = $datos->fetch_assoc();
+        $detalle=new DetalleLibroTemas();
+        $detalle->crearDetalle($detalle,$registro);
+            
+        return $detalle;
+
+    }
 
 
 

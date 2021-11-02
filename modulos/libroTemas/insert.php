@@ -38,9 +38,10 @@
     <title>Libro de temas</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+
 
 <body>
+    <?php require_once "../../menu.php";?>
 
     <div class="container-detalle-libro">
         <div class="titulo">
@@ -50,6 +51,12 @@
         <div class="conteiner-descripcion-clase">
             <div class="subtitulo">
                 <h2>Clase Asociada</h2>
+            </div>
+
+            <div class="conteiner-btn-modificar">
+                <button class="btn-modificar">
+                    <a href="../clase/modificar.php?id=1&idClase=<?php echo $idClase ?>&idMateria=<?php echo $idMateria ?>">Modificar</a>
+                </button>
             </div>
 
             <div class="conteiner-h3">
@@ -69,6 +76,7 @@
                     Tipo de Clase: <span><?php echo $clase->getTipoClase() ?></span>
                 </h3>
             </div>
+
                         
          </div>
 

@@ -31,7 +31,7 @@
         width: 100%;
         position: relative;
         text-align: center;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
     }
     
     .titulo {
@@ -288,6 +288,43 @@
     #GrupoDetalleAnio,
     #GrupoCicloLectivo {
         grid-column: 1/4;
+    }
+    
+    .conteiner-btn-modificar {
+        float: right;
+        margin-right: 300px;
+    }
+    
+    .btn-modificar {
+        display: flex;
+        border-radius: 5px;
+    }
+    
+    .btn-modificar a {
+        padding: 10px;
+        flex: auto;
+        color: black;
+        font-weight: bold;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-decoration: none;
+    }
+    
+    .btn-modificar a:link {
+        color: none;
+    }
+    
+    .btn-modificar:hover {
+        border-color: rgb(255, 255, 255);
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+        background-color: #ffffff;
+        border-radius: 5px;
+    }
+    
+    .btn-modificar a:hover {
+        color: #ffffff;
+        background-color: rgb(221, 0, 0);
+        border-radius: 5px;
+        ;
     }
     /*Mediaqueries*/
     

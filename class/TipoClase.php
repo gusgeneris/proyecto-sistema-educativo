@@ -1,4 +1,6 @@
 <?php
+    require_once "MySql.php";
+
     Class TipoClase{
         private $_idTipoClase;
         private $_detalle;
@@ -110,6 +112,22 @@
             $sql="UPDATE tipo_clase SET `tipo_detalle` = {$this->_detalle} WHERE (`id_tipo_clase` = '{$this->_idTipoClase}')";
             $database = new MySQL();
             $database->actualizar($sql);
+    
+        }
+
+        public static function obtenerPorIdClase($idClase)
+        {
+            $sql = "SELECT id_tipo_clase, tipo_detalle FROM tipo_clase ".
+                "JOIN clase on id_tipo_clase=tipo_clase_id_tipo_clase WHERE id_clase={$idClase}";
+            $database = new MySQL();
+            $datos = $database->consultar($sql);
+    
+            $registro = $datos->fetch_assoc();
+            $tipoClase = new TipoClase();
+            $tipoClase->crearTipo($tipoClase,$registro);
+    
+    
+            return $tipoClase;
     
         }
 

@@ -92,7 +92,8 @@
                 <thead>
                     <tr>
                         <th>Numero de Clase</th>
-                        <th>Fecha de Clase</th>    
+                        <th>Fecha de Clase</th>  
+                        <th>Tipo de Clase</th>  
                         <th>Libro de tema/Asistencia</th>
                     </tr>
                 </thead>
@@ -101,8 +102,10 @@
                     <tr>
                         <td><?php echo $clase->getNumeroClase(); ?></td>
                         <td><?php echo $clase->getFechaClase(); ?></td>
+                        <td><?php echo $clase->getTipoClase(); ?></td>
                         <td>
                             <div class="icon">
+                                <a href="modificar.php?id=3&idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>&idClase=<?php echo $clase->getIdClase(); ?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                                 <a href="detalle_libro_clase.php?idClase=<?php echo $clase->getIdClase(); ?>"><img class="icon-a" src="../../icon/ejeContenido.png" title="Libro de Temas" alt="Libro de Temas"></a> 
                                 <a href="listado.php?idClaseAsistencia=<?php echo $clase->getIdClase(); ?>"><img class="icon-a" src="../../icon/listado.png" title="Asistencia" alt="Asistencia"></a>
                             </div>

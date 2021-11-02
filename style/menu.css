@@ -83,15 +83,13 @@
 }
 
 .clase-nueva {
-    display: flex;
-    float: bottom;
+    display: inline-block;
+    padding: 0px;
 }
 
 .btn-clase-nueva {
+    margin-top: 15px;
     display: flex;
-    margin: 15px;
-    margin-bottom: 19px;
-    padding: 5px;
     border-radius: 5px;
     border: 1px solid;
     border-color: #ffffff;
@@ -104,6 +102,7 @@
     text-decoration: none;
     font-weight: bold;
     outline: none;
+    padding: 5px;
     color: #ffffff;
     flex: auto;
 }

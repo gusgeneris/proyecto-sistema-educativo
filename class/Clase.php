@@ -187,5 +187,14 @@ Class Clase{
 
     }
 
+    public function modificar(){
+
+        $sql="UPDATE `clase` SET `clase_numero` = '{$this->_numeroClase}', `clase_fecha` = '{$this->_fechaClase}', `tipo_clase_id_tipo_clase` = '{$this->_tipoClase}' WHERE (`id_clase` = '{$this->_idClase}');
+        ";
+        $database=new Mysql();
+        $database->actualizar($sql);
+        
+    }
+
 }
 ?>

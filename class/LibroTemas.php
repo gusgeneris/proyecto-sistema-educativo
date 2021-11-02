@@ -84,9 +84,5 @@ Class LibroTemas{
         return $id;
     }
 
-    
-
-
-
 }
 ?>
