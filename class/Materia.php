@@ -320,9 +320,9 @@ Class Materia{
         
         $registro=$dato->fetch_assoc();
 
-        $idCicloLectivoCarrera=$registro["id_materia"];
+        $idMateria=$registro["id_materia"];
 
-        return $idCicloLectivoCarrera;
+        return $idMateria;
     }
 
     public static function listadoPorIdCicloCarrera($idCicloLectivo,$idCarrera,$idDocente){
@@ -355,6 +355,21 @@ Class Materia{
         
 
         return $listadoMaterias;
+    }
+
+    public static function obtenerNombreMateriaPorCurricula($idCurriculaCarrera){
+        $sql="SELECT materia_nombre from materia ".
+            "join curricula_carrera on id_materia=materia_id_materia ".
+            "where id_curricula_carrera = {$idCurriculaCarrera}";
+        
+        $database= new Mysql();
+        $dato=$database->consultar($sql);
+        
+        $registro=$dato->fetch_assoc();
+
+        $nombreMateria=$registro["materia_nombre"];
+
+        return $nombreMateria;
     }
 
 

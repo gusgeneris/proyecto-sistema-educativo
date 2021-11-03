@@ -70,7 +70,8 @@ if(isset($_GET['mj'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png">
+    <title>Alumnos</title>
     <script type="text/javascript" src="../../script/validacion.js"></script>
 </head>
 

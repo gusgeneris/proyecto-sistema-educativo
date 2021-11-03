@@ -196,5 +196,18 @@ Class Clase{
         
     }
 
+    public static function cantidadClasePorIdCurriculaCarrera($idCurriculaCarrera) {
+        $sql="select count(id_clase) as cantidad from clase where curricula_carrera_id_curricula_carrera={$idCurriculaCarrera}";
+
+        $database=new MySql();
+        $dato=$database->consultar($sql);
+        $registro=$dato->fetch_assoc();
+
+        $cantidad=$registro['cantidad'];
+
+        return $cantidad;
+
+    }
+
 }
 ?>

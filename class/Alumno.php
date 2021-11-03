@@ -216,6 +216,36 @@ class Alumno extends Persona{
 
     }  
 
+    public static function listadoPorIdCurricula($idCurriculaCarrera){
+        $sql="SELECT id_alumno, persona_nombre, persona_apellido, persona_dni from persona ". 
+        "join alumno on id_persona = persona_id_persona ".
+        "join alumno_materia on alumno_id_alumno= id_alumno ".
+        "join curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
+        "join materia on id_materia=materia_id_materia ".
+        "join ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = id_ciclo_lectivo_carrera ".
+        "where id_curricula_carrera={$idCurriculaCarrera};";
+
+       
+
+        $dataBase= new MySql();
+        $datos= $dataBase->consultar($sql);
+
+        $listadoAlumnos = [];
+
+        while ($registro = $datos->fetch_assoc()){
+            $alumno=new Alumno();
+            $alumno->setIdAlumno($registro['id_alumno']);
+            $alumno->setNombre($registro['persona_nombre']);
+            $alumno->setApellido($registro['persona_apellido']);
+            $alumno->setDni($registro['persona_dni']);
+
+            $listadoAlumnos[]=$alumno;
+        }
+        return $listadoAlumnos;
+
+    }  
+
+
     public static function listadoPorIdClase($idClase){
         $sql="SELECT id_alumno,estado_asistencia_detalle, persona_nombre, persona_apellido, persona_dni from asistencia ".
             "join alumno on id_alumno = alumno_id_alumno ".

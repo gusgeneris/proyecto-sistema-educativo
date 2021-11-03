@@ -5,6 +5,7 @@
     require_once "../../class/TipoClase.php";
     require_once "../../class/Clase.php";
     require_once "../../class/Alumno.php";
+    require_once "../../class/Asistencia.php";
     require_once "../../class/EstadoAsistencia.php";
 
 ?>
@@ -41,7 +42,7 @@
             </div>
 
             <div class="main">
-                <form action="procesar_busqueda_clase.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+                <form action="procesar_busqueda_asistencia.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
 
                     <input type="hidden" value="<?php echo $idDocente ?>">
 
@@ -89,69 +90,61 @@
 
         <?php if (isset($_GET['idCurriculaCarrera'])){
                     $idCurriculaCarrera = $_GET['idCurriculaCarrera'];
-                    
-                    $listaDeClases= Clase::listadoPorIdCurriculaCarrera($idCurriculaCarrera);
-        ?>
-                
-        <div class="conteiner3Columnas">
-            <table class="tabla">
-                <thead>
-                    <tr>
-                        <th>Numero de Clase</th>
-                        <th>Fecha</th>    
-                        <th>Listado de Asistencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($listaDeClases as $clase): ?>
-                    <tr>
-                        <td><?php echo $clase->getNumeroClase(); ?></td>
-                        <td><?php echo $clase->getFechaClase(); ?></td>
-                        <td>
-                            <a href="listado.php?idClaseAsistencia=<?php echo $clase->getIdClase(); ?>">
-                                <img class="icon-a" src="../../icon/listado.png" title="Asistencia" alt="Asistencia">
-                            </a>                    
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
-                </tbody>
-            </table>
-        </div>
-        <?php }; ?>
-
-
-            <?php if (isset($_GET['idClaseAsistencia'])){
-                    $idClase = $_GET['idClaseAsistencia'];
-                    
-                    $listado= Alumno::listadoPorIdClase($idClase);
+                    $listadoAlumnos=Alumno::listadoPorIdCurricula($idCurriculaCarrera);
+                    $nombreCarrera=Carrera::obtenerPorIdCurriculaCarrera($idCurriculaCarrera);
+                    $nombreMateria=Materia::obtenerNombreMateriaPorCurricula($idCurriculaCarrera);
             ?>
+            <div class="subtitulo">
+                <h2>Reporte Asistencia </h2>
+                <h2>Carrera: <span> <?php echo $nombreCarrera?></span></h2>
+                <h2>Materia: <span> <?php echo $nombreMateria?></span></h2>
+            </div>
                 
             <div class="conteiner3Columnas">
-                <table class="tabla" id="table">
+                <table class="tabla" id="tablaAsistencia">
                     <thead>
                         <tr>
-                            <th>Estado de Asistencia</th>
                             <th>Nombre</th>
                             <th>Apellido</th>    
                             <th>Dni</th>
+                            <th>Cantidad de Faltas</th>
+                            <th>Cantidad de Asistencia</th>
+                            <th>Porcentaje de Asistencia</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($listado as $alumno): ?>
+                        <?php foreach ($listadoAlumnos as $alumno): 
+                                $idAlumno=$alumno->getIdAlumno(); 
+                                $listadoReporte=Asistencia::reporteInasistencia($idAlumno,$idCurriculaCarrera);
+                                $cantidadAsistencias=Asistencia::reporteAsistencia($idAlumno,$idCurriculaCarrera);
+                                $cantidadClases=Clase::cantidadClasePorIdCurriculaCarrera($idCurriculaCarrera);
+                                $porcentajeAsistencia=Asistencia::porcentajeAsistencia($cantidadClases,$cantidadAsistencias);
+                                
+                                foreach ($listadoReporte as list( $nombre,$apellido,$dni,$cantidadFaltas)):
+                         ?>
+                                    <tr>
+                                        <td>
+                                            <?php  echo $nombre; ?>
+                                        </td>
 
-                        <tr>
-                            <td>
-                                <?php  
-                                    $idAlumno= $alumno->getIdAlumno();
-                                    $estadoAsistencia=EstadoAsistencia::descripcionEstadoAsistencia($idClase,$idAlumno);
-                                    echo $estadoAsistencia->getDescripcion();
-                                ?>
-                            </td>
-                            <td><?php echo $alumno->getNombre(); ?></td>
-                            <td><?php echo $alumno->getApellido(); ?></td>
-                            <td><?php echo $alumno->getDni(); ?></td>
-                            
-                        </tr>
+                                        <td>
+                                            <?php echo $apellido; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $dni; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $cantidadFaltas; ?>
+                                        </td> 
+                                        <td>
+                                            <?php echo $cantidadAsistencias; ?> 
+                                        </td> 
+                                        <td>
+                                            <?php echo $porcentajeAsistencia; ?> 
+                                        </td>                                        
+                                    </tr>
+                            <?php endforeach;?>
                         <?php endforeach;?>
                     </tbody>
                 </table>
@@ -159,5 +152,5 @@
             <?php }; ?>
     </body>
 
-    <script src="../../script/estadoAsistencia.js"></script>
+    <script src="../../script/porcentajeAsistencia.js"></script>
 </html>

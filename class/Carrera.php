@@ -300,6 +300,24 @@ Class Carrera{
         return $listaCarreras ;
     }
 
+    public static function obtenerPorIdCurriculaCarrera($idCurriculaCarrera){
+        $sql="SELECT carrera_nombre FROM carrera ".
+            "join ciclo_lectivo_carrera on id_carrera = carrera_id_carrera ".
+            "join curricula_carrera on id_ciclo_lectivo_carrera = ciclo_lectivo_carrera_id_ciclo_lectivo_carrera ".
+            "where id_curricula_carrera={$idCurriculaCarrera};";
+            
+        $dataBase = new MySql();
+
+        $dato = $dataBase->consultar($sql);
+
+        $registro = $dato->fetch_assoc();
+        $carrera=new Carrera();
+        $carrera->setNombre($registro['carrera_nombre']);        
+
+        return $carrera ;
+    }
+
+
 
     
 

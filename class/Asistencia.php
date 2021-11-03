@@ -112,13 +112,65 @@
             $dataBase->actualizar($sql);
         }
 
+        public static function reporteInasistencia($idAlumno,$idCurriculaCarrera){
+                $sql="SELECT persona_nombre,persona_apellido,persona_dni,count(estado_asistencia_detalle) as cantidad_faltas,estado_asistencia_detalle,alumno_id_alumno from asistencia ".
+                        "JOIN estado_asistencia on id_estado_asistencia=estado_asistencia_id_estado_asistencia ".
+                        "JOIN clase on id_clase=clase_id_clase ".
+                        "JOIN curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
+                        "JOIN alumno on alumno_id_alumno=id_alumno ". 
+                        "JOIN persona on id_persona = persona_id_persona ". 
+                        "WHERE id_curricula_carrera={$idCurriculaCarrera} and id_alumno={$idAlumno} and estado_asistencia_detalle='Ausente' group by estado_asistencia_detalle;";
+                        
+                $dataBase= new Mysql();
+                $dato= $dataBase->consultar($sql);
+
+                $listado=array();
+                
+                $registro = $dato->fetch_assoc();
+
+                        $nombre=$registro['persona_nombre'];
+                        $apellido=$registro['persona_apellido'];
+                        $dni=$registro['persona_dni'];
+                        $cantidadFaltas=$registro['cantidad_faltas'];
+                        array_push($listado,array($nombre,$apellido,$dni,$cantidadFaltas));
+                
+                return $listado;
+        }
+        public static function reporteAsistencia($idAlumno,$idCurriculaCarrera){
+                $sql="SELECT persona_nombre,persona_apellido,persona_dni,count(estado_asistencia_detalle) as cantidad_faltas,estado_asistencia_detalle,alumno_id_alumno from asistencia ".
+                        "JOIN estado_asistencia on id_estado_asistencia=estado_asistencia_id_estado_asistencia ".
+                        "JOIN clase on id_clase=clase_id_clase ".
+                        "JOIN curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
+                        "JOIN alumno on alumno_id_alumno=id_alumno ". 
+                        "JOIN persona on id_persona = persona_id_persona ". 
+                        "WHERE id_curricula_carrera={$idCurriculaCarrera} and id_alumno={$idAlumno} and estado_asistencia_detalle='Presente' group by estado_asistencia_detalle;";
+                        
+                $dataBase= new Mysql();
+                $dato= $dataBase->consultar($sql);
+
+                $listado=array();
+                
+                $registro = $dato->fetch_assoc();
+
+                        $nombre=$registro['persona_nombre'];
+                        $apellido=$registro['persona_apellido'];
+                        $dni=$registro['persona_dni'];
+                        $cantidadFaltas=$registro['cantidad_faltas'];
+                        array_push($listado,array($nombre,$apellido,$dni,$cantidadFaltas));
+                
+                return $cantidadFaltas;
+        }
+
+        public static function porcentajeAsistencia($cantidadClases,$cantidadAsistencias){
+
+                $porcentajeAsistencia=round(($cantidadAsistencias/$cantidadClases)*100);
+                
+                return $porcentajeAsistencia;
+
+        }
         
 
-
     }
-
-
-
 
 
 ?>
