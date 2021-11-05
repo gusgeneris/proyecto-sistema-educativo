@@ -64,6 +64,15 @@ class Modulo{
         return $this;
     }
 
+    public function insert(){
+        $sql="INSERT INTO `modulo` (`modulo_descripcion`, `modulo_directorio`) VALUES ('{$this->_nombre}', '{$this->_directorio}')";
+
+        $database =new Mysql();
+        $database->insertarRegistro($sql);
+
+    }
+
+
     public static function obtenerPorIdPerfil($idPerfil){
         $sql="SELECT id_modulo, modulo_descripcion, modulo_directorio FROM modulo
             JOIN perfil_modulo on perfil_modulo.modulo_id_modulo=modulo.id_modulo
@@ -85,18 +94,20 @@ class Modulo{
     return $listadoModulos;}
 
     public static function obtenerTodos(){
-        $sql="SELECT id_modulo,modulo_descripcion,modulo_directorio FROM modulo;";
+        $sql="SELECT id_modulo,modulo_descripcion,modulo_directorio,modulo_estado FROM modulo order by modulo_descripcion;";
         $database =new Mysql();
         $datos=$database->consultar($sql);
         $listadoModulos=[];
 
         if($datos->num_rows > 0){
             while ($registro=$datos->fetch_assoc()){
-                $modulo=new Modulo();
-                $modulo->_idModulo=$registro['id_modulo'];
-                $modulo->_nombre=$registro['modulo_descripcion'];
-                $modulo->_directorio=$registro['modulo_directorio'];
-                $listadoModulos[]=$modulo;
+                if($registro['modulo_estado'] ==  1){
+                    $modulo=new Modulo();
+                    $modulo->_idModulo=$registro['id_modulo'];
+                    $modulo->_nombre=$registro['modulo_descripcion'];
+                    $modulo->_directorio=$registro['modulo_directorio'];
+                    $listadoModulos[]=$modulo;
+                }
             }
         }
     return $listadoModulos;
@@ -129,8 +140,41 @@ class Modulo{
         $database->eliminarRegistro($sql);
     
     }
-    
 
+    public static function eliminar($idModulo){
+        $sql="UPDATE `modulo` SET `modulo_estado` = '2' WHERE (`id_modulo` = '{$idModulo}');" ;
+    
+        $database=new Mysql();
+        $database->actualizar($sql);
+    
+    }
+
+    public static function obtenerPorId($idModulo){
+        $sql="SELECT id_modulo, modulo_descripcion, modulo_directorio FROM modulo WHERE id_modulo={$idModulo};";
+
+        $database =new Mysql();
+        $datos=$database->consultar($sql);
+
+        if($datos->num_rows > 0){
+            $registro=$datos->fetch_assoc();
+            $modulo=new Modulo();
+            $modulo->_idModulo=$registro['id_modulo'];
+            $modulo->_nombre=$registro['modulo_descripcion'];
+            $modulo->_directorio=$registro['modulo_directorio'];
+            }
+        
+        return $modulo;
+    }
+
+    public function actualizarModulo(){
+        $sql="UPDATE `modulo` SET `modulo_descripcion` = '{$this->_nombre}', `modulo_directorio` = '{$this->_directorio}' WHERE (`id_modulo` = '{$this->_idModulo}');" ;
+        
+        $database=new Mysql();
+
+        $database->actualizar($sql);
+    
+    }
+    
 
 
 
