@@ -21,97 +21,147 @@ $idPerfil=$usuario->getIdPerfil();
 
 ?>
 
-
 <header class="encabezado">
-    <nav>    
-        <div class="">
-            <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
-        </div>
-        <?php if ($idPerfil == 3){?>
+    <?php if ($idPerfil == 3):?>
+        <nav>    
+            <div class="">
+                <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
+            </div>
+            <div class="clase-nueva">
+                <button type="button" class="btn-clase-nueva">
+                    <a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a>
+                </button>    
+            </div>
+            
+                <div class="listado-menu" id="listado-menu">
+                    <ul class="">
+                        
+                        <?php foreach($listadoModulos as $modulos): ?>
+                        
+                        <ul class="">
+                            <li class="">
+                                <a id="item-menu" href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php" class="a">
+                                    <?php echo ucwords($modulos->getNombre());?>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/insert.php"class="a">
+                                            Agregar nuevo
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <?php endforeach; ?>
+                        <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
+                    </ul>
+                </div>
+            </nav>  
+        <?php endif; ?>
 
-                    <div class="clase-nueva">
-                        <button type="button" class="btn-clase-nueva">
-                           <a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a>
-                        </button>    
-                    </div>
-        <?php } ?>
+        <?php if ($idPerfil == 1): ?>
+            <?php 
+                $seguridad=[];
+                $ubicacion=[];
+                $persona=[];
+                $configuracion=[];
+                $administracion=[];
+
+                foreach($listadoModulos as $modulo):
+                    $nombreModulo=$modulo->getDirectorio();
+                    if ($nombreModulo=="perfiles"||$nombreModulo=="usuarios"||$nombreModulo=="modulos"):
+                        array_push($seguridad,$nombreModulo);
+                    elseif($nombreModulo=="pais"):
+                        array_push($ubicacion,$nombreModulo);
+                    elseif($nombreModulo=="docentes"||$nombreModulo=="alumnos"):
+                        array_push($persona,$nombreModulo);
+                    elseif($nombreModulo=="periodo_desarrollo"||$nombreModulo=="horarios"):
+                        array_push($configuracion,$nombreModulo);
+                    elseif($nombreModulo=="ciclo_lectivo"||$nombreModulo=="materias"||$nombreModulo=="carreras"):
+                        array_push($administracion,$nombreModulo);
+                    endif;
+
+                endforeach; 
+            ?>
+            
+            
         <div class="listado-menu" id="listado-menu">
-            <ul class="">
-                
-                <?php foreach($listadoModulos as $modulos): ?>
-                <ul class="">
-                    <li class=""><a id="item-menu" href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php" class="a"><?php echo ucwords($modulos->getNombre());?></a>
-                        <ul>
-                            <li><a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/insert.php"class="a">Agregar nuevo</a></li>
+            <nav class="vertical">
+                <div class="">
+                    <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
+                </div>
+                <div class="">
+                    <ul>
+                        <ul class="">
+                            <li class="dropdown">
+                                <span class="a"> Administracion </span>
+                            
+                                <ul>
+                                    <?php foreach($administracion as $directorio):?>
+                                    <li>
+                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo ucfirst(str_replace("_", " ",$directorio)) ?></a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            
+                            </li>
+                            <li class="dropdown">
+                                    <span class="a"  > Configuracion </span>
+                                    
+                                <ul>
+                                    <?php foreach($configuracion as $directorio):?>
+                                    <li>
+                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            
+                            </li>
+                            <li class="dropdown">
+                                <span class="a"> Persona </span>
+                                    
+                                <ul>
+                                    <?php foreach($persona as $directorio):?>
+                                    <li>
+                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            
+                            </li>
+                            <li class="dropdown">
+                                <span class="a"> Ubicacion </span>
+                                
+                                <ul>
+                                    <?php foreach($ubicacion as $directorio):?>
+                                    <li>
+                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            
+                            </li>
+                            
+                            <li class="dropdown">
+                                <span class="a"> Seguridad </span>
+                                <ul>
+                                    <?php foreach($seguridad as $directorio):?>
+                                    <li>
+                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            
                         </ul>
-                    </li>
-                </ul>
-                <?php endforeach; ?>
-                <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
-            </ul>
-        </div>
-        
-        <div class="menuVertical" id="listado-menu">
-            <ul class="">
-                
-                
-                <ul class="">
-                    <li class="">
-                        <a id="item-menu" href="#">
-                            Seguridad
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="/proyecto-modulos/modulos/perfiles/listado.php"class="a">Perfiles</a>
-                            </li>
-                            <li>
-                                <a href="/proyecto-modulos/modulos/modulos/listado.php"class="a">Modulos</a>
-                            </li>
-                            <li>
-                                <a href="/proyecto-modulos/modulos/usuarios/listado.php"class="a">Usuarios</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
-            </ul>
-        </div>
+                        <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
+                    </ul>
+                </div>
 
-    </nav>
+            </nav>
+        </div>
+    <?php endif; ?>                                    
 
 
 </header>
-
-
-<!-- LINEA 25
-    <li class=""><a href="/proyecto-modulos/modulos/usuarios/listado.php" class="a">Usuarios</a>
-                <ul>
-                    <li><a href="/proyecto-modulos/modulos/usuarios/listado.php" class="a">Listado</a></li>
-                    <li><a href="/proyecto-modulos/modulos/usuarios/insert.php"class="a">Agregar nuevo</a></li>
-                </ul>
-            </li>
-            <li class=""><a href="/proyecto-modulos/modulos/alumnos/listado.php" class="a">Alumnos</a>
-                <ul>
-                    <li><a href="/proyecto-modulos/modulos/alumnos/listado.php" class="a">Listado</a></li>
-                    <li><a href="/proyecto-modulos/modulos/alumnos/insert.php" class="a">Agregar nuevo</a></li>
-                </ul
-            ></li>
-            <li class=""><a href="/proyecto-modulos/modulos/docentes/listado.php" class="a">Docente</a>
-                <ul>
-                    <li><a href="/proyecto-modulos/modulos/docentes/listado.php" class="a">Listado</a></li>
-                    <li><a href="/proyecto-modulos/modulos/docentes/insert.php" class="a">Agregar nuevo</a></li>
-                </ul>
-            </li>
-            <li class=""><a href="/proyecto-modulos/modulos/carreras/listado.php" class="a">Carrera</a>
-                <ul>
-                        <li><a href="/proyecto-modulos/modulos/carreras/listado.php" class="a">Listado</a></li>
-                        <li><a href="/proyecto-modulos/modulos/carreras/insert.php" class="a">Agregar nuevo</a></li>
-                </ul>
-            </li>
-            <li class=""><a href="/proyecto-modulos/modulos/materias/listado.php" class="a">Materia</a>
-                <ul>
-                        <li><a href="/proyecto-modulos/modulos/materias/listado.php" class="a">Listado</a></li>
-                        <li><a href="/proyecto-modulos/modulos/materias/insert.php" class="a">Agregar nuevo</a></li>
-                </ul>
-            </li>
- -->

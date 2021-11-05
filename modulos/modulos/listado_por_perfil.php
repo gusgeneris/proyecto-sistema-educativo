@@ -43,7 +43,7 @@ if(isset($_GET['mj'])){
     
     <div class="conteiner-btn-agregar">
         <button type="button" class="btn-agregar" > 
-            <a href="insert.php?idPerfil=<?php echo $idPerfilDelModulo?>">Agregar Nuevo Modulo</a> 
+            <a href="asignar_modulo.php?idPerfil=<?php echo $idPerfilDelModulo?>">Asignar Nuevo Modulo</a> 
         </button>
     </div>
 

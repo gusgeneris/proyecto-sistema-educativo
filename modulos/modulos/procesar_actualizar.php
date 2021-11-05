@@ -6,15 +6,14 @@ $cancelar= $_POST['Cancelar'];
 
 
 if($cancelar==true){
-    header("Location:listado.php?idDocente=".$idDocente);
+    header("Location:listado.php?");
     exit;
 }
 
 $idModulo=$_POST['IdModulo'];
 $nombre=ucfirst($_POST['Modulo']);
 
-
-$directorio=strtolower($nombre);
+$directorio=str_replace(" ", "_", strtolower($nombre));
 
 
 #COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
@@ -40,7 +39,7 @@ $modulo->setDirectorio($directorio);
 $modulo->actualizarModulo();
 
 if ($modulo){
-    header("Location:listado.php?mj=".CORRECT_UPDATE_CODE."&idDocente=".$idDocente);
+    header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
 }
 
 ?>

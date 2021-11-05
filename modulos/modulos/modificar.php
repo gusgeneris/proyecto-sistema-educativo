@@ -2,8 +2,7 @@
 require_once "../../class/Modulo.php";
 require_once "../../configs.php";
 $idModulo=$_GET['idModulo'];
-
-$modulo= Modulo::obtenerPorId($idModulo);
+$moduloPorId= Modulo::obtenerPorId($idModulo);
 
 ?>
 
@@ -27,12 +26,12 @@ $modulo= Modulo::obtenerPorId($idModulo);
     
         <table>
             
-            <input name="IdModulo" type="hidden" class="" value="<?php echo $modulo->getIdModulo(); ?>">
+            <input name="IdModulo" type="hidden" class="" value="<?php echo $moduloPorId->getIdModulo(); ?>">
             
             <div class="formGrup" id="Grupomodulo" >
             <label for="Modulo" class="formLabel">Nombre del Modulo</label>
             <div class="formGrupInput">
-                <input type="text" name="Modulo" id="modulo" class="formInput" value="<?php echo $modulo->getNombre(); ?>">
+                <input type="text" name="Modulo" id="modulo" class="formInput" value="<?php echo $moduloPorId->getNombre(); ?>">
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
         </div>

@@ -5,7 +5,8 @@ require_once "../../configs.php";
 $cancelar= $_POST['Cancelar'];
 
 $moduloDescripcion=ucfirst($_POST["Modulo"]);
-$directorio=strtolower($moduloDescripcion);
+
+$directorio=str_replace(" ", "_", strtolower($moduloDescripcion));
 
 
 if($cancelar==true){
@@ -20,7 +21,7 @@ $modulo->insert();
 
 
 if  ($modulo){
-    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idPerfil=".$idPerfil);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
 }
 
 ?>
