@@ -1,6 +1,7 @@
 <?php
     require_once '../../class/MySql.php'; 
     require_once "../../class/Horario.php";
+    require_once "../../class/Dia.php";
     
     $mensaje='';
     
@@ -11,6 +12,8 @@
             <div class="mensajes"><?php echo $mensaje;?></div><?php
         }
     };
+
+    $listaDias=Dia::obtenerTodo();
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +38,16 @@
         <div class=""><input type="text" name="Numero" class="" placeholder="Numero"></div>
         <div class=""><input type="time" name="HoraInicio" class="" placeholder="Hora Inicio"></div>
         <div class=""><input type="time" name="HoraFin" class="" placeholder="Hora Fin"></div>
+
+        <div class="">
+            <select name="cboDia" id="">
+                <option value="">->Seleccione el Dia<-</option>
+                <?php foreach($listaDias as $dia ):?>
+                    <option value="<?php echo $dia->getIdDia() ?>"><?php echo  $dia->getDescripcion() ?></option>
+                <?php endforeach?>
+            </select>
+        </div>
+
         <div class=""><input type="submit" class="" name="guardar" value="Guardar">
             <input name="Cancelar" type="submit" value="Cancelar">
         </div>               

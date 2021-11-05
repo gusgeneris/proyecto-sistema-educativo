@@ -7,7 +7,7 @@ $idPerfil=$_POST["idPerfil"];
 
 
 if($cancelar==true){
-    header("Location:listado.php?idPerfil=".$idPerfil);
+    header("Location:listado_por_perfil.php?idPerfil=".$idPerfil);
     exit;
 }
 $modulo=new Modulo();
@@ -21,7 +21,7 @@ foreach ($_POST["check_lista"] as $idModulo){
 }
 
 if  ($modulo){
-    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idPerfil=".$idPerfil);
+    header("Location:listado_por_perfil.php?mj=".CORRECT_INSERT_CODE."&idPerfil=".$idPerfil);
 }
 
 ?>

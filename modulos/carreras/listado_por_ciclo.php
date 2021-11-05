@@ -106,6 +106,7 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
                             <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
                             <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/listado.png" title="Listado de Materias" alt="Listado de Materias"></a> 
                             <a href="../../modulos/carreras/asignar_alumno?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/asignar.png" title="Asignar Alumno" alt="Asignar Alumno"></a> 
+                            <a href="../../modulos/horarios/crear_horario?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>">Horario</a> 
                         </div>
                     </td>
                 </tr>

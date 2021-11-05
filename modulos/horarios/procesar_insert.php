@@ -12,12 +12,14 @@ if($cancelar==true){
 $numero = $_POST['Numero'];
 $horaInicio = $_POST['HoraInicio'];
 $horaFin = $_POST['HoraFin'];
+$idDia = $_POST['cboDia'];
 
 
 $horario=new Horario();
 $horario->setNumero($numero);
 $horario->setHoraInicio($horaInicio);
 $horario->setHoraFin($horaFin);
+$horario->setIdDia($idDia);
 
 $horario->insert();
 

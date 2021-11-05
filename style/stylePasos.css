@@ -1,0 +1,38 @@
+.paso2 {
+    display: none
+}
+
+.pasoFinal {
+    display: none
+}
+
+#pasos {
+    margin: 3px;
+}
+
+.cabeceraPaso1 {
+    padding: 1px;
+    margin: 3px;
+    background-color: aquamarine;
+    display: inline;
+}
+
+#cabeceraPaso2 {
+    padding: 1px;
+    margin: 3px;
+    background-color: grey;
+    display: inline;
+}
+
+#cabeceraPaso3 {
+    padding: 1px;
+    margin: 3px;
+    background-color: grey;
+    display: inline;
+}
+
+#containerForm {
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid;
+}

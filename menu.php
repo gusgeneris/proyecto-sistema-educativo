@@ -1,5 +1,8 @@
 <?php
 require_once "class/Usuario.php";
+require_once "class/Docente.php";
+require_once "class/Dia.php";
+require_once "class/Horario.php";
 require_once "configs.php";
 
 session_start();
@@ -14,6 +17,7 @@ $_SESSION['usuario']=$usuario;
 
 $listadoModulos= $usuario->perfil->getArrModulos();
 $idPerfil=$usuario->getIdPerfil();
+
 
 ?>
 
@@ -46,6 +50,33 @@ $idPerfil=$usuario->getIdPerfil();
                 <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
             </ul>
         </div>
+        
+        <div class="menuVertical" id="listado-menu">
+            <ul class="">
+                
+                
+                <ul class="">
+                    <li class="">
+                        <a id="item-menu" href="#">
+                            Seguridad
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/proyecto-modulos/modulos/perfiles/listado.php"class="a">Perfiles</a>
+                            </li>
+                            <li>
+                                <a href="/proyecto-modulos/modulos/modulos/listado.php"class="a">Modulos</a>
+                            </li>
+                            <li>
+                                <a href="/proyecto-modulos/modulos/usuarios/listado.php"class="a">Usuarios</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
+            </ul>
+        </div>
+
     </nav>
 
 

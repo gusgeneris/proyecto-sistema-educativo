@@ -180,7 +180,7 @@ class Docente extends Persona{
     public function asignarMateria($idDocente,$idMateria){
 
         $consultaExistencia= "SELECT * FROM docente_materia WHERE docente_id_docente={$idDocente} AND materia_id_materia={$idMateria}";
-        
+        echo $consultaExistencia;exit;
         $database =new Mysql();
         $dato=$database->consultar($consultaExistencia);
         

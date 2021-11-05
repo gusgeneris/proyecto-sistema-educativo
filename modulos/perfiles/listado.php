@@ -68,7 +68,7 @@ if(isset($_GET['mj'])){
                         <div class="icon">
                             <a href="modificar.php?id=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                             <a href="dar_baja.php?id=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="../../modulos/modulos/listado?idPerfil=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de modulos asignados" alt="Lista de modulos asignados"></a>
+                            <a href="../../modulos/modulos/listado_por_perfil?idPerfil=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de modulos asignados" alt="Lista de modulos asignados"></a>
                         </div>
                     </td>
                 </tr>

@@ -42,7 +42,7 @@
 <body class="body">
     <h1 class="titulo"> Seleccione el modulo</h1>
 
-    <form action="procesar_insert.php" method=POST class="formulario">
+    <form action="procesar_asignar.php" method=POST class="formulario">
 
         <input type="hidden" value="<?php echo $idPerfilDelModulo ?>" name="idPerfil">
        

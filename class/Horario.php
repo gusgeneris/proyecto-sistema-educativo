@@ -1,12 +1,13 @@
 <?php
 
-require_once "../../class/MySql.php";
+require_once "MySql.php";
 
 class Horario{
     private $_idHorario;
     private $_numero;
     private $_horaInicio;
     private $_horaFin;
+    private $_idDia;
 
     
     /**
@@ -90,11 +91,32 @@ class Horario{
         return $this;
     }
 
+    /**
+     * Get the value of _idDia
+     */ 
+    public function getIdDia()
+    {
+        return $this->_idDia;
+    }
+
+    /**
+     * Set the value of _idDia
+     *
+     * @return  self
+     */ 
+    public function setIdDia($_idDia)
+    {
+        $this->_idDia = $_idDia;
+
+        return $this;
+    }
+
     public function crearHorario($horario,$registro){
-        $horario->_idHorario= $registro['id_horario_modulo'];
+        $horario->_idHorario= $registro['id_horario'];
         $horario->_horaInicio= $registro['hora_inicio'];
         $horario->_horaFin= $registro['hora_fin'];
         $horario->_numero= $registro['numero'];
+        $horario->_idDia= $registro['dia_id_dia'];
 
         return $horario;
     }
@@ -102,7 +124,8 @@ class Horario{
     
     
     public function insert(){
-        $sql = "INSERT INTO `horario_modulo` (`hora_inicio`, `hora_fin`, `numero`) VALUES ('$this->_horaInicio', '$this->_horaFin', '$this->_numero')";
+        $sql = "INSERT INTO `horario` (`hora_inicio`, `hora_fin`, `numero`, `dia_id_dia`) VALUES ('$this->_horaInicio', '$this->_horaFin', '$this->_numero','$this->_idDia')";
+                
         $database=new Mysql();
 
         $database->insertarRegistro($sql);
@@ -110,7 +133,7 @@ class Horario{
     }
 
     public static function listaTodos(){
-        $sql=" SELECT id_horario_modulo, hora_inicio,hora_fin,numero,estado FROM horario_modulo";
+        $sql=" SELECT id_horario, hora_inicio,hora_fin,numero,estado,dia_id_dia FROM horario";
         $database=new Mysql();
         $datos=$database->consultar($sql);
         $listadoHorario=[];
@@ -131,7 +154,7 @@ class Horario{
     }
 
     public static function darDeBaja($idHorario){
-        $sql = "UPDATE `horario_modulo` SET `estado` = '2' WHERE (`id_horario_modulo` = '$idHorario')";
+        $sql = "UPDATE `horario` SET `estado` = '2' WHERE (`id_horario` = '$idHorario')";
 
         $database= new MySql();
         $datos = $database->eliminarRegistro($sql);
@@ -139,7 +162,7 @@ class Horario{
     }
 
     public static function obtenerTodoPorId($id){
-        $sql = "SELECT id_horario_modulo,hora_inicio,hora_fin,numero from horario_modulo WHERE id_horario_modulo={$id};";
+        $sql = "SELECT id_horario,hora_inicio,hora_fin,numero,dia_id_dia from horario WHERE id_horario={$id};";
 
         $db = new MySql();
         $datos = $db->consultar($sql);
@@ -159,13 +182,143 @@ class Horario{
     public function actualizarHorario(){
 
         $database = new MySql();
-        $sql = "UPDATE `horario_modulo` SET `numero` = '{$this->_numero}',`hora_inicio` = '{$this->_horaInicio}',`hora_fin` = '{$this->_horaFin}' WHERE (`id_horario_modulo` = '{$this->_idHorario}');";
+        $sql = "UPDATE `horario` SET `numero` = '{$this->_numero}',`hora_inicio` = '{$this->_horaInicio}',`hora_fin` = '{$this->_horaFin}',dia_id_dia = '{$this->_idDia}' WHERE (`id_horario` = '{$this->_idHorario}');";
 
         $database->actualizar($sql);
 
+    }
+
+    public static function listadoHorario(){
+
+        $database = new MySql();
+        $sql = "SELECT distinct numero as numero_modulo,hora_inicio,hora_fin from horario";
+        
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+        $listaHoraInicio=[];
+
+        while ($registro = $datos->fetch_assoc()){
+
+        $horario=new Horario();
+        $horario->setNumero($registro['numero_modulo']);
+        $horario->setHoraInicio($registro['hora_inicio']);
+        $horario->setHoraFin($registro['hora_fin']);
+        $listaHoraInicio[]=$horario;
+        }
+
+        return $listaHoraInicio;
 
     }
 
+    public static function obtenerIdHorario($idDia,$numero){
+
+        $database = new MySql();
+        $sql = "SELECT id_horario from horario where dia_id_dia={$idDia} and numero={$numero}";
+        
+        $db = new MySql();
+        $dato = $db->consultar($sql);
+        
+        $registro=$dato->fetch_assoc();
+        $idHorario=$registro['id_horario'];
+
+        return $idHorario;
+
+    }
+
+    public static function asignarHorarioACurriculaCarrera($idHorario,$idCurriculaCarrera){
+        $sql = "INSERT INTO `horario_curricula_carrera` (`horario_id_horario`, `curricula_carrera_id_curricula_carrera`) VALUES ('{$idHorario}', '{$idCurriculaCarrera}');
+        ";
+                
+        $database=new Mysql();
+
+        $database->insertarRegistro($sql);
+        
+    }
+
+    public static function listadoHorariosPorIdCarrera($idCurriculaCarrera){
+
+        $sql = "SELECT id_dia,materia_nombre,numero from horario ".
+            "join dia on dia_id_dia = id_dia ".
+            "join horario_curricula_carrera on id_horario=horario_id_horario ".
+            "join curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
+            "join materia on id_materia = materia_id_materia ".
+            "where id_curricula_carrera={$idCurriculaCarrera}";
+        
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+
+        $listado=array();
+                
+        while ($registro = $datos->fetch_assoc()){
+
+            $dia=$registro['id_dia'];
+            $materia=$registro['materia_nombre'];
+            $numero=$registro['numero'];
+            array_push($listado,array($dia,$materia,$numero));
+
+        }
+            
+        return $listado;
+
+    }
+
+    public static function listadoHorariosPorIdCicloLectivoCarrera($idCicloLectivoCarrera){
+
+        $sql = "SELECT id_dia,materia_nombre,numero from horario ".
+            "join dia on dia_id_dia = id_dia ".
+            "join horario_curricula_carrera on id_horario=horario_id_horario ".
+            "join curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
+            "join ciclo_lectivo_carrera on id_ciclo_lectivo_carrera = ciclo_lectivo_carrera_id_ciclo_lectivo_carrera ".
+            "join materia on id_materia = materia_id_materia ".
+            "where id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
+        
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+
+        $listado=array();
+                
+        while ($registro = $datos->fetch_assoc()){
+
+            $dia=$registro['id_dia'];
+            $materia=$registro['materia_nombre'];
+            $numero=$registro['numero'];
+            array_push($listado,array($dia,$materia,$numero));
+
+        }
+            
+        return $listado;
+
+    }
+
+    public static function listadoHorariosPorIdDocente($idDocente){
+
+        $sql = "SELECT id_dia,materia_nombre,numero from horario ".
+            "join dia on dia_id_dia = id_dia ".
+            "join horario_curricula_carrera on id_horario=horario_id_horario ".
+            "join curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
+            "join ciclo_lectivo_carrera on id_ciclo_lectivo_carrera = ciclo_lectivo_carrera_id_ciclo_lectivo_carrera ".
+            "join materia on id_materia = materia_id_materia ".
+            "join docente_carrera on docente_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera ".
+            "join docente on id_docente = docente_id_docente ".
+            "where id_docente={$idDocente}";
+            
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+
+        $listado=array();
+                
+        while ($registro = $datos->fetch_assoc()){
+
+            $dia=$registro['id_dia'];
+            $materia=$registro['materia_nombre'];
+            $numero=$registro['numero'];
+            array_push($listado,array($dia,$materia,$numero));
+
+        }
+            
+        return $listado;
+
+    }
 
 }
 
