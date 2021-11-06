@@ -41,6 +41,10 @@
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
 }
 
+.logoLogin {
+    width: 250px;
+}
+
 .body {
     height: 100%;
     /* Ubicación de la imagen */

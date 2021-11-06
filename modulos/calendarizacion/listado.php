@@ -20,10 +20,13 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
-        <script src ="../../jquery3.6.js"></script>
-        <script src ="../../script/comboAsignarCarrera.js"></script>
-        <title>Document</title>
+        <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+        <link rel="stylesheet" href="../../style/menuVertical.css">
+        <script type="text/javascript" src="../../jquery3.6.js"></script>
+        <script type="text/javascript" src="../../script/menu.js" defer> </script>
+        <script type="text/javascript" src ="../../script/comboAsignarCarrera.js"></script>
+        <link rel="icon" type="image/jpg" href="../../image/logo.png">
+        <title>Calendarizacion</title>
     </head>
 
     <?php require_once "../../menu.php";?>
@@ -90,6 +93,6 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
     
-    <script type="text/javascript" src="../../script/menu.js"  ></script>
+
 
 </html>

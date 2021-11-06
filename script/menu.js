@@ -1,18 +1,40 @@
-var seleccionado = 1;
+$(document).ready(function() { //cuando se cargo completamente el documento
+    $('.menu li:has(ul)').click(function(e) { //acceder a los elementos li que tengan un ul dentro
 
-$("#listado-menu ul li a").click(function() {
-
-    $("#listado-menu ul li a").removeClass("seleccionado");
-
-    $(this).addClass("seleccionado");
-    var seleccionado = 2;
-});
-
-if (seleccionado = true) {
-    $("#listado-menu ul li a").click(function() {
-
-        $("#listado-menu ul li a").removeClass("seleccionado");
-
-        $(this).addClass("seleccionado");
+        if ($(this).hasClass('activado')) { //si el elemento tiene la clase activado se realiza la accion
+            $(this).removeClass('activado'); //se remueve la clase
+            $(this).children('ul').slideUp(); //se ocultan los hijos de ese elemento
+        } else {
+            $('.menu li ul').slideUp(); //se ocultan todos los sub menus "slideup()"
+            $('.menu li').removeClass('activado'); //se remueve la clase a todos los elementos
+            $(this).addClass('activado'); //se le agrega la cclase solo a el elemento clikeado
+            $(this).children('ul').slideDown(); //a los hijos del elemento clikeado se los muestra
+        }
     });
-}
+
+    $('.btnMenu').click(function() {
+
+
+
+        if ($(this).hasClass('menuActivado')) {
+            $(this).removeClass('menuActivado');
+            $('.contenedorMenuVertical').css({ 'display': 'none' });
+        } else {
+
+            $(this).addClass('menuActivado');
+            $('.contenedorMenuVertical').css({ 'display': 'inline-block' });
+        }
+        //$('.contenedorMenuVertical .menu').slideToggle(); //cerrar o abrir el menu cuando este en dispositivos moviles
+    });
+
+    $(window).resize(function() { //si el tamaño de la ventana cambia
+        if ($(document).whidth > 450) { //cuando cambia preguntar si es mayor a 450px
+            $('.contenedorMenuVertical .menu').css({ 'display': 'block' })
+        }
+        if ($(document).whidth < 450) { //cuando cambia preguntar si es menor a 450px
+            $('.contenedorMenuVertical .menu').css({ 'display': 'none' })
+            $('.menu li ul').slideUp();
+            $('.menu li ').removeClass('activado');
+        }
+    })
+})

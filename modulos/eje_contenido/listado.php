@@ -14,7 +14,10 @@ require_once "../../class/Docente.php";
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src ="../../jquery3.6.js"></script>
+        <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+        <link rel="stylesheet" href="../../style/menuVertical.css">
+        <script src="../../jquery3.6.js"></script>
+        <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <script src ="../../script/comboCarrera.js"></script>
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
         <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">

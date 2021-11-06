@@ -38,6 +38,10 @@
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+    <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+    <link rel="stylesheet" href="../../style/menuVertical.css">
+    <script src="../../jquery3.6.js"></script>
+    <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Especialidad</title>
     <title>Insertar</title>
 </head>

@@ -22,45 +22,42 @@ $idPerfil=$usuario->getIdPerfil();
 ?>
 
 <header class="encabezado">
-    <?php if ($idPerfil == 3):?>
-        <nav>    
-            <div class="">
-                <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
-            </div>
-            <div class="clase-nueva">
-                <button type="button" class="btn-clase-nueva">
-                    <a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a>
-                </button>    
-            </div>
-            
-                <div class="listado-menu" id="listado-menu">
-                    <ul class="">
-                        
-                        <?php foreach($listadoModulos as $modulos): ?>
-                        
-                        <ul class="">
-                            <li class="">
-                                <a id="item-menu" href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php" class="a">
-                                    <?php echo ucwords($modulos->getNombre());?>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/insert.php"class="a">
-                                            Agregar nuevo
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        
-                        <?php endforeach; ?>
-                        <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
-                    </ul>
-                </div>
-            </nav>  
-        <?php endif; ?>
+    <div class="">
+        <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
+    </div>
+    <button type="button" class="btnMenu"><i class="icono fas fa-bars"></i></button>
+</header>
 
-        <?php if ($idPerfil == 1): ?>
+    <?php if ($idPerfil == 3):?>
+
+        <div class="contenedorMenuVertical" >                    
+            <nav class="vertical">    
+            
+                <div class="clase-nueva">
+                    <button type="button" class="btn-clase-nueva">
+                        <a href='/proyecto-modulos/modulos/clase/insert.php'>Nueva Clase</a>
+                    </button>    
+                </div>
+                
+               <ul class="menu">
+                        
+                    <?php foreach($listadoModulos as $modulos): $nombreModulo=$modulos->getNombre()?>
+
+                        <li>
+                            <a href="/proyecto-modulos/modulos/<?php echo $modulos->getDirectorio();?>/listado.php">
+                            
+                                    <?php echo ucwords($nombreModulo);?>
+                            </a>
+                        </li>                        
+                    <?php endforeach; ?>
+                        <li><a href="/proyecto-modulos/cerrar_sesion.php">Cerrar Sesion<i class="icono right fas fa-sign-in-alt"></i></a></li>
+                </ul>
+            </nav> 
+        </div>
+
+    <?php endif; ?>
+
+         <?php if ($idPerfil == 1): ?>
             <?php 
                 $seguridad=[];
                 $ubicacion=[];
@@ -84,84 +81,77 @@ $idPerfil=$usuario->getIdPerfil();
 
                 endforeach; 
             ?>
-            
-            
-        <div class="listado-menu" id="listado-menu">
-            <nav class="vertical">
-                <div class="">
-                    <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
-                </div>
-                <div class="">
-                    <ul>
-                        <ul class="">
-                            <li class="dropdown">
-                                <span class="a"> Administracion </span>
+
+
+                <div class="contenedorMenuVertical" >
+                     <nav class="vertical">
+                        <ul class="menu">
+                            <li >
+                                <button type="button"><i class="icono left fas fa-tasks"></i> Administracion <i class=" icono right fas fa-chevron-down"></i></button>
                             
                                 <ul>
                                     <?php foreach($administracion as $directorio):?>
                                     <li>
-                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo ucfirst(str_replace("_", " ",$directorio)) ?></a>
+                                        <a href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo ucfirst(str_replace("_", " ",$directorio)) ?></a>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>
                             
                             </li>
-                            <li class="dropdown">
-                                    <span class="a"  > Configuracion </span>
+                            <li >
+                                <button type="button"><i class="icono left fas fa-cogs"></i>Configuracion<i class="icono right fas fa-chevron-down"></i></button>
                                     
                                 <ul>
                                     <?php foreach($configuracion as $directorio):?>
                                     <li>
-                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                        <a href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>
                             
                             </li>
-                            <li class="dropdown">
-                                <span class="a"> Persona </span>
+                            <li >
+                                <button type="button"><i class="icono left fas fa-user-friends"></i>Persona<i class="icono right fas fa-chevron-down"></i></button>
                                     
                                 <ul>
                                     <?php foreach($persona as $directorio):?>
                                     <li>
-                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                        <a href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>
                             
                             </li>
-                            <li class="dropdown">
-                                <span class="a"> Ubicacion </span>
+                            <li >
+                                <button type="button"><i class="icono left fas fa-map-marked-alt"></i>Ubicacion<i class="icono right fas fa-chevron-down"></i></button>
                                 
                                 <ul>
                                     <?php foreach($ubicacion as $directorio):?>
                                     <li>
-                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                        <a href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>
                             
                             </li>
                             
-                            <li class="dropdown">
-                                <span class="a"> Seguridad </span>
+                            <li>
+                                <button type="button"><i class="icono left fas fa-shield-alt"></i> Seguridad <i class="icono right fas fa-chevron-down"></i></button>
                                 <ul>
                                     <?php foreach($seguridad as $directorio):?>
                                     <li>
-                                        <a class="a" id="item-menu" href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
+                                        <a href="/proyecto-modulos/modulos/<?php echo $directorio ?>/listado.php"><?php echo str_replace("_", " ", ucfirst($directorio)) ?></a>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>
                             </li>
                             
+                            <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a"><i class="icono left fas fa-sign-in-alt"></i>Cerrar Sesion</a></li>
                         </ul>
-                        <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a">Cerrar Sesion</a></li>
-                    </ul>
+
+                    </nav>
                 </div>
-
-            </nav>
-        </div>
-    <?php endif; ?>                                    
-
-
-</header>
+        <?php endif; ?>  
+    
+    
+    

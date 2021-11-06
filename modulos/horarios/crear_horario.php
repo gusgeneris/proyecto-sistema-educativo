@@ -30,7 +30,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" >
-            <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+        <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+        <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+        <link rel="stylesheet" href="../../style/menuVertical.css">
+        <script src="../../jquery3.6.js"></script>
+        <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <title>Crear Horario</title>
     </head>
     <body>
