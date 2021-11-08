@@ -1,16 +1,8 @@
 <?php
     require_once '../../class/MySql.php'; 
     require_once "../../class/CicloLectivo.php";
+    require_once "../../mensaje.php";
     
-    $mensaje='';
-    
-    if(isset($_GET['mj'])){
-        $mj=$_GET['mj'];
-        if ($mj==CORRECT_INSERT_CODE){
-            $mensaje=CORRECT_INSERT_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-        }
-    };
 ?>
 
 <!DOCTYPE html>
@@ -33,41 +25,45 @@
 <?php require_once "../../menu.php";?>
 
 <body class="body">
+    <div class="titulo">
+        <h1> Registro de Ciclo Lectivo</h1>
+    </div>
 
-<h1 class="titulo"> Registro de Ciclo Lectivo</h1>
+    <div class="main">
 
-    <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
-    
-       
-        <div class="formGrup" id="GrupoCicloLectivo">
+        <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
         
-        <label for="CicloLectivo" class="formLabel">Ciclo Lectivo</label>    
-            <div class="formGrupInput">
-                <input autofocus type="text"  id="CicloLectivo" name="CicloLectivo" class="formInput" placeholder="Año" >
-                <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-            </div> 
-            <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
-        </div> 
-
-        <!--Grupo de Mensaje-->
+        
+            <div class="formGrup" id="GrupoCicloLectivo">
             
-        <div class="formMensaje" id="GrupoMensaje">
+            <label for="CicloLectivo" class="formLabel">Ciclo Lectivo</label>    
+                <div class="formGrupInput">
+                    <input autofocus type="text"  id="CicloLectivo" name="CicloLectivo" class="formInput" placeholder="Año" >
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div> 
+                <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
+            </div> 
+
+            <!--Grupo de Mensaje-->
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-        
-        </div>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
 
-        <!--Grupo de Boton Enviar-->
+            <!--Grupo de Boton Enviar-->
 
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" id='Guardar' value='FormInsertCicloLectivo'> Guardar</button>
-        </div>
-        <br>
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
-        </div>
-    </form>
-
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" id='Guardar' value='FormInsertCicloLectivo'> Guardar</button>
+            </div>
+            <br>
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <?php require_once "../../footer.php"?>   
 </body>
 
 <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>

@@ -6,6 +6,7 @@
     require_once "../../class/Clase.php";
     require_once "../../class/Alumno.php";
     require_once "../../class/EstadoAsistencia.php";
+    require_once "../../mensaje.php";
 
 ?>
 
@@ -15,7 +16,6 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
         <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
         <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
@@ -118,6 +118,7 @@
                     <?php endforeach;?>
                 </tbody>
             </table>
+        </div>
         <?php }; ?>
 
 
@@ -157,7 +158,10 @@
                 <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Atras</button>
             </div>
         <?php }; ?>
+        
+    <?php require_once "../../footer.php"?>   
 
     </body>
+      
     <script src="../../script/estadoAsistencia.js"></script>
 </html>

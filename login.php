@@ -1,30 +1,8 @@
 <?php
 require_once "class/Usuario.php";
 require_once "configs.php";
-$mensaje='';
+require_once "mensaje.php";
 
-if(isset($_GET['error'])){
-    $error=$_GET['error'];
-    if ($error==ERROR_LOGIN_CODE){
-        $mensaje=ERROR_LOGIN_MENSAJE;?>
-        <div class="mensaje"><?php echo $mensaje;?></div><?php
-    }
-    else if ($error==ERROR_LOGIN_CODE_INACTIVE_USER){
-        $mensaje=ERROR_LOGIN_MENSAJE_INACTIVE_USER;?>
-        <div class="mensaje"><?php echo $mensaje;?></div><?php
-
-    }
-    else if ($error==ERROR_LOGIN_CODE_NULL_DATA){
-        $mensaje=ERROR_LOGIN_MENSAJE_NULL_DATA;?>
-        <div class="mensaje"><?php echo $mensaje;?></div><?php
-        
-    }
-    else if ($error==INCORRECT_SESSION_CODE){
-        $mensaje=INCORRECT_SESSION_MENSAJE;?>
-        <div class="mensaje"><?php echo $mensaje;?></div><?php
-        
-    }
-};
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +12,8 @@ if(isset($_GET['error'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="/proyecto-modulos/style/style.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/login.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/mensaje.css">
     <link rel="icon" type="image/jpg" href="image/logo.png"><title>Login</title>
     <title>Login</title>
 </head>
@@ -42,17 +21,18 @@ if(isset($_GET['error'])){
 <body class="body">
     
     <div class="formulario-inicio">
-        <form action="procesador_login.php" method="POST" class="login"> 
-            <img src="image/logoo_frase.png" alt="" class="logoLogin">
-            
-                <div class="campos-login">
-                    <input type="text" name="txtUsuario" placeholder="Usuario" >
+        <form action="procesador_login.php" method="POST" class="login">
+                <div class="logo"> 
+                    <img src="image/logoo_frase.png" alt="" class="logoLogin">
                 </div>
                 <div class="campos-login">
-                    <input type="password" name="txtContrasenia" placeholder="Contraseña"> 
+                    <input class="inputLogin" type="text" name="txtUsuario" placeholder="Usuario" >
                 </div>
                 <div class="campos-login">
-                    <input type="submit" name="guardar" value="Iniciar Sesion">
+                    <input class="inputLogin" type="password" name="txtContrasenia" placeholder="Contraseña"> 
+                </div>
+                <div class="campos-login">
+                    <input class="inputLogin" type="submit" name="guardar" value="Iniciar Sesion">
                 </div>
         </form> 
     </div>

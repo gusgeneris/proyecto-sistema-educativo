@@ -4,6 +4,7 @@
     require_once "../../class/DetalleLibroTemas.php";    
     require_once "../../class/Materia.php";   
     require_once "../../class/Clase.php";
+    require_once "../../mensaje.php";
 
 
     $idClase=$_GET["idClase"];
@@ -155,6 +156,6 @@
         </div>
         </form>
     </div>
-
+    <?php require_once "footer.php"?>               
 </body>
 </html>

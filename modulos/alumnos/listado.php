@@ -3,61 +3,10 @@ require_once "../../class/Alumno.php";
 require_once "../../class/Persona.php";
 require_once "../../class/Sexo.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 
 $lista = Alumno::listadoAlumnos();
-
-
-$mensaje='';
-    
-if(isset($_GET['mj'])){
-
-    switch($_GET['mj']){
-
-        case ERROR_LONGITUD_NAME_CODE:
-            $mensaje=ERROR_LONGITUD_NAME;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_LONGITUD_LAST_NAME_CODE:
-            $mensaje=ERROR_LONGITUD_LAST_NAME;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_NAME_NO_PERMITE_NUMEROS_CODE:
-            $mensaje=ERROR_NAME_NO_PERMITE_NUMEROS;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_LAST_NAME_NO_PERMITE_NUMEROS_CODE:
-            $mensaje=ERROR_LAST_NAME_NO_PERMITE_NUMEROS;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_LONGITUD_NUMERIC_DNI_CODE:
-            $mensaje=ERROR_LONGITUD_NUMERIC_DNI;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_DATE_INCORRECT_CODE:
-            $mensaje=ERROR_DATE_INCORRECT;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_SEXO_INCORRECT_CODE:
-            $mensaje=ERROR_SEXO_INCORRECT;?>
-            <div class="mensaje"><?php echo $mensaje;?></div><?php
-            break;    
-        case CORRECT_INSERT_CODE:
-            $mensaje=CORRECT_INSERT_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-            break;        
-        case CORRECT_UPDATE_CODE:
-            $mensaje=CORRECT_UPDATE_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-            break;
-        case ERROR_DNI_NUMBER_CODE:
-            $mensaje=ERROR_DNI_NUMBER;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-            break;    
-
-    }
-
-};
 
 
 ?>
@@ -68,7 +17,6 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
@@ -167,6 +115,6 @@ if(isset($_GET['mj'])){
             </tbody>
         </table>
     </div>
-
+    <?php require_once "../../footer.php"?>
 </body>
 </html>

@@ -5,6 +5,7 @@ require_once "../../class/Materia.php";
 require_once "../../class/Alumno.php";
 require_once "../../configs.php";
 require_once "../../class/CicloLectivo.php";
+require_once "../../mensaje.php";
 
 $idAlumno=$_GET["idAlumno"];
 $nombreAlumno=Alumno::obtenerTodoPorId($idAlumno);
@@ -29,89 +30,94 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
     <?php require_once "../../menu.php";?>
 
     <body>
-    <h1 class="titulo"> Asignar Carrera al Alumno/a :<?php echo $nombreAlumno->getNombre();?>, <?php echo $nombreAlumno->getApellido()?></h1>
-
-        <form action="procesar_asignar.php" method=POST class="formUnaColumna" id="formInsert" name="formInsert">
-            <input type="hidden" value="<?php echo $idAlumno?>" name="IdAlumno">
-            <div class="formGrup" id="GrupocboCicloLectivo">
-                <label for="cboCicloLectivo" class="formLabel">Carrera</label>
-                <div class="formGrupInput">
-                    <select name="cboCicloLectivo" id="cboCicloLectivo" class="formInput" onchange="cargarCarrera()">
-                        <option value="">
-                            ->Seleccione un Ciclo Lectivo<-
-                        </option>
-                        <?php foreach($listadoCicloLectivo as $cicloLectivo):{?>
-                            <option value="<?php echo $cicloLectivo->getIdCicloLectivo();?>">
-                                <?php echo $cicloLectivo->getAnio()?>
-                            </option>
-                        <?php } endforeach ; ?>
-                    </select>
-                </div>
-                <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
-            </div>
-
-
-            <div class="formGrup" id="GrupocboCarrera">
-                    <label for="cboCarrera" class="formLabel">Carrera</label>
+        <div class="titulo">
+            <h1> Asignar Carrera al Alumno/a :<?php echo $nombreAlumno->getNombre();?>, <?php echo $nombreAlumno->getApellido()?></h1>
+        </div>
+        <div class="main">
+            <form action="procesar_asignar.php" method=POST class="formUnaColumna" id="formInsert" name="formInsert">
+                <input type="hidden" value="<?php echo $idAlumno?>" name="IdAlumno">
+                <div class="formGrup" id="GrupocboCicloLectivo">
+                    <label for="cboCicloLectivo" class="formLabel">Carrera</label>
                     <div class="formGrupInput">
-                        <Select name="cboCarrera" id="cboCarrera" class="formInput" onchange="">
-                            <option value="0">
-                                ->Seleccionar Carrera<-
+                        <select name="cboCicloLectivo" id="cboCicloLectivo" class="formInput" onchange="cargarCarrera()">
+                            <option value="">
+                                ->Seleccione un Ciclo Lectivo<-
                             </option>
-                        </Select>
+                            <?php foreach($listadoCicloLectivo as $cicloLectivo):{?>
+                                <option value="<?php echo $cicloLectivo->getIdCicloLectivo();?>">
+                                    <?php echo $cicloLectivo->getAnio()?>
+                                </option>
+                            <?php } endforeach ; ?>
+                        </select>
                     </div>
                     <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
-            </div>
+                </div>
 
-            <!--Grupo de Mensaje-->
-                
-            <div class="formMensaje" id="GrupoMensaje">
+
+                <div class="formGrup" id="GrupocboCarrera">
+                        <label for="cboCarrera" class="formLabel">Carrera</label>
+                        <div class="formGrupInput">
+                            <Select name="cboCarrera" id="cboCarrera" class="formInput" onchange="">
+                                <option value="0">
+                                    ->Seleccionar Carrera<-
+                                </option>
+                            </Select>
+                        </div>
+                        <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                </div>
+
+                <!--Grupo de Mensaje-->
                     
-                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                <div class="formMensaje" id="GrupoMensaje">
+                        
+                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+                </div>
+
+                <!--Grupo de Boton Enviar-->
+
+                <div class="formGrupBtnEnviar">
+                    <button type="submit" class="formButton" value ="FormInsertAsignarCarrera" id="Guardar"> Guardar</button>
+                </div>
+
+                <div class="formGrupBtnEnviar">
+                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+                </div>
+
+
+            </form>
+            <br><br>
+            <table border="1" cellspacing="0" cellpadding="">
+                <tr>
+                    <th>Ciclo Lectivo</th>
+                    <th>Carrera</th>    
+                    <th>Accion</th>
+                </tr>
+
+                <?php foreach ($listadoCicloLectivoCarrera as list($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno,$idCicloLectivoCarrera)): ?>
+
+                <tr>
+                    <td><?php echo $cicloLectivo ?></td>
+                    <td><?php echo $carrera ?></td>
+                    <td>
+                        <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
+                            Eliminar
+                        </a>|
+                        <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
+                            Materias Asociadas
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach;?>
+            </table>
+        </div>
             
-            </div>
-
-            <!--Grupo de Boton Enviar-->
-
-            <div class="formGrupBtnEnviar">
-                <button type="submit" class="formButton" value ="FormInsertAsignarCarrera" id="Guardar"> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
-            </div>
-
-
-        </form>
-        <br><br>
-        <table border="1" cellspacing="0" cellpadding="">
-            <tr>
-                <th>Ciclo Lectivo</th>
-                <th>Carrera</th>    
-                <th>Accion</th>
-            </tr>
-
-            <?php foreach ($listadoCicloLectivoCarrera as list($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno,$idCicloLectivoCarrera)): ?>
-
-            <tr>
-                <td><?php echo $cicloLectivo ?></td>
-                <td><?php echo $carrera ?></td>
-                <td>
-                    <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
-                        Eliminar
-                    </a>|
-                    <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
-                        Materias Asociadas
-                    </a>
-                </td>
-            </tr>
-            <?php endforeach;?>
-        </table>
-           
-        
+    <?php require_once "../../footer.php"?>   
 
     </body>
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+    
+    
 
 </html>

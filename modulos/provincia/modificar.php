@@ -2,6 +2,7 @@
 
 require_once "../../class/Provincia.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 if(isset($_GET['id'])){
     $id=$_GET['id'];    
@@ -22,7 +23,6 @@ $provincia= Provincia::obtenerPorIdProvincia($idProvincia);
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -32,12 +32,12 @@ $provincia= Provincia::obtenerPorIdProvincia($idProvincia);
     <?php require_once "../../menu.php";?>
 
     <body class="modif-user">
-        <h1 class="titulo">Ingrese los nuevos datos</h1>
-        
-        <form action="procesar_actualizar.php" method="POST"  class="formUnaColumna" name="formModificar" id="formModificar">
-                
+        <div class="titulo">
+            <h1>Ingrese los nuevos datos</h1>
+        </div>
+        <div class="main">
+            <form action="procesar_actualizar.php" method="POST"  class="formUnaColumna" name="formModificar" id="formModificar">
 
-                
                 <input name="IdPais" type="hidden" class="" value="<?php echo $provincia->getIdPais(); ?>">
                 
                 
@@ -65,9 +65,11 @@ $provincia= Provincia::obtenerPorIdProvincia($idProvincia);
                 </div>
 
                 <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar onclick="window.history.go(-1); return false" >Cancelar</button>
+                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
-    </form>
+        </form>
+    </div>
+    <?php require_once "../../footer.php"?>     
 
 </body>
 

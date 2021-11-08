@@ -2,30 +2,20 @@
     require_once '../../class/MySql.php'; 
     require_once "../../configs.php";  
     require_once "../../class/Provincia.php";
-    
-    $mensaje='';
-    
-    if(isset($_GET['mj'])){
-        $mj=$_GET['mj'];
-        if ($mj==CORRECT_INSERT_CODE){
-            $mensaje=CORRECT_INSERT_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-        }
-    };
+    require_once "../../mensaje.php";
 
     $idPais= $_GET['idPais'];
     
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -37,41 +27,46 @@
 <?php require_once "../../menu.php";?>
 
 <body class="body">
-<h1 class="titulo"> Registro de Provincia</h1>
+    <div class="titulo">
+        <h1> Registro de Provincia</h1>
+    </div>
 
-    <form action="procesador_insert.php"  method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
-        
-        
-        <input type="hidden" name="IdPais" value="<?php echo $idPais ?>">
-
-        <div class="formGrup" id="GrupoProvincia">
-        
-            <label for="Provincia" class="formLabel">Nombre Provincia</label>    
-            <div class="formGrupInput">
-                <input type="text" name="Provincia" class="formInput" placeholder="Nombre Provincia">
-            </div>
-            <p class="formularioInputError"> El Nombre de Provincia no permite simbolos ni numeros.</p> 
-        </div> 
-
-
-        <!--Grupo de Mensaje-->
+    <div class="main">
+        <form action="procesador_insert.php"  method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
             
-        <div class="formMensaje" id="GrupoMensaje">
+            
+            <input type="hidden" name="IdPais" value="<?php echo $idPais ?>">
+
+            <div class="formGrup" id="GrupoProvincia">
+            
+                <label for="Provincia" class="formLabel">Nombre Provincia</label>    
+                <div class="formGrupInput">
+                    <input type="text" name="Provincia" class="formInput" placeholder="Nombre Provincia">
+                </div>
+                <p class="formularioInputError"> Los datos ingresados son incorrectos.</p> 
+            </div> 
+
+
+            <!--Grupo de Mensaje-->
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-        
-        </div>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
 
-        <!--Grupo de Boton Enviar-->
+            <!--Grupo de Boton Enviar-->
 
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" id='Guardar' value='FormInsertProvincia'> Guardar</button>
-        </div>
-        <br>
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
-        </div>
-    </form>
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" id='Guardar' value='FormInsertProvincia'> Guardar</button>
+            </div>
+            <br>
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <?php require_once "../../footer.php"?>    
 
 </body>
 

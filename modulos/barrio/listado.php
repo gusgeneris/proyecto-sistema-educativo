@@ -1,24 +1,11 @@
 <?php
 require_once "../../class/Barrio.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 $idLocalidad=$_GET['idLocalidad'];
 
 $lista = Barrio::listado();
-
-
-$mensaje='';
-    
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
 
 
 ?>
@@ -29,8 +16,7 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -41,42 +27,47 @@ if(isset($_GET['mj'])){
 <?php require_once "../../menu.php";?>
 
 <body class="body-listuser">
-    <br>
-    <br>
-    <h1 class="titulo">Lista de Barrios</h1>
-    <br>
-    <br>
+    <div class="titulo">
+        <h1 class="titulo">Lista de Barrios</h1>
+    </div>
 
-    <a href="insertar.php?idLocalidad=<?php echo $idLocalidad ?>">Agregar Barrio</a>
- 
-    <table class="tabla" method="GET">
-        <tr >
-            <th> ID Barrio </th>
-            <th> ID Localidad </th>
-            <th> Nombre Barrio </th>
-
-            <th> Acciones</th>
-
-        </tr>
-        <?php foreach ($lista as $barrio ):?> 
+    <div class="conteiner-btn-agregar">
+        <button type="button" class="btn-agregar" > 
+        <a href="insertar.php?idLocalidad=<?php echo $idLocalidad ?>">Agregar Barrio</a>
+        </button>
+    </div>
+    
+    <div class="conteiner3Columnas">
+        <table class="tabla" method="GET">
             <tr >
-                <td >
-                    <?php echo $barrio->getIdBarrio(); ?>
-                </td>
-                <td>
-                    <?php echo $barrio->getIdLocalidad(); ?>
-                </td>
-                <td>
-                    <?php echo $barrio->getNombre(); ?>
-                </td>
+                <th> ID Barrio </th>
+                <th> ID Localidad </th>
+                <th> Nombre Barrio </th>
 
-                <td>
-                    <a href="eliminar.php?idBarrio=<?php echo $barrio->getIdBarrio(); ?>&idLocalidad=<?php echo $barrio->getIdLocalidad();?>" class="">Borrar</a>
-                    <a href="modificar.php?idBarrio=<?php echo $barrio->getIdBarrio(); ?>&idLocalidad=<?php echo $barrio->getIdLocalidad();?>" class="">Modificar</a>
-                </td>
+                <th> Acciones</th>
 
             </tr>
-        <?php endforeach ?>    
-    </table>
+            <?php foreach ($lista as $barrio ):?> 
+                <tr >
+                    <td >
+                        <?php echo $barrio->getIdBarrio(); ?>
+                    </td>
+                    <td>
+                        <?php echo $barrio->getIdLocalidad(); ?>
+                    </td>
+                    <td>
+                        <?php echo $barrio->getNombre(); ?>
+                    </td>
+
+                    <td>
+                        <a href="eliminar.php?idBarrio=<?php echo $barrio->getIdBarrio(); ?>&idLocalidad=<?php echo $barrio->getIdLocalidad();?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                        <a href="modificar.php?idBarrio=<?php echo $barrio->getIdBarrio(); ?>&idLocalidad=<?php echo $barrio->getIdLocalidad();?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                    </td>
+
+                </tr>
+            <?php endforeach ?>    
+        </table>
+    </div>
+    <?php require_once "../../footer.php"?>     
 </body>
 </html>

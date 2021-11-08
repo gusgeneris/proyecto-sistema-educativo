@@ -136,7 +136,7 @@ if(isset($_GET['mj'])){
             </tbody>
     </table>
 
-
+    <?php require_once "../../footer.php"?>                           
 
 </body>
 </html>

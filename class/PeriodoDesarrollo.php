@@ -95,7 +95,8 @@
         }
     
         public static function obtenerTodoPorId($idPeriodoDesarrollo){
-            $sql = "SELECT id_periodo_desarrollo, detalle_Periodo, estado from periodo_desarrollo WHERE id_periodo_desarrollo={$idPeriodoDesarrollo};";
+            $sql = "SELECT id_periodo_desarrollo, detalle_periodo, estado from periodo_desarrollo WHERE id_periodo_desarrollo={$idPeriodoDesarrollo};";
+            
             $db = new MySql();
             $datos = $db->consultar($sql);
     

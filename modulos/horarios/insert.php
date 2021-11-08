@@ -2,16 +2,7 @@
     require_once '../../class/MySql.php'; 
     require_once "../../class/Horario.php";
     require_once "../../class/Dia.php";
-    
-    $mensaje='';
-    
-    if(isset($_GET['mj'])){
-        $mj=$_GET['mj'];
-        if ($mj==CORRECT_INSERT_CODE){
-            $mensaje=CORRECT_INSERT_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-        }
-    };
+    require_once "../../mensaje.php";
 
     $listaDias=Dia::obtenerTodo();
 ?>
@@ -23,8 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -36,27 +26,53 @@
 <?php require_once "../../menu.php";?>
 
 <body class="body">
+    <div class="titulo">
+        <h1> Registro de Horario</h1>
+    </div>
+    <div class="main">
+        <form action="procesar_insert.php" method=POST class="formInsertUnaColumna">
+            
+            <div class="formGrup">     
+                <label for="Numero" class="formLabel">Numero del modulo que tendra el horario</label>    
+                <div class="formGrupInput">
+                    <input type="text" name="Numero" id="Numero" class="formInput" placeholder="Numero">
+                    <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                </div>
 
-    <form action="procesar_insert.php" method=POST class="formulario">
-        <h1 class="titulo"> Registro de Horario</h1>
-        <div class=""><input type="text" name="Numero" class="" placeholder="Numero"></div>
-        <div class=""><input type="time" name="HoraInicio" class="" placeholder="Hora Inicio"></div>
-        <div class=""><input type="time" name="HoraFin" class="" placeholder="Hora Fin"></div>
+            </div>
 
-        <div class="">
-            <select name="cboDia" id="">
-                <option value="">->Seleccione el Dia<-</option>
-                <?php foreach($listaDias as $dia ):?>
-                    <option value="<?php echo $dia->getIdDia() ?>"><?php echo  $dia->getDescripcion() ?></option>
-                <?php endforeach?>
-            </select>
-        </div>
 
-        <div class=""><input type="submit" class="" name="guardar" value="Guardar">
-            <input name="Cancelar" type="submit" value="Cancelar">
-        </div>               
-    </form>
+            <div class="formGrup">
+                <label for="HoraInicio" class="formLabel">Hora de Inicio</label>
+                <input type="time" class="formInput" name="HoraInicio" id="HoraInicio" placeholder="Hora Inicio">
+            </div>
 
+            <div class="formGrup">
+                <label for="HoraFin" class="formLabel">Hora de Finalizacion</label>
+                <input type="time" class="formInput" name="HoraFin" id="HoraFin" placeholder="Hora Fin">
+            </div>
+
+            <div class="">
+                <label for="cboDia" class="formLabel">Dia</label>
+                <select name="cboDia" id="cboDia">
+                    <option value="">->Seleccione el Dia<-</option>
+                    <?php foreach($listaDias as $dia ):?>
+                        <option value="<?php echo $dia->getIdDia() ?>"><?php echo  $dia->getDescripcion() ?></option>
+                    <?php endforeach?>
+                </select>
+            </div>
+
+            
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
+            </div>
+        
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            </div>             
+        </form>
+    </div>
+    <?php require_once "../../footer.php"?> 
 </body>
 
 </html>

@@ -3,25 +3,11 @@ require_once "../../class/Domicilio.php";
 require_once "../../class/Persona.php";
 require_once "../../class/Sexo.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 $idPersona=$_GET['idPersona'];
 
 $lista = Domicilio::listadoPorIdPersona($idPersona);
-
-
-$mensaje='';
-    
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
-
 
 ?>
 
@@ -37,7 +23,6 @@ if(isset($_GET['mj'])){
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <script type="text/javascript" src ="../../script/comboDomicilio.js"></script>
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar domicilio</title>
 </head>
 
@@ -91,5 +76,6 @@ if(isset($_GET['mj'])){
             </tbody>    
         </table>
     </div>
+    <?php require_once "../../footer.php"?>
 </body>
 </html>

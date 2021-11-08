@@ -65,6 +65,11 @@
         gap: 0px;
     }
     
+    .formModificarUnaColumna {
+        text-align: center;
+        /*espaciado entre cada elemento*/
+    }
+    
     .formModificar2Columnas {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -72,6 +77,9 @@
     }
     
     .formLabel {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
         display: block;
         /*abarque el 100%*/
         font-weight: 700;
@@ -107,7 +115,9 @@
     }
     
     .formularioInputError {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 12px;
+        font-weight: bold;
         /*elimina el mangen inferior que trae por defecto*/
         margin-bottom: 0;
         display: none;
@@ -115,6 +125,10 @@
     
     .formularioInputError-activo {
         display: block;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: #bb2929;
     }
     
     .formGrupBtnEnviar,

@@ -5,6 +5,7 @@
     require_once "../../class/Materia.php";   
     require_once "../../class/Clase.php";
     require_once "../../class/EstadoAsistencia.php";
+    require_once "../../mensaje.php";
 
 
     $idClase=$_GET["idClase"];
@@ -30,7 +31,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
@@ -145,7 +145,8 @@
         <button type="button" class="formButton" id="Guardar">
             <a href="../../inicio.php">  Listo </a> 
         </button>
-    </div>                
+    </div>  
+    <?php require_once "../../footer.php"?>                   
 
 </body>
 <script src="../../script/estadoAsistencia.js">

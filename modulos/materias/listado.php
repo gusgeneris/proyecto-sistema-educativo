@@ -3,6 +3,7 @@ require_once "../../class/Materia.php";
 require_once "../../class/Carrera.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 $materia=new Materia();
 
@@ -22,22 +23,7 @@ if(isset($_GET["txtNombre"])){
 
 }
 
-$mensaje='';
-
-#highlight_string(var_export($listadoMaterias,true));
 $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
-
-    
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
 
 ?>
 
@@ -48,7 +34,6 @@ if(isset($_GET['mj'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" >
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -125,5 +110,6 @@ if(isset($_GET['mj'])){
             </tbody>
         </table>
     </div>
+    <?php require_once "../../footer.php"?> 
 </body>
 </html>

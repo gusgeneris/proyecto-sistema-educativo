@@ -2,7 +2,8 @@
 require_once "../../class/Carrera.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php";
-require_once "../../class/CicloLectivo.php";
+require_once "../../class/CicloLectivo.php"; 
+require_once "../../mensaje.php";
 
 $carrera=new Carrera();
 
@@ -29,24 +30,6 @@ if (isset($_GET["idCiclo"])){
     $listadoCarreras=$carrera->listadoCarreras();
 }
 
-#highlight_string(var_export($listadoCarreras,true));
-
-
-$mensaje='';
-    
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==INCORRECT_INSERT_MENSAJE_CARRERA_DUPLICATE_CODE){
-        $mensaje=INCORRECT_INSERT_MENSAJE_CARRERA_DUPLICATE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
 
 $idCicloLectivo=$_GET["idCiclo"];
 $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
@@ -59,7 +42,6 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
@@ -118,11 +100,7 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
             </tbody>
         </table>
     </div>
-
+    
+    <?php require_once "../../footer.php"?>                  
 </body>
-<footer >
-    <div class="footer">
-        <p class="diseñadorPor">Diseñado por Sandoval Gustavo 2021</p>
-    </div>
-</footer>
 </html>

@@ -181,3 +181,12 @@ tr:hover td {
     /*sacar subrayado autodefinido que le coloca el naegador*/
     box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4)
 }
+
+.conteiner.horario {
+    margin-left: 23%;
+}
+
+.conteiner.horario th {
+    padding: 20px;
+    text-align: center;
+}

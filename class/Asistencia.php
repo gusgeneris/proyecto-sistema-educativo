@@ -119,7 +119,7 @@
                         "JOIN curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
                         "JOIN alumno on alumno_id_alumno=id_alumno ". 
                         "JOIN persona on id_persona = persona_id_persona ". 
-                        "WHERE id_curricula_carrera={$idCurriculaCarrera} and id_alumno={$idAlumno} and estado_asistencia_detalle='Ausente' group by estado_asistencia_detalle;";
+                        "WHERE id_curricula_carrera={$idCurriculaCarrera} and id_alumno={$idAlumno} and estado_asistencia_detalle='Ausente' group by estado_asistencia_detalle order by persona_apellido;";
                         
                 $dataBase= new Mysql();
                 $dato= $dataBase->consultar($sql);

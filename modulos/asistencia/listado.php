@@ -6,6 +6,7 @@
     require_once "../../class/Clase.php";
     require_once "../../class/Alumno.php";
     require_once "../../class/EstadoAsistencia.php";
+    require_once "../../mensaje.php";
 
 ?>
 
@@ -160,6 +161,7 @@
                 </table>
             </div>
             <?php }; ?>
+            <?php require_once "../../footer.php"?>    
     </body>
 
     <script src="../../script/estadoAsistencia.js"></script>

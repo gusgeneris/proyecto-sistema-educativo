@@ -3,6 +3,7 @@
     require_once "../../class/Carrera.php";
     require_once "../../class/Clase.php";
     require_once "../../class/TipoClase.php";
+    require_once "../../mensaje.php";
 
 
 

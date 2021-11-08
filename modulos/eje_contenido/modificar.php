@@ -1,6 +1,7 @@
 <?php
 require_once "../../class/EjeContenido.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 if(isset($_GET['id'])){
     $id=$_GET['id'];    
@@ -74,6 +75,6 @@ $ejeContenido= EjeContenido::obtenerTodoPorId($id);
                 </div> 
         </form>
     </div>
-
+    <?php require_once "../../footer.php"?>         
 </body>
 </html>

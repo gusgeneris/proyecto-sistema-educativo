@@ -2,16 +2,7 @@
 require_once "../../class/MySql.php";
 require_once "../../class/Materia.php";    
 require_once "../../configs.php";  
-
-$mensaje='';
-
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
+require_once "../../mensaje.php";
 
 
 ?>
@@ -22,7 +13,6 @@ if(isset($_GET['mj'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -36,35 +26,37 @@ if(isset($_GET['mj'])){
 <body>
     
     <h1 class="titulo"> Registro de Materia</h1>
-
-    <form action="procesar_insert.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
-        
-        <div class="formGrup" id="GrupoNombreMateria" >
-            <label for="NombreMateria" class="formLabel">Materia Nombre</label>
-            <div class="formGrupInput">
-                <input type="text" id='NombreMateria' name="NombreMateria" class="formInput" placeholder="Materia Nombre">
+    <div class="main">
+        <form action="procesar_insert.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+            
+            <div class="formGrup" id="GrupoNombreMateria" >
+                <label for="NombreMateria" class="formLabel">Materia Nombre</label>
+                <div class="formGrupInput">
+                    <input type="text" id='NombreMateria' name="NombreMateria" class="formInput" placeholder="Materia Nombre">
+                </div>
+                <p class="formularioInputError"> Los datos ingresados no son correctos.</p>
             </div>
-            <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-        </div>
-        
-        <!--Grupo de Mensaje-->
             
-        <div class="formMensaje" id="GrupoMensaje">
+            <!--Grupo de Mensaje-->
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-            
-        </div>
-    
-        <!--Grupo de Boton Enviar-->
-    
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
-        </div>
-    
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
-        </div>
-    </form>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+            </div>
+        
+            <!--Grupo de Boton Enviar-->
+        
+            <div class="formGrupBtnEnviar">
+                <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
+            </div>
+        
+            <div class="formGrupBtnEnviar">
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <?php require_once "../../footer.php"?> 
     
 </body>
 

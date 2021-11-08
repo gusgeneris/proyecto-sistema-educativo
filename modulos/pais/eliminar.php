@@ -7,6 +7,6 @@ $idPais=$_GET["idPais"];
 
 $eliminarRegistro=Pais::eliminarPais($idPais);
 
-header("Location:paises.php");
+header("Location:listado.php");
 
 ?>

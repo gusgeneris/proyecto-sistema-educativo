@@ -1,24 +1,11 @@
 <?php
 require_once "../../class/Localidad.php";
 require_once "../../configs.php";
+require_once "../../mensaje.php";
 
 $idProvincia=$_GET['idProvincia'];
 
 $lista = Localidad::listadoPorProvincia($idProvincia);
-
-$mensaje='';
-    
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
-
 
 ?>
 
@@ -28,8 +15,7 @@ if(isset($_GET['mj'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -40,39 +26,48 @@ if(isset($_GET['mj'])){
 <?php require_once "../../menu.php";?>
 
 <body class="body-listuser">
-    <br>
-    <br>
-    <h1 class="titulo">Lista de Localidades</h1>
-    <br>
-    <br>
+    <div class="titulo">
+        <h1 class="titulo">Lista de Localidades</h1>
+    </div>
 
-    <a href="insert.php?idProvincia=<?php echo $idProvincia ?>">Agregar Localidad</a>
- 
-    <table class="tabla" method="GET">
-        <tr >
+    <div class="conteiner-btn-agregar">
+        <button type="button" class="btn-agregar" > 
+            <a href="insert.php?idProvincia=<?php echo $idProvincia ?>">Agregar Localidad</a>
+        </button>
+    </div>
+    
+    <div class="conteiner3Columnas">
+        <table class="tabla" method="GET">
+            <thead>
+                <tr >
 
-            <th> ID Localidad </th>
-            <th> Nombre</th>
-            <th> Acciones</th>
+                    <th> ID Localidad </th>
+                    <th> Nombre</th>
+                    <th> Acciones</th>
 
-        </tr>
-        <?php foreach ($lista as $localidad ):?> 
-            <tr >
-                <td >
-                    <?php echo $localidad->getIdLocalidad(); ?>
-                </td>
-                <td>
-                    <?php echo $localidad->getNombre(); ?>
-                </td>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($lista as $localidad ):?> 
+                <tr >
+                    <td >
+                        <?php echo $localidad->getIdLocalidad(); ?>
+                    </td>
+                    <td>
+                        <?php echo $localidad->getNombre(); ?>
+                    </td>
 
-                <td>
-                    <a href="eliminar.php?idLocalidad=<?php echo $localidad->getIdLocalidad();?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class="">Borrar</a> | 
-                    <a href="modificar.php?idLocalidad=<?php echo $localidad->getIdLocalidad(); ?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class="">Modificar</a> | 
-                    <a href="../barrio/listado?idLocalidad=<?php echo $localidad->getIdLocalidad(); ?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class="">Barrios</a>
-                </td>
+                    <td>
+                        <a href="eliminar.php?idLocalidad=<?php echo $localidad->getIdLocalidad();?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                        <a href="modificar.php?idLocalidad=<?php echo $localidad->getIdLocalidad(); ?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                        <a href="../barrio/listado?idLocalidad=<?php echo $localidad->getIdLocalidad(); ?>&idProvincia=<?php echo $localidad->getIdProvincia();?>" class=""><img class="icon-a" src="../../icon/gps.png" title="Barrios" alt="Barrios"></a>
+                    </td>
 
-            </tr>
-        <?php endforeach ?>    
-    </table>
+                </tr>
+            <?php endforeach ?> 
+            </tbody>   
+        </table>
+    </div>
+    <?php require_once "../../footer.php"?> 
 </body>
 </html>

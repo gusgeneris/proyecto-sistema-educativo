@@ -8,6 +8,7 @@ const ERROR_LOGIN_CODE_NULL_DATA = '3';
 const ERROR_LOGIN_MENSAJE_NULL_DATA = 'Ingrese algun dato.';
 const CORRECT_INSERT_CODE= '4';
 const CORRECT_INSERT_MENSAJE= 'Se ingresarion los datos correctamente';
+
 const CORRECT_UPDATE_CODE= '5';
 const CORRECT_UPDATE_MENSAJE= 'Se actualizaron los datos correctamente';
 const INCORRECT_SESSION_CODE= '6';
@@ -35,7 +36,7 @@ const ERROR_LAST_NAME_NO_PERMITE_NUMEROS='Error no se permite numeros en el APEL
 const ERROR_DNI_NUMBER_CODE='17';
 const ERROR_DNI_NUMBER='Error no se permite letras ni simbolos en el DNI';
 
-const ERROR_CAMPOS_VACIOS_CODE = '';
+const ERROR_CAMPOS_VACIOS_CODE = '18';
 const ERROR_CAMPOS_VACIOS = 'Error en la longitud';
 
 

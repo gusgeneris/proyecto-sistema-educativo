@@ -2,6 +2,7 @@
     require_once "../../class/Clase.php";
     require_once "../../class/LibroTemas.php";
     require_once "../../class/DetalleLibroTemas.php";
+    require_once "../../mensaje.php";
 
 
     $idDetalleLibroTemas=$_GET["idDetalleLibro"];
@@ -19,7 +20,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -77,5 +77,6 @@
                 </div>
         </form>
     </div>
+    <?php require_once "../../footer.php"?> 
 </body>
 </html>

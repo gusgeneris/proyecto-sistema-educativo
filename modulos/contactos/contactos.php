@@ -2,6 +2,7 @@
 
 require_once "../../class/Contacto.php";
 require_once "../../class/TipoContacto.php";
+require_once "../../mensaje.php";
 
 
 $idPersona = $_GET["idPersona"];
@@ -118,6 +119,7 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 		</tbody>	
 	</table>
 </div>
+    <?php require_once "../../footer.php"?>     
 
 </body>
 

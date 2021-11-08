@@ -77,7 +77,7 @@ class Modulo{
         $sql="SELECT id_modulo, modulo_descripcion, modulo_directorio FROM modulo
             JOIN perfil_modulo on perfil_modulo.modulo_id_modulo=modulo.id_modulo
             JOIN perfil on perfil_modulo.perfil_id_perfil=perfil.id_perfil 
-            WHERE perfil.id_perfil={$idPerfil};";
+            WHERE perfil.id_perfil={$idPerfil}  order by modulo_descripcion;";
         $database =new Mysql();
         $datos=$database->consultar($sql);
         $listadoModulos=[];

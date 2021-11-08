@@ -5,6 +5,7 @@ require_once "../../class/Materia.php";
 require_once "../../class/Alumno.php";
 require_once "../../configs.php";
 require_once "../../class/CicloLectivo.php";
+require_once "../../mensaje.php";
 
 
 $anio=date("Y");
@@ -88,7 +89,7 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
 
             </form>    
         </div>    
-
+    <?php require_once "../../footer.php"?>                         
     </body>
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>

@@ -4,6 +4,7 @@
     require_once "../../class/CicloLectivo.php";
     require_once "../../class/Carrera.php";
     require_once "../../class/Docente.php";
+    require_once "../../mensaje.php";
 
     $eje=new EjeContenido();
 
@@ -30,7 +31,6 @@
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <script src ="../../script/comboCarrera.js"></script>
         <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css" class="">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
         <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista ejes</title>
 
     </head>
@@ -74,7 +74,7 @@
                 </tbody>
             </table>
         </div>   
-        
+    <?php require_once "../../footer.php"?>         
     </body>
 
 </html>

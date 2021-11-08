@@ -8,7 +8,8 @@ require_once "../../class/Barrio.php";
 require_once "../../class/Localidad.php";
 require_once "../../class/Sexo.php";
 require_once "../../class/Perfil.php";
-require_once "../../configs.php";
+require_once "../../configs.php"; 
+require_once "../../mensaje.php";
 
 if(isset($_GET['id'])){
     $id=$_GET['id'];    
@@ -46,7 +47,6 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
         <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
         <link rel="stylesheet" href="../../style/menuVertical.css">
         <script src="../../jquery3.6.js"></script>
@@ -153,9 +153,9 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
             </form>
         </div>
 
+        <?php require_once "../../footer.php"?>                            
+    </body>
 
-        </body>
-
-<script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
+    <script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 
 </html>

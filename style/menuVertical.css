@@ -18,7 +18,7 @@ a {
 }
 
 .btnMenu {
-    padding: 20px;
+    padding: 15px;
     background: #393E46;
     border: none;
     color: #fff;
@@ -36,6 +36,8 @@ a {
     line-height: 18px;
     background-color: #393E46;
     position: absolute;
+    height: 100%;
+    z-index: 1000;
 }
 
 .contenedorMenuVertical .menu {
@@ -128,12 +130,13 @@ a {
 }
 
 .clase-nueva {
-    display: inline-block;
+    display: block;
     padding: 0px;
     margin-left: 20px;
 }
 
 .btn-clase-nueva {
+    margin-left: 28%;
     margin-top: 15px;
     display: flex;
     border-radius: 5px;
@@ -166,6 +169,107 @@ a {
 .btn-clase-nueva a:hover {
     color: #ffffff;
 }
+
+.icono.menu {
+    font-size: 20px;
+}
+
+.btnBack {
+    display: inline;
+}
+
+.iconoAtras {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+
+/*Estilos para el pie de pagina*/
+
+.logo {
+    margin: 50px;
+}
+
+footer {
+    margin-top: 50px;
+    background-color: #393e46;
+}
+
+.conteinerFooter {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.logoFooter {
+    padding: 20px;
+}
+
+.logoFooter img {
+    height: 70%;
+    padding-top: 40px;
+}
+
+.modulosFooter {
+    padding: 20px;
+}
+
+.modulosFooter ul {
+    text-align: left;
+    list-style: none;
+    padding-left: 30%;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.modulosFooter ul li {
+    padding: 5px;
+    font-size: 15px;
+}
+
+.tituloModulosFooter {
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-left: 30%;
+}
+
+.contactosFooter {
+    padding: 20px;
+}
+
+.contactosFooter ul {
+    text-align: left;
+    list-style: none;
+    padding-left: 50px;
+}
+
+.contactosFooter ul li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.iconFooter {
+    font-size: 40px;
+}
+
+.firmaFooter {
+    color: whitesmoke;
+    background-color: #202225;
+    text-align: center;
+    padding: 10px;
+    grid-column: 1/4;
+}
+
+.contenedorvacio {
+    height: 400px;
+}
+
+
+/*Media queri para adaptar el menu*/
 
 @media screen and (max-width: 450px) {
     body {

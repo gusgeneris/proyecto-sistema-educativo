@@ -1,20 +1,14 @@
 <?php
     require_once '../../class/MySql.php'; 
-    require_once "../../class/EjeContenido.php";
+    require_once "../../class/EjeContenido.php"; 
+    require_once "../../mensaje.php";
     
     $mensaje='';
     $idCarrera=$_GET["idCarrera"];
     $idMateria=$_GET["idMateria"];
     $idCicloLectivo=$_GET["idCicloLectivo"];
 
-    
-    if(isset($_GET['mj'])){
-        $mj=$_GET['mj'];
-        if ($mj==CORRECT_INSERT_CODE){
-            $mensaje=CORRECT_INSERT_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-        }
-    };
+ 
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +69,7 @@
                 </div> 
         </form>
     </div>
-
+    <?php require_once "../../footer.php"?>     
 </body>
 
 </html>

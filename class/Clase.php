@@ -155,7 +155,7 @@ Class Clase{
     public static function listadoPorIdCurriculaCarrera($idCurriculaCarrera){
         $sql= "SELECT id_clase, clase_numero, clase_fecha,tipo_detalle from clase ".
             "join tipo_clase on id_tipo_clase=tipo_clase_id_tipo_clase ". 
-            "where curricula_carrera_id_curricula_carrera= {$idCurriculaCarrera}";
+            "where curricula_carrera_id_curricula_carrera= {$idCurriculaCarrera} order by clase_numero";
             
             
         $dataBase=new MySql();

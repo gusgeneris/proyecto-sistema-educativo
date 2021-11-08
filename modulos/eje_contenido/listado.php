@@ -4,6 +4,7 @@ require_once "../../class/Materia.php";
 require_once "../../class/CicloLectivo.php";
 require_once "../../class/Carrera.php";
 require_once "../../class/Docente.php";
+require_once "../../mensaje.php";
 
 
 ?>
@@ -21,7 +22,6 @@ require_once "../../class/Docente.php";
         <script src ="../../script/comboCarrera.js"></script>
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
         <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
         <link rel="icon" type="image/jpg" href="../../image/logo.png">
         <title>Busqueda Ejes de COntenido</title>
 
@@ -151,7 +151,7 @@ require_once "../../class/Docente.php";
         <?php endif; ?>
         
         
-        
+    <?php require_once "../../footer.php"?>         
     </body>
 
 </html>

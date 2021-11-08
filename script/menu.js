@@ -29,7 +29,7 @@ $(document).ready(function() { //cuando se cargo completamente el documento
 
     $(window).resize(function() { //si el tamaño de la ventana cambia
         if ($(document).whidth > 450) { //cuando cambia preguntar si es mayor a 450px
-            $('.contenedorMenuVertical .menu').css({ 'display': 'block' })
+            $('.contenedorMenuVertical .menu').css({ 'display': 'block' });
         }
         if ($(document).whidth < 450) { //cuando cambia preguntar si es menor a 450px
             $('.contenedorMenuVertical .menu').css({ 'display': 'none' })
@@ -38,3 +38,18 @@ $(document).ready(function() { //cuando se cargo completamente el documento
         }
     })
 })
+
+$(document).on("click", function(e) {
+
+    var container = $(".contenedorMenuVertical");
+    var btnConteiner = $(".btnMenu");
+    if (!btnConteiner.is(e.target) && btnConteiner.has(e.target).length === 0) {
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            $('.contenedorMenuVertical').css({ 'display': 'none' });
+            $(btnConteiner).removeClass('menuActivado');
+
+            //Se ha pulsado en cualquier lado fuera de los elementos contenidos en la variable container
+
+        }
+    }
+});

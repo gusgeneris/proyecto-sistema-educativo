@@ -27,7 +27,6 @@ $listadoMatriculasActuales=[];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/styleInsert.css" class="">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -78,6 +77,9 @@ $listadoMatriculasActuales=[];
         <input type="submit" class="" name="guardar" value="Guardar">
         <input name="Cancelar" type="submit" value="Cancelar">
     </form>
+
+    
+    <?php require_once "../../footer.php"?>
     
 </body>
 </html>

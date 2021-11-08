@@ -1,6 +1,8 @@
 <?php
 require_once "../../class/Horario.php";
 require_once "../../class/Dia.php";
+require_once "../../mensaje.php";
+require_once "../../mensaje.php";
 
 $lista=Horario::listaTodos();
 
@@ -12,12 +14,10 @@ $lista=Horario::listaTodos();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
-    
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css" class="">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista horarios</title>
 
@@ -31,7 +31,7 @@ $lista=Horario::listaTodos();
 
     <div class="conteiner-btn-agregar">
         <button type="button" class="btn-agregar" > 
-            <a href="insert.php">agregar nuevo</a>
+            <a href="insert.php">Agregar nuevo horario</a>
         </button>
     </div>
     
@@ -69,8 +69,11 @@ $lista=Horario::listaTodos();
                         <?php $dia=Dia::obtenerPorId($horario->getIdDia()); echo $dia->getDescripcion(); ?>
                     </td>
                     <td>
-                        <a href="dar_baja.php?id=<?php echo $horario->getIdHorario(); ?>" class="">borrar</a>
-                        <a href="modificar.php?id= <?php echo $horario->getIdhorario(); ?>" class="">modificar</a>
+                        <div class="icon">
+                            <a href="dar_baja.php?id=<?php echo $horario->getIdHorario(); ?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                            <a href="modificar.php?id= <?php echo $horario->getIdhorario(); ?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                        </div>
+                       
                     </td>
                 </tr>
             <?php endforeach ?>
@@ -78,6 +81,6 @@ $lista=Horario::listaTodos();
         
         </table>
     </div>
-
+    <?php require_once "../../footer.php"?> 
 </body>
 </html>

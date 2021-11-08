@@ -11,7 +11,7 @@
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
     border-radius: 15px;
     width: 50%;
-    height: 50%;
+    height: 70%;
 }
 
 .formulario-inicio {
@@ -45,6 +45,7 @@
 .inputLogin {
     border-radius: 7px;
     border: none;
+    padding: 10px;
 }
 
 .body {

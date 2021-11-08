@@ -1,16 +1,7 @@
 <?php
     require_once '../../class/MySql.php'; 
     require_once "../../class/Especialidad.php";
-    
-    $mensaje='';
-    
-    if(isset($_GET['mj'])){
-        $mj=$_GET['mj'];
-        if ($mj==CORRECT_INSERT_CODE){
-            $mensaje=CORRECT_INSERT_MENSAJE;?>
-            <div class="mensajes"><?php echo $mensaje;?></div><?php
-        }
-    };
+    require_once "../../mensaje.php";
 
 
 ?>
@@ -23,7 +14,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -67,6 +57,7 @@
             </div>
         </form>
     </div>
+    <?php require_once "../../footer.php"?>   
     
 </body>
 

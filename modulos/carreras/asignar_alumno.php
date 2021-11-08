@@ -4,7 +4,8 @@ require_once "../../class/Estado.php";
 
 require_once "../../class/Alumno.php";
 require_once "../../configs.php";
-require_once "../../class/Carrera.php";
+require_once "../../class/Carrera.php"; 
+require_once "../../mensaje.php";
 
 
 $idCicloLectivo=$_GET["idCiclo"];
@@ -51,8 +52,8 @@ $listadoAlumnosAsiganadosActuales=[];
     <input type="hidden" name="IdCicloLectivo" value="<?php echo $idCarrera?>">
     <input type="hidden" name="IdCarrera" value="<?php echo $idCicloLectivo?>">
 
-
-        <table border="1">
+    <div class="conteiner">
+        <table class="tabla">
             <tr>
                 <td>Asignar</td>
                 <td>Nombre Alumno</td>
@@ -89,7 +90,9 @@ $listadoAlumnosAsiganadosActuales=[];
         <br>
         <input type="submit" class="" name="guardar" value="Guardar">
         <input name="Cancelar" type="submit" value="Cancelar">
-    </form>
+        </div>
+    
+        <?php require_once "../../footer.php"?>   
     
 </body>
 </html>

@@ -25,7 +25,11 @@ $idPerfil=$usuario->getIdPerfil();
     <div class="">
         <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
     </div>
-    <button type="button" class="btnMenu"><i class="icono fas fa-bars"></i></button>
+    <button type="button" class="btnMenu"><i class="icono menu fas fa-bars"></i></button>
+    <button type="button" class="btnMenu">
+        <a href="javascript:history.back()"><i class="icono menu fas fa-arrow-left"></i></a>
+    </button>
+    
 </header>
 
     <?php if ($idPerfil == 3):?>
@@ -40,7 +44,8 @@ $idPerfil=$usuario->getIdPerfil();
                 </div>
                 
                <ul class="menu">
-                        
+                        <li><a href="/proyecto-modulos/inicio.php"><i class="icono right fas fa-home"></i>Inicio</a></li>
+
                     <?php foreach($listadoModulos as $modulos): $nombreModulo=$modulos->getNombre()?>
 
                         <li>
@@ -51,6 +56,7 @@ $idPerfil=$usuario->getIdPerfil();
                         </li>                        
                     <?php endforeach; ?>
                         <li><a href="/proyecto-modulos/cerrar_sesion.php">Cerrar Sesion<i class="icono right fas fa-sign-in-alt"></i></a></li>
+                       
                 </ul>
             </nav> 
         </div>
@@ -86,6 +92,7 @@ $idPerfil=$usuario->getIdPerfil();
                 <div class="contenedorMenuVertical" >
                      <nav class="vertical">
                         <ul class="menu">
+                            <li><a href="/proyecto-modulos/inicio.php"><i class="icono left fas fa-home"></i>Inicio</a></li>
                             <li >
                                 <button type="button"><i class="icono left fas fa-tasks"></i> Administracion <i class=" icono right fas fa-chevron-down"></i></button>
                             

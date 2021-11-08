@@ -23,7 +23,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
@@ -38,21 +37,24 @@
 
 <body class="body">
 
-    <h1 class="titulo"> Registro de Pais</h1>
+    <div class="titulo">
+        <h1> Registro de Pais</h1>
+    </div>
 
-    <form action="procesador_insert.php" method="POST"  class="formInsertUnaColumna" id="formInsert" name="formInsert">
-        
-        <div class="formGrup" id="GrupoPais">
-                
-            <label for="Pais" class="formLabel">Nombre Pais</label>    
-            <div class="formGrupInput">
-                <input  type="text" name="Pais" class="formInput" placeholder="Nombre Pais"></div>
-            </div>
-            <p class="formularioInputError"> El Nombre de Pais no permite simbolos ni numeros.</p> 
-        </div>
-
-            <!--Grupo de Mensaje-->
+    <div class="main">
+        <form action="procesador_insert.php" method="POST"  class="formInsertUnaColumna" id="formInsert" name="formInsert">
             
+            <div class="formGrup" id="GrupoPais">
+                    
+                <label for="Pais" class="formLabel">Nombre Pais</label>    
+                <div class="formGrupInput">
+                    <input  type="text" name="Pais" class="formInput" placeholder="Nombre Pais"></div>
+                </div>
+                <p class="formularioInputError"> El Nombre de Pais no permite simbolos ni numeros.</p> 
+            </div>
+
+                <!--Grupo de Mensaje-->
+                
             <div class="formMensaje" id="GrupoMensaje">
                 
                 <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
@@ -66,12 +68,12 @@
             </div>
             <br>
             <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
             </div>
         </form>
-    
-    </body>
-    
+    </div>
+    <?php require_once "../../footer.php"?>  
+        
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
     
 </body>
