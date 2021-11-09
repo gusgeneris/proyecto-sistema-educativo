@@ -24,7 +24,19 @@ a {
     color: #fff;
 }
 
+.btnAtras {
+    padding: 15px;
+    background: #393E46;
+    border: none;
+    color: #fff;
+}
+
 .btnMenu .icono {
+    float: right;
+    margin: 10px;
+}
+
+.btnAtras .icono {
     float: right;
     margin: 10px;
 }
@@ -36,7 +48,6 @@ a {
     line-height: 18px;
     background-color: #393E46;
     position: absolute;
-    height: 100%;
     z-index: 1000;
 }
 

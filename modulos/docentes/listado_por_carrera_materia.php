@@ -134,7 +134,8 @@ if(isset($_GET['mj'])){
                 </tr>
                 <?php endforeach ?>
             </tbody>
-    </table>
+        </table>
+    </div>
 
     <?php require_once "../../footer.php"?>                           
 

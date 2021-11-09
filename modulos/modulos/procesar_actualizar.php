@@ -23,7 +23,7 @@ if (strlen($nombre) < 3 ){
     exit;
 }
 
-if((!preg_match("/^[a-zA-Z_ ]*$/",$nombre))){
+if((!preg_match("/^[a-zA-Z0-9_ ]{8,}$/",$nombre))){
     header("Location:listado.php?mj=assssd");
     exit;
 };

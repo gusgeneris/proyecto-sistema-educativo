@@ -13,26 +13,26 @@
 .cabeceraPaso1 {
     padding: 1px;
     margin: 3px;
-    background-color: aquamarine;
+    background-color: #0062ffd5;
     display: inline;
+    border-radius: 4px;
 }
 
 #cabeceraPaso2 {
     padding: 1px;
     margin: 3px;
-    background-color: grey;
+    background-color: rgba(155, 155, 155, 0.699);
     display: inline;
 }
 
 #cabeceraPaso3 {
     padding: 1px;
     margin: 3px;
-    background-color: grey;
+    background-color: rgba(155, 155, 155, 0.699);
     display: inline;
 }
 
 #containerForm {
     text-align: center;
     border-radius: 5px;
-    border: 1px solid;
 }

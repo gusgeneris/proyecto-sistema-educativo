@@ -8,7 +8,7 @@ const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
     nombreCarrera: /^[a-zA-Z0-9_ ]{8,}$/,
-    nombreMateria: /^[a-zA-Z0-9_ ]{3,40}$/,
+    nombreMateria: /^[a-zA-Z0-9_ ]{3}$/,
     apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     contrasenia: /^.{4,12}$/, // 4 a 12 digitos.
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -102,7 +102,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.anios, e.target, 'Anios')
             break;
         case "NombreCarrera":
-            validarCampo(expresiones.nombreMateria, e.target, 'NombreCarrera')
+            validarCampo(expresiones.nombreCarrera, e.target, 'NombreCarrera')
             break;
         case "NombreMateria":
             validarCampo(expresiones.nombreMateria, e.target, 'NombreMateria')

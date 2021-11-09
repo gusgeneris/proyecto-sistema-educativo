@@ -95,9 +95,9 @@ $lista = Docente::listadoDocente();
                     </td>
                     <td>
                         <div class="icon">
-                            <a href="dar_baja.php?id=<?php echo $docente->getIdPersona(); ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
-                            <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class=""><img class="icon-a" src="../../icon/listado.png" title="Lista de Especialidades" alt="Lista de Especialidades"></a>
+                            <a href="dar_baja.php?id=<?php echo $docente->getIdPersona(); ?>" class=""><i class="icono eliminar fas fa-trash" title="Eliminar" alt="Eliminar"></i></a>
+                            <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class=""><i class="icono modificar fas fa-edit"  title="Modificar" alt="Modificar"></i></a>
+                            <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class=""><i class="icono modificar fas fa-clipboard-list" title="Lista de Especialidades" alt="Lista de Especialidades"></i></a>
                         </div>
                     </td>
                 </tr>

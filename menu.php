@@ -26,7 +26,7 @@ $idPerfil=$usuario->getIdPerfil();
         <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
     </div>
     <button type="button" class="btnMenu"><i class="icono menu fas fa-bars"></i></button>
-    <button type="button" class="btnMenu">
+    <button type="button" class="btnAtras">
         <a href="javascript:history.back()"><i class="icono menu fas fa-arrow-left"></i></a>
     </button>
     
@@ -34,7 +34,7 @@ $idPerfil=$usuario->getIdPerfil();
 
     <?php if ($idPerfil == 3):?>
 
-        <div class="contenedorMenuVertical" >                    
+        <div class="contenedorMenuVertical" id="contenedorMenuVertical">                    
             <nav class="vertical">    
             
                 <div class="clase-nueva">
@@ -79,17 +79,18 @@ $idPerfil=$usuario->getIdPerfil();
                         array_push($ubicacion,$nombreModulo);
                     elseif($nombreModulo=="docentes"||$nombreModulo=="alumnos"):
                         array_push($persona,$nombreModulo);
-                    elseif($nombreModulo=="periodo_desarrollo"||$nombreModulo=="horarios"):
+                    elseif($nombreModulo=="periodo_desarrollo"||$nombreModulo=="horarios"||$nombreModulo=="anio_desarrollo"):
                         array_push($configuracion,$nombreModulo);
                     elseif($nombreModulo=="ciclo_lectivo"||$nombreModulo=="materias"||$nombreModulo=="carreras"):
                         array_push($administracion,$nombreModulo);
                     endif;
 
                 endforeach; 
+
             ?>
 
 
-                <div class="contenedorMenuVertical" >
+                <div class="contenedorMenuVertical"  id="contenedorMenuVertical">
                      <nav class="vertical">
                         <ul class="menu">
                             <li><a href="/proyecto-modulos/inicio.php"><i class="icono left fas fa-home"></i>Inicio</a></li>

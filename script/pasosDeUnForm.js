@@ -5,7 +5,7 @@ function mostrarPaso2() {
 
     var paso2 = document.getElementById("paso2").style.display = "inline";
 
-    document.getElementById("cabeceraPaso2").style.backgroundColor = "aquamarine"
+    document.getElementById("cabeceraPaso2").style.backgroundColor = "#0062ffd5"
 
 }
 
@@ -17,7 +17,7 @@ function mostrarPasoFinal() {
 
     var paso2 = document.getElementById("pasoFinal").style.display = "inline";
 
-    document.getElementById("cabeceraPaso3").style.backgroundColor = "aquamarine"
+    document.getElementById("cabeceraPaso3").style.backgroundColor = "#0062ffd5"
 
 }
 
@@ -38,6 +38,8 @@ function atras1() {
 
     var paso2 = document.getElementById("paso2").style.display = "none";
     var paso1 = document.getElementById("paso1").style.display = "block";
+    document.getElementById("cabeceraPaso1").style.backgroundColor = "#0062ffd5"
+    document.getElementById("cabeceraPaso2").style.backgroundColor = "grey"
 
 }
 
@@ -45,5 +47,7 @@ function atras2() {
 
     var paso1 = document.getElementById("paso2").style.display = "block";
     var paso2 = document.getElementById("pasoFinal").style.display = "none";
+    document.getElementById("cabeceraPaso2").style.backgroundColor = "#0062ffd5"
+    document.getElementById("cabeceraPaso3").style.backgroundColor = "grey"
 
 }

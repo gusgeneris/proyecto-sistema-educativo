@@ -65,17 +65,16 @@ if(isset($_GET['idCurriculaCarrera'])){
             <h1>Calendarizacion</h1>
         </div>
         
-        <form method="POST" action="procesar_insert.php" method=POST class="formInsert" id="formInsert" name="formInsert">
+        <div class="main">
+            <form method="POST" action="procesar_insert.php" method=POST class="formInsert2Columnas" id="formInsert" name="formInsert">
 
-                <input type="hidden" name="idCalendarizacion" value="<?php echo $idCalendarizacion?>">
-                <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera?>">
 
                 <div class="formGrup" id="GrupoNumClase">
                     <div class="formGrupInput">
                         <label for="NumClase" class="formLabel">N° Clase</label>
                         <input type="number" id="NumClase" name="NumClase" class="formInput">
                     </div>
-                    <p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
+                    <p class="formularioInputError"> El Campo debe estar bien escrito.</p> 
                     
                 </div> 
                 
@@ -84,15 +83,15 @@ if(isset($_GET['idCurriculaCarrera'])){
                         <label for="Fecha" class="formLabel">Fecha</label>   
                         <input type="date" name="Fecha" id="Fecha" class="formInput">
                     </div>
-                    <p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
+                    <p class="formularioInputError"> El Campo debe estar bien escrito.</p> 
                 </div> 
-
+                <br>
                 <div class="formGrup" id="GrupoActividad">
                     <div class="formGrupInput">
                         <label for="Actividad" class="formLabel">Actividad</label>   
                         <textarea name="Actividad" id="Actividad" class="formInput"></textarea>
                     </div>
-                    <p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
+                    <p class="formularioInputError"> El Campo debe estar bien escrito.</p> 
                 </div>
 
                 <div class="formGrup" id="GrupoContenido">
@@ -100,10 +99,10 @@ if(isset($_GET['idCurriculaCarrera'])){
                         <label for="Contenido" class="formLabel">Contenido</label>   
                         <textarea name="Contenido" id="Contenido" class="formInput"></textarea>
                     </div>
-                    <p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
+                    <p class="formularioInputError"> El Campo debe estar bien escrito.</p> 
                 </div>
                 
-                &nbsp;&nbsp;&nbsp;
+                
                     <!--Grupo de Mensaje-->
                         
                 <div class="formMensaje" id="GrupoMensaje">
@@ -112,6 +111,9 @@ if(isset($_GET['idCurriculaCarrera'])){
                     
                 </div>
 
+                <input type="hidden" name="idCalendarizacion" value="<?php echo $idCalendarizacion?>">
+                <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera?>">
+               
                     <!--Grupo de Boton Enviar-->
 
                 <div class="formGrupBtnEnviar">
@@ -120,7 +122,7 @@ if(isset($_GET['idCurriculaCarrera'])){
 
 
             </form>
-            <br>
+        </div>
 
         <div class="subtitulo" style="border-bottom: 1px solid">
             <h2>Detalles Cargados</h2>

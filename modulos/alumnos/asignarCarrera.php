@@ -83,32 +83,39 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                 <div class="formGrupBtnEnviar">
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
                 </div>
-
-
+            
             </form>
-            <br><br>
-            <table border="1" cellspacing="0" cellpadding="">
-                <tr>
-                    <th>Ciclo Lectivo</th>
-                    <th>Carrera</th>    
-                    <th>Accion</th>
-                </tr>
+        </div>
+        
+        <div class="conteriner3Columnas">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ciclo Lectivo</th>
+                        <th>Carrera</th>    
+                        <th>Accion</th>
+                    </tr>
+                </thead>     
+                <tbody>           
+                    <?php foreach ($listadoCicloLectivoCarrera as list($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno,$idCicloLectivoCarrera)): ?>
 
-                <?php foreach ($listadoCicloLectivoCarrera as list($cicloLectivo,$carrera,$idCicloLectivoCarreraAlumno,$idCicloLectivoCarrera)): ?>
-
-                <tr>
-                    <td><?php echo $cicloLectivo ?></td>
-                    <td><?php echo $carrera ?></td>
-                    <td>
-                        <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
-                            Eliminar
-                        </a>|
-                        <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
-                            Materias Asociadas
-                        </a>
-                    </td>
-                </tr>
-                <?php endforeach;?>
+                    <tr>
+                        <td><?php echo $cicloLectivo ?></td>
+                        <td><?php echo $carrera ?></td>
+                        <td>
+                            <div class="icon">                           
+                                <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
+                                <img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                </a>|
+                                <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
+                                    <img class="icon-a" src="../../icon/listado.png" title="Listado de Materias Asociadas" alt="Listado de Asociadas">
+                                </a>
+                            </div>
+ 
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                </tbody>
             </table>
         </div>
             

@@ -45,12 +45,10 @@ $lista = Alumno::listadoAlumnos();
         <table class="tabla" id="table">
             <thead>
                 <tr >
-                    <th> ID Alumno</th>
-                    <th> ID Persona</th>
                     <th> Nombre</th>
                     <th> Apellido</th>
                     <th> Fecha Nacimiento</th>
-                    <th> Nacionalidad</th>
+                    <th> Dni</th>
                     <th> Numero Legajo</th>
                     <th> Sexo</th>
                     <th> Contacto</th>
@@ -62,12 +60,7 @@ $lista = Alumno::listadoAlumnos();
             <tbody>
                 <?php foreach ($lista as $alumno ):?> 
                     <tr >
-                        <td >
-                            <?php echo $alumno->getIdAlumno(); ?>
-                        </td>
-                        <td>
-                            <?php echo $alumno->getIdPersona(); ?>
-                        </td>
+                    
                         <td>
                             <?php echo $alumno->getNombre(); ?>
                         </td>
@@ -78,7 +71,7 @@ $lista = Alumno::listadoAlumnos();
                             <?php echo $alumno->getFechaNacimiento(); ?>
                         </td>
                         <td>
-                            <?php echo $alumno->getNacionalidad(); ?>
+                            <?php echo $alumno->getDni(); ?>
                         </td>
                         <td>
                             <?php echo $alumno->getNumLegajo(); ?>

@@ -72,7 +72,8 @@ tr:hover td {
 }
 
 .icon-a {
-    width: 20px;
+    margin: 2px;
+    width: 30px;
 }
 
 .conteiner-btn-agregar {
@@ -189,4 +190,27 @@ tr:hover td {
 .conteiner.horario th {
     padding: 20px;
     text-align: center;
+}
+
+.icono.eliminar {
+    color: rgb(194, 18, 18);
+    font-size: 25px;
+    margin: 5px;
+}
+
+.icono.modificar {
+    color: rgb(41, 41, 41);
+    font-size: 25px;
+    margin: 5px;
+}
+
+.icono.asignar {
+    color: rgb(44, 192, 38);
+    font-size: 25px;
+    margin: 5px;
+}
+
+.icono.ver {
+    color: rgb(37, 37, 43);
+    font-size: 25px;
 }

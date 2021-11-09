@@ -34,7 +34,7 @@
 
         <div class="conteiner horario">
 
-            <table class="tabla">
+            <table class="tabla" id="tablaHorarios">
 
                 <thead>
                 
@@ -82,10 +82,10 @@
 
         </div>
         <?php endif?>
-        <div class="contenedorvacio"></div>                      
+        <div class="contenedorvacio"></div> 
+    <?php require_once "footer.php"?>
+                     
 
     </body>
-
-<?php require_once "footer.php"?>
-
+<script src="script/horario.js"></script>
 </html>

@@ -38,15 +38,17 @@ $lista = Barrio::listado();
     </div>
     
     <div class="conteiner3Columnas">
-        <table class="tabla" method="GET">
-            <tr >
-                <th> ID Barrio </th>
-                <th> ID Localidad </th>
-                <th> Nombre Barrio </th>
+        <table class="tabla" >
+            <thead>
+                <tr >
+                    <th> ID Barrio </th>
+                    <th> ID Localidad </th>
+                    <th> Nombre Barrio </th>
 
-                <th> Acciones</th>
-
-            </tr>
+                    <th> Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
             <?php foreach ($lista as $barrio ):?> 
                 <tr >
                     <td >
@@ -63,9 +65,9 @@ $lista = Barrio::listado();
                         <a href="eliminar.php?idBarrio=<?php echo $barrio->getIdBarrio(); ?>&idLocalidad=<?php echo $barrio->getIdLocalidad();?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
                         <a href="modificar.php?idBarrio=<?php echo $barrio->getIdBarrio(); ?>&idLocalidad=<?php echo $barrio->getIdLocalidad();?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                     </td>
-
                 </tr>
-            <?php endforeach ?>    
+            <?php endforeach ?>   
+            </tbody> 
         </table>
     </div>
     <?php require_once "../../footer.php"?>     

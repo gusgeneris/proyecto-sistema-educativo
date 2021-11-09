@@ -19,6 +19,7 @@
     
     $idCicloLectivoCarrera=CicloLectivo::obtenerIdCicloLectivoCarrera($idCicloLectivo,$idCarrera);
 
+    $carrera=Carrera::listadoPorId($idCarrera);
 
 
 ?>
@@ -29,8 +30,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" >
         <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+        <link rel="stylesheet" href="/proyecto-modulos/style/styleFormInsert.css">
         <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
         <link rel="stylesheet" href="../../style/menuVertical.css">
         <script src="../../jquery3.6.js"></script>
@@ -40,7 +41,13 @@
     <body>
     
 <?php require_once "../../menu.php";?>
-    <div class="">
+
+    <div class="titulo">
+        <h1>Crear Horario para la carrera: <?php echo $carrera->getNombre()?></h1>
+    </div>
+
+
+    <div class="main">
         
         <form action="procesar_asignar.php" method="POST">
             <input type="hidden" name="idCarrera" value="<?php echo $idCarrera ?>">
@@ -64,14 +71,31 @@
                     <option value="<?php echo $dia->getIdDia()?>"> <?php echo $dia->getDescripcion()?></option>
                 <?php endforeach?>        
             </select>
-            <br><br>
+           
+            <div class="conteiner3columnas">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Asignar</th>
+                            <th>Hora de Inicio</th>
+                            <th>Hora de Finalizacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                <?php foreach ($listaHorario as $horario):?>
+                    <tr>
+                    <td><input type="checkbox" name="check_lista[]" value="<?php echo $horario->getNumero() ?>"></td>
 
-            <?php foreach ($listaHorario as $horario):?>
-                <input type="checkbox" name="check_lista[]" value="<?php echo $horario->getNumero() ?>">
+                    <td><?php echo $horario->getHoraInicio()?></td>
 
-                <?php echo $horario->getHoraInicio()?> - <?php echo $horario->getHoraFin()?>
-                <br>
-            <?php endforeach?>
+                    <td><?php echo $horario->getHoraFin()?></td>
+                    
+                    </tr>
+                <?php endforeach?>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="formGrupBtnEnviar" >
                 <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
@@ -90,9 +114,13 @@
                     
         ?>
 
+        <div class="subtitulo">
+            <h2>Horarios de la Carrera: <?php echo $carrera->getNombre()?></h2>
+        </div>
+
             <div class="conteiner">
 
-                <table style="border:1px solid;">
+                <table class="tabla">
 
                     <thead>
                     
@@ -138,5 +166,6 @@
                     </tbody>
                 </table>
         </div>
+    <?php require_once "../../footer.php"?>     
     </body>
 </html>

@@ -97,7 +97,11 @@
                     $listaDeClases= Clase::listadoPorIdCurriculaCarrera($idCurriculaCarrera);
         ?>
                 
-        <div class="conteiner3Columnas">
+            <div class="formGrupBtnEnviar">
+                <button class="formButton" id="Guardar"><a href="reporte_asistencias.php?idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>">Reporte de asistencia</a></button>
+            </div>
+       
+            <div class="conteiner3Columnas">
             <table class="tabla">
                 <thead>
                     <tr>
@@ -161,6 +165,7 @@
                 </table>
             </div>
             <?php }; ?>
+            
             <?php require_once "../../footer.php"?>    
     </body>
 

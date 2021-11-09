@@ -100,13 +100,13 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
                         
                         <td>
                             <div class="icon">
-                            <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
+                                <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
 
-                                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></i></a>
                                 
-                                <?php if (($carrera->getEstado())==2){?>
+                            <?php if (($carrera->getEstado())==2){?>
                                 <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>"> Dar Alta</a>
-                                <?php } ?>
+                            <?php } ?>
                             </div>
                         </td>
                     </tr>

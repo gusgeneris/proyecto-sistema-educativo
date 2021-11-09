@@ -53,3 +53,10 @@ $(document).on("click", function(e) {
         }
     }
 });
+
+$(document).ready(function() {
+
+    var height = $(window).height();
+
+    $('#contenedorMenuVertical').height(height);
+});

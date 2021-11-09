@@ -25,7 +25,7 @@
         <script src="../../jquery3.6.js"></script>
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <script src ="../../script/comboCarrera.js"></script>
-        <title>Busqueda de Clases</title>
+        <title>Busqueda de Reporte de Asistencias</title>
     </head>
     <body>
 
@@ -41,7 +41,7 @@
 
         <div>
             <div class="titulo">
-                <h1 class="titulo">Busqueda de Asistencia</h1>
+                <h1 class="titulo">Busqueda de  Reportes de Asistencias</h1>
             </div>
 
             <div class="main">
@@ -83,7 +83,7 @@
                     </div>                  
                     
                     <div class="formGrupBtnEnviar"> 
-                        <button class="formButton" id="Guardar" type="submit" > Buscar Clases </button>
+                        <button class="formButton" id="Guardar" type="submit" > Buscar Reporte</button>
                     </div> 
 
                 </form>
