@@ -63,6 +63,20 @@ class Estado{
             return $listadoEstados;}
 
     }
+    public static function estadoPorId($idEstado){
+        $sql="SELECT id_estado,estado_descripcion FROM estado WHERE id_estado={$idEstado}";
+        
+        
+        $database=new MySql();
+        $dato = $database->consultar($sql);
+
+        $registro = $dato->fetch_assoc();
+
+        $estado=new Estado();
+        $estado->setIdEstado($registro['id_estado']);
+        $estado->setDescripcion($registro['estado_descripcion']);
+        return $estado;
+    }
 
 
 

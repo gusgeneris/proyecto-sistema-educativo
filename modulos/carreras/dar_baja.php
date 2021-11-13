@@ -1,5 +1,6 @@
 <?php
 require_once "../../class/Carrera.php";
+require_once "../../configs.php";
 $idCarrera=$_GET["id"];
 
 
@@ -12,7 +13,7 @@ if(isset($_GET["idCiclo"])){
 
 Carrera::darDeBaja($idCarrera);
 
-header("Location:listado.php?");
+header("Location:listado.php?mj=".CORRECT_DELETE_CODE);
 
 
 ?>

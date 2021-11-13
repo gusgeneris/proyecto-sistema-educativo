@@ -13,6 +13,7 @@ if($cancelar==true){
 
 $idUsuario=$_POST['idUsuario'];
 $nombreUser = $_POST['NombreUsuario'];
+$contrasenia = $_POST['Contrasenia'];
 $personaNombre = $_POST['Nombre'];
 $personaApellido = $_POST['Apellido'];
 $personaDni = $_POST['Dni'];
@@ -83,6 +84,7 @@ $user->setIdUsuario($idUsuario);
 $user->setNombreUsuario($nombreUser);
 $user->setNombre($personaNombre);
 $user->setApellido($personaApellido);
+$user->setContrasenia($contrasenia);
 $user->setDni($personaDni);
 $user->setFechaNacimiento($personaFechaNac);
 $user->setNacionalidad($personaNacionalidad);

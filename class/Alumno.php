@@ -63,31 +63,56 @@ class Alumno extends Persona{
 
     }
 
-    public static function listadoAlumnos(){
-        $sql = "SELECT alumno.id_alumno,alumno.alumno_num_legajo,
+    public static function listadoAlumnos($filtroEstado=0,$filtroApellido=""){
+        $sql = "SELECT estado_id_estado,alumno.id_alumno,alumno.alumno_num_legajo,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
         persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,persona.estado_id_estado FROM alumno 
         JOIN persona on persona.id_persona=alumno.persona_id_persona";
 
-    $db = new MySql();
-    $datos = $db->consultar($sql);
+        $where="";
 
-    $listadoAlumnos = [];
+        if($filtroEstado!=0){
+            $where.=" WHERE estado_id_estado='$filtroEstado' ";
+        };
 
-    while ($registro = $datos->fetch_assoc()){
-        if($registro['estado_id_estado']==1){
-            $alumno=new Alumno();
-            $alumno->crearAlumno ($alumno,$registro);
+        if($filtroApellido != ""){
+            if($where!= ""){
+                $where.=" AND persona_apellido like '%{$filtroApellido}%'";
+            }else{
+                $where= " WHERE persona_apellido like '%{$filtroApellido}%'";
+            }
+        }
+        $sql.=$where;
 
-            $listadoAlumnos[]=$alumno;
-    }}
+        $db = new MySql();
+        $datos = $db->consultar($sql);
 
-    return $listadoAlumnos;
+        $listadoAlumnos = [];
+
+        while ($registro = $datos->fetch_assoc()){
+            #if($registro['estado_id_estado']==1){
+                $alumno=new Alumno();
+                $alumno->crearAlumno ($alumno,$registro);
+                
+                $alumno->_estado= $registro['estado_id_estado'];
+
+                $listadoAlumnos[]=$alumno;
+        }
+
+        return $listadoAlumnos;
 
     }
 
+    public static function darAlta($idPersona){
+        $sql="UPDATE `persona` SET `estado_id_estado` = '1' WHERE (`id_persona` = {$idPersona})";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
+    }
+
     public static function obtenerTodoPorId($id){
-        $sql = "SELECT alumno.id_alumno,alumno.alumno_num_legajo,
+        $sql = "SELECT estado_id_estado,alumno.id_alumno,alumno.alumno_num_legajo,
         persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
         persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo FROM alumno 
         JOIN persona on persona.id_persona=alumno.persona_id_persona WHERE id_alumno={$id}";

@@ -13,27 +13,13 @@ $idCicloLectivo=$_GET["idCicloLectivo"];
 
 $idCicloLectivoCarrera=Carrera::idCicloLectivoCarrera($idCicloLectivo,$idCarrera);
 
+$idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
+
+
 $lista = Docente::listadoPorDocenteMateria($idCicloLectivoCarrera,$idMateria);
 
 $materia=Materia::listadoPorId($idMateria);
 $carrera=Carrera::listadoPorId($idCarrera);
-
-
-#highlight_string(var_export($lista,true));
-
-$mensaje='';
-    
-if(isset($_GET['mj'])){
-    $mj=$_GET['mj'];
-    if ($mj==CORRECT_INSERT_CODE){
-        $mensaje=CORRECT_INSERT_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }else if($mj==CORRECT_UPDATE_CODE){
-        $mensaje=CORRECT_UPDATE_MENSAJE;?>
-        <div class="mensajes"><?php echo $mensaje;?></div><?php
-    }
-};
-
 
 ?>
 
@@ -47,6 +33,7 @@ if(isset($_GET['mj'])){
     <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista Docentes</title>
@@ -56,7 +43,9 @@ if(isset($_GET['mj'])){
 
 
 <body class="body-listuser">
-    <?php require_once "../../menu.php";?>
+    <?php 
+        require_once "../../mensaje.php"; require_once "../../menu.php";
+    ?>
     
     <div class="titulo">
         <h1>Lista de Docentes de la Materia: <?php echo $materia ?> <br> 
@@ -69,7 +58,7 @@ if(isset($_GET['mj'])){
          </button>
     </div>
     
-    <div class="conteiner" id=>
+    <div class="conteiner" id="table">
         <table class="tabla" method="GET">
             <thead>
                 <tr >
@@ -127,8 +116,19 @@ if(isset($_GET['mj'])){
                     </td>
                     <td>
                         <div class="icon">
-                            <a href="dar_baja.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>&idCicloLectivo=<?php echo $idCicloLectivo; ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de Especialidades" alt="Lista de Especialidades"></a>
+                            <?php
+                                    $idDocente=$docente->getIdDocente();                                
+                                    $estadoDocenteMateria=Docente::estadoDocenteMateria($idDocente,$idCurriculaCarrera);
+                                    $estadoDocenteCarrera=Docente::estadoDocenteCarrera($idDocente,$idCicloLectivoCarrera);
+                            
+                            if ($estadoDocenteMateria==2 && $estadoDocenteCarrera==2){?>
+                                        <div id="trDadoDeBaja"><a href="dar_alta_asignacion.php?idDocente=<?php echo $docente->getIdDocente()?>&idCicloLectivoCarrera=<?php echo $idCicloLectivoCarrera?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>&idMateria=<?php echo $idMateria?>&idCicloLectivo=<?php echo $idCicloLectivo?>&idCarrera=<?php echo $idCarrera?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a></div>
+                            <?php }else{ ?>
+
+                                <a href="dar_baja_asignacion.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>&idCicloLectivo=<?php echo $idCicloLectivo; ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de Especialidades" alt="Lista de Especialidades"></a>
+
+                            <?php } ?>
                         </div>
                     </td>
                 </tr>

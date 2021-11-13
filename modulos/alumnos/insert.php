@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="/proyecto-modulos/style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Alumno</title>
@@ -81,7 +82,7 @@
             <div class="formGrup" id="GrupoFecha">
                     <label for="Fecha" class="formLabel">Fecha Nacimiento</label>
                     <div class="formGrupInput">
-                        <input type="date" id='FechaNacimiento' name="FechaNacimiento" class="formInput" placeholder="Fecha">
+                        <input type="date" id='FechaNacimiento' name="Fecha" class="formInput" placeholder="Fecha">
                         <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
                     </div>
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
@@ -140,10 +141,8 @@
 
             <div class="formGrupBtnEnviar">
                 <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+           
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onClick="history.go(-1);">Cancelar</button>
             </div>
             
         </form>

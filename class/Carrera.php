@@ -203,11 +203,11 @@ Class Carrera{
         if($datos->num_rows > 0){
         
             while ($registro = $datos->fetch_assoc()){
-                if ($registro['ciclo_lectivo_carrera_estado']==1){
+                #if ($registro['ciclo_lectivo_carrera_estado']==1){
                 $carrera=new Carrera();
                 $carrera->crearCarrera($registro,$carrera);
 
-                $listadoCarreras[]=$carrera;}
+                $listadoCarreras[]=$carrera;#}
             }
         }
         return $listadoCarreras;
@@ -223,6 +223,35 @@ Class Carrera{
         $idCicloLectivoCarrera=$registro["id_ciclo_lectivo_carrera"];
         $sql="UPDATE ciclo_lectivo_carrera SET `ciclo_lectivo_carrera_estado` = '2' WHERE (`id_ciclo_lectivo_carrera` = {$idCicloLectivoCarrera})";
         $database->eliminarRegistro($sql);
+
+    }
+
+    public static function estadoCicloLectivoCarrera($idCicloLectivo,$idCarrera){
+        $sql="SELECT ciclo_lectivo_carrera_estado from ciclo_lectivo_carrera where ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} and carrera_id_carrera={$idCarrera}";
+
+        $dataBase=new MySql();
+        $dato=$dataBase->consultar($sql);
+        $registro = $dato->fetch_assoc();
+        $estado=$registro['ciclo_lectivo_carrera_estado'];
+        
+        return $estado;
+    
+    }
+
+    public static function darAltaAsignacionACiclo($idCicloLectivo,$idCarrera){
+
+        $sqlId="SELECT id_ciclo_lectivo_carrera FROM ciclo_lectivo_carrera WHERE ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} AND carrera_id_carrera={$idCarrera};";
+        
+        $database =new Mysql();
+        $dato=$database->consultar($sqlId);
+        $registro=$dato->fetch_assoc();
+        $idCicloLectivoCarrera=$registro["id_ciclo_lectivo_carrera"];
+
+        $sql="UPDATE ciclo_lectivo_carrera SET `ciclo_lectivo_carrera_estado` = '1' WHERE (`id_ciclo_lectivo_carrera` = {$idCicloLectivoCarrera})";
+        
+        $database =new Mysql();
+        $database->actualizar($sql);
+        return true;
 
     }
 
@@ -268,7 +297,7 @@ Class Carrera{
 
     static public function idCurriculaCarrera($idCicloLectivoCarrera,$idMateria){
         $sql="SELECT id_curricula_carrera from curricula_carrera join ciclo_lectivo_carrera on ciclo_lectivo_carrera_id_ciclo_lectivo_carrera = id_ciclo_lectivo_carrera where id_ciclo_lectivo_carrera= {$idCicloLectivoCarrera} and materia_id_materia= {$idMateria}";  
-        
+    
         $database =new Mysql();
         $dato=$database->consultar($sql);
         $registro=$dato->fetch_assoc();
@@ -299,7 +328,7 @@ Class Carrera{
 
         return $listaCarreras ;
     }
-
+    
     public static function obtenerPorIdCurriculaCarrera($idCurriculaCarrera){
         $sql="SELECT carrera_nombre FROM carrera ".
             "join ciclo_lectivo_carrera on id_carrera = carrera_id_carrera ".

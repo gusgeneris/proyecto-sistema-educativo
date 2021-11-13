@@ -4,7 +4,6 @@
     require_once "../../class/DetalleLibroTemas.php";    
     require_once "../../class/Materia.php";   
     require_once "../../class/Clase.php";
-    require_once "../../mensaje.php";
 
 
     $idClase=$_GET["idClase"];
@@ -36,10 +35,12 @@
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <title>Nueva Asitencia</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
 
 <body>
     <div class="titulo">
@@ -151,11 +152,11 @@
                 </tbody>
             <?php endforeach?>
         </table>
-        <div class="formGrupBtnEnviar" >
+        <div class="formGrupBtnEnviar3Columnas" >
             <button type="submit"  class="formButton" id="Guardar"> Guardar Registro </button>
         </div>
         </form>
     </div>
-    <?php require_once "footer.php"?>               
+    <?php require_once "../../footer.php"?>               
 </body>
 </html>

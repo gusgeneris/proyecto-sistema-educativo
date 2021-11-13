@@ -15,11 +15,18 @@
 
     $idCiCloLectivoCarrera=Carrera::idCicloLectivoCarrera($idCicloLectivo,$idCarrera);
 
-    $docente->asignarCarrera($idDocente,$idCiCloLectivoCarrera);
-    $docente->asignarMateria($idDocente,$idMateria);
+    $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCiCloLectivoCarrera,$idMateria);
 
-    header("Location:listado_por_carrera_materia.php?idMateria=".$idMateria."&idCarrera=".$idCarrera."&idCicloLectivo=".$idCicloLectivo);
+    $cicloCarrera=$docente->asignarCarrera($idDocente,$idCiCloLectivoCarrera);
 
+    $materia=$docente->asignarMateria($idDocente,$idCurriculaCarrera);
+
+    if($materia==1&&$cicloCarrera==1){
+        header("Location:listado_por_carrera_materia.php?mj=".INCORRECT_INSERT_DOCENTE_DUPLICATE_CODE."&idMateria=".$idMateria."&idCarrera=".$idCarrera."&idCicloLectivo=".$idCicloLectivo);
+    }else{
+        header("Location:listado_por_carrera_materia.php?mj=".CORRECT_ASIG_CODE."&idMateria=".$idMateria."&idCarrera=".$idCarrera."&idCicloLectivo=".$idCicloLectivo);
+        
+    }
 
 
 ?>

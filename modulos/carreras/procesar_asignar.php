@@ -25,9 +25,4 @@
         header("Location:listado.php?idCiclo=".$idCicloLectivo);
         exit;
     }
-
-    
-    if ($carrera){
-        header("Location:listado_por_ciclo.php?mj=".CORRECT_INSERT_CODE."&idCiclo=".$idCicloLectivo);
-    }
 ?>

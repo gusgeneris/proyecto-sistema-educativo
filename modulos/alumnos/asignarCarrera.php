@@ -21,27 +21,34 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
+        <link rel="stylesheet" href="../../style/tabla.css">
+        <link rel="stylesheet" href="/proyecto-modulos/style/menuVertical.css" class="">
         <script src ="../../jquery3.6.js"></script>
         <script src ="../../script/comboAsignarCarrera.js"></script>
         <title>Document</title>
     </head>
 
-    <?php require_once "../../menu.php";?>
+    
 
     <body>
+        <?php require_once "../../menu.php";?>
+
         <div class="titulo">
             <h1> Asignar Carrera al Alumno/a :<?php echo $nombreAlumno->getNombre();?>, <?php echo $nombreAlumno->getApellido()?></h1>
         </div>
+
         <div class="main">
-            <form action="procesar_asignar.php" method=POST class="formUnaColumna" id="formInsert" name="formInsert">
+
+            <form action="procesar_asignar.php" method=POST class="formInsert3Columnas" id="formInsert" name="formInsert">
+
                 <input type="hidden" value="<?php echo $idAlumno?>" name="IdAlumno">
+
                 <div class="formGrup" id="GrupocboCicloLectivo">
-                    <label for="cboCicloLectivo" class="formLabel">Carrera</label>
+                    <label for="cboCicloLectivo" class="formLabel">Ciclo Lectivo</label>
                     <div class="formGrupInput">
                         <select name="cboCicloLectivo" id="cboCicloLectivo" class="formInput" onchange="cargarCarrera()">
                             <option value="">
-                                ->Seleccione un Ciclo Lectivo<-
+                                ->Seleccionar<-
                             </option>
                             <?php foreach($listadoCicloLectivo as $cicloLectivo):{?>
                                 <option value="<?php echo $cicloLectivo->getIdCicloLectivo();?>">
@@ -50,7 +57,7 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                             <?php } endforeach ; ?>
                         </select>
                     </div>
-                    <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                    <p class="formularioInputError"> Debe sereccionar una opcion.</p> 
                 </div>
 
 
@@ -59,11 +66,11 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                         <div class="formGrupInput">
                             <Select name="cboCarrera" id="cboCarrera" class="formInput" onchange="">
                                 <option value="0">
-                                    ->Seleccionar Carrera<-
+                                    ->Seleccionar<-
                                 </option>
                             </Select>
                         </div>
-                        <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                        <p class="formularioInputError"> Debe sereccionar una opcion.</p> 
                 </div>
 
                 <!--Grupo de Mensaje-->
@@ -76,19 +83,17 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
 
                 <!--Grupo de Boton Enviar-->
 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviar3Columnas">
                     <button type="submit" class="formButton" value ="FormInsertAsignarCarrera" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+                
+                    <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
                 </div>
             
             </form>
         </div>
         
-        <div class="conteriner3Columnas">
-            <table>
+        <div class="conteiner3Columnas">
+            <table class="tabla">
                 <thead>
                     <tr>
                         <th>Ciclo Lectivo</th>
@@ -106,7 +111,7 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                             <div class="icon">                           
                                 <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
                                 <img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                                </a>|
+                                </a>
                                 <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
                                     <img class="icon-a" src="../../icon/listado.png" title="Listado de Materias Asociadas" alt="Listado de Asociadas">
                                 </a>

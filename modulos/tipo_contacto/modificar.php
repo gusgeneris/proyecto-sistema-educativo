@@ -55,10 +55,8 @@ $tipoContacto=TipoContacto::obtenerPorId($id);
                 <div> 
                 <div class="formGrupBtnEnviar">
                     <button type="submit" class="formButton" value ="FormInsertTipoContacto" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+               
+                    <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
     </form>
     <?php require_once "../../footer.php"?> 

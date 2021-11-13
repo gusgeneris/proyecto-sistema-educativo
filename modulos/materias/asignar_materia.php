@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="../../style/menuVertical.css">
         <script src="../../jquery3.6.js"></script>
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
-        <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Asigar Docente</title>
+        <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Asigar Materia</title>
         <title>Asignar</title>
     </head>
 
@@ -103,12 +103,10 @@
 
                 <br>
 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviarUnaColumna">
                     <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+                
+                    <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
                 </div>        
 
             </form>

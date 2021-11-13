@@ -72,7 +72,7 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
                 <div class="formGrup" id="GrupoDetalleDomicilio" >
                     <label for="GrupoDetalleDomicilio" class="formLabel">Detalle de Domicilio</label>
                     <div class="formGrupInput">   
-                        <input name="Detalle" type="text" class="formInput" value="<?php echo $domicilio->getDetalle(); ?>">
+                        <input name="DetalleDomicilio" type="text" class="formInput" value="<?php echo $domicilio->getDetalle(); ?>">
                         </div>
                     <p class="formularioInputError"> Debe seleccionar una opcion. </p>
                 </div>
@@ -143,11 +143,9 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
                 </div>
 
                 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviar ">
                     <button type="submit" class="formButton" value ="FormInsertdocentes" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
+            
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
             </form>

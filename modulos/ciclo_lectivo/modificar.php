@@ -57,11 +57,9 @@ $CicloLectivo= CicloLectivo::obtenerTodoPorId($id);
 
             <!--Grupo de Boton Enviar-->
 
-            <div class="formGrupBtnEnviar">
+            <div class="formGrupBtnEnviar3Columnas">
                 <button type="submit" class="formButton" id='Guardar' value='FormInsertCicloLectivo'> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar">
+            
                 <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
             </div>
         </form>

@@ -236,7 +236,8 @@ class Usuario extends Persona {
         parent::actualizarPersona();
 
         $database = new MySql();
-        $sql = "UPDATE `usuario` SET `usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+        $sql = "UPDATE `usuario` SET usuario_contrasenia={$this->_contrasenia},`usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+
 
         $database->actualizar($sql);
 

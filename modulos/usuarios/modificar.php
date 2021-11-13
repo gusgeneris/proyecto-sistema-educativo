@@ -4,13 +4,12 @@ require_once "../../class/Persona.php";
 require_once "../../class/Sexo.php";
 require_once "../../class/Perfil.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 if(isset($_GET['id'])){
     $id=$_GET['id'];    
 }
 
-$usuario= Usuario::obtenerTodoPorId($id);
+$usuarioAmodificar= Usuario::obtenerTodoPorId($id);
 
 $listaSexo=Sexo::sexoTodos();
 
@@ -32,7 +31,8 @@ $listaPerfil=Perfil::perfilTodos();
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Usuario</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+require_once "../../mensaje.php";?>
 
 <body class="modif-user">
     <div class="titulo">
@@ -46,7 +46,7 @@ $listaPerfil=Perfil::perfilTodos();
                     <label for="Nombre" class="formLabel">Nombre</label> 
                     
                     <div class="formGrupInput">
-                        <input name="Nombre" type="text" class="formInput" value="<?php echo $usuario->getNombre(); ?>">   
+                        <input name="Nombre" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getNombre(); ?>">   
                     
                     </div>
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
@@ -56,7 +56,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoApellido" > 
                     <label for="Apellido" class="formLabel">Apellido</label> 
                     <div class="formGrupInput">
-                        <input name="Apellido" type="text" class="formInput" value="<?php echo $usuario->getApellido(); ?>">
+                        <input name="Apellido" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getApellido(); ?>">
                     </div>
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
                 </div>
@@ -66,7 +66,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoFechaNacimiento" > 
                     <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
                     <div class="formGrupInput">
-                        <input name="FechaNacimiento" type="date" class="formInput" value="<?php echo $usuario->getFechaNacimiento(); ?>">
+                        <input name="FechaNacimiento" type="date" class="formInput" value="<?php echo $usuarioAmodificar->getFechaNacimiento(); ?>">
                     </div>
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
                 </div>
@@ -74,7 +74,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoDni" > 
                     <label for="Dni" class="formLabel">Dni</label> 
                     <div class="formGrupInput">
-                        <input name="Dni" type="text" class="formInput" value="<?php echo $usuario->getDni(); ?>">
+                        <input name="Dni" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getDni(); ?>">
                     </div>
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
                 </div>
@@ -82,7 +82,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoNacionalidad" > 
                     <label for="Nacionalidad" class="formLabel">Nacionalidad</label>
                     <div class="formGrupInput"> 
-                        <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $usuario->getNacionalidad(); ?>">
+                        <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getNacionalidad(); ?>">
                     </div>
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
                 </div>
@@ -90,7 +90,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoNombreUsuario" > 
                     <label for="NombreUsuario" class="formLabel">Nombre Usuario</label>
                     <div class="formGrupInput"> 
-                        <input name="NombreUsuario" type="text" class="formInput" value="<?php echo $usuario->getNombreUsuario(); ?>">            
+                        <input name="NombreUsuario" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getNombreUsuario(); ?>">            
                     </div>
                 
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
@@ -99,7 +99,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoContrasenia" > 
                     <label for="Contrasenia" class="formLabel">Contraseña</label>
                     <div class="formGrupInput"> 
-                        <input name="Contrasenia" type="text" class="formInput" id="Contrasenia" value="<?php echo $usuario->getContrasenia(); ?>">            
+                        <input name="Contrasenia" type="text" class="formInput" id="Contrasenia" value="<?php echo $usuarioAmodificar->getContrasenia(); ?>">            
                     </div>
                 
                     <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
@@ -108,7 +108,7 @@ $listaPerfil=Perfil::perfilTodos();
                 <div class="formGrup" id="GrupoContrasenia2" >
                     <label for="Contrasenia2" class="formLabel">Validar Contraseña</label>
                     <div class="formGrupInput">
-                        <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" value="<?php echo $usuario->getContrasenia(); ?>">
+                        <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" value="<?php echo $usuarioAmodificar->getContrasenia(); ?>">
                         
                         <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
                     </div>
@@ -123,7 +123,7 @@ $listaPerfil=Perfil::perfilTodos();
                                 -> Seleccione Sexo <-
                             </option>
                             <?php foreach($listaSexo as $sexo):?>
-                                <option <?php if($sexo->getIdSexo()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo();?>">
+                                <option <?php if($sexo->getIdSexo()==$usuarioAmodificar->getIdSexo()){echo "SELECTED";}?> value="<?php echo $sexo->getIdSexo();?>">
                                     <?php echo $sexo->getDescripcion(); ?>
                                 </option>
                             <?php endforeach?>
@@ -142,7 +142,7 @@ $listaPerfil=Perfil::perfilTodos();
                                     -->Seleccione Perfil<--
                             </option>
                             <?php foreach($listaPerfil as $perfil):?>
-                            <option <?php if($perfil->getIdPerfil()==$usuario->getIdSexo()){echo "SELECTED";}?> value="<?php echo $perfil->getIdPerfil(); ?>">
+                            <option <?php if($perfil->getIdPerfil()==$usuarioAmodificar->getIdSexo()){echo "SELECTED";}?> value="<?php echo $perfil->getIdPerfil(); ?>">
                                 <?php echo $perfil->getPerfilNombre();?>
                             </option>
                             <?php endforeach?>
@@ -153,11 +153,11 @@ $listaPerfil=Perfil::perfilTodos();
                 
                 
                 <div> 
-                    <input name="idUsuario" type="hidden" class="" value="<?php echo $usuario->getIdUsuario(); ?>">
+                    <input name="idUsuario" type="hidden" class="" value="<?php echo $usuarioAmodificar->getIdUsuario(); ?>">
                 </div>
 
                 <div> 
-                    <input name="IdPersona" type="hidden" class="" value="<?php echo $usuario->getIdPersona(); ?>">
+                    <input name="IdPersona" type="hidden" class="" value="<?php echo $usuarioAmodificar->getIdPersona(); ?>">
                 </div>
 
 

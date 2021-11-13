@@ -6,11 +6,32 @@ require_once "../../class/Carrera.php";
 class cicloLectivo{
     private $_idCicloLectivo;
     private $_anio;
+    private $_estado;
 
     private $_arrCarrera;
 
     public function __toString() {
         return "{$this->_anio}";
+    }
+
+        /**
+     * Get the value of _estado
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
     }
 
     
@@ -68,30 +89,59 @@ class cicloLectivo{
     
     public function insert(){
         $sql = "INSERT INTO `ciclo_lectivo` (`ciclo_lectivo_anio`) VALUES ('{$this->_anio}')";
+
+
         $database=new Mysql();
 
         $database->insertarRegistro($sql);
     }
 
-    public static function listaTodos(){
+    public static function listaTodos($filtroEstado=0,$filtroAnio=""){
         $sql= "SELECT id_ciclo_lectivo, ciclo_lectivo_anio, estado FROM ciclo_lectivo";
+
+        
+        
+        $where="";
+
+        if($filtroEstado!=0){
+            $where.=" WHERE estado='$filtroEstado' ";
+        };
+
+        if($filtroAnio != ""){
+            if($where!= ""){
+                $where.=" AND ciclo_lectivo_anio like '%{$filtroAnio}%'";
+            }else{
+                $where= " WHERE ciclo_lectivo_anio like '%{$filtroAnio}%'";
+            }
+        }
+        $sql.=$where;
+        
         $database=new Mysql();
         $datos=$database->consultar($sql);
         $listadoCicloLectivo=[];
         
         while ($registro = $datos->fetch_assoc()){
-            if($registro['estado']==1){
+            #if($registro['estado']==1){
 
             $cicloLectivo=new cicloLectivo();
             $cicloLectivo->crearCicloLectivo($cicloLectivo,$registro);
+            $cicloLectivo->_estado= $registro['estado'];
 
             $listadoCicloLectivo[]=$cicloLectivo;
-            }
+            
             
         }
 
         return $listadoCicloLectivo;
 
+    }
+
+    public static function darAlta($idCiclo){
+        $sql="UPDATE `ciclo_lectivo` SET `estado` = '1' WHERE (`id_ciclo_lectivo` = {$idCiclo})";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
     public static function darDeBaja($idCicloLectivo){
@@ -165,6 +215,8 @@ class cicloLectivo{
 
         return $idCicloLectivoCarrera;
     }
+
+
 
 }
 

@@ -15,7 +15,7 @@ if($cancelar==true){
 $personaNombre = $_POST['Nombre'];
 $personaApellido = $_POST['Apellido'];
 $personaDni = $_POST['Dni'];
-$personaFechaNac = $_POST['FechaNacacimiento'];
+$personaFechaNac = $_POST['Fecha'];
 $personaNacionalidad= $_POST['Nacionalidad'];
 $docenteNumMatricula= $_POST['NumeroMatricula'];
 $personaSexo= $_POST['cboSexo'];

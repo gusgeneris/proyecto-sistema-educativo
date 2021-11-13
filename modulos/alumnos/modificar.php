@@ -47,7 +47,7 @@ $listadoSexo=Sexo::sexoTodos();
                 <label for="Nombre" class="formLabel">Nombre</label>
                 
                 <div class="formGrupInput"> 
-                    <input id="Nombre" name="PersonaNom" type="text" class="formInput" value="<?php echo $alumno->getNombre(); ?>">            
+                    <input autofocus id="Nombre" name="Nombre" type="text" class="formInput" value="<?php echo $alumno->getNombre(); ?>">            
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
@@ -56,16 +56,16 @@ $listadoSexo=Sexo::sexoTodos();
                 <label for="Apellido" class="formLabel">Apellido</label>
                 
                 <div class="formGrupInput"> 
-                    <input name="Apellido" type="text" class="formInput" value="<?php echo $alumno->getApellido(); ?>">
+                    <input autofocus name="Apellido" type="text" class="formInput" value="<?php echo $alumno->getApellido(); ?>">
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
 
-            <div class="formGrup" id="GrupoFechaNacimiento" > 
+            <div class="formGrup" id="GrupoFecha" > 
                 <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
                 
                 <div class="formGrupInput">
-                    <input name="FechaNac" type="date" class="formInput" value="<?php echo $alumno->getFechaNacimiento(); ?>">
+                    <input name="Fecha" type="date" class="formInput" id="Fecha" value="<?php echo $alumno->getFechaNacimiento(); ?>">
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
@@ -89,11 +89,11 @@ $listadoSexo=Sexo::sexoTodos();
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
 
-            <div class="formGrup" id="GrupoNumLegajo" > 
+            <div class="formGrup" id="GrupoNumeroLegajo" > 
                 <label for="NumLegajo" class="formLabel">Numero de Legajo</label>
             
                 <div class="formGrupInput">
-                <input name="NumLegajo" type="text" class="formInput" value="<?php echo $alumno->getNumLegajo(); ?>">
+                <input name="NumeroLegajo" type="text" class="formInput" value="<?php echo $alumno->getNumLegajo(); ?>">
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
@@ -134,10 +134,8 @@ $listadoSexo=Sexo::sexoTodos();
             
             <div class="formGrupBtnEnviar" >
                 <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar" >
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+           
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
                  
         </form>

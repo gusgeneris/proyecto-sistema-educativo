@@ -30,15 +30,15 @@
         <h1>Ingrese los nuevos datos</h1>
     </div>
 
-    <div>
+    <div class="main">
         <form action="procesar_actualizar.php" method="post" class="formModificar2Columnas" id="formModificar">
             
             <input name="IdCarrera" type="hidden" value="<?php echo $carrera->getIdCarrera();?>">
 
-            <div class="formGrup" id="GrupoNombre" >
+            <div class="formGrup" id="GrupoNombreCarrera" >
                 <label for="Nombre" class="formLabel">Nombre</label>
                 <div class="formGrupInput">
-                    <input type="text" id='Nombre' name="Nombre" class="formInput" value="<?php echo $carrera->getNombre();?>">
+                    <input type="text" id='Nombre' name="NombreCarrera" class="formInput" value="<?php echo $carrera->getNombre();?>">
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
@@ -62,10 +62,8 @@
 
             <div class="formGrupBtnEnviar">
                 <button type="submit" class="formButton" value ="FormInsertCarrera" id="Guardar"> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+           
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
         </form>
     </div>

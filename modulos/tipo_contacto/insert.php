@@ -51,10 +51,8 @@
     
             <div class="formGrupBtnEnviar">
                 <button type="submit" class="formButton" id='Guardar' value='FormInsertTipoContacto'> Guardar</button>
-            </div>
-            <br>
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+            
+                <button name="Cancelar" class="formButton" type="BUTTON" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
             </div>
         </form>
         <?php require_once "../../footer.php"?> 

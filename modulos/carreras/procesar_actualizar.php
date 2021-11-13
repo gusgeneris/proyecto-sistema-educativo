@@ -11,7 +11,7 @@
     }
 
     $idCarrera=$_POST["IdCarrera"];
-    $nombre=$_POST["Nombre"];
+    $nombre=$_POST["NombreCarrera"];
     $duracionAnios=$_POST["Anios"];
 
           #COMPRUEBA LAS CANTIDADES MINIMAS DE DIGITOS QUE DEBE CONTENER
@@ -41,7 +41,7 @@
     $carrera->modificar();
 
     if ($carrera){
-        header("Location:listado.php?mj=".CORRECT_UPDATE_CODE."&idCiclo=".$idCicloLectivo);
+        header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
     }
 
 ?>

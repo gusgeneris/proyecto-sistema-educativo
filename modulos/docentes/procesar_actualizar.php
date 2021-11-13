@@ -15,10 +15,10 @@ $idDocente=$_POST['idDocente'];
 $idPersona= $_POST['IdPersona'];
 $personaNombre = $_POST['Nombre'];
 $personaApellido = $_POST['Apellido'];
-$personaFechaNac = $_POST['FechaNac'];
+$personaFechaNac = $_POST['Fecha'];
 $personaDni = $_POST['Dni'];
 $personaNacionalidad= $_POST['Nacionalidad'];
-$numMatricula= $_POST['NumMatricula'];
+$numMatricula= $_POST['NumeroMatricula'];
 $personaSexo= $_POST['cboSexo'];
 
 if ($personaDni == ''){

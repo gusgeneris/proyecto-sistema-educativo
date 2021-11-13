@@ -62,11 +62,11 @@ $listaPerfil=Perfil::perfilTodos();
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
 
-            <div class="formGrup" id="GrupoFechaNacimiento" > 
+            <div class="formGrup" id="GrupoFecha" > 
                 <label for="FechaNacimiento" class="formLabel">Fecha Nacimiento</label> 
                     
                 <div class="formGrupInput">
-                    <input name="FechaNac" type="date" class="formInput" value="<?php echo $docente->getFechaNacimiento(); ?>">
+                    <input name="Fecha" type="date" class="formInput" value="<?php echo $docente->getFechaNacimiento(); ?>">
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
@@ -90,11 +90,11 @@ $listaPerfil=Perfil::perfilTodos();
             </div>
 
 
-            <div class="formGrup" id="GrupoNumLegajo" > 
+            <div class="formGrup" id="GrupoNumeroMatricula" > 
                 
                 <label for="NumMatricula" class="formLabel">Numero de Matricula</label>
                 <div class="formGrupInput">
-                    <input name="NumMatricula" type="text" class="formInput" value="<?php echo $docente->getNumMatricula(); ?>">
+                    <input name="NumeroMatricula" type="text" class="formInput" value="<?php echo $docente->getNumMatricula(); ?>">
                 </div>
                 <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
             </div>
@@ -133,11 +133,9 @@ $listaPerfil=Perfil::perfilTodos();
             </div>
 
             <div class="formGrupBtnEnviar">
-               <button type="submit" class="formButton" value ="FormInsertdocentes" id="Guardar"> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar">
-               <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+               <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
+        
+               <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
             
         </form>

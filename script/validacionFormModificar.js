@@ -6,14 +6,17 @@ const selects = document.querySelectorAll('#formModificar select');
 
 const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
+    nombre: /^[a-zA-ZÀ-ÿ\s ]{3,40}$/, // Letras y espacios, pueden llevar acentos.
     nombreCarrera: /^[a-zA-Z0-9_ ]*$/,
     apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     contrasenia: /^.{4,12}$/, // 4 a 12 digitos.
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     dni: /^\d{7,14}$/, // 7 a 14 numeros.
     numeros: /^\d{7,14}$/, // 7 a 14 numeros.
+    nombreMateria: /^[a-zA-Z0-9_ ]{3,}$/,
+    fecha: /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/,
     anio: /^\d{4}$/,
+    anios: /^\d{1}$/,
     nulo: /^\0$/,
     especialidad: /^[a-zA-Z_ ]*$/,
     barrio: /^[a-zA-Z0-9_ ]*$/,
@@ -33,10 +36,12 @@ const campos = {
     CicloLectivo: false,
     NombreUsuario: false,
     Contrasenia: false,
+    NombreMateria: false,
     Perfil: false,
     Anios: false,
     Especialidad: false,
     Barrio: false,
+    Anios: false,
     Pais: false,
     Provincia: false,
     Localidad: false,
@@ -52,7 +57,8 @@ const campos = {
     DetalleAnio: false,
     DetallePeriodo: false,
     NumClase: false,
-    NombreCarrera: false
+    NombreCarrera: false,
+    fecha: false
 }
 
 const validarFormulario = (e) => {
@@ -72,8 +78,14 @@ const validarFormulario = (e) => {
         case "NumeroLegajo":
             validarCampo(expresiones.numeros, e.target, 'NumeroLegajo')
             break;
+        case "Anios":
+            validarCampo(expresiones.anios, e.target, 'Anios')
+            break;
         case "NumeroMatricula":
             validarCampo(expresiones.numeros, e.target, 'NumeroMatricula')
+            break;
+        case "NombreMateria":
+            validarCampo(expresiones.nombreMateria, e.target, 'NombreMateria')
             break;
         case "NombreUsuario":
             validarCampo(expresiones.nombre, e.target, 'NombreUsuario')
@@ -86,7 +98,7 @@ const validarFormulario = (e) => {
             validarContrasenia2();
             break;
         case "NombreCarrera":
-            validarCampo(expresiones.nombreMateria, e.target, 'NombreCarrera')
+            validarCampo(expresiones.nombreCarrera, e.target, 'NombreCarrera')
             break;
         case "CicloLectivo":
             validarCampo(expresiones.anio, e.target, 'CicloLectivo')
@@ -142,6 +154,12 @@ const validarFormulario = (e) => {
         case "NumClase":
             validarCampo(expresiones.numClase, e.target, 'NumClase')
             break;
+        case "Fecha":
+            validarCampo(expresiones.fecha, e.target, 'Fecha')
+            break;
+        case "NumeroLegajo":
+            validarCampo(expresiones.numeros, e.target, 'NumeroLegajo')
+            break;
     }
 }
 
@@ -196,6 +214,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -203,12 +222,14 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
                 formulario.submit();
+                exit;
             } else {
 
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
@@ -217,6 +238,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.CicloLectivo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -224,6 +246,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -231,6 +254,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.NombreCarrera && campos.Anios) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -238,6 +262,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Especialidad) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -245,6 +270,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Barrio) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -252,6 +278,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Pais) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -259,6 +286,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Provincia) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -266,6 +294,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Localidad) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -273,6 +302,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Contacto) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -280,6 +310,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -287,6 +318,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.DetalleDomicilio) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -294,6 +326,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.DetalleAnio) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -301,6 +334,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.DetallePeriodo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -308,6 +342,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.NumClase) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }

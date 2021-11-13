@@ -24,8 +24,10 @@
 
 <body class="body">
 
-<h1 class="titulo"> Registro de Ciclo Lectivo</h1>
-
+    <div class="titulo">
+        <h1> Registro de Ciclo Lectivo</h1>
+    </div>
+    
     <div class="main">
         <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
         
@@ -50,12 +52,10 @@
 
             <!--Grupo de Boton Enviar-->
 
-            <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviar3Columnas">
                 <button type="submit" class="formButton" id='Guardar' value='FormInsertCicloLectivo'> Guardar</button>
-            </div>
-            <br>
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+            
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
             </div>
         </form>
     </div>

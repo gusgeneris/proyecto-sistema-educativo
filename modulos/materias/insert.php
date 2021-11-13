@@ -2,7 +2,6 @@
 require_once "../../class/MySql.php";
 require_once "../../class/Materia.php";    
 require_once "../../configs.php";  
-require_once "../../mensaje.php";
 
 
 ?>
@@ -24,8 +23,11 @@ require_once "../../mensaje.php";
 <?php require_once "../../menu.php";?>
 
 <body>
-    
-    <h1 class="titulo"> Registro de Materia</h1>
+    <div class="titulo">    
+        <h1> Registro de Materia</h1>
+    </div>
+
+
     <div class="main">
         <form action="procesar_insert.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
             
@@ -47,12 +49,10 @@ require_once "../../mensaje.php";
         
             <!--Grupo de Boton Enviar-->
         
-            <div class="formGrupBtnEnviar">
+            <div class="formGrupBtnEnviar3Columnas">
                 <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
-            </div>
-        
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
             </div>
         </form>
     </div>

@@ -23,6 +23,7 @@ $lista = Domicilio::listadoPorIdPersona($idPersona);
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <script type="text/javascript" src ="../../script/comboDomicilio.js"></script>
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar domicilio</title>
 </head>
 

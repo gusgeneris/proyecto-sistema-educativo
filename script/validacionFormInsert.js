@@ -6,21 +6,22 @@ const selects = document.querySelectorAll('#formInsert select');
 
 const expresiones = {
     usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
+    nombre: /^[a-zA-ZÀ-ÿ\s ]{3,40}$/, // Letras y espacios, pueden llevar acentos.
     nombreCarrera: /^[a-zA-Z0-9_ ]{8,}$/,
-    nombreMateria: /^[a-zA-Z0-9_ ]{3}$/,
+    nombreMateria: /^[a-zA-Z0-9_ ]{3,}$/,
     apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     contrasenia: /^.{4,12}$/, // 4 a 12 digitos.
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     dni: /^\d{7,14}$/, // 7 a 14 numeros.
     numeros: /^\d{7,14}$/, // 7 a 14 numeros.
+    fecha: /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/,
     anio: /^\d{4}$/,
     anios: /^\d{1}$/,
     especialidad: /^[a-zA-Z_ ]*$/,
     barrio: /^[a-zA-Z0-9_ ]*$/,
     localidad: /^[a-zA-Z0-9_ ]*$/,
     pais: /^[a-zA-ZÀ-ÿ\s]{3,40}$/,
-    contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
+    contacto: /^[a-zA-Z0-9 _.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
     cboSelect: /^[1-9]{1,3}$/,
     numClase: /^\d{1,100}$/
@@ -58,7 +59,8 @@ const campos = {
     DetalleAnio: false,
     DetallePeriodo: false,
     NumClase: false,
-    NombreCarrera: false
+    NombreCarrera: false,
+    Fecha: false
 
 }
 
@@ -162,7 +164,9 @@ const validarFormulario = (e) => {
         case "NumClase":
             validarCampo(expresiones.numClase, e.target, 'NumClase')
             break;
-
+        case "Fecha":
+            validarCampo(expresiones.fecha, e.target, 'Fecha')
+            break;
 
     }
 }
@@ -221,6 +225,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -228,12 +233,14 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
                 formulario.submit();
+                exit;
             } else {
 
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
@@ -242,6 +249,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.CicloLectivo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -249,6 +257,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -256,6 +265,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.NombreCarrera && campos.Anios) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -263,6 +273,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.NombreMateria) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -270,6 +281,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Especialidad) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -277,6 +289,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Barrio) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -284,6 +297,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Pais) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -291,6 +305,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Provincia) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -298,6 +313,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Localidad) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -305,6 +321,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Contacto) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -312,6 +329,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.Nombre) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -319,6 +337,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.DetalleDomicilio) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -326,6 +345,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.cboCarrera && campos.cboCicloLectivo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -333,6 +353,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.DetalleAnio) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -340,6 +361,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.DetallePeriodo) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -347,6 +369,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.cboCarrera) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -354,6 +377,7 @@ formulario.addEventListener('submit', (e) => {
             if (campos.NumClase) {
 
                 formulario.submit();
+                exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }

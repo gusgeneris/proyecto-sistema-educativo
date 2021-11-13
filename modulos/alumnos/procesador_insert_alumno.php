@@ -15,7 +15,7 @@ $personaNombre = trim($_POST['Nombre']);
 $personaApellido = trim($_POST['Apellido']);
 $personaNacionalidad= trim($_POST['Nacionalidad']);
 $personaDni = $_POST['Dni'];
-$personaFechaNac = $_POST['FechaNacimiento'];
+$personaFechaNac = $_POST['Fecha'];
 $alumnoNumLegajo= $_POST['NumeroLegajo'];
 $personaSexo= $_POST['cboSexo'];
 

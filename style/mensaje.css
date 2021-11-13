@@ -1,7 +1,9 @@
 .mensaje {
-    position: relative;
-    background: none repeat scroll 0 0 #ff3c00;
-    border-radius: 20px 20px 20px 20px;
+    margin-left: 37%;
+    display: inline;
+    position: absolute;
+    background: #2a8a0d;
+    border-radius: 20px;
     color: rgb(255, 255, 255);
     font-weight: bold;
     padding: 10px 20px;

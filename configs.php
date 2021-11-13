@@ -39,6 +39,17 @@ const ERROR_DNI_NUMBER='Error no se permite letras ni simbolos en el DNI';
 const ERROR_CAMPOS_VACIOS_CODE = '18';
 const ERROR_CAMPOS_VACIOS = 'Error en la longitud';
 
+const CORRECT_DELETE_CODE = '19';
+const CORRECT_DELETE_MENSAJE = 'Se dio de baja correctamente el registro';
+const CORRECT_ALTA_CODE = '20';
+const CORRECT_ALTA_MENSAJE = 'Se dio de alta correctamente el registro';
+
+const CORRECT_ASIG_CODE = '21';
+const CORRECT_ASIG_MENSAJE = 'Se dio de alta correctamente el registro';
+
+const INCORRECT_INSERT_DOCENTE_DUPLICATE_CODE ="22";
+const INCORRECT_INSERT_DOCENTE_DUPLICATE= "Error: El docente ya se encuentra registrado";
+
 
 
 ?>

@@ -97,7 +97,7 @@
                     $listaDeClases= Clase::listadoPorIdCurriculaCarrera($idCurriculaCarrera);
         ?>
                 
-            <div class="formGrupBtnEnviar">
+            <div class="formGrupBtnEnviar informeAsistencia">
                 <button class="formButton" id="Guardar"><a href="reporte_asistencias.php?idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>">Reporte de asistencia</a></button>
             </div>
        

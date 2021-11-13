@@ -8,6 +8,6 @@ $idPersona=$_GET["idPersona"];
 
 $eliminarRegistro=Domicilio::eliminarRegistro($idDomicilio);
 
-header("Location:domicilios.php?idPersona=".$idPersona);
+header("Location:domicilios.php?idPersona=".$idPersona."&mj=".CORRECT_DELETE_CODE);
 
 ?>

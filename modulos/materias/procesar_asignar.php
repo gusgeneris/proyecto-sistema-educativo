@@ -19,9 +19,19 @@
     $idMateria=$_POST["cboMateria"];
 
 
-    $materia=Materia::crearRelacionConCarrera($idMateria,$idCarrera,$idCicloLectivo,$periodoDesarrollo,$anioDesarrollo);
+    $dato=Materia::crearRelacionConCarrera($idMateria,$idCarrera,$idCicloLectivo,$periodoDesarrollo,$anioDesarrollo);
 
     if ($materia==true){
-        header("Location:listado_por_carrera.php?idCarrera=".$idCarrera."&mj=".CORRECT_INSERT_CODE."&idCiclo=".$idCicloLectivo);
+        header("Location:listado_por_carrera.php?idCarrera=".$idCarrera."&mj=".CORRECT_ASIG_CODE."&idCiclo=".$idCicloLectivo);
     }
+
+
+    if($dato==1){
+        header("Location:listado_por_carrera.php?idCarrera=".$idCarrera."&mj=".CORRECT_ASIG_CODE."&idCiclo=".$idCicloLectivo);
+        }
+    else{
+        header("Location:listado_por_carrera.php?idCarrera=".$idCarrera."&mj=".INCORRECT_INSERT_MENSAJE_CARRERA_DUPLICATE_CODE."&idCiclo=".$idCicloLectivo);
+        
+    }
+    exit;
 ?>

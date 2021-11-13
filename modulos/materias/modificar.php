@@ -36,7 +36,7 @@
         
         <input name="idMateria" type="hidden" value="<?php echo $materia->getIdMateria();?>">
         
-        <div class="formGrup" id="GrupoNombre" >
+        <div class="formGrup" id="GrupoNombreMateria" >
                 <label for="NombreMateria" class="formLabel">Nombre Materia</label>
             <div class="formGrupInput">
                 <input name="NombreMateria"class="formInput" type="text"  value="<?php echo $nombreMateria;?>">
@@ -54,11 +54,9 @@
         </div>
 
                 
-        <div class="formGrupBtnEnviar">
+        <div class="formGrupBtnEnviar3Columnas">
             <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
-        </div>
-
-        <div class="formGrupBtnEnviar">
+        
             <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
         </div>
     </form>

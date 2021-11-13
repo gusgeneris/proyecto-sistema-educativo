@@ -33,7 +33,9 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
+    <script type="text/javascript" src="../../script/estadosListado.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Carreras</title>
     <title>Document</title>
 </head>
@@ -76,10 +78,10 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
     </div>
 
     <div class="conteiner3Columnas" id=>
-        <table class="tabla">
+        <table class="tabla" id="table">
             <thead>
                 <tr>
-                    <th>Id Carrera</th>
+                    <th>Estado</th>
                     <th>Nombre</th>
                     <th>Duracion en Años</th>
                     <th>Acciones</th>
@@ -89,7 +91,8 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
                 <?php foreach ($listadoCarreras as $carrera):?>
                     <tr>
                         <td>
-                            <?php echo $carrera->getIdCarrera()?>
+                        <?php $estado=Estado::estadoPorId($carrera->getEstado());
+                                    echo $estado->getDescripcion() ?>
                         </td>
                         <td>
                             <?php echo $carrera->getNombre()?> 
@@ -105,7 +108,7 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
                                 <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></i></a>
                                 
                             <?php if (($carrera->getEstado())==2){?>
-                                <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>"> Dar Alta</a>
+                                <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
                             <?php } ?>
                             </div>
                         </td>

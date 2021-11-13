@@ -4,7 +4,7 @@ require_once "../../class/Domicilio.php";
 
 $idDomicilio=$_POST['IdDomicilio'];
 $idPersona= $_POST['IdPersona'];
-$detalle=$_POST['Detalle'];
+$detalle=$_POST['DetalleDomicilio'];
 
 if((!preg_match("/^[a-zA-Z0-9_ ]*$/",$detalleDomicilio))){
     header("Location:domicilios?mj=".ERROR_LONGITUD_LAST_NAME_CODE );

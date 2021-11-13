@@ -2,7 +2,6 @@
     require_once '../../class/Sexo.php';
     require_once '../../class/MySql.php'; 
     require_once "../../configs.php";  
-    require_once "../../mensaje.php";
 ?>
 <?php  
     
@@ -76,7 +75,7 @@
                 <div class="formGrup" id="GrupoFecha">
                         <label for="Fecha" class="formLabel">Fecha Nacimiento</label>
                         <div class="formGrupInput">
-                            <input type="date" id='FechaNacimiento' name="FechaNacimiento" class="formInput" placeholder="Fecha">
+                            <input type="date" id='FechaNacimiento' name="Fecha" class="formInput" placeholder="Fecha">
                             <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
                         </div>
                         <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
@@ -149,7 +148,7 @@
                 <!--Grupo de Contrasenia2-->
                 
                 <div class="formGrup" id="GrupoContrasenia2" >
-                    <label for="Contrasenia2" class="formLabel">Vuelva a ingresar su Contraseña</label>
+                    <label for="Contrasenia2" class="formLabel">Repetir Contraseña</label>
                     <div class="formGrupInput">
                         <input type="text" id='Contrasenia2' name="Contrasenia2" class="formInput" placeholder="Contraseña">
                         
@@ -172,14 +171,13 @@
 
                 <div class="formGrupBtnEnviar">
                     <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+               
+                    <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
                 </div>
                 
             </form>
-        </main>
+        </div>
+
         <?php require_once "../../footer.php"?>                        
     </body>
 

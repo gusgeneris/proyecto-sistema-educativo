@@ -108,7 +108,7 @@
                 </div>
 
 
-                <div class="formGrupBtnEnviar" >
+                <div class="formGrupBtnEnviar3Columnas" >
                     <button type="submit" class="formButton" id="Guardar"> Guardar Registro </button>
                 </div>
         </form>

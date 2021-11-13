@@ -3,7 +3,6 @@ require_once "../../class/Materia.php";
 require_once "../../class/Carrera.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 $materia=new Materia();
 
@@ -36,8 +35,10 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <script type="text/javascript" src="../../script/estadosListado.js"></script>    
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Materias</title>
 </head>
 
@@ -45,7 +46,10 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
 
 <body class="body-listuser">
 
-    <?php require_once "../../menu.php";?>
+    <?php 
+        require_once "../../mensaje.php";
+        require_once "../../menu.php";
+    ?>
 
     <div class="titulo">
         <h1>Lista de Materias</h1>
@@ -82,10 +86,10 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
         </form>
     </div>
     
-    <div class="conteiner3Columnas" id=>
+    <div class="conteiner3Columnas" id="table">
         <table class="tabla">
             <thead>
-                <th>Id materia</th>
+                <th>Estado</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
             </thead>
@@ -93,7 +97,8 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
                 <?php foreach ($listadoMaterias as $materia):?>
                 <tr>
                     <td>
-                        <?php echo $materia->getIdmateria()?>
+                        <?php $estado=Estado::estadoPorId($materia->getEstado());
+                                    echo $estado->getDescripcion()?>
                     </td>
                     <td>
                         <?php echo $materia->getNombre()?> 
@@ -103,6 +108,11 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
                             <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a> 
                             
                             <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+
+                            <?php if (($materia->getEstado())==2){?>
+                                        <a href="dar_alta.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
+                                <?php } ?>
+                        
                         </div>
                     </td>
                 </tr>

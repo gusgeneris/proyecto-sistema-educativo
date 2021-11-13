@@ -118,7 +118,7 @@
             <h2>Horarios de la Carrera: <?php echo $carrera->getNombre()?></h2>
         </div>
 
-            <div class="conteiner">
+            <div class="conteiner horario">
 
                 <table class="tabla">
 

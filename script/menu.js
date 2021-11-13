@@ -60,3 +60,9 @@ $(document).ready(function() {
 
     $('#contenedorMenuVertical').height(height);
 });
+
+$(document).ready(function() {
+    setTimeout(function() {
+        $("#mensaje").fadeOut(1000);
+    }, 3000);
+})

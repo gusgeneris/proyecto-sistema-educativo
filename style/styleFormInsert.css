@@ -59,10 +59,9 @@
         /*espaciado entre cada elemento*/
     }
     
-    .formInsert2Columnas {
+    .formInsert3Columnas {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2px;
+        grid-template-columns: 1fr 1fr 1fr;
     }
     
     .formModificarUnaColumna {
@@ -155,13 +154,33 @@
     }
     
     .formGrupBtnEnviar {
-        display: flex;
-        flex-direction: column;
-        float: bottom;
-        align-items: center;
+        display: inline-block;
         margin: 5px;
+        text-align: center;
         grid-column: 1/4;
-        row-gap: 0px;
+        margin-bottom: 30px
+    }
+    
+    .formGrupBtnEnviar3Columnas {
+        display: inline;
+        margin-top: 25%;
+        text-align: center;
+        margin-bottom: 30px
+    }
+    
+    .formGrupBtnEnviarUnaColumna {
+        display: inline;
+        margin-left: 20%;
+        margin-top: 25%;
+        text-align: center;
+        margin-bottom: 30px
+    }
+    
+    .formGrupBtnEnviar.central {
+        display: inline;
+        margin-left: 20%;
+        margin-top: 15%;
+        text-align: center;
         margin-bottom: 30px
     }
     
@@ -189,6 +208,21 @@
     .formGrup {
         padding: 10px;
     }
+    /*Stilos del modulo de contacto*/
+    
+    .formGrup.contacto {
+        grid-column: 1/2;
+    }
+    
+    .formGrup.contacto2 {
+        grid-column: 2/3;
+    }
+    
+    .formGrupBtnEnviar.contacto {
+        margin-top: 50px;
+        grid-column: 3/4;
+    }
+    /*---------------------------*/
     
     .formButton:hover {
         box-shadow: 3px 0px 30px rgba(163, 163, 163, 2);
@@ -339,6 +373,10 @@
         background-color: rgb(221, 0, 0);
         border-radius: 5px;
         ;
+    }
+    
+    .formGrupBtnEnviar.informeAsistencia {
+        float: left;
     }
     /*Mediaqueries*/
     

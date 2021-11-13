@@ -7,25 +7,12 @@ require_once "../../mensaje.php";
 
 $materia=new Materia();
 
-if(isset($_GET["cboFiltroEstado"])){
-    $filtroEstado=$_GET["cboFiltroEstado"];
-
-} else{
-    $filtroEstado=1;
-    $idCarrera=$_GET["idCarrera"];
-}
-
-if(isset($_GET["txtNombre"])){
-    $filtroNombre=$_GET["txtNombre"];
-    $idCarrera=$_GET["idCarrera"];
-} else{
-    $filtroNombre="";
-    $idCarrera=$_GET["idCarrera"];
-}
-
 $idCarrera=$_GET["idCarrera"];
 $idCicloLectivo=$_GET["idCiclo"];
-$listadoMaterias=$materia->listadoPorIdCarrera($idCicloLectivo,$idCarrera,$filtroEstado,$filtroNombre);
+
+$idCicloLectivoCarrera=Carrera::idCicloLectivoCarrera($idCicloLectivo,$idCarrera);
+
+$listadoMaterias=$materia->listadoPorIdCarrera($idCicloLectivo,$idCarrera);
 
 
 $carrera=Carrera::listadoPorId($idCarrera);
@@ -44,6 +31,7 @@ $carrera=Carrera::listadoPorId($idCarrera);
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Materias</title>
 </head>
 
@@ -83,11 +71,26 @@ $carrera=Carrera::listadoPorId($idCarrera);
                         </td>
                         <td>
                             <div class="icon">
-                                <a href="eliminar_relacion.php?id=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo ?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+
+                            <?php 
+                                $idMateria=$materia->getIdMateria();
+                                $estado=Materia::estadoCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
+
+                                if($estado==2){?>
+                                
+                                    <a href="dar_alta_materia_asignada_a_ciclo.php?idCarrera=<?php echo $idCarrera?>&idMateria=<?php echo $materia->getIdMateria()?>&idCiclo=<?php echo $idCicloLectivo?>&idCicloLectivoCarrera=<?php echo $idCicloLectivoCarrera?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>    
+
+                            <?php }else{ ?>
+
+
+                                <a href="eliminar_relacion.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCiclo=<?php echo $idCicloLectivo ?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
                                 <a href="../eje_contenido/listado_por_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/ejeContenido.png" title="Eje de contenido" alt="Eje de contenido"></a>
                                 <a href="../docentes/listado_por_carrera_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/listadoPersona.png" title="Listado de Docentes" alt="Listado de Docentes"></a>
                                 <a href="../asistencia/procesar_busqueda_asistencia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/asistencia.png" title="Asistencia" alt="Asistencia"></a>
-                            </div>
+                            
+                                <?php } ?>
+                                
+                                </div>
                         </td>
                         <?php endforeach?>
                     </tr>

@@ -113,11 +113,9 @@
 
             <!--Grupo de Boton Enviar-->
 
-            <div class="formGrupBtnEnviar">
+            <div class="formGrupBtnEnviar central">
                 <button type="submit" class="formButton" value ="FormInsertDetalleDomicilio" id="Guardar"> Guardar</button>
-            </div>
-
-            <div class="formGrupBtnEnviar">
+            
                 <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
             </div>
             

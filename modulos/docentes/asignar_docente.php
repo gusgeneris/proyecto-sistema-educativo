@@ -4,7 +4,6 @@
     require_once '../../class/Carrera.php';
     require_once '../../class/MySql.php'; 
     require_once "../../configs.php"; 
-    require_once "../../mensaje.php"; 
 
     $idCarrera=$_GET["idCarrera"];
     $idMateria=$_GET["idMateria"];
@@ -28,6 +27,7 @@
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
         <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
         <link rel="stylesheet" href="../../style/menuVertical.css">
+        <link rel="stylesheet" href="../../style/mensaje.css">
         <script src="../../jquery3.6.js"></script>
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Asigar Docente</title>
@@ -37,7 +37,9 @@
 
     <body class="body">
 
-        <?php require_once "../../menu.php";?>
+        <?php
+            require_once "../../mensaje.php";  require_once "../../menu.php";
+        ?>
 
         <div class="titulo">
             <h1> Asignar Docente a la Materia: <?php echo $materia ?> / <?php echo $carrera ?> </h1>
@@ -63,11 +65,9 @@
                     <p class="formularioInputError"> Debe seleccionar una opcion </p> 
                 </div>
 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviarUnaColumna">
                     <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
+               
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
                 </div>               
             </form>

@@ -300,7 +300,8 @@ class Horario{
             "join materia on id_materia = materia_id_materia ".
             "join docente_carrera on docente_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera ".
             "join docente on id_docente = docente_id_docente ".
-            "where id_docente={$idDocente}";
+            " join docente_materia on id_docente=docente_materia.docente_id_docente ".
+            "where id_docente={$idDocente} and docente_materia_estado=1 and docente_carrera_estado=1";
             
         $db = new MySql();
         $datos = $db->consultar($sql);

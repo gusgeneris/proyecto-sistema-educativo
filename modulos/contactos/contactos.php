@@ -20,7 +20,6 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css" class="">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css"> 
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
@@ -36,11 +35,11 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 <div class="titulo"><h1>Agregar contacto</h1></div>
 
 <div class="main">
-	<form method="POST" action="procesar_alta.php" method=POST class="formInsert" id="formInsert" name="formInsert">
+	<form method="POST" action="procesar_alta.php" method=POST class="formInsert3Columnas" id="formInsert" name="formInsert">
 
 		<input type="hidden" name="txtIdPersona" value="<?php echo $idPersona; ?>">
 
-		<div class="formGrup" id="GrupoBarrio">
+		<div class="formGrup contacto" id="GrupoBarrio">
 			<label for="cboTipoContacto" class="formLabel">Tipo Contacto</label>
 
 			<select name="cboTipoContacto">
@@ -55,10 +54,10 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 				<?php endforeach ?>
 
 			</select>
-		</div> <br>
+		</div> 
 
 		
-		<div class="formGrup" id="GrupoContacto">
+		<div class="formGrup contacto2" id="GrupoContacto">
 			
 			<label for="Contacto" class="formLabel">Valor</label>    
 			<div class="formGrupInput">
@@ -67,7 +66,6 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 			<p class="formularioInputError"> El Contacto debe estar bien escrito.</p> 
 		</div> 
 		
-		&nbsp;&nbsp;&nbsp;
 			<!--Grupo de Mensaje-->
 				
 		<div class="formMensaje" id="GrupoMensaje">
@@ -78,12 +76,10 @@ $listadoTipoContactos = TipoContacto::obtenerTodos();
 
 			<!--Grupo de Boton Enviar-->
 
-		<div class="formGrupBtnEnviar">
+		<div class="formGrupBtnEnviar contacto">
 			<button type="submit" class="formButton" id='Guardar' value='FormInsertContacto'> Guardar</button>
-		</div>
 		
-		<div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
         </div>
 
 	</form>

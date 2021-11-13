@@ -45,7 +45,7 @@ require_once "../../mensaje.php";
                         </div>
                         <p class="formularioInputError"> El NombreCarrera no debe contener numeros ni simbolos.</p>
 
-                        <div class="formGrupBtnEnviar">
+                        <div class="formGrupBtnEnviar3Columnas">
                         <button type="button" class="formButton" id="Guardar" onclick="mostrarPaso2()"> Siguiente </button>
                         </div>
 
@@ -60,12 +60,9 @@ require_once "../../mensaje.php";
                         </div>
                         <p class="formularioInputError"> Debe ingresar correctamente los datos solicitados.</p>
                     </div>
-                    <div class="formGrupBtnEnviar">
+                    <div class="formGrupBtnEnviar3Columnas">
                     <button type="button" class="formButton" id="Guardar" onclick="mostrarPasoFinal(), presentarContenido()" > Siguiente </button>
-                    </div>
-
-
-                    <div class="formGrupBtnEnviar">
+                    
                     <button type="button" class="formButton" id="Cancelar" onclick="atras1()" > Atras </button>
                     </div>
                 </div>
@@ -83,7 +80,7 @@ require_once "../../mensaje.php";
                 <div class="pasoFinal" id="pasoFinal">
                     <div>
                         <div class="subtitulo"> 
-                            <h2>¿Desea ingresar los datos?</h2>
+                            <h2>¿Desea ingresar estos datos?</h2>
                         </div>
                         <br>
                         <p id=nombre >Nombre de la carrera: </p>
@@ -92,11 +89,9 @@ require_once "../../mensaje.php";
                 
                     </div>
 
-                    <div class="formGrupBtnEnviar">
+                    <div class="formGrupBtnEnviar3Columnas">
                         <button type="submit" class="formButton" value ="FormInsertCarrera" id="Guardar"> Guardar</button>
-                    </div>
                     
-                    <div class="formGrupBtnEnviar">
                         <button type="button" class="formButton" id="Cancelar" onclick="atras2()" > Atras </button>
                     </div>
                     

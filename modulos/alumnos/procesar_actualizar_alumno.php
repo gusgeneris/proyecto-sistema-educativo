@@ -12,14 +12,14 @@ if($cancelar==true){
 }
 
 $idAlumno=$_POST['IdAlumno'];
-$personaNombre = $_POST['PersonaNom'];
+$personaNombre = $_POST['Nombre'];
 $personaApellido = $_POST['Apellido'];
 $personaDni = $_POST['Dni'];
-$personaFechaNac = $_POST['FechaNac'];
+$personaFechaNac = $_POST['Fecha'];
 $personaNacionalidad= $_POST['Nacionalidad'];
 $idPersona= $_POST['IdPersona'];
 $personaSexo= $_POST['cboSexo'];
-$numLegajo= $_POST['NumLegajo'];
+$numLegajo= $_POST['NumeroLegajo'];
 
 
 if ($personaDni == ''){
@@ -40,7 +40,7 @@ if (strlen($personaNombre) < 3 ){
     exit;
 }
 
-if (ctype_alpha($personaNombre) == false){
+if ((!preg_match("/^[a-zA-ZÀ-ÿ\s ]{3,40}$/",$personaNombre))){
     header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
     exit;
 }

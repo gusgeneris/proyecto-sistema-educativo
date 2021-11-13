@@ -4,7 +4,7 @@ body {
 
 .conteiner {
     width: 400px;
-    margin: 30px 180px;
+    margin: 50px 20%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -92,6 +92,10 @@ tr:hover td {
     border-radius: 3px;
     cursor: pointer;
     display: flex;
+}
+
+.conteiner.horario {
+    margin-left: 100px;
 }
 
 .btn-agregar a {
