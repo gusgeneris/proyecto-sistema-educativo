@@ -15,6 +15,10 @@ else{header("Location:/proyecto-modulos/login.php?error=".INCORRECT_SESSION_CODE
 exit;}
 $_SESSION['usuario']=$usuario;
 
+$nombre=$usuario->getNombre();
+$apellido=$usuario->getApellido();
+$idUsuario=$usuario->getIdUsuario();
+
 $listadoModulos= $usuario->perfil->getArrModulos();
 $idPerfil=$usuario->getIdPerfil();
 
@@ -22,13 +26,25 @@ $idPerfil=$usuario->getIdPerfil();
 ?>
 
 <header class="encabezado">
-    <div class="">
-        <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
-    </div>
+    
     <button type="button" class="btnMenu"><i class="icono menu fas fa-bars"></i></button>
     <button type="button" class="btnAtras">
         <a href="javascript:history.back()"><i class="icono menu fas fa-arrow-left"></i></a>
     </button>
+    <div class="logoMenu">
+        <a href="/proyecto-modulos/inicio.php"><img class="logob" src="/proyecto-modulos/image/logoo_frase.png" ></a>
+    </div>
+
+
+    
+    <button type="button" class="btnUsuarioConectado"><?php echo $nombre.", ". $apellido?> </button>
+
+    <div class="contenedorUsuarioConfig">
+        <ul class="menuUsuarioConfig"> 
+            <li><a href="/proyecto-modulos/modulos/usuarios/modificar.php?id=<?php echo $idUsuario ?>"><i class="fas fa-edit"></i> Editar Perfil</a></li>
+            <li class=""><a href="/proyecto-modulos/cerrar_sesion.php" class="a"><i class="icono left fas fa-sign-in-alt"></i> Cerrar Sesion</a></li>
+        </ul>
+    </div>
     
 </header>
 
@@ -79,13 +95,14 @@ $idPerfil=$usuario->getIdPerfil();
                         array_push($ubicacion,$nombreModulo);
                     elseif($nombreModulo=="docentes"||$nombreModulo=="alumnos"):
                         array_push($persona,$nombreModulo);
-                    elseif($nombreModulo=="periodo_desarrollo"||$nombreModulo=="horarios"||$nombreModulo=="anio_desarrollo"):
+                    elseif($nombreModulo=="periodo_desarrollo"||$nombreModulo=="horarios"||$nombreModulo=="anio_desarrollo"||$nombreModulo=="especialidad"||$nombreModulo=="tipo_contacto"):
                         array_push($configuracion,$nombreModulo);
                     elseif($nombreModulo=="ciclo_lectivo"||$nombreModulo=="materias"||$nombreModulo=="carreras"):
                         array_push($administracion,$nombreModulo);
                     endif;
 
                 endforeach; 
+
 
             ?>
 

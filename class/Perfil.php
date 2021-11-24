@@ -6,6 +6,7 @@ require_once 'Modulo.php';
 class Perfil{
     private $_idPerfil;
     private $_perfilNombre;
+    private $_estado;
     private $_arrModulos;
 
 
@@ -55,7 +56,25 @@ class Perfil{
     public function getArrModulos()
     {
         return $this->_arrModulos;
-    }
+    }    /**
+    * Get the value of _estado
+    */ 
+   public function getEstado()
+   {
+       return $this->_estado;
+   }
+
+   /**
+    * Set the value of _estado
+    *
+    * @return  self
+    */ 
+   public function setEstado($_estado)
+   {
+       $this->_estado = $_estado;
+
+       return $this;
+   }
 
     public function insert(){
         $sql="INSERT INTO `perfil` (`perfil_nombre`) VALUES ('$this->_perfilNombre');
@@ -68,7 +87,7 @@ class Perfil{
 
     public static function perfilTodos(){
 
-        $sql="SELECT id_perfil,perfil_nombre FROM perfil";
+        $sql="SELECT estado,id_perfil,perfil_nombre FROM perfil";
         $database=new MySql();
         $datos = $database->consultar($sql);
         $listadoPerfil = [];
@@ -79,9 +98,32 @@ class Perfil{
                 $perfil=new Perfil();
                 $perfil->setIdPerfil($registro['id_perfil']);
                 $perfil->setPerfilNombre($registro['perfil_nombre']);
+                $perfil->setEstado($registro['estado']);
                 $listadoPerfil[]=$perfil;
             }
             return $listadoPerfil;}
+
+    }
+
+    public static function perfilTodosActivos(){
+
+        $sql="SELECT estado,id_perfil,perfil_nombre FROM perfil";
+        $database=new MySql();
+        $datos = $database->consultar($sql);
+        $listadoPerfil = [];
+
+ 
+        
+            while ($registro = $datos->fetch_assoc()){
+                if($registro['estado']==1){
+                    $perfil=new Perfil();
+                    $perfil->setIdPerfil($registro['id_perfil']);
+                    $perfil->setPerfilNombre($registro['perfil_nombre']);
+                    $perfil->setEstado($registro['estado']);
+                    $listadoPerfil[]=$perfil;
+                }
+            }
+            return $listadoPerfil;
 
     }
 
@@ -109,11 +151,21 @@ class Perfil{
 
         }
 
-        public function darDeBaja($idPerfil){
+        public static function darDeBaja($idPerfil){
             $sql = "UPDATE `perfil` SET `estado` = '2' WHERE (`id_perfil` = '$idPerfil')";
 
             $database= new MySql();
-            $datos = $database->eliminarRegistro($sql);
+            $datos = $database->actualizar($sql);
         }
+
+        public static function darAlta($idPerfil){
+            $sql = "UPDATE `perfil` SET `estado` = '1' WHERE (`id_perfil` = '$idPerfil')";
+
+            $database= new MySql();
+            $datos = $database->actualizar($sql);
+            return true;
+        }
+
+
 }
 ?>

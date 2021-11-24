@@ -6,10 +6,29 @@ Class DetalleCalendarizacion{
     private $_fechaClase;
     private $_actividad;
     private $_contenidoPriorizado;
+    private $_numeroEjeContenido;
     
     private $_idCalendarizacion;
 
-    
+        /**
+     * Get the value of _numeroEjeContenido
+     */ 
+    public function getNumeroEjeContenido()
+    {
+        return $this->_numeroEjeContenido;
+    }
+
+    /**
+     * Set the value of _numeroEjeContenido
+     *
+     * @return  self
+     */ 
+    public function setNumeroEjeContenido($_numeroEjeContenido)
+    {
+        $this->_numeroEjeContenido = $_numeroEjeContenido;
+
+        return $this;
+    }
     /**
      * Get the value of _idDetalleCalendarizacion
      */ 
@@ -139,6 +158,7 @@ Class DetalleCalendarizacion{
         $detalle->_actividad= $registro['detalle_actividad'];
         $detalle->_contenidoPriorizado= $registro['detalle_contenido_priorizado'];
         $detalle->_idCalendarizacion= $registro['calendarizacion_id_calendarizacion'];
+        $detalle->_numeroEjeContenido= $registro['detalle_calendarizacion_num_eje_contenido'];
 
         return $detalle;
 
@@ -147,7 +167,7 @@ Class DetalleCalendarizacion{
     
     static public function listado($idCurriculaCarrera){
 
-        $sql="SELECT id_detalle_calendarizacion ,detalle_numero_clase, detalle_fecha_clase, detalle_actividad, detalle_contenido_priorizado, calendarizacion_id_calendarizacion from detalle_calendarizacion  
+        $sql="SELECT detalle_calendarizacion_num_eje_contenido,id_detalle_calendarizacion ,detalle_numero_clase, detalle_fecha_clase, detalle_actividad, detalle_contenido_priorizado, calendarizacion_id_calendarizacion from detalle_calendarizacion  
         join calendarizacion on id_calendarizacion = calendarizacion_id_calendarizacion
         join curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera
         where curricula_carrera_id_curricula_carrera = {$idCurriculaCarrera}";
@@ -170,7 +190,7 @@ Class DetalleCalendarizacion{
 
     public function insert(){
 
-        $sql="INSERT INTO `detalle_calendarizacion` (`detalle_actividad`, `detalle_contenido_priorizado`, `calendarizacion_id_calendarizacion`, `detalle_numero_clase`, `detalle_fecha_clase`) VALUES ('{$this->_actividad}', '{$this->_contenidoPriorizado}', '{$this->_idCalendarizacion}', '{$this->_numeroClase}', '{$this->_fechaClase}');
+        $sql="INSERT INTO `detalle_calendarizacion` (`detalle_calendarizacion_num_eje_contenido`,`detalle_actividad`, `detalle_contenido_priorizado`, `calendarizacion_id_calendarizacion`, `detalle_numero_clase`, `detalle_fecha_clase`) VALUES ('{$this->_numeroEjeContenido}','{$this->_actividad}', '{$this->_contenidoPriorizado}', '{$this->_idCalendarizacion}', '{$this->_numeroClase}', '{$this->_fechaClase}');
         ";
        
         $database=new Mysql();
@@ -206,12 +226,14 @@ Class DetalleCalendarizacion{
     public function actualizarDetalleCalendarizacion(){
 
         $database = new MySql();
-        $sql = "UPDATE `detalle_calendarizacion` SET `detalle_actividad` = '{$this->_actividad}',`detalle_contenido_priorizado` = '{$this->_contenidoPriorizado}', `detalle_numero_clase` ='{$this->_numeroClase}', `detalle_fecha_clase` = '{$this->_fechaClase}' WHERE (`id_detalle_calendarizacion` = '{$this->_idDetalleCalendarizacion}');";
+        $sql = "UPDATE `detalle_calendarizacion` SET `detalle_calendarizacion_num_eje_contenido` = '{$this->_numeroEjeContenido}',`detalle_actividad` = '{$this->_actividad}',`detalle_contenido_priorizado` = '{$this->_contenidoPriorizado}', `detalle_numero_clase` ='{$this->_numeroClase}', `detalle_fecha_clase` = '{$this->_fechaClase}' WHERE (`id_detalle_calendarizacion` = '{$this->_idDetalleCalendarizacion}');";
         
         $database->actualizar($sql);
 
 
     }
+
+
 }
 
 

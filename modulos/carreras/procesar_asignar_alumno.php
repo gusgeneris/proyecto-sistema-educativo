@@ -16,17 +16,18 @@ if($cancelar==true){
 
 
 $alumno=new Alumno();
-$alumno->eliminarTodaRelacionCicloLecticoCarrera($idCicloLectivoCarrera);
+
+
 
 foreach ($_POST["check_lista"] as $idAlumno){
+   # $alumno->eliminarTodaRelacionCicloLecticoCarrera($idCicloLectivoCarrera,$idAlumno);
     
-
     $asignarCicloLectivoCarrera=Alumno::asignarCicloLectivoCarrera($idAlumno,$idCicloLectivoCarrera);
   
 }
 
 if ($alumno){
-    header("Location:asignar_alumno.php?idCarrera=".$idCarrera."&idCiclo=".$idCicloLectivo);
+    header("Location:../carreras/listado_por_ciclo.php?mj=".CORRECT_INSERT_CODE."&idCiclo=".$idCicloLectivo);
 }
 
 

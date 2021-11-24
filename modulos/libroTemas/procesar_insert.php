@@ -8,7 +8,8 @@
         header("Location:listado.php");
         exit;
     }
-    
+    $idMateria= $_POST['idMateria'];
+    $idCarrera= $_POST['idCarrera'];
     $idLibroTemas = $_POST['idLibroTemas'];
     $temaDia = $_POST['temaDia'];
     $observaciones = $_POST['observaciones'];
@@ -26,7 +27,7 @@
     $detalleLibroTemas->insert();
     
     if ($detalleLibroTemas){
-        header("Location:../../modulos/asistencia/insert.php?mj=".CORRECT_INSERT_CODE."&idClase=".$idClase."&idCurriculaCarrera=".$idCurriculaCarrera);
+        header("Location:../../modulos/libroTemas/insert.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_INSERT_CODE."&idClase=".$idClase."&idCurriculaCarrera=".$idCurriculaCarrera);
     }
     
 

@@ -7,12 +7,13 @@ require_once "../../class/Carrera.php";
 
 
 $idCicloLectivoCarrera=$_GET["id"];
-$idAlumno=$_GET["idAlumno"];
+$idAlumno=$_GET["idAlumno"];    
 
 $listadoMateria=Materia::listadoMateriasParaMatricularAlumno($idCicloLectivoCarrera);
 $matricula=Materia::listadoPorAlumno($idCicloLectivoCarrera,$idAlumno);
 
 $alumno=Alumno::obtenerTodoPorId($idAlumno);
+$nombreCarrera=Carrera::carreraPorIdCicloLectivoCarrera($idCicloLectivoCarrera);
 
 
 $listadoMatriculasActuales=[];
@@ -44,7 +45,7 @@ $listadoMatriculasActuales=[];
         <?php require_once "../../menu.php";?>
 
         <div class="titulo">
-            <h1>Matriculacion a Materias del Alumno:<?php echo $alumno?></h1>
+            <h1>Matriculacion a Materias del Alumno: <span> <?php echo $alumno?> </span><br> Carrera: <span><?php echo $nombreCarrera ?></span><h1>
         </div>
 
         <div class="main">
@@ -93,9 +94,6 @@ $listadoMatriculasActuales=[];
                 
                 <div class="formGrupBtnEnviar">
                     <button type="submit" class="formButton" value ="FormInsertAsignarCarrera" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
                 </div>
 

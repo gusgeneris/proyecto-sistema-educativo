@@ -21,10 +21,13 @@ $horario->setHoraInicio($horaInicio);
 $horario->setHoraFin($horaFin);
 $horario->setIdDia($idDia);
 
-$horario->insert();
+$dato=$horario->insert();
 
-if ($horario){
+if ($dato==1){
     header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
+}else{
+    header("Location:listado.php?mj=".INCORRECT_INSERT_DATO_DUPLICATE_CODE);
+
 }
 
 ?>

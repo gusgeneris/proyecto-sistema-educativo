@@ -44,14 +44,14 @@
 
             <div class="main">
 
-                <form action="procesar_asignar.php" method=POST class="formulario">
+                <form action="procesar_asignar.php" id="formInsert" method=POST class="formulario">
 
                     <div><input type="hidden" name=IdCiclo value=<?php echo $idCicloLectivo  ?>></div>
 
                     <div class="formGrup" id="GrupocboCarrera">
                         <label for="cboCarrera" class="formLabel ">Carrera</label>
                         <div class="formGrupInput">
-                            <select name="Carrera" id="" class="">
+                            <select name="cboCarrera" id="cboCarrera" class="formInput">
                                 <option value="NULL" class="">Asigne Carrera</option>
                                 <?php foreach($listado as $carrera):?>
                                 <option value="<?php echo $carrera->getIdCarrera(); ?>" class=""><?php echo $carrera?></option>
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="formGrupBtnEnviarUnaColumna">
-                        <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
+                        <button type="submit" class="formButton" value ="FormInsertAsignar" id="Guardar"> Guardar</button>
                    
                         <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
                     </div>             
@@ -70,5 +70,8 @@
             </div>
         <?php require_once "../../footer.php"?>                            
     </body>
+
+    
+    <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 
 </html>

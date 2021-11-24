@@ -8,6 +8,7 @@ if(isset($_GET['id'])){
 }
 $idCarrera=$_GET["idCarrera"];
 $idMateria=$_GET["idMateria"];
+$idCicloLectivo=$_GET["idCicloLectivo"];
 
 $ejeContenido= EjeContenido::obtenerTodoPorId($id);
 
@@ -43,6 +44,7 @@ $ejeContenido= EjeContenido::obtenerTodoPorId($id);
             
                 <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera ?>></div>
                 <div><input type="hidden" name=IdMateria value=<?php echo $idMateria ?>></div>
+                <div><input type="hidden" name=IdCicloLectivo value=<?php echo $idCicloLectivo ?>></div>
                 
                 <div class=""> 
                     <input name="idEjeContenido" type="hidden" class="" value="<?php echo $ejeContenido->getIdEjeContenido(); ?>">
@@ -61,7 +63,7 @@ $ejeContenido= EjeContenido::obtenerTodoPorId($id);
                     <label for="Descripcion" class="formLabel">Detalle</label>
 
                     <div class="formGrupInput"> 
-                    <textarea name="" id="" cols="30" rows="10" name="Descripcion" type="text" class="formInput" value=""> <?php echo $ejeContenido->getDescripcion(); ?></textarea>
+                    <textarea cols="30" rows="10" name="Descripcion" type="text" class="formInput"> <?php echo $ejeContenido->getDescripcion(); ?></textarea>
                     </div>
                     <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
                 </div>

@@ -75,8 +75,8 @@ $lista = Alumno::listadoAlumnos($filtroEstado,$filtroApellido);
                 </div>
             
                 <div>
-                    <label class="label" for="nombreCarrera"> Nombre Carrera: </label>
-                        <input class="form-input" type="text" name="txtNombre" id="nombreCarrera">
+                    <label class="label" for="nombreAlumno"> Apellido Alumno: </label>
+                        <input class="form-input" type="text" name="txtNombre" id="nombreAlumno">
                 </div>
                 <div class="conteiner-btn-filtrar">
                     <button class="btn-filtrar" type="submit" value="Filtrar"> Filtrar </button>
@@ -146,14 +146,17 @@ $lista = Alumno::listadoAlumnos($filtroEstado,$filtroApellido);
                     </td>
                         <td>
                             <div class="icon">
-                                <a href="dar_baja.php?id=<?php echo $alumno->getIdPersona();?>" ><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            
+                                
+                                <?php if (($alumno->getEstado())==2){?>
+                                    <a href="dar_alta.php?id=<?php echo $alumno->getIdPersona()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
+                                <?php }else{ ?>
+                                
+                                <a href="#" onclick="consulta(<?php echo $alumno->getIdPersona();?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
+
                                 <a href="modificar.php?id=<?php echo $alumno->getIdAlumno();?>" ><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                             
                                 <a href="asignarCarrera.php?idAlumno=<?php echo $alumno->getIdAlumno();?>" ><img class="icon-a" src="../../icon/asignar.png" title="Asignar" alt="Asignar Carrera"></a>
                                 
-                                <?php if (($alumno->getEstado())==2){?>
-                                    <a href="dar_alta.php?id=<?php echo $alumno->getIdPersona()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
                                 <?php } ?>
                             </div>
                         </td>
@@ -164,4 +167,14 @@ $lista = Alumno::listadoAlumnos($filtroEstado,$filtroApellido);
     </div>
     <?php require_once "../../footer.php"?>
 </body>
+
+    <script>
+        function consulta(idPersona){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idPersona;
+            }
+        }
+    </script>
 </html>

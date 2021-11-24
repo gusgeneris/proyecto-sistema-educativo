@@ -1,23 +1,23 @@
 <?php
 
-require_once "../../class/Barrio.php";
-require_once "../../configs.php";
-require_once "../../mensaje.php";
+    require_once "../../class/Barrio.php";
+    require_once "../../configs.php";
+    require_once "../../mensaje.php";
 
-if(isset($_GET['id'])){
-    $id=$_GET['id'];    
-}
+    if(isset($_GET['id'])){
+        $id=$_GET['id'];    
+    }
 
-$idLocalidad = $_GET['idLocalidad'];
-$idBarrio=$_GET["idBarrio"];
+    $idLocalidad = $_GET['idLocalidad'];
+    $idBarrio=$_GET["idBarrio"];
 
-$barrio= Barrio::obtenerPorIdBarrio($idBarrio);
+    $barrio= Barrio::obtenerPorIdBarrio($idBarrio);
 
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,11 +65,9 @@ $barrio= Barrio::obtenerPorIdBarrio($idBarrio);
                 </div>
 
                 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviarUnaColumna">
                     <button type="submit" class="formButton" value ="FormInsertBarrio" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
+                
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
             </form>

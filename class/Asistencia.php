@@ -113,13 +113,13 @@
         }
 
         public static function reporteInasistencia($idAlumno,$idCurriculaCarrera){
-                $sql="SELECT persona_nombre,persona_apellido,persona_dni,count(estado_asistencia_detalle) as cantidad_faltas,estado_asistencia_detalle,alumno_id_alumno from asistencia ".
+                $sql="SELECT persona_nombre,persona_apellido,persona_dni,alumno_id_alumno from asistencia ".
                         "JOIN estado_asistencia on id_estado_asistencia=estado_asistencia_id_estado_asistencia ".
                         "JOIN clase on id_clase=clase_id_clase ".
                         "JOIN curricula_carrera on id_curricula_carrera = curricula_carrera_id_curricula_carrera ".
                         "JOIN alumno on alumno_id_alumno=id_alumno ". 
                         "JOIN persona on id_persona = persona_id_persona ". 
-                        "WHERE id_curricula_carrera={$idCurriculaCarrera} and id_alumno={$idAlumno} and estado_asistencia_detalle='Ausente' group by estado_asistencia_detalle order by persona_apellido;";
+                        "WHERE id_curricula_carrera={$idCurriculaCarrera} and id_alumno={$idAlumno}  group by estado_asistencia_detalle order by persona_apellido;";
                         
                 $dataBase= new Mysql();
                 $dato= $dataBase->consultar($sql);
@@ -131,8 +131,7 @@
                         $nombre=$registro['persona_nombre'];
                         $apellido=$registro['persona_apellido'];
                         $dni=$registro['persona_dni'];
-                        $cantidadFaltas=$registro['cantidad_faltas'];
-                        array_push($listado,array($nombre,$apellido,$dni,$cantidadFaltas));
+                        array_push($listado,array($nombre,$apellido,$dni));
                 
                 return $listado;
         }

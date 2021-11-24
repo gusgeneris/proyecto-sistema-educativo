@@ -1,6 +1,7 @@
 <?php
 require_once "../../class/Mysql.php";
 require_once "../../class/Provincia.php";
+require_once "../../configs.php";
 
 $idPais= $_POST['IdPais'];
 $idProvincia=$_POST["IdProvincia"];
@@ -21,7 +22,7 @@ $provincia->setNombre($nombre);
 
 $provincia->modificarProvincia();
 
-header("Location:listado.php?idPais=".$idPais);
+header("Location:listado.php?idPais=".$idPais."&mj=".CORRECT_UPDATE_CODE);
 
 
 

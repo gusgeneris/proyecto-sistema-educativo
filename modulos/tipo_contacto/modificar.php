@@ -1,7 +1,5 @@
 <?php
 require_once "../../class/TipoContacto.php";
-require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 $id=$_GET['idTipoContacto'];
 
@@ -23,15 +21,17 @@ $tipoContacto=TipoContacto::obtenerPorId($id);
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Eje Contenido</title>
 </head>
-<?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
 
 <body class="modif-user">
+    <div class="titulo">
+        <h1>Ingrese los nuevos datos</h1>
+    </div>
 
-    <h1 class="titulo">Ingrese los nuevos datos</h1>
-    
-
-    <form action="procesar_actualizar.php"  method="POST" class="formUnaColumna" name="formModificar" id="formModificar">
-        
+    <div class="main">
+        <form action="procesar_actualizar.php"  method="POST" class="formUnaColumna" name="formModificar" id="formModificar">
+            
              
             <input name="IdTipoContacto" type="hidden" class="" value="<?php echo $tipoContacto->getIdTipoContacto(); ?>">
             
@@ -52,13 +52,14 @@ $tipoContacto=TipoContacto::obtenerPorId($id);
                 
                 </div>
 
-                <div> 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviarUnaColumna">
                     <button type="submit" class="formButton" value ="FormInsertTipoContacto" id="Guardar"> Guardar</button>
                
                     <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
-    </form>
+        </form>
+    </div>
+
     <?php require_once "../../footer.php"?> 
 
 </body>

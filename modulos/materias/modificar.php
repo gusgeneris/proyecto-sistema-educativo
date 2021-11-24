@@ -19,6 +19,7 @@
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
+<script type="text/javascript" src="../../script/validacionFormModificar.js" defer></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Materia</title>
 </head>
@@ -31,7 +32,7 @@
 </div>
 
 <div class="main">
-    <form action="procesar_actualizar.php" method="POST" class="formModificarUnaColumna" id="formModificar" name="formModificar">
+    <form action="procesar_actualizar.php" method="POST" class="formModificarUnaColumna" id="formModificar" name="formularioMateriaModificar">
 
         
         <input name="idMateria" type="hidden" value="<?php echo $materia->getIdMateria();?>">
@@ -66,5 +67,4 @@
 </body>
 
 
-<script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 </html>

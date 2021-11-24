@@ -318,7 +318,7 @@ class Docente extends Persona{
 
     
     public static function darAltaDocenteCarrera($idDocente,$idCicloLectivoCarrera){
-        $sql="UPDATE `docente_carrera` SET `docente_carrera_estado` = '1' WHERE (`docente_id_docente` = {$idDocente}) and  (`ciclo_lectico_carrera_id_ciclo_lectivo_carrera` = {$idCicloLectivoCarrera})";
+        $sql="UPDATE `docente_carrera` SET `docente_carrera_estado` = '1' WHERE (`docente_id_docente` = {$idDocente}) and  (`ciclo_lectivo_carrera_id_ciclo_lectivo_carrera` = {$idCicloLectivoCarrera})";
 
         
 
@@ -333,6 +333,20 @@ class Docente extends Persona{
         $database=new Mysql();
         $database->actualizar($sql);
         return true;
+    }
+
+    public static function cantidadTotalDocentes(){
+        $sql="SELECT count(id_docente) as cantidad from docente;";
+
+        $dataBase=new MySql();
+
+        $dato=$dataBase->consultar($sql);
+
+        $registro= $dato->fetch_assoc();
+            $cantidad= $registro['cantidad'];
+        
+        return $cantidad;
+
     }
 
 }

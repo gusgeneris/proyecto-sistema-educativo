@@ -1,6 +1,7 @@
 <?php
 
 require_once "../../class/Contacto.php";
+require_once "../../configs.php";
 
 
 $idPersona = $_POST["txtIdPersona"];
@@ -22,7 +23,7 @@ $contacto->setValor($valor);
 $contacto->guardar();
 
 
-header("location: contactos.php?idPersona=" . $idPersona);
+header("location: contactos.php?mj=".CORRECT_INSERT_CODE."&idPersona=" . $idPersona);
 
 
 

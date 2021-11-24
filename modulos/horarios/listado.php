@@ -1,8 +1,7 @@
 <?php
 require_once "../../class/Horario.php";
 require_once "../../class/Dia.php";
-require_once "../../mensaje.php";
-require_once "../../mensaje.php";
+require_once "../../configs.php";
 
 $lista=Horario::listaTodos();
 
@@ -18,12 +17,16 @@ $lista=Horario::listaTodos();
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
-    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css" class="">
+    <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista horarios</title>
 
 </head>
-<?php require_once "../../menu.php";?>
+
 <body class="body-listuser">
+
+    <?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
     
     <div class="titulo">
         <h1>Lista de Horarios</h1>
@@ -41,11 +44,10 @@ $lista=Horario::listaTodos();
         <table class="tabla" >
             <thead>
                 <tr >
-                    <th> ID Horario</th>
+                    <th> Modulo</th>
+                    <th> Dia</th>
                     <th> Hora Inicio</th>
                     <th> Hora Fin</th>
-                    <th> Numero</th>
-                    <th> Id Dia</th>
                     <th> Acciones</th>
 
                 </tr>
@@ -53,8 +55,11 @@ $lista=Horario::listaTodos();
             <tbody>
             <?php foreach ($lista as $horario ):?> 
                 <tr >
-                    <td >
-                        <?php echo $horario->getIdHorario(); ?>
+                    <td>
+                        <?php echo $horario->getNumero(); ?>
+                    </td>
+                    <td>
+                        <?php $dia=Dia::obtenerPorId($horario->getIdDia()); echo $dia->getDescripcion(); ?>
                     </td>
                     <td>
                         <?php echo $horario->getHoraInicio(); ?>
@@ -63,15 +68,22 @@ $lista=Horario::listaTodos();
                         <?php echo $horario->getHoraFin(); ?>
                     </td>
                     <td>
-                        <?php echo $horario->getNumero(); ?>
-                    </td>
-                    <td>
-                        <?php $dia=Dia::obtenerPorId($horario->getIdDia()); echo $dia->getDescripcion(); ?>
-                    </td>
-                    <td>
                         <div class="icon">
+                            <?php 
+                                $idHorario= $horario->getIdHorario();
+
+                                $estado=$horario->getEstado();
+
+                                if($estado==2){?>
+                                
+                                    <a href="dar_alta.php?id=<?php echo $idHorario?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>    
+
+                            <?php }else{ ?>
+
                             <a href="dar_baja.php?id=<?php echo $horario->getIdHorario(); ?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="modificar.php?id= <?php echo $horario->getIdhorario(); ?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                            <a href="modificar.php?id=<?php echo $horario->getIdhorario(); ?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                            
+                            <?php } ?>
                         </div>
                        
                     </td>

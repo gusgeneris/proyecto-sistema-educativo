@@ -1,5 +1,6 @@
 <?php
 require_once "../../class/Horario.php";
+require_once "../../class/Dia.php";
 require_once "../../configs.php";
 require_once "../../mensaje.php";
 
@@ -8,6 +9,7 @@ if(isset($_GET['id'])){
 }
 
 $horario= Horario::obtenerTodoPorId($id);
+$listadoDias=Dia::obtenerTodo();
 
 ?>
 
@@ -33,39 +35,61 @@ $horario= Horario::obtenerTodoPorId($id);
     </div>
     
     <div class="main">
-        <form action="procesar_actualizar.php" method="POST" class="formInsertUnaColumna">
+        <form action="procesar_actualizar.php" method="POST" class="formInsertUnaColumna" id='formModificar'>
             
-                <div class=""> 
                     <input name="idHorario" type="hidden" class="formInput" value="<?php echo $horario->getIdHorario(); ?>">
-                </div>
+                
 
 
-                <div class="formGrup">
+                <div class="formGrup" id="GrupoNumero">
                     <label for="Numero" class="formLabel">Numero del modulo que tendra el horario</label>   
-                    <input name="Numero" type="text" class="formInput" value="<?php echo $horario->getNumero(); ?>">
+                    <div class="formGrupInput">
+                        <input name="Numero" type="text" class="formInput" value="<?php echo $horario->getNumero(); ?>">
+                        <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                    </div>
                 </div>
 
 
-                <div class="formGrup">
+                <div class="formGrup" id="GrupoHoraInicio">
                     <label for="HoraInicio" class="formLabel">Hora de Inicio</label>
-                    <input name="HoraInicio" type="time" class="formInput" value="<?php echo $horario->getHoraInicio(); ?>">
+                    <div class="formGrupInput">
+                        <input id="HoraInicio" name="HoraInicio" type="time" class="formInput" value="<?php echo $horario->getHoraInicio(); ?>">
+                        <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                    </div>
                 </div>
 
-                <div class="formGrup">
+                <div class="formGrup" id="GrupoHoraFin">
                     <label for="HoraFin" class="formLabel">Hora de Finalizacion</label>
-                    <input name="HoraFin" type="time" class="formInput" value="<?php echo $horario->getHoraFin(); ?>">
+                    <div class="formGrupInput">
+                        <input id="HoraFin" name="HoraFin" type="time" class="formInput" value="<?php echo $horario->getHoraFin(); ?>">
+                        <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                    </div>
                 </div>
 
-            <div class="formGrupBtnEnviar">
-                <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
-            </div>
-            
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+                <div class="formGrup" id="GrupocboDia">
+                    <label for="cboDia" class="formLabel">Dia</label>
+                    <div class="formGrupInput">
+                        <select class="formInput" name="cboDia" id="cboDia">
+                            <?php foreach($listadoDias as $dia):?>
+                                <option <?php if($dia->getIdDia()==$horario->getIdDia()){echo "SELECTED";}?> value="<?php echo $dia->getIdDia();?>">
+                                    <?php echo $dia->getDescripcion(); ?>
+                                </option>
+                            <?php endforeach?>
+                        </select>
+                        <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                    </div>
+                </div>
+
+            <div class="formGrupBtnEnviarDosColumnas">
+                <button type="submit" class="formButton" value ="FormInsertHorario" id="Guardar"> Guardar</button>
+           
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
             </div>     
         
         </form>
     </div>
     <?php require_once "../../footer.php"?> 
 </body>
+
+<script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 </html>

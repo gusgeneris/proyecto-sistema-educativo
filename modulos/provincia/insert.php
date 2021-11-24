@@ -2,9 +2,13 @@
     require_once '../../class/MySql.php'; 
     require_once "../../configs.php";  
     require_once "../../class/Provincia.php";
-    require_once "../../mensaje.php";
+    require_once "../../class/Pais.php";
 
     $idPais= $_GET['idPais'];
+
+    
+$pais=Pais::obtenerPorIdPais($idPais);
+$nombrePais=$pais->getNombre();
     
 ?>
 
@@ -28,7 +32,7 @@
 
 <body class="body">
     <div class="titulo">
-        <h1> Registro de Provincia</h1>
+        <h1> Registro de Provincia para el Pais: <?php echo $nombrePais ?></h1>
     </div>
 
     <div class="main">
@@ -57,11 +61,9 @@
 
             <!--Grupo de Boton Enviar-->
 
-            <div class="formGrupBtnEnviar">
+            <div class="formGrupBtnEnviarUnaColumna">
                 <button type="submit" class="formButton" id='Guardar' value='FormInsertProvincia'> Guardar</button>
-            </div>
-            <br>
-            <div class="formGrupBtnEnviar">
+            
                 <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
             </div>
         </form>

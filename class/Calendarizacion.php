@@ -75,7 +75,8 @@ Class Calendarizacion{
         $sql="INSERT INTO `sistema_educativo`.`calendarizacion` (`curricula_carrera_id_curricula_carrera`) VALUES ({$this->_idCurriculaCarreraCiclo})";
        
         $database=new Mysql();
-        $database->insertarRegistro($sql);
+        $idCalendarizacion=$database->insertarRegistro($sql);
+        return $idCalendarizacion;
         
     }
 

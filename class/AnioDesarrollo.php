@@ -47,6 +47,26 @@ class AnioDesarrollo{
         return $this;
     }
 
+        /**
+     * Get the value of _estado
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
+
   
 
     public function crearAnioDesarrollo($anioDesarrollo,$registro){
@@ -59,15 +79,29 @@ class AnioDesarrollo{
     
     
     public function insert(){
-        $sql = "INSERT INTO `anio_desarrollo` (`detalle_anio`) VALUES ('{$this->_detalleAnio}')";
+
+        $sql="SELECT * FROM anio_desarrollo where detalle_anio='{$this->_detalleAnio}'";
 
         
         $database=new Mysql();
 
-        $database->insertarRegistro($sql);
+        $dato=$database->consultar($sql);
+
+        if($dato->num_rows==0){
+            $sql = "INSERT INTO `anio_desarrollo` (`detalle_anio`) VALUES ('{$this->_detalleAnio}')";
+
+            $database=new Mysql();
+
+            $database->insertarRegistro($sql);
+
+            return 1;
+        }else{
+            return 0;
+        }
+
     }
 
-    public static function listaTodos(){
+    public static function listaTodosActivos(){
         $sql= "SELECT id_anio_desarrollo, detalle_anio, estado FROM anio_desarrollo";
         
         $database=new Mysql();
@@ -82,6 +116,26 @@ class AnioDesarrollo{
 
             $listadoAnioDesarrollo[]=$anioDesarrollo;
             }
+            
+        }
+
+        return $listadoAnioDesarrollo;
+
+    }
+
+    public static function listaTodos(){
+        $sql= "SELECT id_anio_desarrollo, detalle_anio, estado FROM anio_desarrollo";
+        
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+        $listadoAnioDesarrollo=[];
+        
+        while ($registro = $datos->fetch_assoc()){
+
+            $anioDesarrollo=new AnioDesarrollo();
+            $anioDesarrollo->crearAnioDesarrollo($anioDesarrollo,$registro);
+
+            $listadoAnioDesarrollo[]=$anioDesarrollo;
             
         }
 
@@ -121,11 +175,15 @@ class AnioDesarrollo{
         $database = new MySql();
         $database->actualizar($sql);
 
-        
     }
 
+    public static function darAlta($idAnioDesarrollo){
+        $sql = "UPDATE `anio_desarrollo` SET `estado` = '1' WHERE (`id_anio_desarrollo` = '$idAnioDesarrollo')";
 
-
+        $database= new MySql();
+        $datos = $database->eliminarRegistro($sql);
+        return true;
+    }
 }
 
  

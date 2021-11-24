@@ -4,7 +4,13 @@ body {
 
 .conteiner {
     width: 400px;
-    margin: 50px 20%;
+    margin: 40px 15%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.conteinerCentral {
+    width: 500px;
+    margin-left: 20%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -16,9 +22,13 @@ body {
 }
 
 .conteiner3Columnas {
-    width: 500px;
+    width: 700px;
     margin: 30px auto;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.conteiner3Columnas.libroTemas {
+    margin-left: 300px;
 }
 
 h1 {
@@ -42,6 +52,7 @@ th,
 td {
     padding: 10px;
     text-align: center;
+    position: relative;
 }
 
 thead {
@@ -72,6 +83,7 @@ tr:hover td {
 }
 
 .icon-a {
+    position: relative;
     margin: 2px;
     width: 30px;
 }
@@ -217,4 +229,51 @@ tr:hover td {
 .icono.ver {
     color: rgb(37, 37, 43);
     font-size: 25px;
+}
+
+.buscadorHorarios {
+    border-bottom: 3px solid rgb(0, 81, 255);
+}
+
+.inexistencia {
+    text-align: center;
+    color: white;
+    width: 50%;
+    margin-top: 10%;
+    margin-left: 25%;
+    padding: 20px;
+    background-color: #393E46;
+    box-shadow: 10px 10px 5px grey;
+    border: none;
+}
+
+.inexistencia button {
+    margin: 10px;
+    padding: 10px;
+}
+
+.inexistencia button:hover {
+    background-color: #239123;
+    color: #ffffff;
+}
+
+.subtituloExistencia {
+    margin: 10px;
+}
+
+.guia {
+    padding: 20px;
+    float: right;
+}
+
+.guiaColor {
+    display: inline;
+    padding: 7px;
+    background-color: green;
+    border-radius: 100px;
+    ;
+}
+
+.guia h3 {
+    margin: 5px;
 }

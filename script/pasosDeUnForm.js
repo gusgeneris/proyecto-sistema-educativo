@@ -6,7 +6,7 @@ function mostrarPaso2() {
     var paso2 = document.getElementById("paso2").style.display = "inline";
 
     document.getElementById("cabeceraPaso2").style.backgroundColor = "#0062ffd5"
-
+    document.getElementById("cabeceraPaso2").style.color = "white"
 }
 
 function mostrarPasoFinal() {
@@ -18,6 +18,7 @@ function mostrarPasoFinal() {
     var paso2 = document.getElementById("pasoFinal").style.display = "inline";
 
     document.getElementById("cabeceraPaso3").style.backgroundColor = "#0062ffd5"
+    document.getElementById("cabeceraPaso3").style.color = "white"
 
 }
 

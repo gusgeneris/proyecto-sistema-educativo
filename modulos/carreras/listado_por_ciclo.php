@@ -35,7 +35,7 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
     <?php require_once "../../mensaje.php"; require_once "../../menu.php";?>
 
     <div class="titulo">
-        <h1 class="titulo">Lista de Carreras del ciclo lectivo: <?php echo $cicloLectivo?> </h1>
+        <h1>Lista de Carreras del ciclo lectivo: <?php echo $cicloLectivo?> </h1>
     </div>
     
     
@@ -76,11 +76,13 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
                                     <a href="dar_alta_asignacion_a_ciclo.php?idCicloLectivo=<?php echo $idCicloLectivo?>&idCarrera=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
 
                               <?php }else{?>
-                            <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
+                            <a href="#" onclick="consulta(<?php echo $carrera->getIdCarrera();?>,<?php echo $idCicloLectivo?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
+
                             <a href="../../modulos/materias/listado_por_carrera?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/listado.png" title="Listado de Materias" alt="Listado de Materias"></a> 
                             <a href="../../modulos/carreras/asignar_alumno?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/asignar.png" title="Asignar Alumno" alt="Asignar Alumno"></a> 
                             <a href="../../modulos/horarios/crear_horario?idCarrera=<?php echo $carrera->getIdCarrera()?>&idCiclo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/calendario.png" title="Horarios" alt="Horarios"></a> 
-                                <?php }?>
+                            <a href="../reportes/domPdf/reporte_alumnos_carrera.php?idCicloLectivo=<?php echo $idCicloLectivo?>&idCarrera=<?php echo $carrera->getIdCarrera() ?>"><img class="icon-a" src="../../icon/pdf.png" title="ListadoAlumnos" alt="ListadoAlumnos"></a>    
+                            <?php }?>
                         </div>
                     </td>
                 </tr>
@@ -91,4 +93,15 @@ $cicloLectivo=CicloLectivo::obtenerTodoPorId($idCicloLectivo);
     
     <?php require_once "../../footer.php"?>                  
 </body>
+
+
+    <script>
+        function consulta(idCarrera,idCiclo){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idCarrera+"&idCiclo="+idCiclo;
+            }
+        }
+    </script>
 </html>

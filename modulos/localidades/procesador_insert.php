@@ -14,6 +14,7 @@ $nombre= $_POST['Localidad'];
 
 
 $idProvincia=  $_POST['IdProvincia'];
+$idPais=  $_POST['IdPais'];
 
 if((!preg_match("/[a-zA-Z ]{2,254}/",$nombre))){
     header("Location:listado.php?mj=errorNombre");
@@ -28,7 +29,7 @@ $localidad->setIdProvincia($idProvincia);
 $localidad->insertarlocalidad();
 
 if ($localidad){
-    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idProvincia=".$idProvincia);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idProvincia=".$idProvincia."&idPais=".$idPais);
 }
 
 ?>

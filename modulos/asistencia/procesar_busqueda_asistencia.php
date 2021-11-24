@@ -17,7 +17,7 @@
 
         $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
         
-        header("Location:../../modulos/asistencia/reporte_asistencia_para_administracion.php?idCurriculaCarrera=". $idCurriculaCarrera);
+        header("Location:../../modulos/reportes/domPdf/reporte_asistencia.php?idCurriculaCarrera=". $idCurriculaCarrera);
         exit;
 
     endif;
@@ -33,6 +33,6 @@
 
     $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
     
-    header("Location:../../modulos/asistencia/reporte_asistencias.php?idCurriculaCarrera=". $idCurriculaCarrera);
+    header("Location:../../reportes/domPdf/reporte_asistencia.php?idCurriculaCarrera=". $idCurriculaCarrera);
 
 ?>

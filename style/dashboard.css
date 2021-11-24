@@ -1,0 +1,73 @@
+.contenedorTarjetas {
+    margin: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 100px;
+}
+
+.imagenTarjeta {
+    display: inline-block;
+    margin: 5px;
+}
+
+.tarjeta {
+    border: 2px solid black;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 20px;
+}
+
+.imagenTarjeta img {
+    margin: 20px;
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+}
+
+.valorTarjeta {
+    display: inline-block;
+    font-size: 50px;
+    margin-left: 20px;
+}
+
+.tarjeta.alumno {
+    background-color: rgb(26, 161, 38);
+    color: rgb(190, 240, 194);
+    border: 2px solid rgb(80, 219, 52);
+    box-shadow: 5px 5px 5px grey;
+}
+
+.tarjeta.docente {
+    background-color: rgb(216, 121, 31);
+    color: rgb(240, 222, 190);
+    border: 2px solid rgb(219, 166, 52);
+    box-shadow: 5px 5px 5px grey;
+}
+
+.tarjeta.carrera {
+    background-color: rgb(26, 107, 161);
+    color: rgb(190, 224, 240);
+    border: 2px solid rgb(52, 119, 219);
+    box-shadow: 5px 5px 5px grey;
+}
+
+.graficoTorta {
+    display: inline-block;
+    height: 300px;
+    width: 460px;
+    margin: 30px;
+    margin-left: 10px;
+}
+
+.ultimosUsuarios {
+    margin: 30px;
+}
+
+.graficoBarras {
+    display: inline;
+    float: left;
+    width: 800px;
+    height: 300px;
+    margin: 30px;
+    margin-right: 10px;
+}

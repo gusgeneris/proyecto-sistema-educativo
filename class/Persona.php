@@ -209,9 +209,36 @@ class Persona{
         $sql = "UPDATE `persona` SET `estado_id_estado` = '2' WHERE (`id_persona` = '$idPersona')";
 
         $db = new MySql();
-        $datos = $db->eliminarRegistro($sql);
+        $datos = $db->actualizar($sql);
 
     }
+
+    public static function darAlta($idPersona){
+        $sql = "UPDATE `persona` SET `estado_id_estado` = '1' WHERE (`id_persona` = '$idPersona')";
+
+        $db = new MySql();
+        $datos = $db->actualizar($sql);
+        return true;
+
+    }
+
+    public static function obtenerPorId($idPersona){
+        $sql = "SELECT persona_nombre,persona_apellido from persona where id_persona = '{$idPersona}'";
+
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+        
+        $persona=new Persona();
+
+        $registro=$datos->fetch_assoc();
+
+        $persona->_nombre =$registro['persona_nombre'];
+        $persona->_apellido =$registro['persona_apellido'];
+
+        return $persona;
+
+    }
+
 }
 
 

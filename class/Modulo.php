@@ -4,6 +4,7 @@ class Modulo{
     private $_idModulo;
     private $_nombre;
     private $_directorio;
+    private $_estado;
 
         /**
      * Get the value of _idModulo
@@ -64,11 +65,46 @@ class Modulo{
         return $this;
     }
 
-    public function insert(){
-        $sql="INSERT INTO `modulo` (`modulo_descripcion`, `modulo_directorio`) VALUES ('{$this->_nombre}', '{$this->_directorio}')";
+        /**
+     * Get the value of _estado
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
 
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
+
+
+    public function insert(){
+
+        $sql="SELECT * from modulo where modulo_descripcion='{$this->_nombre}'";
+
+         
         $database =new Mysql();
-        $database->insertarRegistro($sql);
+        $dato=$database->consultar($sql);
+
+        if($dato->num_rows == 0){
+
+            $sql="INSERT INTO `modulo` (`modulo_descripcion`, `modulo_directorio`) VALUES ('{$this->_nombre}', '{$this->_directorio}')";
+
+            $database =new Mysql();
+            $database->insertarRegistro($sql);
+            return 1;
+
+        }else{
+            return 0;
+        }
 
     }
 
@@ -94,6 +130,25 @@ class Modulo{
     return $listadoModulos;}
 
     public static function obtenerTodos(){
+        $sql="SELECT modulo_estado,id_modulo,modulo_descripcion,modulo_directorio,modulo_estado FROM modulo order by modulo_descripcion;";
+        $database =new Mysql();
+        $datos=$database->consultar($sql);
+        $listadoModulos=[];
+
+        if($datos->num_rows > 0){
+            while ($registro=$datos->fetch_assoc()){
+                    $modulo=new Modulo();
+                    $modulo->_idModulo=$registro['id_modulo'];
+                    $modulo->_nombre=$registro['modulo_descripcion'];
+                    $modulo->_directorio=$registro['modulo_directorio'];
+                    $modulo->_estado=$registro['modulo_estado'];
+                    $listadoModulos[]=$modulo;
+            }
+        }
+    return $listadoModulos;
+    }
+
+    public static function obtenerTodosActivos(){
         $sql="SELECT id_modulo,modulo_descripcion,modulo_directorio,modulo_estado FROM modulo order by modulo_descripcion;";
         $database =new Mysql();
         $datos=$database->consultar($sql);
@@ -149,6 +204,15 @@ class Modulo{
     
     }
 
+    public static function darAlta($idModulo){
+        $sql="UPDATE `modulo` SET `modulo_estado` = '1' WHERE (`id_modulo` = '{$idModulo}');" ;
+    
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
+    
+    }
+
     public static function obtenerPorId($idModulo){
         $sql="SELECT id_modulo, modulo_descripcion, modulo_directorio FROM modulo WHERE id_modulo={$idModulo};";
 
@@ -175,16 +239,17 @@ class Modulo{
     
     }
     
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

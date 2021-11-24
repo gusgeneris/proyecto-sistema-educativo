@@ -23,7 +23,11 @@ const expresiones = {
     contacto: /^[a-zA-Z0-9_.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
     cboSelect: /^[1-9]{1,3}$/,
-    numClase: /^\d{1,100}$/
+    numClase: /^\d{1,100}$/,
+    localidad: /^[a-zA-Z0-9_ ]*$/,
+    hora: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+    numero: /^\d{1}$/,
+    nombreUsuario: /^[a-zA-Z0-9_.+-@]{3,40}$/,
 }
 
 const campos = {
@@ -58,11 +62,21 @@ const campos = {
     DetallePeriodo: false,
     NumClase: false,
     NombreCarrera: false,
-    fecha: false
+    fecha: false,
+    cboPeriodoDesarrollo: false,
+    cboAnioDesarrollo: false,
+    cboDia: false,
+    HoraInicio: false,
+    HoraFin: false,
+    Numero: false,
+    Modulo: false,
+    cboTipoClase: false
 }
+
 
 const validarFormulario = (e) => {
     switch (e.target.name) { //se identifica el nombre del donde se desencadena el evento para poder manipular su contenido//
+
         case "Nombre":
             validarCampo(expresiones.nombre, e.target, 'Nombre')
             break;
@@ -88,7 +102,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.nombreMateria, e.target, 'NombreMateria')
             break;
         case "NombreUsuario":
-            validarCampo(expresiones.nombre, e.target, 'NombreUsuario')
+            validarCampo(expresiones.nombreUsuario, e.target, 'NombreUsuario')
             break;
         case "Contrasenia":
             validarCampo(expresiones.contrasenia, e.target, 'Contrasenia')
@@ -122,7 +136,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.nombre, e.target, 'Provincia')
             break;
         case "Localidad":
-            validarCampo(expresiones.nombre, e.target, 'Localidad')
+            validarCampo(expresiones.localidad, e.target, 'Localidad')
             break;
         case "TipoContacto":
             validarCampo(expresiones.nombre, e.target, 'TipoContacto')
@@ -160,7 +174,36 @@ const validarFormulario = (e) => {
         case "NumeroLegajo":
             validarCampo(expresiones.numeros, e.target, 'NumeroLegajo')
             break;
+        case "cboAnioDesarrollo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboAnioDesarrollo')
+            break;
+        case "cboPeriodoDesarrollo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboPeriodoDesarrollo')
+            break;
+        case "cboDocente":
+            validarCampo(expresiones.cboSelect, e.target, 'cboDocente')
+            break;
+        case "HoraInicio":
+            validarCampo(expresiones.hora, e.target, 'HoraInicio')
+            break;
+        case "HoraFin":
+            validarCampo(expresiones.hora, e.target, 'HoraFin')
+            break;
+        case "Numero":
+            validarCampo(expresiones.numero, e.target, 'Numero')
+            break;
+        case "cboDia":
+            validarCampo(expresiones.cboSelect, e.target, 'cboDia')
+            break;
+        case "Modulo":
+            validarCampo(expresiones.nombre, e.target, 'Modulo')
+            break;
+        case "cboTipoClase":
+            validarCampo(expresiones.cboSelect, e.target, 'cboTipoClase')
+            break;
+
     }
+
 }
 
 const validarCampo = (expresion, input, campo) => { //expresion hace referencia a las expresiones regulares antes definidas, el input hace referencia al evento que en este caso es target, el campo es el lugar //
@@ -196,8 +239,12 @@ const validarContrasenia2 = () => {
 }
 
 inputs.forEach((input) => {
+    input.focus();
     input.addEventListener('keyup', (validarFormulario))
     input.addEventListener('blur', (validarFormulario))
+
+
+    input.addEventListener('onfocus', (validarFormulario))
 })
 
 selects.forEach((select) => {
@@ -211,7 +258,9 @@ formulario.addEventListener('submit', (e) => {
     switch (document.getElementById('Guardar').value) {
         case 'FormInsertAlumnos':
 
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -219,7 +268,9 @@ formulario.addEventListener('submit', (e) => {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertDocente':
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula && campos.cboSexo) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroMatricula) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -227,7 +278,10 @@ formulario.addEventListener('submit', (e) => {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
         case 'FormInsertUsuario':
-            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario && campos.cboSexo && cboPerfil) {
+            if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.Contrasenia && campos.NombreUsuario) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -237,6 +291,8 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertCicloLectivo':
             if (campos.CicloLectivo) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -244,6 +300,8 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertPerfil':
             if (campos.Nombre) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -253,6 +311,8 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertCarrera':
             if (campos.NombreCarrera && campos.Anios) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -260,6 +320,8 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertEspecialidad':
             if (campos.Especialidad) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -269,6 +331,8 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertBarrio':
             if (campos.Barrio) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -276,6 +340,8 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertPais':
             if (campos.Pais) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -285,29 +351,37 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertProvincia':
             if (campos.Provincia) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-        case 'FormInserLocalidad':
+        case 'FormInsertLocalidad':
             if (campos.Localidad) {
 
-                formulario.submit();
-                exit;
-            } else {
-                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
-            }
-        case 'FormInserContacto':
-            if (campos.Contacto) {
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-        case 'FormInserTipoContacto':
-            if (campos.Nombre) {
+        case 'FormInsertContacto':
+            if (campos.Contacto) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertTipoContacto':
+            if (campos.TipoContacto) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -317,6 +391,8 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertDetalleDomicilio':
             if (campos.DetalleDomicilio) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -324,6 +400,8 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertAnioDesarrollo':
             if (campos.DetalleAnio) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
 
                 formulario.submit();
                 exit;
@@ -333,6 +411,8 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertPeriodoDesarrollo':
             if (campos.DetallePeriodo) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -340,6 +420,149 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertDetalleCalendarizacion':
             if (campos.NumClase) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignar':
+            if (campos.cboCarrera) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarMateria':
+            if (campos.cboMateria && campos.cboPeriodoDesarrollo && campos.cboAnioDesarrollo) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarDocente':
+            if (campos.cboDocente) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarCarrera':
+            if (campos.cboCarrera && campos.cboCicloLectivo) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertHorario':
+            if (campos.cboDia && campos.HoraInicio && campos.HoraFin && campos.Numero) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignar':
+            if (campos.cboCarrera) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarMateria':
+            if (campos.cboMateria && campos.cboPeriodoDesarrollo && campos.cboAnioDesarrollo) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarDocente':
+            if (campos.cboDocente) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarCarrera':
+            if (campos.cboCarrera && campos.cboCicloLectivo) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertHorario':
+            if (campos.cboDia && campos.HoraInicio && campos.HoraFin && campos.Numero) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertModulo':
+            if (campos.Modulo) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+
+        case 'FormInsertClase':
+            if (campos.Fecha) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertPerfil':
+            if (campos.Perfil) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertMateria':
+            if (campos.NombreMateria) {
 
                 formulario.submit();
                 exit;

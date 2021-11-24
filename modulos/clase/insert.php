@@ -42,13 +42,13 @@
 
     <div class="main">
         
-        <form action="procesar_insert.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+        <form action="procesar_insert.php" method="POST" class="formInsert2Columnas" id="formInsert" name="formInsert">
             
             <div class="formGrup" id="GrupocboCarrera">
                 <label for="cboCarrera" class="formLabel">Carrera</label>
                     <div class="formGrupInput">
                         
-                        <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+                        <select name="cboCarrera" class="formInput" id="cboCarrera" onchange="cargarMaterias()">
                             <option value="0">
                                 ->Seleccionar Carrera<-
                             </option>
@@ -67,7 +67,7 @@
                 <label for="cboMateria" class="formLabel">Materia</label>
                     <div class="formGrupInput">
 
-                        <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
+                        <select name="cboMateria" class="formInput" id="cboMateria" onchange="cargarNumeroClase()">
 
                             <option value="0">
                                 ->Seleccionar Materia<-
@@ -81,7 +81,7 @@
             <div class="formGrup" id="GrupoFecha">
                 <label for="Fecha" class="formLabel">Fecha de la nueva clase</label>
                 <div class="formGrupInput">
-                    <input type="date" id="Fecha" name="fechaClase" class="fecha" value="<?php echo date("Y-m-d"); ?>">
+                    <input type="date" id="Fecha" class="formInput" name="Fecha" class="fecha" value="<?php echo date("Y-m-d"); ?>">
                 </div>
                 <p class="formularioInputError"> Error en la fecha</p>
             </div>  
@@ -90,7 +90,7 @@
                 <label for="cboTipoClase" class="formLabel">Tipo Clase</label>
                     <div class="formGrupInput">
 
-                        <select name="cboTipoClase" id="cboTipoClase">
+                        <select class="formInput" name="cboTipoClase" id="cboTipoClase">
                             <?php foreach ($listaTiposClases as $tipo):?>
                                 <option value = "<?php echo $tipo->getIdTipoClase()?>">
                                     <?php echo $tipo->getDetalle()?>
@@ -102,11 +102,18 @@
                     <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
             </div>
             
-            <div>
+            <
             <input id="numeroClase" type="hidden" name="numeroClase" value=>
+            
+
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
             </div>
-            <div class="formGrupBtnEnviar">
-                <button class="formButton" id="Guardar" type="submit" > Agregar Clase </button>
+            
+            <div class="formGrupBtnEnviarUnaColumna">
+                <button class="formButton" id="Guardar" type="submit" value ="FormInsertClase"> Agregar Clase </button>
             </div>
 
         </form>
@@ -116,4 +123,8 @@
 
 
 </body>
+
+
+<script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+
 </html>

@@ -3,7 +3,6 @@ require_once "../../class/Materia.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php";
 require_once "../../class/Carrera.php";
-require_once "../../mensaje.php";
 
 $materia=new Materia();
 
@@ -38,7 +37,8 @@ $carrera=Carrera::listadoPorId($idCarrera);
 <body class="body-listuser">
 
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
     
     <div class="titulo">
         <h1 >Lista de Materias de la carrera de: <?php echo $carrera?></h1>
@@ -54,20 +54,27 @@ $carrera=Carrera::listadoPorId($idCarrera);
         <table class="tabla">
             <thead>
                 <tr>
-                    <th>Id materia</th>
                     <th>Nombre</th>
+                    <th>Periodo</th>
+                    <th>Anio</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <?php foreach ($listadoMaterias as $materia):?>
+                    <?php
+                        $idMateria=$materia->getIdMateria();
+                        $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria) ?>
                     <tr>
                         <td>
-                            <?php echo $materia->getIdmateria()?>
+                            <?php echo $materia->getNombre()?> 
                         </td>
                         <td>
-                            <?php echo $materia->getNombre()?> 
+                            <?php echo $materia->getPeriodoDesarrollo()?>
+                        </td>
+                        <td>
+                            <?php echo $materia->getAnioDesarrollo()?>
                         </td>
                         <td>
                             <div class="icon">
@@ -82,12 +89,12 @@ $carrera=Carrera::listadoPorId($idCarrera);
 
                             <?php }else{ ?>
 
-
-                                <a href="eliminar_relacion.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCiclo=<?php echo $idCicloLectivo ?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                <a href="#" onclick="consulta(<?php echo $materia->getIdMateria();?>,<?php echo $idCarrera?>,<?php echo $idCicloLectivo ?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                <a href="modificar_periodo_anio_desarrollo.php?idCarrera=<?php echo $idCarrera?>&idCiclo=<?php echo $idCicloLectivo?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>&id=<?php echo $idMateria?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                                 <a href="../eje_contenido/listado_por_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/ejeContenido.png" title="Eje de contenido" alt="Eje de contenido"></a>
                                 <a href="../docentes/listado_por_carrera_materia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/listadoPersona.png" title="Listado de Docentes" alt="Listado de Docentes"></a>
                                 <a href="../asistencia/procesar_busqueda_asistencia.php?idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $idCarrera?>&idCicloLectivo=<?php echo $idCicloLectivo?>"><img class="icon-a" src="../../icon/asistencia.png" title="Asistencia" alt="Asistencia"></a>
-                            
+                                <a href="../reportes/domPdf/reporte_alumnos_materia.php?idCicloLectivo=<?php echo $idCicloLectivo?>&idMateria=<?php echo $materia->getIdMateria()?>&idCarrera=<?php echo $carrera->getIdCarrera() ?>"><img class="icon-a" src="../../icon/pdf.png" title="ListadoAlumnos" alt="ListadoAlumnos"></a>    
                                 <?php } ?>
                                 
                                 </div>
@@ -100,4 +107,14 @@ $carrera=Carrera::listadoPorId($idCarrera);
     </div>
         <?php require_once "../../footer.php"?> 
 </body>
+
+    <script>
+        function consulta(idMateria,idCarrera,idCicloLectivo){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="eliminar_relacion.php?idMateria="+idMateria+"&idCarrera="+idCarrera+"&idCiclo="+idCicloLectivo;
+            }
+        }
+    </script>
 </html>

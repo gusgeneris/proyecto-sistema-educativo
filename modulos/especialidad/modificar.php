@@ -26,40 +26,43 @@ $especialidad= Especialidad::obtenerPorId($id);
 
 <body class="modif-user">
     
-    <h1 class="titulo">Ingrese los nuevos datos</h1>
+    <div class="titulo">
+        <h1>Ingrese los nuevos datos</h1>
+    </div>
 
-    <form action="procesar_actualizar.php" method=POST class="formInsertUnaColumna" id="formModificar" name="formModificar">
-    
-        <table>
-            
-            <input name="IdEspecialidad" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
-            
-            <div class="formGrup" id="GrupoEspecialidad" >
-            <label for="Esecialidad" class="formLabel">Especialidad</label>
-            <div class="formGrupInput">
-                <input type="text" name="Especialidad" id="Especialidad" class="formInput" value="<?php echo $especialidad->getDescripcion(); ?>">
-                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-            </div>
-        </div>
+    <div class="main">
 
-        <!--Grupo de Mensaje-->
-            
-        <div class="formMensaje" id="GrupoMensaje">
+        <form action="procesar_actualizar.php" method=POST class="formInsertUnaColumna" id="formModificar" name="formModificar">
+                    
+                <input name="IdEspecialidad" type="hidden" class="" value="<?php echo $especialidad->getIdEspecialidad(); ?>">
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-            
-        </div>
-    
-        <!--Grupo de Boton Enviar-->
-    
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" value ="FormInsertEspecialidad" id="Guardar"> Guardar</button>
-        </div>
-    
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
-        </div>
-    </form>
+                <div class="formGrup" id="GrupoEspecialidad" >
+                    <label for="Esecialidad" class="formLabel">Especialidad</label>
+                    <div class="formGrupInput">
+                        <input type="text" name="Especialidad" id="Especialidad" class="formInput" value="<?php echo $especialidad->getDescripcion(); ?>">
+                        <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+                    </div>
+                </div>
+
+            <!--Grupo de Mensaje-->
+                
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+            </div>
+        
+            <!--Grupo de Boton Enviar-->
+        
+            <div class="formGrupBtnEnviarDosColumnas">
+                <button type="submit" class="formButton" value ="FormInsertEspecialidad" id="Guardar"> Guardar</button>
+        
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+
     <?php require_once "../../footer.php"?>      
 </body>
 

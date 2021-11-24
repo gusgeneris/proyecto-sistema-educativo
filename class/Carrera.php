@@ -203,11 +203,11 @@ Class Carrera{
         if($datos->num_rows > 0){
         
             while ($registro = $datos->fetch_assoc()){
-                #if ($registro['ciclo_lectivo_carrera_estado']==1){
+                if ($registro['estado_id_estado']==1){
                 $carrera=new Carrera();
                 $carrera->crearCarrera($registro,$carrera);
 
-                $listadoCarreras[]=$carrera;#}
+                $listadoCarreras[]=$carrera;}
             }
         }
         return $listadoCarreras;
@@ -307,13 +307,13 @@ Class Carrera{
     }
 
     public static function listaCarrerasPorDocente($idDocente,$anioCicloLectivo){
-        $sql="SELECT DISTINCT  id_carrera, carrera_nombre FROM carrera".
-            " join ciclo_lectivo_carrera on carrera.id_carrera = carrera_id_carrera".
+        $sql="SELECT id_carrera, carrera_nombre FROM ciclo_lectivo_carrera".
+            " join docente_carrera on id_ciclo_lectivo_carrera=ciclo_lectivo_carrera_id_ciclo_lectivo_carrera".
+            " join carrera on carrera.id_carrera = carrera_id_carrera".
             " join ciclo_lectivo on id_ciclo_lectivo = ciclo_lectivo_id_ciclo_lectivo".
-            " join docente_carrera on id_carrera=carrera_id_carrera".
             " join docente on id_docente = docente_id_docente".
             " where id_docente={$idDocente} and id_ciclo_lectivo={$anioCicloLectivo};";
-            
+        
         $dataBase = new MySql();
 
         $dato = $dataBase->consultar($sql);
@@ -347,7 +347,33 @@ Class Carrera{
     }
 
 
+    public static function carreraPorIdCicloLectivoCarrera($idCicloLectivoCarrera){
+        $sql="SELECT carrera_nombre from carrera join ciclo_lectivo_carrera on id_carrera=carrera_id_carrera WHERE id_ciclo_lectivo_carrera={$idCicloLectivoCarrera}";
+  
+        $database=new Mysql();
 
+        $dato=$database->consultar($sql);
+
+        $registro = $dato->fetch_assoc();
+        $nombreCarrera=$registro['carrera_nombre'];
+
+        return $nombreCarrera;
+
+    }
+
+    public static function cantidadTotalCarreras(){
+        $sql="SELECT count(id_carrera) as cantidad from carrera;";
+
+        $dataBase=new MySql();
+
+        $dato=$dataBase->consultar($sql);
+
+        $registro= $dato->fetch_assoc();
+            $cantidad= $registro['cantidad'];
+        
+        return $cantidad;
+
+    }
     
 
 }

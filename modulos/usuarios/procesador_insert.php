@@ -91,14 +91,15 @@ $user->setFechaNacimiento($personaFechaNac);
 $user->setNacionalidad($personaNacionalidad);
 $user->setIdSexo($personaSexo);
 $user->setIdPerfil($usuarioPerfil);
-$user->setEstado('1');
 $user->perfil=$usuarioPerfil;
 
-$user->insertUser();
+$dato=$user->insertUser();
 
 
-if ($user){
+if ($dato==1){
     header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
+}else{
+    header("Location:insert.php?mj=".INCORRECT_INSERT_DATO_DUPLICATE_USER_NAME_CODE);
 }
 
 ?>

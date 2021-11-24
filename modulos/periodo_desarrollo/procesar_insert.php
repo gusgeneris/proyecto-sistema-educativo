@@ -25,10 +25,13 @@ if((!preg_match("/^[a-zA-Z_ ]*$/",$detallePeriodo))){
 $periodoDesarrollo=new PeriodoDesarrollo;
 $periodoDesarrollo->setDetallePeriodo($detallePeriodo);
 
-$periodoDesarrollo->insert();
+$dato=$periodoDesarrollo->insert();
 
-if ($periodoDesarrollo){
+
+if ($dato==1){
     header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
+}else{
+    header("Location:listado.php?mj=".INCORRECT_INSERT_DATO_DUPLICATE_CODE);
 }
 
 ?>

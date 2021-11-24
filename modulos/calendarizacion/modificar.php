@@ -1,5 +1,6 @@
 <?php
 require_once "../../class/DetalleCalendarizacion.php";
+require_once "../../class/EjeContenido.php";
 require_once "../../configs.php";
 require_once "../../mensaje.php";
 
@@ -9,9 +10,12 @@ if(isset($_GET['id'])){
 $idDetalleCalendarizacion=$_GET['idDetalleCalendarizacion'];
 $idCalendarizacion=$_GET['idCalendarizacion'];
 $idCurriculaCarrera=$_GET['idCurriculaCarrera'];
+$idCarrera= $_GET ['idCarrera'];
+$idMateria= $_GET ['idMateria'];
 
 $lista = DetalleCalendarizacion::listado($idCurriculaCarrera);
 $detalleCalendarizacion=DetalleCalendarizacion::listadoPorIdDetalle($idDetalleCalendarizacion);
+$listadoEjeContenido=EjeContenido::obtenerPorIdCurriculaCarrera($idCurriculaCarrera);
 
 ?>
 
@@ -80,6 +84,28 @@ $detalleCalendarizacion=DetalleCalendarizacion::listadoPorIdDetalle($idDetalleCa
                 </div>
                 <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
             </div>
+
+            
+            <input type="hidden" name="idMateria" value="<?php echo $idMateria?>">
+            <input type="hidden" name="idCarrera" value="<?php echo $idCarrera?>">
+               
+
+            <div class="formGrup ejeContenido" id="GrupocboEjeContenido" >
+                        <label for="cboEjeContenido" class="formLabel">N° Eje de Contenido</label>
+                        <div class="formGrupInput">
+                            <Select name="cboEjeContenido" id="cboEjeContenido" class="formInput">
+                                <option value="0">
+                                   N° Eje de Contenido
+                                </option>
+                                <?php foreach($listadoEjeContenido as $ejeContenido):{?>
+                                    <option value="<?php echo $ejeContenido->getNumero()?>">
+                                    <?php echo $ejeContenido->getNumero()?>
+                                </option>
+                            <?php } endforeach; ?>
+                            </Select>
+                        </div>
+                        <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                </div>
         
             
             <!--Grupo de Mensaje-->
@@ -91,13 +117,9 @@ $detalleCalendarizacion=DetalleCalendarizacion::listadoPorIdDetalle($idDetalleCa
             </div>
 
             <!--Grupo de Boton Enviar-->
-            <input type="submit" value="Actualizar"> 
-            <div class="formGrupBtnEnviar">
+            <div class="formGrupBtnEnviarUnaColumna">
                 <button type="submit" class="formButton" id='Guardar' value='FormInsertDetalleCalendarizacion'>Guardar</button>
-            </div>
-            <br>
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
             </div>
         </form>
     </div>

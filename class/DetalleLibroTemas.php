@@ -140,12 +140,18 @@ Class DetalleLibroTemas{
 
         $db = new MySql();
         $datos = $db->consultar($sql);
-        $registro=$datos->fetch_assoc();
 
-        $detalle=new DetalleLibroTemas();
-        $detalle->crearDetalle($detalle,$registro);
+        $listaDetalle=[];
 
-        return $detalle;      
+        while($registro = $datos->fetch_assoc()){
+
+            $detalle=new DetalleLibroTemas();
+            $detalle->crearDetalle($detalle,$registro);
+
+            $listaDetalle[]=$detalle;
+        }
+
+        return $listaDetalle;      
 
     }
 
@@ -154,13 +160,18 @@ Class DetalleLibroTemas{
         
         $db = new MySql();
         $datos = $db->consultar($sql);
-        $registro=$datos->fetch_assoc();
 
-        $detalle=new DetalleLibroTemas();
-        $detalle->crearDetalle($detalle,$registro);
+        $listadoDetalle=[];
 
-        return $detalle;      
+        while ($registro = $datos->fetch_assoc()){
 
+            $detalle=new DetalleLibroTemas();
+            $detalle->crearDetalle($detalle,$registro);
+            $listadoDetalle []= $detalle;
+
+        }
+        
+        return $listadoDetalle;      
     }
 
     public static function detalleLibroPorCurriculaCarrera($idCurriculaCarrera){
@@ -186,7 +197,7 @@ Class DetalleLibroTemas{
 
         }
         
-        return $listadoDetalle;      
+        return $listadoDetalle;    
 
     }
 

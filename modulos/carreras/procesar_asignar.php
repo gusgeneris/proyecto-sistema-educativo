@@ -5,9 +5,9 @@
 
     $cancelar= $_POST['Cancelar'];
 
-    if(isset($_POST["Carrera"])){
+    if(isset($_POST["cboCarrera"])){
         $idCicloLectivo=$_POST["IdCiclo"];
-        $idCarrera=$_POST["Carrera"];
+        $idCarrera=$_POST["cboCarrera"];
         $carrera=new Carrera();
         $dato=$carrera->asignarCiclo($idCicloLectivo,$idCarrera);
         

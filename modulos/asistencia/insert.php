@@ -28,7 +28,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
@@ -75,37 +74,12 @@
         </div>
                         
     </div>
-    <div class="conteiner-descripcion-clase">
+    
 
-        <div class="subtitulo">
-            <h2>Detalle libro de temas Asociado</h2>
-        </div>
-
-        <div class="conteiner-h3">
-            <h3>
-                Tema del dia:<span> <?php echo $detalleLibro->getTemaDia() ?></span>
-            </h3>
-        </div>
-        
-        <div class="conteiner-h3">
-            <h3>
-                Observaciones:<span> <?php echo $detalleLibro->getObservaciones() ?></span>
-           </h3>
-        </div>
-
-        <div class="conteiner-btn-modificar">
-            <button class="btn-modificar">
-                <a href="../libroTemas/modificar.php?id=1&idClase=<?php echo $idClase ?>&idDetalleLibro=<?php echo $detalleLibro->getIdDetalleLibroTemas()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>">Modificar</a>
-            </button>
-        </div>
-        <div class="conteiner-h3">
-            <h3>
-               Firma observante: 
-           </h3>
-        </div>
+    <div class="subtitulo">
+        <h2 class="">Lista de Alumnos</h2>
     </div>
-
-
+    <div class="main">
     <form action="procesar_insert.php" method="POST">
 
     <input type="hidden" name="idClase" value="<?php echo $idClase ?>">
@@ -113,11 +87,9 @@
     <input type="hidden" name="idCicloLectivoCarrera" value="<?php echo $idCicloLectivoCarrera ?>">
     <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera ?>">
     
-    <div class="subtitulo">
-        <h2 class="">Lista de Alumnos</h2>
-    </div>
+    
 
-    <div class="conteinerAsistencia" id=>
+    <div class="conteiner3Columnas" id=>
         <table class="tabla" id="table">
 
         <thead>
@@ -152,11 +124,14 @@
                 </tbody>
             <?php endforeach?>
         </table>
-        <div class="formGrupBtnEnviar3Columnas" >
+        <div class="formGrupBtnEnviar central" >
             <button type="submit"  class="formButton" id="Guardar"> Guardar Registro </button>
         </div>
+    
+        </div>
         </form>
-    </div>
+    
+        </div>
     <?php require_once "../../footer.php"?>               
 </body>
 </html>

@@ -18,6 +18,8 @@ if((!preg_match("/[a-zA-Z0-9_ ]{2,254}/",$nombre))){
 };
 
 $idLocalidad=  $_POST['IdLocalidad'];
+$idProvincia=$_GET['IdProvincia'];
+$idPais=$_GET['IdPais'];
 
 
 $barrio=new Barrio();
@@ -27,7 +29,7 @@ $barrio->setIdLocalidad($idLocalidad);
 $barrio->insertarBarrio();
 
 if ($barrio){
-    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idLocalidad=".$idLocalidad);
+    header("Location:listado.php?mj=".CORRECT_INSERT_CODE."&idLocalidad=".$idLocalidad."&idPais=".$idPais."&idProvincia=".$idProvincia);
 }
 
 ?>

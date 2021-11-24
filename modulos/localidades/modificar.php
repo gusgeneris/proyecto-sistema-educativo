@@ -10,6 +10,7 @@ if(isset($_GET['id'])){
 
 $idLocalidad = $_GET['idLocalidad'];
 $idProvincia=$_GET["idProvincia"];
+$idPais=$_GET['idPais'];
 
 $localidad= Localidad::obtenerPorIdLocalidad($idLocalidad);
 
@@ -17,17 +18,18 @@ $localidad= Localidad::obtenerPorIdLocalidad($idLocalidad);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
-    <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
-    <link rel="stylesheet" href="../../style/menuVertical.css">
-    <script src="../../jquery3.6.js"></script>
-    <script type="text/javascript" src="../../script/menu.js" defer> </script>
-        <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Localidad</title>
+        <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+        <link rel="stylesheet" href="../../style/menuVertical.css">
+        <script src="../../jquery3.6.js"></script>
+        <script type="text/javascript" src="../../script/menu.js" defer> </script>
+        <link rel="icon" type="image/jpg" href="../../image/logo.png">
+        <title>Modificar Localidad</title>
     </head>
     <?php require_once "../../menu.php";?>
 
@@ -46,6 +48,7 @@ $localidad= Localidad::obtenerPorIdLocalidad($idLocalidad);
                 </div>
                 <div class=""> 
                     <input name="IdLocalidad" type="hidden" class="" value="<?php echo $localidad->getIdLocalidad(); ?>">
+                    <input name="IdPais" type="hidden" class="" value="<?php echo $idPais; ?>">
                 </div>
 
                 <div class="formGrup" id="GrupoLocalidad" >
@@ -66,11 +69,9 @@ $localidad= Localidad::obtenerPorIdLocalidad($idLocalidad);
                 </div>
 
                 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviarUnaColumna">
                     <button type="submit" class="formButton" value ="FormInsertLocalidad" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
+                
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
             </form>

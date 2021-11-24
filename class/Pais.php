@@ -5,7 +5,27 @@ require_once "Mysql.php";
 class Pais{
     private $_idPais;
     private $_nombre;
+    private $_estado;
 
+    /**
+     * Get the value of _idPais
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _idPais
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
 
     /**
      * Get the value of _idPais
@@ -50,6 +70,7 @@ class Pais{
     public function crearPais($pais,$registro){
         $pais->_idPais = $registro['id_pais'];
         $pais->_nombre = $registro['pais_nombre'];
+        $pais->_estado = $registro['pais_estado'];
         return $pais;
     }
 
@@ -81,11 +102,19 @@ class Pais{
     }
 
     static function eliminarPais($idPais){
-        $sql="DELETE FROM `pais` WHERE (`id_pais` = {$idPais});";
+        $sql="UPDATE `pais` SET pais_estado = '2' WHERE  (`id_pais` = {$idPais});";
 
         $database=new Mysql();
         $database->eliminarRegistro($sql);
 
+    }
+
+    public static function darAlta($idPais){
+        $sql="UPDATE `pais` SET `pais_estado` = '1' WHERE (`id_pais` = {$idPais})";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
     static public function obtenerPorIdPais($idPais){

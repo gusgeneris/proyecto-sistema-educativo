@@ -1,7 +1,6 @@
 <?php
     require_once '../../class/MySql.php'; 
     require_once "../../class/Perfil.php";
-    require_once "../../mensaje.php";
 ?>
 
 <!DOCTYPE html>
@@ -14,47 +13,51 @@
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Perfil</title>
     <title>Insertar Nuevo</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
 
 <body class="body">
 
-    <h1 class="titulo"> Registro de Perfil</h1>
-    <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
-        
-        <div class="formGrup" id="GrupoPerfil">
-        
-            <label for="Perfil" class="formLabel">Ciclo Lectivo</label>    
-            <div class="formGrupInput">
-                <input type="text" name="Perfil" id="Perfil" class="formInput" placeholder="Nombre">
-            </div>
-            <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
-        </div> 
+    <div class="titulo">
+        <h1> Registro de Perfil</h1>
+    </div>
 
-         <!--Grupo de Mensaje-->
+    <div class="main">
+        <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
             
-        <div class="formMensaje" id="GrupoMensaje">
+            <div class="formGrup" id="GrupoPerfil">
+            
+                <label for="Perfil" class="formLabel">Nombre del Perfil</label>    
+                <div class="formGrupInput">
+                    <input type="text" name="Perfil" id="Perfil" class="formInput" placeholder="Nombre">
+                </div>
+                <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
+            </div> 
+
+            <!--Grupo de Mensaje-->
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-        
-        </div>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
 
-        <!--Grupo de Boton Enviar-->
+            <!--Grupo de Boton Enviar-->
 
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" id='Guardar' value='FormInsertPerfil'> Guardar</button>
-        </div>
-        <br>
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
-        </div>
+            <div class="formGrupBtnEnviarDosColumnas">
+                <button type="submit" class="formButton" id='Guardar' value='FormInsertPerfil'> Guardar</button>
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+            </div>
 
-    </form>
+        </form>
+    </div>
     <?php require_once "../../footer.php"?> 
 
 </body>

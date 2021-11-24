@@ -6,6 +6,28 @@ class Localidad{
     private $_idLocalidad;
     private $_nombre;
     private $_idProvincia;
+    private $_estado;
+
+    /**
+     * Get the value of _idPais
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _idPais
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
+
 
 
     /**
@@ -73,6 +95,7 @@ class Localidad{
         $localidad->_idLocalidad = $registro['id_localidad'];
         $localidad->_nombre = $registro['localidad_nombre'];
         $localidad->_idProvincia = $registro['provincia_id_provincia'];
+        $localidad->_estado = $registro['localidad_estado'];
         return $localidad;
 
     }
@@ -131,11 +154,19 @@ class Localidad{
     }
 
     static function eliminarLocalidad($idLocalidad){
-        $sql="DELETE FROM `localidad` WHERE (`id_localidad` = {$idLocalidad});";
+        $sql="UPDATE `localidad` SET localidad_estado = '2' WHERE  (`id_localidad` = {$idLocalidad});";
 
         $database=new Mysql();
         $database->eliminarRegistro($sql);
 
+    }
+
+    public static function darAlta($idLocalidad){
+        $sql="UPDATE `localidad` SET `localidad_estado` = '1' WHERE (`id_localidad` = {$idLocalidad})";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
     static public function obtenerPorIdLocalidad($idLocalidad){

@@ -1,6 +1,7 @@
 <?php
 require_once "../../class/Mysql.php";
 require_once "../../class/Pais.php";
+require_once "../../configs.php";
 
 $idPais= $_POST['IdPais'];
 $nombre= $_POST['Pais'];
@@ -17,7 +18,7 @@ $pais->setNombre($nombre);
 
 $pais->modificarPais();
 
-header("Location:listado.php")
+header("Location:listado.php?mj=".CORRECT_UPDATE_CODE)
 
 
 

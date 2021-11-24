@@ -2,7 +2,6 @@
 require_once "../../class/Carrera.php";
 require_once "../../class/Estado.php";
 require_once "../../configs.php"; 
-require_once "../../mensaje.php";
 
 $carrera=new Carrera();
 
@@ -37,15 +36,16 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="stylesheet" href="../../style/mensaje.css">
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Carreras</title>
-    <title>Document</title>
+    
 </head>
 <body class="body-listuser">
 
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+        require_once "../../mensaje.php";?>
 
     <div class="titulo">
-        <h1 class="titulo">Lista de Carreras</h1>
+        <h1>Lista de Carreras</h1>
     </div>
 
     <div class="conteiner-btn-agregar">
@@ -103,13 +103,16 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
                         
                         <td>
                             <div class="icon">
-                                <a href="dar_baja.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
-
-                                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></i></a>
                                 
                             <?php if (($carrera->getEstado())==2){?>
                                 <a href="dar_alta.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
-                            <?php } ?>
+                            <?php }else{ ?>
+                                <a href="#" onclick="consulta(<?php echo $carrera->getIdCarrera()?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+
+                                <a href="modificar.php?id=<?php echo $carrera->getIdCarrera()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></i></a>
+                                
+                            <?php }
+                            ?>
                             </div>
                         </td>
                     </tr>
@@ -119,4 +122,14 @@ $listadoCarreras=$carrera->listadoCarreras($filtroEstado,$filtroNombre);
     </div>
     <?php require_once "../../footer.php"?>                                 
 </body>
+
+<script>
+    function consulta(id){
+
+        if (confirm("¿Estas deguro que deseas eliminar?"))
+        {
+            window.location.href="dar_baja.php?id="+id;
+        }
+    }
+</script>
 </html>

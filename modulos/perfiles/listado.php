@@ -1,7 +1,6 @@
 <?php
 require_once "../../class/Perfil.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 $perfil=new Perfil();
 $listaPerfiles=$perfil->perfilTodos();
@@ -20,6 +19,7 @@ $mensaje='';
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado perfiles</title>
@@ -28,10 +28,11 @@ $mensaje='';
 <body class="body-listuser">
 
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
     
     <div class="titulo">
-        <h1 class="titulo">Lista de Perfiles</h1>
+        <h1>Lista de Perfiles</h1>
     </div>
 
     <div class="conteiner-btn-agregar">
@@ -44,7 +45,6 @@ $mensaje='';
             <thead>
                 <th>Id Perfil</th>
                 <th>Nombre</th>
-                <th>Estado</th>
                 <th>Acciones</th>
             </thead>
             <tbody>
@@ -57,13 +57,17 @@ $mensaje='';
                         <?php echo $perfil->getPerfilNombre()?> 
                     </td>
                     <td>
-                        1
-                    </td>
-                    <td>
                         <div class="icon">
-                            <a href="modificar.php?id=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
-                            <a href="dar_baja.php?id=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="../../modulos/modulos/listado_por_perfil?idPerfil=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de modulos asignados" alt="Lista de modulos asignados"></a>
+                            <?php    
+                                $estado=$perfil->getEstado();                        
+                                if ($estado==2){?>
+                                <a href="dar_alta.php?id=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
+                            <?php }else{ ?>
+                                <a href="#" onclick="consulta(<?php echo $perfil->getIdPerfil()?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                            
+                                <a href="modificar.php?id=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                                <a href="../../modulos/modulos/listado_por_perfil?idPerfil=<?php echo $perfil->getIdPerfil()?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de modulos asignados" alt="Lista de modulos asignados"></a>
+                            <?php } ?>
                         </div>
                     </td>
                 </tr>
@@ -74,4 +78,15 @@ $mensaje='';
     <?php require_once "../../footer.php"?> 
 
 </body>
+
+    <script>
+        function consulta(idPerfil){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idPerfil;
+            }
+        }
+    </script>
+
 </html>

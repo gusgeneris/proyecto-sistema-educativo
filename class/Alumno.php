@@ -103,6 +103,31 @@ class Alumno extends Persona{
 
     }
 
+    public static function listadoAlumnosActivos(){
+        $sql = "SELECT estado_id_estado,alumno.id_alumno,alumno.alumno_num_legajo,
+        persona.id_persona,persona.persona_fecha_nac, persona.persona_nombre,
+        persona.persona_apellido,persona.persona_nacionalidad,persona.persona_dni,sexo_id_sexo,persona.estado_id_estado FROM alumno 
+        JOIN persona on persona.id_persona=alumno.persona_id_persona";
+
+        $db = new MySql();
+        $datos = $db->consultar($sql);
+
+        $listadoAlumnos = [];
+
+        while ($registro = $datos->fetch_assoc()){
+            if($registro['estado_id_estado']==1){
+                $alumno=new Alumno();
+                $alumno->crearAlumno ($alumno,$registro);
+                
+                $alumno->_estado= $registro['estado_id_estado'];
+
+                $listadoAlumnos[]=$alumno;}
+        }
+
+        return $listadoAlumnos;
+
+    }
+
     public static function darAlta($idPersona){
         $sql="UPDATE `persona` SET `estado_id_estado` = '1' WHERE (`id_persona` = {$idPersona})";
 
@@ -144,11 +169,24 @@ class Alumno extends Persona{
     }
 
     static public function asignarCicloLectivoCarrera($idAlumno,$idCicloLectivoCarrera){
-        $sql="INSERT INTO `ciclo_lectivo_carrera_alumno` (`alumno_id_alumno`, `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera`) VALUES ('{$idAlumno}','{$idCicloLectivoCarrera}')";
-        
+        $sql="SELECT * FROM ciclo_lectivo_carrera_alumno where alumno_id_alumno='{$idAlumno}' and ciclo_lectivo_carrera_id_ciclo_lectivo_carrera='{$idCicloLectivoCarrera}' ";
+
         $database= new Mysql();
 
-        $database->insertarRegistro($sql);
+        $dato=$database->consultar($sql);
+        
+        if($dato->num_rows==0){
+
+            $sql="INSERT INTO `ciclo_lectivo_carrera_alumno` (`alumno_id_alumno`, `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera`) VALUES ('{$idAlumno}','{$idCicloLectivoCarrera}')";
+            
+            $database= new Mysql();
+
+            $database->insertarRegistro($sql);
+            return 1;
+        }
+        else{
+            return 0;
+        }
     
     }
 
@@ -171,7 +209,7 @@ class Alumno extends Persona{
       
     }
 
-    static public function eliminarRelacionCicloLecticoCarreraAlumno($idCicloLectivoCarreraAlumno){
+    static public function eliminarRelacionCicloLectivoCarreraAlumno($idCicloLectivoCarreraAlumno){
         $sql="DELETE FROM `ciclo_lectivo_carrera_alumno` WHERE (`id_ciclo_lectivo_carrera_alumno` = '{$idCicloLectivoCarreraAlumno}')";
         $database = new Mysql();
         $database->eliminarRegistro($sql);
@@ -205,8 +243,9 @@ class Alumno extends Persona{
         
     }
 
-    static public function eliminarTodaRelacionCicloLecticoCarrera($idCicloLectivoCarrera){
-        $sql="DELETE FROM `ciclo_lectivo_carrera_alumno` WHERE (`ciclo_lectivo_carrera_id_ciclo_lectivo_carrera` = '{$idCicloLectivoCarrera}')";
+    static public function eliminarTodaRelacionCicloLecticoCarrera($idCicloLectivoCarrera,$idAlumno){
+        $sql="DELETE FROM `ciclo_lectivo_carrera_alumno` WHERE `ciclo_lectivo_carrera_id_ciclo_lectivo_carrera` = '{$idCicloLectivoCarrera}' and alumno_id_alumno='{$idAlumno}'";
+        
         $database = new Mysql();
         $database->eliminarRegistro($sql);
     
@@ -297,7 +336,89 @@ class Alumno extends Persona{
         
     }
 
+    
+    public static function obtenerGroupSexo(){
+        $sql="SELECT sexo_descripcion,count(sexo_descripcion) as cantidad from sexo ".
+            "join persona on id_sexo = sexo_id_sexo ".
+            "join alumno on id_persona=persona_id_persona ".
+            "group by sexo_descripcion;";
 
+        $dataBase=new MySql();
+
+        $datos=$dataBase->consultar($sql);
+
+        $listadoSexoPersonas=[];
+
+        while($registro= $datos->fetch_assoc()){
+            $sexoDescipcion=$registro['sexo_descripcion'];
+            $cantidad= $registro['cantidad'];
+            array_push($listadoSexoPersonas,array($sexoDescipcion,$cantidad));
+        }
+        return $listadoSexoPersonas;
+
+    }
+
+    public static function cantidadTotalAlumnos(){
+        $sql="SELECT count(id_alumno) as cantidad from alumno;";
+
+        $dataBase=new MySql();
+
+        $dato=$dataBase->consultar($sql);
+
+        $registro= $dato->fetch_assoc();
+            $cantidad= $registro['cantidad'];
+        
+        return $cantidad;
+
+    }
+
+    public static function cantidadAlumnoPorCarrera(){
+        $anio=date("Y");
+
+        $sql="SELECT carrera_nombre, count(id_alumno) as cantidad from ciclo_lectivo_carrera ".
+            "join ciclo_lectivo_carrera_alumno on id_ciclo_lectivo_carrera =ciclo_lectivo_carrera_id_ciclo_lectivo_carrera ".
+            "join ciclo_lectivo on id_ciclo_lectivo =ciclo_lectivo_id_ciclo_lectivo ".
+            "join carrera on id_carrera = carrera_id_carrera ".
+            "join alumno on id_alumno=alumno_id_alumno where ciclo_lectivo_anio=$anio group by carrera_nombre ";
+
+        $dataBase=new MySql();
+
+        $datos=$dataBase->consultar($sql);
+
+        $listado=[];
+
+        while($registro= $datos->fetch_assoc()){
+            $nombreCarrera= $registro['carrera_nombre'];
+            $cantidad= $registro['cantidad'];
+            array_push($listado,array($nombreCarrera,$cantidad));
+        }
+
+        return $listado;
+
+    }
+
+    public static function busquedaPorApellido($apellido){
+        $sql="SELECT id_alumno,id_persona, persona_nombre, persona_apellido, persona_fecha_nac, persona_dni, persona_nacionalidad, alumno_num_legajo, sexo_id_sexo, persona.estado_id_estado 
+        from persona join alumno on id_persona=persona_id_persona 
+        where persona_apellido like'%{$apellido}%'";
+
+        $dataBase=new MySql();
+
+        $datos=$dataBase->consultar($sql);
+
+        $listadoAlumnos = [];
+
+        while ($registro = $datos->fetch_assoc()){
+            if($registro['estado_id_estado']==1){
+                $alumno=new Alumno();
+                $alumno->crearAlumno ($alumno,$registro);
+
+                $listadoAlumnos[]=$alumno;
+        }}
+
+        return $listadoAlumnos;      
+    }
+    
 
 }
 

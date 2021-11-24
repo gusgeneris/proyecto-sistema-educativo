@@ -24,7 +24,7 @@ $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateri
 
 
 
-header("Location:listado.php?idCurriculaCarrera=".$idCurriculaCarrera);
+header("Location:listado.php?idMateria=".$idMateria."&idCarrera=".$idCarrera."&mj=".CORRECT_SEARCH_CODE."&idCurriculaCarrera=".$idCurriculaCarrera);
 
 
 ?>

@@ -13,9 +13,12 @@ $idCarrera = $_POST['cboCarrera'];
 
 $idCicloLectivoCarrera=Carrera::idCicloLectivoCarrera($idCicloLectivo,$idCarrera);
 
-$asignarCicloLectivoCarrera=Alumno::asignarCicloLectivoCarrera($idAlumno,$idCicloLectivoCarrera);
+$dato=$asignarCicloLectivoCarrera=Alumno::asignarCicloLectivoCarrera($idAlumno,$idCicloLectivoCarrera);
 
-
-header("Location:asignarCarrera.php?idAlumno=".$idAlumno)
+if($dato==1){
+    header("Location:asignarCarrera.php?mj=".CORRECT_ASIG_CODE."&idAlumno=".$idAlumno);
+}else{
+    header("Location:asignarCarrera.php?mj=".INCORRECT_INSERT_DATO_DUPLICATE_CODE."&idAlumno=".$idAlumno);
+}
 
 ?>

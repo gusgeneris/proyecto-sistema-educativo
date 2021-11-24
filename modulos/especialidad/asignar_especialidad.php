@@ -5,7 +5,7 @@
 
     $idDocente=$_GET["idDocente"];
 
-    $listado=Especialidad::listaTodos();
+    $listado=Especialidad::listaTodosActivos();
 
     $especialidades=Especialidad::listarPorDocente($idDocente);
     $listadoEspecialidadesActuales=[];
@@ -77,16 +77,14 @@
                         <?php endforeach?>
                     </tbody>              
                 </table>                        
-
-            <div class="formGrupBtnEnviar" >
-                <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
             </div>
-
-            <div class="formGrupBtnEnviar" >
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+            <div class="formGrupBtnEnviarUnaColumna" >
+                <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
+            
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>           
         </form>
-    </div>
+</div>
     <?php require_once "../../footer.php"?>   
 
 </body>

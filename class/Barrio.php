@@ -6,6 +6,29 @@ class Barrio{
     private $_idBarrio;
     private $_nombre;
     private $_idLocalidad;
+    private $_estado;
+
+
+     /**
+     * Get the value of _idPais
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _idPais
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
+
 
     
 
@@ -74,6 +97,7 @@ class Barrio{
         $barrio->_idBarrio = $registro['id_barrio'];
         $barrio->_nombre = $registro['barrio_nombre'];
         $barrio->_idLocalidad = $registro['localidad_id_localidad'];
+        $barrio->_estado = $registro['barrio_estado'];
         return $barrio;
     }
 
@@ -138,12 +162,20 @@ class Barrio{
         
     }
 
-    static function eliminarBarrio($idbarrio){
-        $sql="DELETE FROM `barrio` WHERE (`id_barrio` = {$idbarrio});";
+    static function eliminarBarrio($idBarrio){
+        $sql="UPDATE `barrio` SET barrio_estado = '2' WHERE  (`id_barrio` = {$idBarrio});";
 
         $database=new Mysql();
         $database->eliminarRegistro($sql);
 
+    }
+
+    public static function darAlta($idBarrio){
+        $sql="UPDATE `barrio` SET `barrio_estado` = '1' WHERE (`id_barrio` = {$idBarrio})";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
     static public function obtenerPorIdBarrio($idBarrio){

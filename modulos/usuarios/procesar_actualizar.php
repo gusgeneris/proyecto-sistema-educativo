@@ -2,7 +2,7 @@
 require_once "../../class/Persona.php";
 require_once "../../class/Usuario.php";
 require_once "../../class/Mysql.php";
-require_once "../../configs.php";
+require_once "../../configs.php"; 
 
 $cancelar= $_POST['Cancelar'];
 
@@ -23,6 +23,11 @@ $idPersona= $_POST['IdPersona'];
 $personaSexo= $_POST['cboSexo'];
 $usuarioPerfil= $_POST['cboPerfil'];
 
+if ($usuarioPerfil == ''){
+    $usuarioPerfil = 3;
+}
+
+
 if ($personaDni == ''){
     $personaDni = 'NULL';
 }
@@ -41,7 +46,7 @@ if (strlen($personaNombre) < 3 ){
     exit;
 }
 
-if (ctype_alpha($personaNombre) == false){
+if (!preg_match('/^[a-zA-ZÀ-ÿ\s ]{3,40}$/',$personaNombre)){
     header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
     exit;
 }
@@ -53,7 +58,7 @@ if (strlen($personaApellido) < 3){
     
 }
 
-if (ctype_alpha($personaApellido) == false){
+if (!preg_match('/^[a-zA-ZÀ-ÿ\s ]{3,40}$/',$personaApellido) ){
     header("Location:listado.php?mj=".ERROR_LAST_NAME_NO_PERMITE_NUMEROS_CODE);
     exit;
 }
@@ -92,10 +97,22 @@ $user->setIdPersona($idPersona);
 $user->setIdSexo($personaSexo);
 $user->setIdPerfil($usuarioPerfil);
 
-$user->actualizarUsuario();
+$dato=$user->actualizarUsuario();
 
-if ($user){
-    header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
-}
+if ($usuarioPerfil == 1):
+    if ($dato==1){
+        header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);}
+    else{
+        header("Location:modificar.php?id=".$idUsuario."&mj=".INCORRECT_INSERT_DATO_DUPLICATE_USER_NAME_CODE);
+    }
+endif;
+
+if ($usuarioPerfil == 3):
+    if ($dato==1){
+        header("Location:../../inicio.php?mj=".CORRECT_UPDATE_CODE);}
+    else{
+        header("Location:modificar.php?id=".$idUsuario."&mj=".INCORRECT_INSERT_DATO_DUPLICATE_USER_NAME_CODE);
+    }
+endif;
 
 ?>

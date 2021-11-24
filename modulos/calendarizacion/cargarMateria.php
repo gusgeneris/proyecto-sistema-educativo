@@ -21,7 +21,7 @@ require_once "../../class/CicloLectivo.php";
     $idCarrera=$_GET["idCarrera"];
     
 
-    $respuesta="<option value='0'>->Seleccionar Materia<-</option>";
+    $respuesta="<option value='0'>Seleccionar Materia</option>";
 
     $listadoMateria=Materia::listadoPorIdCicloCarrera($idCicloLectivo,$idCarrera,$idDocente);
     

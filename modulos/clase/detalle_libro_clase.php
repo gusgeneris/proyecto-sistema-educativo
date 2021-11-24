@@ -1,6 +1,7 @@
 <?php 
     require_once "../../class/CicloLectivo.php";
     require_once "../../class/Carrera.php";
+    require_once "../../class/Materia.php";
     require_once "../../class/Docente.php";
     require_once "../../class/DetalleLibroTemas.php";
     require_once "../../class/Clase.php";
@@ -37,7 +38,17 @@
         if (isset($_GET['idClase'])){
             $idClase = $_GET['idClase'];
             
-            $detalle= DetalleLibroTemas::detalleLibroPorClase($idClase);
+            $listadoDetalle= DetalleLibroTemas::detalleLibroPorClase($idClase);
+            $clase=Clase::mostrarPorId($idClase);
+            $numeroClase=$clase->getNumeroClase();
+
+            $idCarrera=$_GET['idCarrera'];
+            $carrera=Carrera::listadoPorId($idCarrera);
+            $nombreCarrera=$carrera->getNombre();
+
+            $idMateria=$_GET['idMateria'];
+            $materia=Materia::listadoPorId($idMateria);
+            $nombreMateria=$materia->getNombre();
             
         }else {
             header("Location:inicio.php");}
@@ -45,7 +56,7 @@
             
     ?>
     <div class="titulo">
-        <h1>Actividad realizada en la clase</h1>
+        <h1>Actividad realizada en la clase N°: <span><?php echo $numeroClase?></span><br>Materia: <span><?php echo $nombreMateria?></span><br>Carrera: <span><?php echo $nombreCarrera?></span></h1>
     </div>
 
     <div class="conteiner3Columnas" >
@@ -59,17 +70,19 @@
             </thead>
 
             <tbody>
+                <?php foreach ($listadoDetalle as $detalle):?>
                 <tr>
                     <td><?php echo $detalle->getTemaDia(); ?></td>
                     <td><?php echo $detalle->getObservaciones(); ?></td>
                 </tr>
+                <?php endforeach?>
             </tbody>
         </table>
     </div>
 
     
 
-    <div class="formGrupBtnEnviar">
+    <div class="formGrupBtnEnviar central">
         <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Atras</button>
     </div>
 

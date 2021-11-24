@@ -9,6 +9,7 @@ class Usuario extends Persona {
     protected $_idPerfil;
     protected $_nombreUsuario;
     protected $_contrasenia;
+    protected $_estado;
 
     public $perfil;
 
@@ -96,6 +97,26 @@ class Usuario extends Persona {
     public function setContrasenia($_contrasenia)
     {
         $this->_contrasenia = $_contrasenia;
+
+        return $this;
+    } 
+
+    /**
+     * Get the value of _estado
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
 
         return $this;
     }
@@ -192,16 +213,28 @@ class Usuario extends Persona {
     }
 
     public function insertUser(){
-        
-        parent::insertPersona();
 
+        $sql="SELECT * FROM usuario where usuario_nombre='{$this->_nombreUsuario}'";
+
+        
         $database=new MySql();
+        $dato=$database->consultar($sql);
 
-        $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contrasenia}','{$this->_idPerfil}','{$this->_idPersona}')";
+        if($dato->num_rows == 0){
+
         
-        echo $sql;
+            parent::insertPersona();
 
-        $database->insertarRegistro($sql);
+            $database=new MySql();
+
+            $sql = "INSERT INTO usuario (usuario_nombre,usuario_contrasenia,perfil_id_perfil,persona_id_persona) VALUES ('{$this->_nombreUsuario}','{$this->_contrasenia}','{$this->_idPerfil}','{$this->_idPersona}')";
+            
+
+            $database->insertarRegistro($sql);
+            return 1;}
+        else{
+            return 0;
+        }
 
     }
 
@@ -233,17 +266,70 @@ class Usuario extends Persona {
 
     public function actualizarUsuario(){
 
-        parent::actualizarPersona();
+        $sql="SELECT * FROM usuario where usuario_nombre='{$this->_nombreUsuario}'";
 
-        $database = new MySql();
-        $sql = "UPDATE `usuario` SET usuario_contrasenia={$this->_contrasenia},`usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+        $database=new MySql();
+        $dato1=$database->consultar($sql);
+
+        
+        $sql="SELECT * FROM usuario where usuario_nombre='{$this->_nombreUsuario}' and id_usuario='{$this->_idUsuario}'";
+
+        
+        $dato2=$database->consultar($sql);
+
+        if($dato1->num_rows == 0){
 
 
-        $database->actualizar($sql);
+            parent::actualizarPersona();
+
+            $database = new MySql();
+            $sql = "UPDATE `usuario` SET usuario_contrasenia={$this->_contrasenia},`usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+
+
+            $database->actualizar($sql);
+            return 1;
+        }
+        elseif($dato2->num_rows == 1){
+            parent::actualizarPersona();
+
+            $database = new MySql();
+            $sql = "UPDATE `usuario` SET usuario_contrasenia={$this->_contrasenia},`usuario_nombre` = '{$this->_nombreUsuario}',`perfil_id_perfil` = '{$this->_idPerfil}' WHERE (`id_usuario` = '{$this->_idUsuario}');";
+
+
+            $database->actualizar($sql);
+            return 1;
+        }
+        else{
+            return 0;
+        }
+            
 
 
     }
 
+    public static function ultimosUsuariosRegistrados(){
+        $sql="select usuario_nombre,persona_nombre,persona_apellido, perfil_nombre from usuario ".
+            "join perfil on id_perfil = perfil_id_perfil ".
+            "join persona on id_persona = persona_id_persona order by id_usuario desc limit 5";
+        
+        $dataBase=new MySql();
 
- 
+        $datos=$dataBase->consultar($sql);
+
+        $listadoUsuarios=[];
+
+        while($registro= $datos->fetch_assoc()){
+            $usuarioNombre= $registro['usuario_nombre'];
+            $personaNombre= $registro['persona_nombre'];
+            $personaApellido= $registro['persona_apellido'];
+            $perfilNombre= $registro['perfil_nombre'];
+
+            array_push($listadoUsuarios,array($usuarioNombre,$personaNombre,$personaApellido,$perfilNombre));
+        }
+
+        return $listadoUsuarios;
+    }
+
+
+
 }

@@ -19,7 +19,7 @@
     $clase=Clase::mostrarPorId($idClase);
     
     $listado=Alumno::listadoPorIdCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
-    $detalleLibro=DetalleLibroTemas::detallePorIdCurriculaIdClase($idCurriculaCarrera,$idClase);
+    $listaDetalleLibro=DetalleLibroTemas::detallePorIdCurriculaIdClase($idCurriculaCarrera,$idClase);
     
 
 ?>
@@ -68,29 +68,38 @@
             </h3>
         </div>
     
+
+        
+        <div class="subtitulo">
+            <h2>Registros de libro de temas cargados</h2>
         </div>
-        <div class="conteiner-descripcion-clase">
 
-            <div class="subtitulo">
-                <h2>Detalle libro de temas Asociado</h2>
-            </div>
+        <div class="conteiner3Columnas">
 
-            <div class="conteiner-h3">
-                <h3>
-                    Tema del dia:<span> <?php echo $detalleLibro->getTemaDia() ?></span>
-                </h3>
-            </div>
-            
-            <div class="conteiner-h3">
-                <h3>
-                    Observaciones:<span> <?php echo $detalleLibro->getObservaciones() ?></span>
-            </h3>
-            </div>
-            <div class="conteiner-h3">
-                <h3>
-                Firma observante: 
-            </h3>
-            </div>
+
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <td>Tema del dia</td>
+                        <td>Observaciones</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    
+                 <?php foreach ($listaDetalleLibro as $detalleLibro):?>
+                    <tr>
+                        <td><?php echo $detalleLibro->getTemaDia() ?></td>
+                        <td><?php echo $detalleLibro->getObservaciones() ?></td>
+
+                        
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
         </div>
     
 
@@ -141,11 +150,13 @@
                 <?php endforeach?>
             </tbody>       
         </table>
-    <div class="formGrupBtnEnviar" >
-        <button type="button" class="formButton" id="Guardar">
-            <a href="../../inicio.php">  Listo </a> 
-        </button>
-    </div>  
+        <div class="formGrupBtnEnviar central" >
+            <button type="button" class="formButton" id="Guardar">
+                <a href="../../inicio.php">  Listo </a> 
+            </button>
+        </div>  
+    </div> 
+
     <?php require_once "../../footer.php"?>                   
 
 </body>

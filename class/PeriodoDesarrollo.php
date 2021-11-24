@@ -4,6 +4,7 @@
     class PeriodoDesarrollo{
         private $_idPeriodoDesarrollo;
         private $_detallePeriodo;
+        private $_estado;
 
         
 
@@ -47,6 +48,26 @@
                 return $this;
         }
 
+              /**
+         * Get the value of _estado
+         */ 
+        public function getEstado()
+        {
+                return $this->_estado;
+        }
+
+        /**
+         * Set the value of _estado
+         *
+         * @return  self
+         */ 
+        public function setEstado($_estado)
+        {
+                $this->_estado = $_estado;
+
+                return $this;
+        }
+
         public function crearPeriodoDesarrollo($periodoDesarrollo,$registro){
             $periodoDesarrollo->_idPeriodoDesarrollo= $registro['id_periodo_desarrollo'];
             $periodoDesarrollo->_detallePeriodo= $registro['detalle_periodo'];
@@ -57,14 +78,29 @@
         
         
         public function insert(){
-            $sql = "INSERT INTO `periodo_desarrollo` (`detalle_periodo`) VALUES ('$this->_detallePeriodo')";
-    
+
+            $sql="SELECT * FROM periodo_desarrollo where detalle_periodo='{$this->_detallePeriodo}'";
+
+            
             $database=new Mysql();
     
-            $database->insertarRegistro($sql);
-        }
+            $dato=$database->consultar($sql);
+
+            if($dato->num_rows ==0){
+                $sql = "INSERT INTO `periodo_desarrollo` (`detalle_periodo`) VALUES ('$this->_detallePeriodo')";
     
-        public static function listaTodos(){
+                $database=new Mysql();
+        
+                $database->insertarRegistro($sql);
+                return 1;
+            }else{
+                return 0;
+            }
+
+            
+        }
+
+        public static function listaTodosActivos(){
             $sql= "SELECT id_periodo_desarrollo, detalle_periodo, estado FROM periodo_desarrollo";
             
             $database=new Mysql();
@@ -86,6 +122,27 @@
     
         }
     
+        public static function listaTodos(){
+            $sql= "SELECT id_periodo_desarrollo, detalle_periodo, estado FROM periodo_desarrollo";
+            
+            $database=new Mysql();
+            $datos=$database->consultar($sql);
+            $listadoPeriodoDesarrollo=[];
+            
+            while ($registro = $datos->fetch_assoc()){
+                
+                $periodoDesarrollo=new PeriodoDesarrollo();
+                $periodoDesarrollo->crearPeriodoDesarrollo($periodoDesarrollo,$registro);
+    
+                $listadoPeriodoDesarrollo[]=$periodoDesarrollo;
+                }
+                
+            
+    
+            return $listadoPeriodoDesarrollo;
+    
+        }
+    
         public static function darDeBaja($idPeriodoDesarrollo){
             $sql = "UPDATE `periodo_desarrollo` SET `estado` = '2' WHERE (`id_periodo_desarrollo` = '$idPeriodoDesarrollo')";
     
@@ -93,6 +150,17 @@
             $datos = $database->eliminarRegistro($sql);
     
         }
+
+        public static function darAlta($idPeriodoDesarrollo){
+            $sql = "UPDATE `periodo_desarrollo` SET `estado` = '1' WHERE (`id_periodo_desarrollo` = '$idPeriodoDesarrollo')";
+    
+            $database= new MySql();
+            $datos = $database->eliminarRegistro($sql);
+            return true;
+    
+        }
+
+        
     
         public static function obtenerTodoPorId($idPeriodoDesarrollo){
             $sql = "SELECT id_periodo_desarrollo, detalle_periodo, estado from periodo_desarrollo WHERE id_periodo_desarrollo={$idPeriodoDesarrollo};";
@@ -121,6 +189,8 @@
     
         }
    
+
+  
     }
 
 ?>

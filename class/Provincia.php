@@ -6,7 +6,28 @@ class Provincia{
     private $_idProvincia;
     private $_nombre;
     private $_idPais;
+    private $_estado;
 
+
+     /**
+     * Get the value of _idPais
+     */ 
+    public function getEstado()
+    {
+        return $this->_estado;
+    }
+
+    /**
+     * Set the value of _idPais
+     *
+     * @return  self
+     */ 
+    public function setEstado($_estado)
+    {
+        $this->_estado = $_estado;
+
+        return $this;
+    }
 
     /**
      * Get the value of _idProvincia
@@ -73,6 +94,7 @@ class Provincia{
         $provincia->_idProvincia = $registro['id_provincia'];
         $provincia->_nombre = $registro['provincia_nombre'];
         $provincia->_idPais = $registro['pais_id_pais'];
+        $provincia->_estado = $registro['provincia_estado'];
         return $provincia;
 
     }
@@ -130,11 +152,19 @@ class Provincia{
     }
 
     static function eliminarProvincia($idProvincia){
-        $sql="DELETE FROM `provincia` WHERE (`id_provincia` = {$idProvincia});";
+        $sql="UPDATE `provincia` SET provincia_estado = '2' WHERE  (`id_provincia` = {$idProvincia});";
 
         $database=new Mysql();
         $database->eliminarRegistro($sql);
 
+    }
+
+    public static function darAlta($idProvincia){
+        $sql="UPDATE `provincia` SET `provincia_estado` = '1' WHERE (`id_provincia` = {$idProvincia})";
+
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
     static public function obtenerPorIdProvincia($idProvincia){

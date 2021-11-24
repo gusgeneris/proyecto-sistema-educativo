@@ -3,6 +3,8 @@
     require_once "../../class/Horario.php";
     require_once "../../class/Dia.php";
     require_once "../../class/Materia.php";
+    require_once "../../class/AnioDesarrollo.php";
+    require_once "../../class/PeriodoDesarrollo.php";
     require_once "../../class/Estado.php";
     require_once "../../configs.php";
     require_once "../../class/Carrera.php";
@@ -36,6 +38,8 @@
         <link rel="stylesheet" href="../../style/menuVertical.css">
         <script src="../../jquery3.6.js"></script>
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
+        <script src ="../../script/cargarHorarios.js"></script>
+        <link rel="icon" type="image/jpg" href="../../image/logo.png">
         <title>Crear Horario</title>
     </head>
     <body>
@@ -49,7 +53,7 @@
 
     <div class="main">
         
-        <form action="procesar_asignar.php" method="POST">
+        <form action="procesar_asignar.php" method="POST" class="formInsert2Columnas" >
             <input type="hidden" name="idCarrera" value="<?php echo $idCarrera ?>">
             <input type="hidden" name="idCicloLectivo" value="<?php echo $idCicloLectivo ?>">
 
@@ -61,10 +65,9 @@
                     <option value="<?php echo $materia->getIdMateria()?>"> <?php echo $materia->getNombre()?></option>
                 <?php endforeach?>        
             </select>
-            <br><br>
 
 
-            <select name="cboDia" id="">
+            <select name="cboDia" id="cboDia" onchange="cargarHorario()">
 
                 <option value="">Seleccionar Dia</option>
                 <?php foreach($listaDias as $dia):?>
@@ -81,42 +84,87 @@
                             <th>Hora de Finalizacion</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id=cuerpoTablaHorario>
                     
-                <?php foreach ($listaHorario as $horario):?>
-                    <tr>
-                    <td><input type="checkbox" name="check_lista[]" value="<?php echo $horario->getNumero() ?>"></td>
-
-                    <td><?php echo $horario->getHoraInicio()?></td>
-
-                    <td><?php echo $horario->getHoraFin()?></td>
-                    
-                    </tr>
-                <?php endforeach?>
+                
                     </tbody>
                 </table>
             </div>
 
             <div class="formGrupBtnEnviar" >
                 <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
-            </div>
 
-            <div class="formGrupBtnEnviar" >
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
 
         </form>
         
-    </div>
+    <?php 
+        $anioDesarrollo=AnioDesarrollo::listaTodosActivos();
+        $periodoDesarrollo=PeriodoDesarrollo::listaTodosActivos(); 
+        $filtroAnio="";
+        $filtroPeriodo="";                
+    ?>
 
-        <?php 
-                $listadoHorariosConMaterias=Horario::listadoHorariosPorIdCicloLectivoCarrera($idCicloLectivoCarrera);
-                    
-        ?>
+    </div>
+       
+        <div class="titulo">
+            <h1>Horarios de la Carrera: <?php echo $carrera->getNombre()?></h1>
+        </div><br>
 
         <div class="subtitulo">
-            <h2>Horarios de la Carrera: <?php echo $carrera->getNombre()?></h2>
+            <h2>Buscar por Anio/Periodo de desarrollo</h2>
         </div>
+            
+            <div class="buscadorHorarios" >
+                
+
+                <form action="" method=POST class="formInsert3Columnas">
+                    
+                    
+                    <div class="formGrup">
+                        <label for="cboAnioDesarrollo" class="formLabel">Anio de desarrollo</label>
+                        <select name="cboAnioDesarrollo" class="formInput" id="">
+                            <?php foreach ($anioDesarrollo as $anio):
+                                $fAnio= $anio->getIdAnioDesarrollo();
+                                $filtroAnio= $fAnio;
+                            ?>
+                                <option value="<?php echo $anio->getIdAnioDesarrollo()?>"><?php echo $anio->getDetalleAnio()?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+
+                    <div class="formGrup">
+                        <label for="cboPeriodoDesarrollo" class="formLabel">Periodo de desarrollo</label>
+                        <select name="cboPeriodoDesarrollo" class="formInput" id="">
+                            <?php foreach ($periodoDesarrollo as $periodo):   
+                                $fPeriodo=  $periodo->getIdPeriodoDesarrollo();
+                                $filtroPeriodo=$fPeriodo;
+                            ?>
+                                <option value="<?php echo $periodo->getIdPeriodoDesarrollo()?>"><?php echo $periodo->getDetallePeriodo()?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                    <div class="formGrupBtnEnviar contacto">
+
+                        <button type="submit" class="formButton" id='Guardar' value='FormInsertContacto'> Buscar</button>
+                    
+                    </div>
+
+                </form>
+            </div>
+
+            <?php 
+                if(isset($_POST['cboAnioDesarrollo'])){
+                    $filtroAnio=$_POST['cboAnioDesarrollo'];
+                }
+
+                if(isset($_POST['cboPeriodoDesarrollo'])){
+                    $filtroPeriodo=$_POST['cboPeriodoDesarrollo'];
+                }
+                $listadoHorariosConMaterias=Horario::listadoHorariosPorIdCicloLectivoCarrera($idCicloLectivoCarrera,$filtroAnio,$filtroPeriodo);
+              
+            ?>
 
             <div class="conteiner horario">
 
@@ -138,7 +186,7 @@
                     <tbody>
                         
                         <?php foreach ($listaHorario as $horario){?>
-                            <?php $grilla_horario   =   $horario->getNumero();   //Variable de control donde se almacena el horario actual ?>
+                            <?php $grilla_horario   =   $horario->getNumero();//Variable de control donde se almacena el horario actual ?>
 
                                 <tr>
                                     <td><?php echo $horario->getNumero(); ?></td>

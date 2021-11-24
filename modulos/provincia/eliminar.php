@@ -8,6 +8,6 @@ $idProvincia=$_GET["idProvincia"];
 
 $eliminarRegistro=Provincia::eliminarProvincia($idProvincia);
 
-header("Location:provincias.php?idPais=".$idPais);
+header("Location:listado.php?idPais=".$idPais."&mj=".CORRECT_DELETE_CODE);
 
 ?>

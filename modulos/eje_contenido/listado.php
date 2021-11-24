@@ -4,7 +4,6 @@ require_once "../../class/Materia.php";
 require_once "../../class/CicloLectivo.php";
 require_once "../../class/Carrera.php";
 require_once "../../class/Docente.php";
-require_once "../../mensaje.php";
 
 
 ?>
@@ -21,12 +20,14 @@ require_once "../../mensaje.php";
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <script src ="../../script/comboCarrera.js"></script>
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
+        <link rel="stylesheet" href="../../style/mensaje.css">
         <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
         <link rel="icon" type="image/jpg" href="../../image/logo.png">
         <title>Busqueda Ejes de COntenido</title>
 
     </head>
     <?php require_once "../../menu.php";
+        require_once "../../mensaje.php";
         $idUsuario=$usuario->getIdPerfil();
         $idPersona=$usuario->getIdPersona();
     ?>
@@ -46,17 +47,17 @@ require_once "../../mensaje.php";
                 <h1>Buscar Eje de Contenido</h1>
             </div>
             <div class="main">  
-                <form action="procesar_busqueda.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+                <form action="procesar_busqueda.php" method="POST" class="formInsert3Columnas" id="formInsert" name="formInsert">
 
                     <input type="hidden" value="<?php echo $idDocente ?>">
 
                     <div class="formGrup" id="GrupocboCarrera">
                         <label for="cboCarrera" class="formLabel">Carrera</label>
                         <div class="formGrupInput">
-                            <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+                            <select class="formInput" name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
                                 
                                 <option value="0">
-                                    ->Seleccionar Carrera<-
+                                    Seleccionar Carrera
                                 </option>
                             <?php foreach ($listaCarreras as $carrera): ?>
                                 <option value="<?php echo $carrera->getIdCarrera() ?>">
@@ -75,10 +76,10 @@ require_once "../../mensaje.php";
                     <div class="formGrup" id="GrupocboMateria">
                         <label for="cboMateria" class="formLabel">Materia</label>
                             <div class="formGrupInput">
-                                <select name="cboMateria" id="cboMateria">
+                                <select class="formInput" name="cboMateria" id="cboMateria">
 
                                     <option value="0">
-                                        ->Seleccionar Materia<-
+                                        Seleccionar Materia
                                     </option>
 
                                 </select>
@@ -86,8 +87,8 @@ require_once "../../mensaje.php";
                             <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
                     </div>                  
                     
-                    <div class="formGrupBtnEnviar"> 
-                        <button class="formButton" id="Guardar" type="submit" > Buscar Clases </button>
+                    <div class="formGrupBtnEnviar3Columnas"> 
+                        <button class="formButton" value="FormInsertAsistencia" id="Guardar" type="submit" > Buscar </button>
                     </div> 
 
                 </form>
@@ -108,7 +109,7 @@ require_once "../../mensaje.php";
             $materia=Materia::listadoPorId($idMateria);
         ?>
             <div class="titulo">
-                <h1>Lista de Eje Contenido de la Materia:  <?php echo $materia?></h1>
+                <h1>Lista de Eje Contenido de la Materia: <span> <?php echo $materia?></span></h1>
             </div>
 
             <div class="conteiner-btn-agregar">
@@ -121,7 +122,6 @@ require_once "../../mensaje.php";
                 <table class="tabla" method="GET">
                     <thead>
                         <tr>
-                            <th> ID Eje</th>
                             <th> Numero de Eje</th>
                             <th> Descripcion</th>
                             <th> Acciones</th>
@@ -130,9 +130,6 @@ require_once "../../mensaje.php";
                     <tbody>
                     <?php foreach ($lista as $contenido ):?> 
                         <tr >
-                            <td >
-                                <?php echo $contenido->getIdEjeContenido(); ?>
-                            </td>
                             <td>
                                 <?php echo $contenido->getNumero(); ?>                
                             </td>
@@ -140,8 +137,9 @@ require_once "../../mensaje.php";
                                 <?php echo $contenido->getDescripcion(); ?>
                             </td>
                             <td>
-                                <a href="dar_baja.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                                <a href="modificar.php?id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                                <a href="#" onclick="consulta(<?php echo $contenido->getIdEjeContenido();?>,<?php echo $idMateria?>,<?php echo $idCarrera?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                
+                                <a href="modificar.php?idCicloLectivo=<?php echo $idCicloLectivo?>&id=<?php echo $contenido->getIdEjeContenido(); ?>&idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -154,4 +152,14 @@ require_once "../../mensaje.php";
     <?php require_once "../../footer.php"?>         
     </body>
 
+    <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+    <script>
+        function consulta(idEje,idMateria,idCarrera){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idEje+"&idMateria="+idMateria+"&idCarrera="+idCarrera;
+            }
+        }
+    </script>
 </html>

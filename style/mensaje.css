@@ -1,6 +1,6 @@
 .mensaje {
     margin-left: 37%;
-    display: inline;
+    display: flex;
     position: absolute;
     background: #2a8a0d;
     border-radius: 20px;
@@ -9,4 +9,40 @@
     padding: 10px 20px;
     text-align: center;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.mensajeAlert {
+    margin-left: 37%;
+    display: flex;
+    position: absolute;
+    background: #f79627;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.mensajeError {
+    margin-left: 37%;
+    display: flex;
+    position: absolute;
+    background: #f72727;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    position: relative;
 }

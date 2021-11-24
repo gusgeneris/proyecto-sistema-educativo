@@ -17,7 +17,7 @@
     $idPersona=$usuario->getIdPersona();
     $idDocente=Docente::obtenerPorIdPersona($idPersona);
 
-    $respuesta="<option value='0'>->Seleccionar Materia<-</option>";
+    $respuesta="<option value='0'>Seleccionar Materia</option>";
 
     $anio=date("Y");
     

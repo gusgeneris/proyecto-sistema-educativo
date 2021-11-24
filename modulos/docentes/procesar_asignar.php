@@ -5,7 +5,7 @@
     require_once "../../class/Carrera.php";
     require_once "../../configs.php";
 
-    $idDocente=$_POST["Docente"];
+    $idDocente=$_POST["cboDocente"];
     $idMateria=$_POST["IdMateria"];
     $idCicloLectivo=$_POST["IdCicloLectivo"];
     

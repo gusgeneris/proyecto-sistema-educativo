@@ -1,20 +1,20 @@
 <?php
     require_once "../../class/Clase.php";
+    require_once "../../configs.php";  
 
    
 
     $idClase=$_POST["idClase"];
 
-    $numeroClase=$_POST["numeroClase"];
-    $fechaClase=$_POST["fechaClase"];
+    $fechaClase=$_POST["Fecha"];
     $tipoClase=$_POST["cboTipoClase"];
+    $idCurriculaCarrera=$_POST["idCurriculaCarrera"];
 
     $clase=new Clase();
 
     $clase->setIdClase($idClase);
     $clase->setFechaClase($fechaClase);
     $clase->setTipoClase($tipoClase);
-    $clase->setNumeroClase($numeroClase);
 
     $clase->modificar();
 
@@ -23,7 +23,7 @@
         switch ($idSolicitario) {
             case '1':
                 $idMateria=$_POST["idMateria"];
-                header("Location:../libroTemas/insert.php?idClase=". $idClase."&idMateria=".$idMateria);
+                header("Location:../libroTemas/insert.php?mj=".CORRECT_UPDATE_CODE."&idClase=". $idClase."&idMateria=".$idMateria."&idCurriculaCarrera=".$idCurriculaCarrera);
                 break;
                 exit;
             case '2':

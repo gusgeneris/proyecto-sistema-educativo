@@ -10,7 +10,7 @@ if($cancelar==true){
     exit;
 }
 
-$nombre= $_POST['Pais'];
+$nombre= $_POST['Provincia'];
 
 if((!preg_match("/[a-zA-Z ]{2,254}/",$nombre))){
     header("Location:listado.php?mj=errorNombre");

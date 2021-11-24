@@ -27,9 +27,9 @@
 
     $listadoMateria=Materia::listadoPorIdCicloCarrera($idCicloLectivo,$idCarrera,$idDocente);
 
-
     foreach($listadoMateria as $materia):
-        $respuesta.= "<option value='". $materia->getIdMateria()."'>". $materia->getNombre()."</option>";
+        $nombreMateria=$materia->getNombre();
+        $respuesta.= "<option value='". $materia->getIdMateria()."'>". $nombreMateria."</option>";
 
     endforeach;
 

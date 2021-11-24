@@ -46,7 +46,7 @@
         </div>
         
         <div class="main">
-            <form action="procesar_asignar.php" method=POST class="formulario">
+            <form action="procesar_asignar.php" method=POST class="formulario"  id="formInsert" name="formInsert">
                 
                 <div><input type="hidden" name=IdCarrera value=<?php echo $idCarrera  ?>></div>
                 <div><input type="hidden" name=IdMateria value=<?php echo $idMateria  ?>></div>
@@ -55,7 +55,7 @@
                 <div class="formGrup" id="GrupocboDocente">
                     <label for="cboDocente" class="formLabel ">Docente</label>
                     <div class="formGrupInput">
-                        <select name="Docente" id="" class="">
+                        <select name="cboDocente" id="cboDocente" class="formInput">
                             <option value="NULL" class="">Asigne al Docente</option>
                             <?php foreach($listado as $docente):?>
                             <option value="<?php echo $docente->getIdDocente(); ?>" class=""><?php echo $docente." | Dni:"; echo $docente->getDni() ?></option>
@@ -66,13 +66,14 @@
                 </div>
 
                 <div class="formGrupBtnEnviarUnaColumna">
-                    <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
+                    <button type="submit" class="formButton" value ="FormInsertAsignarDocente" id="Guardar"> Guardar</button>
                
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+                    <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
                 </div>               
             </form>
         </div>  
         <?php require_once "../../footer.php"?>             
     </body>
 
+    <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 </html>

@@ -13,17 +13,22 @@ $numero = $_POST['Numero'];
 $horaInicio = $_POST['HoraInicio'];
 $horaFin = $_POST['HoraFin'];
 
+$idDia = $_POST['cboDia'];
+
 
 $horario=new Horario();
 $horario->setIdHorario($numero);
 $horario->setNumero($numero);
 $horario->setHoraInicio($horaInicio);
 $horario->setHoraFin($horaFin);
+$horario->setIdDia($idDia);
 
-$horario->actualizarHorario();
+$dato=$horario->actualizarHorario();
 
-if ($horario){
+if ($dato==1){
     header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
+}else{
+    header("Location:listado.php?mj=".INCORRECT_INSERT_DATO_DUPLICATE_CODE);
 }
 
 ?>

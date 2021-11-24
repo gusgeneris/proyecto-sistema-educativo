@@ -1,9 +1,6 @@
 <?php
     require_once '../../class/MySql.php'; 
     require_once "../../class/Especialidad.php";   
-    require_once "../../mensaje.php";
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,36 +22,38 @@
 <?php require_once "../../menu.php";?>
 
 <body class="body">
-    
-    <h1 class="titulo"> Registro de Especialidad</h1>
-    <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInser">
-        
-        <div class="formGrup" id="GrupoEspecialidad" >
-            <label for="Esecialidad" class="formLabel">Especialidad Nombre</label>
-            <div class="formGrupInput">
-                <input type="text" name="Especialidad" id="Especialidad" class="formInput" placeholder="Descripcion">
-                <p class="formularioInputError"> El nombre no debe contener simbolos.</p>
+    <div class="titulo">
+        <h1> Registro de Especialidad</h1>
+    </div>
+    <div class="main">
+        <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInser">
+            
+            <div class="formGrup" id="GrupoEspecialidad" >
+                <label for="Esecialidad" class="formLabel">Especialidad Nombre</label>
+                <div class="formGrupInput">
+                    <input type="text" name="Especialidad" id="Especialidad" class="formInput" placeholder="Descripcion">
+                    <p class="formularioInputError"> El nombre no debe contener simbolos.</p>
+                </div>
             </div>
-        </div>
 
-        <!--Grupo de Mensaje-->
-            
-        <div class="formMensaje" id="GrupoMensaje">
+            <!--Grupo de Mensaje-->
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-            
-        </div>
-    
-        <!--Grupo de Boton Enviar-->
-    
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" value ="FormInsertEspecialidad" id="Guardar"> Guardar</button>
-        </div>
-    
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
-        </div>
-    </form>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+            </div>
+        
+            <!--Grupo de Boton Enviar-->
+        
+            <div class="formGrupBtnEnviarUnaColumna">
+                <button type="submit" class="formButton" value ="FormInsertEspecialidad" id="Guardar"> Guardar</button>
+          
+                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
     <?php require_once "../../footer.php"?>      
 </body>
 

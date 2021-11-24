@@ -30,7 +30,6 @@ $carrera=Carrera::listadoPorId($idCarrera);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
-    <link rel="stylesheet" href="/proyecto-modulos/style/menu.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <link rel="stylesheet" href="../../style/mensaje.css">
@@ -58,12 +57,10 @@ $carrera=Carrera::listadoPorId($idCarrera);
          </button>
     </div>
     
-    <div class="conteiner" id="table">
+    <div class="conteiner central" id="table">
         <table class="tabla" method="GET">
             <thead>
                 <tr >
-                    <th> ID Docente</th>
-                    <th> ID Persona</th>
                     <th> Nombre</th>
                     <th> Apellido</th>
                     <th> Fecha Nacimiento</th>
@@ -78,12 +75,6 @@ $carrera=Carrera::listadoPorId($idCarrera);
             <tbody>
                 <?php foreach ($lista as $docente ):?> 
                 <tr >
-                    <td >
-                        <?php echo $docente->getIdDocente(); ?>
-                    </td>
-                    <td>
-                        <?php echo $docente->getIdPersona(); ?>
-                    </td>
                     <td>
                         <?php echo $docente->getNombre(); ?>
                     </td>
@@ -105,7 +96,6 @@ $carrera=Carrera::listadoPorId($idCarrera);
                             foreach($listadoSexo as $sexo):
                                 echo $sexo->getDescripcion(); 
                             endforeach
-                            #echo $docente->getIdSexo();
                         ?>
                     </td>
                     <td>
@@ -122,10 +112,10 @@ $carrera=Carrera::listadoPorId($idCarrera);
                                     $estadoDocenteCarrera=Docente::estadoDocenteCarrera($idDocente,$idCicloLectivoCarrera);
                             
                             if ($estadoDocenteMateria==2 && $estadoDocenteCarrera==2){?>
-                                        <div id="trDadoDeBaja"><a href="dar_alta_asignacion.php?idDocente=<?php echo $docente->getIdDocente()?>&idCicloLectivoCarrera=<?php echo $idCicloLectivoCarrera?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>&idMateria=<?php echo $idMateria?>&idCicloLectivo=<?php echo $idCicloLectivo?>&idCarrera=<?php echo $idCarrera?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a></div>
+                                        <a href="dar_alta_asignacion.php?idDocente=<?php echo $docente->getIdDocente()?>&idCicloLectivoCarrera=<?php echo $idCicloLectivoCarrera?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera ?>&idMateria=<?php echo $idMateria?>&idCicloLectivo=<?php echo $idCicloLectivo?>&idCarrera=<?php echo $idCarrera?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
                             <?php }else{ ?>
-
-                                <a href="dar_baja_asignacion.php?idDocente=<?php echo $docente->getIdDocente(); ?>&idCarrera=<?php echo $idCarrera; ?>&idMateria=<?php echo $idMateria; ?>&idCicloLectivo=<?php echo $idCicloLectivo; ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                <a href="#" onclick="consulta(<?php echo $docente->getIdDocente();?>,<?php echo $idCarrera ?>,<?php echo $idMateria; ?>,<?php echo $idCicloLectivo; ?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+				
                                 <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>"><img class="icon-a" src="../../icon/listado.png" title="Lista de Especialidades" alt="Lista de Especialidades"></a>
 
                             <?php } ?>
@@ -140,4 +130,14 @@ $carrera=Carrera::listadoPorId($idCarrera);
     <?php require_once "../../footer.php"?>                           
 
 </body>
+
+    <script>
+        function consulta(idDocente,idCarrera,idMateria,idCicloLectivo){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja_asignacion.php?idDocente="+idDocente+"&idCarrera="+idCarrera+"&idMateria="+idMateria+"&idCicloLectivo="+idCicloLectivo;
+            }
+        }
+    </script>
 </html>

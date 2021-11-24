@@ -16,12 +16,14 @@ if($cancelar==true){
 $modulo=new Modulo();
 $modulo->setNombre($moduloDescripcion);
 $modulo->setDirectorio($directorio);
-$modulo->insert();
+$dato=$modulo->insert();
 
 
 
-if  ($modulo){
+if  ($dato==1){
     header("Location:listado.php?mj=".CORRECT_INSERT_CODE);
+}else{
+    header("Location:listado.php?mj=".INCORRECT_INSERT_DATO_DUPLICATE_CODE);
 }
 
 ?>

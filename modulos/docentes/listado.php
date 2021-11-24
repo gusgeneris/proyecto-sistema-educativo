@@ -137,11 +137,14 @@ $lista = Docente::listadoDocente($filtroEstado,$filtroApellido);
                         </td>
                         <td>
                             <div class="icon">
-                                <a href="dar_baja.php?id=<?php echo $docente->getIdPersona(); ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                                <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
-                                <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class=""><img class="icon-a" src="../../icon/listado.png" title="Lista Especialidades" alt="Lista Especialidades"></a>
+                               
                                 <?php if (($docente->getEstado())==2){?>
                                         <a href="dar_alta.php?id=<?php echo $docente->getIdPersona()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
+                                <?php }else{ ?>
+                                        <a href="#" onclick="consulta(<?php echo $docente->getIdPersona();?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                                    
+                                        <a href="modificar.php?id= <?php echo $docente->getIdDocente(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                                        <a href="../especialidad/listado_por_docente.php?idDocente=<?php echo $docente->getIdDocente(); ?>" class=""><img class="icon-a" src="../../icon/listado.png" title="Lista Especialidades" alt="Lista Especialidades"></a>
                                 <?php } ?>
                             </div>
                         </td>
@@ -154,4 +157,14 @@ $lista = Docente::listadoDocente($filtroEstado,$filtroApellido);
         <?php require_once "../../footer.php"?>                               
 
     </body>
+
+    <script>
+        function consulta(idPersona){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idPersona;
+            }
+        }
+    </script>
 </html>

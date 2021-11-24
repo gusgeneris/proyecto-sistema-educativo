@@ -26,6 +26,7 @@ $listaPerfil=Perfil::perfilTodos();
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Modificar Usuario</title>
@@ -49,7 +50,7 @@ require_once "../../mensaje.php";?>
                         <input name="Nombre" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getNombre(); ?>">   
                     
                     </div>
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+                    <p class="formularioInputError"> Debe ingresar los datos correctamente.</p>         
                 </div>
                 
 
@@ -58,7 +59,7 @@ require_once "../../mensaje.php";?>
                     <div class="formGrupInput">
                         <input name="Apellido" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getApellido(); ?>">
                     </div>
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+                    <p class="formularioInputError"> Debe ingresar los datos correctamente.</p>         
                 </div>
                 
                 
@@ -68,7 +69,7 @@ require_once "../../mensaje.php";?>
                     <div class="formGrupInput">
                         <input name="FechaNacimiento" type="date" class="formInput" value="<?php echo $usuarioAmodificar->getFechaNacimiento(); ?>">
                     </div>
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>
+                    <p class="formularioInputError"> Debe ingresar los datos correctamente.</p>
                 </div>
 
                 <div class="formGrup" id="GrupoDni" > 
@@ -76,7 +77,7 @@ require_once "../../mensaje.php";?>
                     <div class="formGrupInput">
                         <input name="Dni" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getDni(); ?>">
                     </div>
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+                    <p class="formularioInputError"> Debe ingresar los datos correctamente.</p>         
                 </div>
 
                 <div class="formGrup" id="GrupoNacionalidad" > 
@@ -84,7 +85,7 @@ require_once "../../mensaje.php";?>
                     <div class="formGrupInput"> 
                         <input name="Nacionalidad" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getNacionalidad(); ?>">
                     </div>
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+                    <p class="formularioInputError"> Debe ingresar los datos correctamente.</p>         
                 </div>
 
                 <div class="formGrup" id="GrupoNombreUsuario" > 
@@ -93,7 +94,7 @@ require_once "../../mensaje.php";?>
                         <input name="NombreUsuario" type="text" class="formInput" value="<?php echo $usuarioAmodificar->getNombreUsuario(); ?>">            
                     </div>
                 
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+                    <p class="formularioInputError">Debe ingresar los datos correctamente.</p>         
                 </div>
 
                 <div class="formGrup" id="GrupoContrasenia" > 
@@ -102,7 +103,7 @@ require_once "../../mensaje.php";?>
                         <input name="Contrasenia" type="text" class="formInput" id="Contrasenia" value="<?php echo $usuarioAmodificar->getContrasenia(); ?>">            
                     </div>
                 
-                    <p class="formularioInputError"> La fecha de nacimiento no es necesariamente obligatoria.</p>         
+                    <p class="formularioInputError"> Debe ingresar los datos correctamente.</p>         
                 </div>
 
                 <div class="formGrup" id="GrupoContrasenia2" >
@@ -133,7 +134,7 @@ require_once "../../mensaje.php";?>
                 </div>
 
 
-
+                <?php if ($idPerfil == 1):?>
                 <div class="formGrup" id="GrupocboPerfil">
                     <label for="cboPerfil" class="formLabel labelSexo">Perfil</label>
                     <div class="formGrupInput">
@@ -150,6 +151,8 @@ require_once "../../mensaje.php";?>
                     </div>
                     <p class="formularioInputError"> Debe seleccionar una opcion </p> 
                 </div>
+                <?php endif?>
+                
                 
                 
                 <div> 
@@ -172,9 +175,6 @@ require_once "../../mensaje.php";?>
                 
                 <div class="formGrupBtnEnviar">
                     <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;" >Cancelar</button>
                 </div>
     

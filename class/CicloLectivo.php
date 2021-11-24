@@ -1,7 +1,7 @@
 <?php
 
-require_once "../../class/MySql.php";
-require_once "../../class/Carrera.php";
+require_once "MySql.php";
+require_once "Carrera.php";
 
 class cicloLectivo{
     private $_idCicloLectivo;
@@ -128,6 +128,29 @@ class cicloLectivo{
             $cicloLectivo->_estado= $registro['estado'];
 
             $listadoCicloLectivo[]=$cicloLectivo;
+            
+            
+        }
+
+        return $listadoCicloLectivo;
+
+    }
+
+    public static function listaTodosActivos(){
+        $sql= "SELECT id_ciclo_lectivo, ciclo_lectivo_anio, estado FROM ciclo_lectivo";
+        
+        $database=new Mysql();
+        $datos=$database->consultar($sql);
+        $listadoCicloLectivo=[];
+        
+        while ($registro = $datos->fetch_assoc()){
+            if($registro['estado']==1){
+
+            $cicloLectivo=new cicloLectivo();
+            $cicloLectivo->crearCicloLectivo($cicloLectivo,$registro);
+            $cicloLectivo->_estado= $registro['estado'];
+
+            $listadoCicloLectivo[]=$cicloLectivo;}
             
             
         }

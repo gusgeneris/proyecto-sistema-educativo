@@ -25,40 +25,41 @@ $moduloPorId= Modulo::obtenerPorId($idModulo);
 
 <body class="modif-user">
     
-    <h1 class="titulo">Ingrese los nuevos datos</h1>
+    <div class="titulo">
+        <h1>Ingrese los nuevos datos</h1>
+    </div>
 
-    <form action="procesar_actualizar.php" method=POST class="formInsertUnaColumna" id="" name="formModificar">
-    
-        <table>
-            
-            <input name="IdModulo" type="hidden" class="" value="<?php echo $moduloPorId->getIdModulo(); ?>">
-            
-            <div class="formGrup" id="Grupomodulo" >
-            <label for="Modulo" class="formLabel">Nombre del Modulo</label>
-            <div class="formGrupInput">
-                <input type="text" name="Modulo" id="modulo" class="formInput" value="<?php echo $moduloPorId->getNombre(); ?>">
-                <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
-            </div>
-        </div>
-
-        <!--Grupo de Mensaje-->
-            
-        <div class="formMensaje" id="GrupoMensaje">
+    <div class="main">
+        <form action="procesar_actualizar.php" method=POST class="formInsertUnaColumna" id="formModificar" name="formModificar">
+        
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-            
-        </div>
-    
-        <!--Grupo de Boton Enviar-->
-    
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" value ="FormInsertModulo" id="Guardar"> Guardar</button>
-        </div>
-    
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
-        </div>
-    </form>
+                <input name="IdModulo" type="hidden" class="" value="<?php echo $moduloPorId->getIdModulo(); ?>">
+                
+            <div class="formGrup" id="GrupoModulo" >
+                <label for="Modulo" class="formLabel">Nombre del Modulo</label>
+                <div class="formGrupInput">
+                    <input type="text" name="Modulo" id="Modulo" class="formInput" value="<?php echo $moduloPorId->getNombre(); ?>">
+                    <p class="formularioInputError"> El nombre no debe contener numeros ni simbolos.</p>
+                </div>
+            </div>
+
+            <!--Grupo de Mensaje-->
+                
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+            </div>
+        
+            <!--Grupo de Boton Enviar-->
+        
+            <div class="formGrupBtnEnviarDosColumnas">
+                <button type="submit" class="formButton" value ="FormInsertModulo" id="Guardar"> Guardar</button>
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
     <?php require_once "../../footer.php"?>   
     
 </body>

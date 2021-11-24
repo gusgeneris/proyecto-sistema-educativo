@@ -11,28 +11,35 @@
 }
 
 .cabeceraPaso1 {
-    padding: 1px;
+    padding: 5px;
     margin: 3px;
     background-color: #0062ffd5;
+    color: white;
     display: inline;
     border-radius: 4px;
 }
 
 #cabeceraPaso2 {
-    padding: 1px;
+    padding: 5px;
     margin: 3px;
     background-color: rgba(155, 155, 155, 0.699);
     display: inline;
+    border-radius: 4px;
 }
 
 #cabeceraPaso3 {
-    padding: 1px;
+    padding: 5px;
     margin: 3px;
     background-color: rgba(155, 155, 155, 0.699);
     display: inline;
+    border-radius: 4px;
 }
 
 #containerForm {
     text-align: center;
     border-radius: 5px;
+}
+
+.pasoFinal .subtitulo {
+    margin: 10px;
 }

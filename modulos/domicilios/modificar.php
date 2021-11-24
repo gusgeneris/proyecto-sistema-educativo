@@ -8,7 +8,6 @@ require_once "../../class/Barrio.php";
 require_once "../../class/Localidad.php";
 require_once "../../class/Sexo.php";
 require_once "../../class/Perfil.php";
-require_once "../../configs.php"; 
 require_once "../../mensaje.php";
 
 if(isset($_GET['id'])){
@@ -144,7 +143,7 @@ $listadoBarrios= Barrio::listadoPorLocalidad($idLocalidad)
 
                 
                 <div class="formGrupBtnEnviar ">
-                    <button type="submit" class="formButton" value ="FormInsertdocentes" id="Guardar"> Guardar</button>
+                    <button type="submit" class="formButton" value ="FormInsertDetalleDomicilio" id="Guardar"> Guardar</button>
             
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>

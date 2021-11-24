@@ -4,10 +4,15 @@ require_once "../../configs.php";
 
 $cancelar= $_POST['Cancelar'];
 
+
 if($cancelar==true){
     header("Location:listado.php");
     exit;
 }
+
+
+$idCarrera= $_POST ['idCarrera'];
+$idMateria= $_POST ['idMateria'];
 
 $idCurriculaCarreraCiclo = $_POST['idCurriculaCarrera'];
 
@@ -15,10 +20,10 @@ $idCurriculaCarreraCiclo = $_POST['idCurriculaCarrera'];
 $calendarizacion=new Calendarizacion();
 $calendarizacion->setIdCurriculaCarreraCiclo($idCurriculaCarreraCiclo);
 
-$calendarizacion->insert();
+$idCalendarizacion=$calendarizacion->insert();
 
 if ($calendarizacion){
-    header("Location:detalle_calendarizacion.php?mj=".CORRECT_INSERT_CODE."&idCurriculaCarrera=".$idCurriculaCarreraCiclo);
+    header("Location:detalle_calendarizacion.php?idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_INSERT_CODE."&idCurriculaCarrera=".$idCurriculaCarreraCiclo."&idCalendarizacion=".$idCalendarizacion);
 }
 
 ?>

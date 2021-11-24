@@ -5,11 +5,10 @@ require_once "../../class/Materia.php";
 require_once "../../class/Alumno.php";
 require_once "../../configs.php";
 require_once "../../class/CicloLectivo.php";
-require_once "../../mensaje.php";
 
 $idAlumno=$_GET["idAlumno"];
 $nombreAlumno=Alumno::obtenerTodoPorId($idAlumno);
-$listadoCicloLectivo= CicloLectivo::listaTodos();
+$listadoCicloLectivo= CicloLectivo::listaTodosActivos();
 $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAlumno);
 
 ?>
@@ -22,16 +21,22 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/styleFormInsert.css">
         <link rel="stylesheet" href="../../style/tabla.css">
-        <link rel="stylesheet" href="/proyecto-modulos/style/menuVertical.css" class="">
+        <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+        <link rel="stylesheet" href="../../style/mensaje.css">
+        <link rel="stylesheet" href="../../style/menuVertical.css">
         <script src ="../../jquery3.6.js"></script>
+        <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <script src ="../../script/comboAsignarCarrera.js"></script>
-        <title>Document</title>
+        <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Asignar Carrera</title>
     </head>
 
     
 
     <body>
-        <?php require_once "../../menu.php";?>
+        
+        <?php require_once "../../menu.php";
+        require_once "../../mensaje.php";?>
+       
 
         <div class="titulo">
             <h1> Asignar Carrera al Alumno/a :<?php echo $nombreAlumno->getNombre();?>, <?php echo $nombreAlumno->getApellido()?></h1>
@@ -93,7 +98,7 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
         </div>
         
         <div class="conteiner3Columnas">
-            <table class="tabla">
+            <table class="tabla"  id="table">
                 <thead>
                     <tr>
                         <th>Ciclo Lectivo</th>
@@ -108,10 +113,10 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
                         <td><?php echo $cicloLectivo ?></td>
                         <td><?php echo $carrera ?></td>
                         <td>
-                            <div class="icon">                           
-                                <a href="eliminarRelacionCicloLecticoCarreraAlumno.php?id=<?php echo $idCicloLectivoCarreraAlumno?>&idAlumno=<?php echo $idAlumno?>">
-                                <img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                                </a>
+                            <div class="icon">   
+                                
+                                <a href="#" onclick="consulta(<?php echo $idCicloLectivoCarreraAlumno?>,<?php echo $idAlumno?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
+
                                 <a href="matriculacionAMaterias.php?id=<?php echo $idCicloLectivoCarrera?>&idAlumno=<?php echo $idAlumno?>">
                                     <img class="icon-a" src="../../icon/listado.png" title="Listado de Materias Asociadas" alt="Listado de Asociadas">
                                 </a>
@@ -130,6 +135,14 @@ $listadoCicloLectivoCarrera=Carrera::listadoCicloLectivoCarreraPorIdAlumno($idAl
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
     
-    
+    <script>
+        function consulta(idCicloLectivoCarreraAlumno,idAlumno){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="eliminarRelacionCicloLectivoCarreraAlumno.php?id="+idCicloLectivoCarreraAlumno+"&idAlumno="+idAlumno;
+            }
+        }
+    </script>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 require_once "../../class/Mysql.php";
 require_once "../../class/Domicilio.php";
+require_once "../../configs.php"; 
 
 $idDomicilio=$_POST['IdDomicilio'];
 $idPersona= $_POST['IdPersona'];
@@ -24,7 +25,7 @@ $domicilio->setDetalle($detalle);
 
 $domicilio->modificarDomicilio();
 
-header("Location:domicilios?idPersona=".$idPersona)
+header("Location:domicilios?idPersona=".$idPersona."&mj=".CORRECT_UPDATE_CODE)
 
 
 

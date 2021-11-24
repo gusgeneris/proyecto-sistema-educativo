@@ -8,6 +8,7 @@ class TipoContacto {
 
 	private $_idTipoContacto;
 	private $_descripcion;
+	private $_estado;
 
 	public function setIdTipoContacto($idTipoContacto)
 	{
@@ -36,9 +37,30 @@ class TipoContacto {
 		return $this;
 	}
 
+	
+	/**
+	 * Get the value of _estado
+	 */ 
+	public function getEstado()
+	{
+		return $this->_estado;
+	}
+
+	/**
+	 * Set the value of _estado
+	 *
+	 * @return  self
+	 */ 
+	public function setEstado($_estado)
+	{
+		$this->_estado = $_estado;
+
+		return $this;
+	}
+
 	public static function obtenerTodos()
 	{
-		$sql = "SELECT id_tipo_contacto, tipo_contacto_descripcion FROM tipo_contacto";
+		$sql = "SELECT estado,id_tipo_contacto, tipo_contacto_descripcion FROM tipo_contacto";
 		$database = new MySQL();
 		$datos = $database->consultar($sql);
 
@@ -48,6 +70,7 @@ class TipoContacto {
 	    	$tipoContacto = new TipoContacto();
 			$tipoContacto->_idTipoContacto = $registro["id_tipo_contacto"];
 			$tipoContacto->_descripcion = $registro["tipo_contacto_descripcion"];
+			$tipoContacto->_estado = $registro["estado"];
     		$listadoTipoContactos[] = $tipoContacto;
     	}
 
@@ -55,6 +78,30 @@ class TipoContacto {
     	return $listadoTipoContactos;
 
 	}
+
+	public static function obtenerTodosActivos()
+	{
+		$sql = "SELECT estado,id_tipo_contacto, tipo_contacto_descripcion FROM tipo_contacto";
+		$database = new MySQL();
+		$datos = $database->consultar($sql);
+
+    	$listadoTipoContactos = [];
+
+    	while ($registro = $datos->fetch_assoc()) {
+			if($registro['estado']==1){
+	    	$tipoContacto = new TipoContacto();
+			$tipoContacto->_idTipoContacto = $registro["id_tipo_contacto"];
+			$tipoContacto->_descripcion = $registro["tipo_contacto_descripcion"];
+			$tipoContacto->_estado = $registro["estado"];
+    		$listadoTipoContactos[] = $tipoContacto;
+			}
+    	}
+
+
+    	return $listadoTipoContactos;
+
+	}
+
 
 	public static function obtenerPorId($idTipoContacto)
 	{
@@ -90,12 +137,24 @@ class TipoContacto {
 
 	}
 
+	public static function darAlta($idTipoContacto){
+
+		$sql="UPDATE tipo_contacto SET `estado` = '1' WHERE (`id_tipo_contacto` = $idTipoContacto)";
+		$database = new MySQL();
+		$database->actualizar($sql);
+		return true;
+
+
+	}
+
 	public function modificar(){
-		$sql="UPDATE tipo_contacto SET `tipo_contacto_descripcion` = {$this->_descripcion} WHERE (`id_tipo_contacto` = '{$this->_idTipoContacto}')";
+		$sql="UPDATE tipo_contacto SET `tipo_contacto_descripcion` = '{$this->_descripcion}' WHERE (`id_tipo_contacto` = '{$this->_idTipoContacto}')";
+				
 		$database = new MySQL();
 		$database->actualizar($sql);
 
 	}
+
 
 }
 

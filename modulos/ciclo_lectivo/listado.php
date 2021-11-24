@@ -96,8 +96,9 @@ $lista=CicloLectivo::listaTodos($filtroEstado,$filtroAnio);
                         </td>
                         <td>
                             <div class="icon">
-                                <a href="dar_baja.php?id=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
-                                
+
+                                <a href="#" onclick="consulta(<?php echo $cicloLectivo->getIdCicloLectivo()?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
+
                                 <a href="modificar.php?id=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                                 
                                 <a href="../carreras/listado_por_ciclo.php?idCiclo=<?php echo $cicloLectivo->getIdCicloLectivo(); ?>" class=""><img class="icon-a" src="../../icon/listado.png" title="Lista Carreras Asociadas" alt="Lista Carreras Asociadas"></a>
@@ -115,5 +116,15 @@ $lista=CicloLectivo::listaTodos($filtroEstado,$filtroAnio);
     </div> 
     <?php require_once "../../footer.php"?>           
 </body>
+
+    <script>
+        function consulta(idCicloLectivo){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idCicloLectivo;
+            }
+        }
+    </script>
 
 </html>

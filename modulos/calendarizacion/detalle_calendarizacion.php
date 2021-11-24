@@ -1,10 +1,11 @@
 <?php
 require_once "../../class/Carrera.php";
+require_once "../../class/Materia.php";
 require_once "../../class/CicloLectivo.php";
 require_once "../../class/Calendarizacion.php";
+require_once "../../class/EjeContenido.php";
 require_once "../../class/DetalleCalendarizacion.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 
 
@@ -12,6 +13,12 @@ if(isset($_GET['idCurriculaCarrera'])){
     $idCurriculaCarrera=$_GET['idCurriculaCarrera'];
     $idCalendarizacion=$_GET['idCalendarizacion'];
     $lista = DetalleCalendarizacion::listado($idCurriculaCarrera);
+    
+    $listadoEjeContenido=EjeContenido::obtenerPorIdCurriculaCarrera($idCurriculaCarrera);
+    
+    $idCarrera= $_GET ['idCarrera'];
+    $idMateria= $_GET ['idMateria'];
+
 }else{
 
     $anio=date("Y");
@@ -24,18 +31,56 @@ if(isset($_GET['idCurriculaCarrera'])){
     $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
 
     $existencia=Calendarizacion::existenciaRelacion($idCurriculaCarrera);
+    $listadoEjeContenido=EjeContenido::obtenerPorIdCurriculaCarrera($idCurriculaCarrera);
+
 
     if ($existencia==0){
-        ?> <section>
-            <form action='procesar_nueva_calendarizacion.php' method='POST'>
-                <button  type='submit' name='idCurriculaCarrera' value='<?php echo $idCurriculaCarrera?>'> Agregar Calendarizacion </button>
-            </form>
-        </section>
+        ?> 
+        
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="../../style/styleFormInsert.css">
+            <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
+            <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
+            <link rel="stylesheet" href="../../style/menuVertical.css">
+            <link rel="stylesheet" href="../../style/mensaje.css">
+            <script src="../../jquery3.6.js"></script>
+            <script type="text/javascript" src="../../script/menu.js" defer> </script>
+            <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
+            <script type="text/javascript" src="../../script/validacion.js"></script>
+        </head>
+
+        <?php require_once "../../menu.php";
+        require_once "../../mensaje.php";?>
+
+        <body class="body-listuser">
+            <section class="inexistencia">
+                <div class="subtituloExistencia">
+                    <h2>No Existe Calendarizacion para esta materia</h2>
+                </div><br>
+                <label for="">¿Desea agregar una nueva Calendarizacion</label><br>
+                <form action='procesar_nueva_calendarizacion.php' method='POST'>
+                    <input type="hidden" name="idCarrera" value="<?php echo $idCarrera ?>">
+                    <input type="hidden" name="idMateria" value="<?php echo $idMateria ?>">
+                    <button  type='submit' name='idCurriculaCarrera' value='<?php echo $idCurriculaCarrera?>'> Agregar Calendarizacion </button>
+                </form>
+            </section>
+        
+            <?php require_once "../../footer.php"?>                    
+        </body>
+
+</html>
+            
         <?php exit;
     }else{
     
         $lista = DetalleCalendarizacion::listado($idCurriculaCarrera);
         $idCalendarizacion=Calendarizacion::obtenerIdCalendarizacion($idCurriculaCarrera);
+        $listadoEjeContenido=EjeContenido::obtenerPorIdCurriculaCarrera($idCurriculaCarrera);
     }
 }
 
@@ -51,18 +96,27 @@ if(isset($_GET['idCurriculaCarrera'])){
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Alumnos</title>
     <script type="text/javascript" src="../../script/validacion.js"></script>
 </head>
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
 
     <body class="body-listuser">
         
         <div class="titulo">
-            <h1>Calendarizacion</h1>
+            <?php 
+                $carrera = Carrera::listadoPorId($idCarrera);
+                $nombreCarrera=$carrera->getNombre();
+
+                $materia = Materia::listadoPorId($idMateria);
+                $nombreMateria=$materia->getNombre();
+            ?>
+            <h1>Calendarizacion <br> Carrera:<span><?php echo $nombreCarrera  ?></span> <br> Materia:<span><?php echo $nombreMateria  ?></span></h1>
         </div>
         
         <div class="main">
@@ -101,6 +155,23 @@ if(isset($_GET['idCurriculaCarrera'])){
                     </div>
                     <p class="formularioInputError"> El Campo debe estar bien escrito.</p> 
                 </div>
+
+                <div class="formGrup ejeContenido" id="GrupocboEjeContenido" >
+                        <label for="cboEjeContenido" class="formLabel">N° Eje de Contenido</label>
+                        <div class="formGrupInput">
+                            <Select name="cboEjeContenido" id="cboEjeContenido" class="formInput">
+                                <option value="0">
+                                   N° Eje de Contenido
+                                </option>
+                                <?php foreach($listadoEjeContenido as $ejeContenido):{?>
+                                    <option value="<?php echo $ejeContenido->getNumero()?>">
+                                    <?php echo $ejeContenido->getNumero()?>
+                                </option>
+                            <?php } endforeach; ?>
+                            </Select>
+                        </div>
+                        <p class="formularioInputError"> El Nombre de Barrio no permite simbolos ni numeros.</p> 
+                </div>
                 
                 
                     <!--Grupo de Mensaje-->
@@ -113,6 +184,8 @@ if(isset($_GET['idCurriculaCarrera'])){
 
                 <input type="hidden" name="idCalendarizacion" value="<?php echo $idCalendarizacion?>">
                 <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera?>">
+                <input type="hidden" name="idMateria" value="<?php echo $idMateria?>">
+                <input type="hidden" name="idCarrera" value="<?php echo $idCarrera?>">
                
                     <!--Grupo de Boton Enviar-->
 
@@ -128,24 +201,25 @@ if(isset($_GET['idCurriculaCarrera'])){
             <h2>Detalles Cargados</h2>
         </div>
 
+        <div class="formGrupBtnEnviar central">
+            <button class="formButton" id="Buscar"><a href="../reportes/domPdf/reporte_calendarizacion.php?idCarrera=<?php echo $idCarrera ?>&idMateria=<?php echo $idMateria?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>">Exportar a PDF</a></button>
+        </div>
+
         <div class="conteiner3Columnas" >
             <table class="tabla" id="table">
                 <thead>
                     <tr >
-                        <th> ID Detalle</th>
                         <th> Numero de Clase</th>
                         <th> Fecha Clase</th>
                         <th> Actividad</th>
                         <th> Contenido Priorizado</th>
+                        <th> Numero Eje de Contenido</th>
                         <th> Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($lista as $detalle ):?> 
                     <tr >
-                        <td >
-                            <?php echo $detalle->getIdDetalleCalendarizacion(); ?>
-                        </td>
                         <td>
                             <?php echo $detalle->getNumeroClase(); ?>
                         </td>
@@ -159,9 +233,14 @@ if(isset($_GET['idCurriculaCarrera'])){
                             <?php echo $detalle->getContenidoPriorizado(); ?>
                         </td>
                         <td>
+                            <?php echo $detalle->getNumeroEjeContenido(); ?>
+                        </td>
+                        <td>
                             <div class="icon">
-                                <a href="eliminar.php?idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                                <a href="modificar.php??idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>&idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>" ><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+
+                                <a href="#" onclick="consulta(<?php echo $idMateria?>,<?php echo $idCarrera?>,<?php echo $detalle->getIdDetalleCalendarizacion()?>,<?php echo $idCurriculaCarrera?>,<?php echo $idCalendarizacion?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a></a> 
+
+                                <a href="modificar.php?idMateria=<?php echo $idMateria?>&idCarrera=<?php echo $idCarrera?>&idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>&idCurriculaCarrera=<?php echo $idCurriculaCarrera?>&idCalendarizacion=<?php echo $idCalendarizacion?>&idDetalleCalendarizacion=<?php echo $detalle->getIdDetalleCalendarizacion()?>" ><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                             </div>
                         </td>
                     </tr>
@@ -174,5 +253,14 @@ if(isset($_GET['idCurriculaCarrera'])){
     </body>
 
     <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
+    <script>
+        function consulta(idMateria,idCarrera,idDetalleCalendarizacion,idCurriculaCarrera,idCalendarizacion){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="eliminar.php?idMateria="+idMateria+"&idCarrera="+idCarrera+"&idDetalleCalendarizacion="+idDetalleCalendarizacion+"&idCurriculaCarrera="+idCurriculaCarrera+"&idCalendarizacion"+idCalendarizacion;
+            }
+        }
+    </script>
 
 </html>

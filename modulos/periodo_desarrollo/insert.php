@@ -2,7 +2,6 @@
     require_once '../../class/MySql.php'; 
     require_once "../../class/PeriodoDesarrollo.php";
     
-    require_once "../../mensaje.php";;
 ?>
 
 <!DOCTYPE html>
@@ -15,49 +14,52 @@
     <link rel="stylesheet" href="../../style/styleFormInsert.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Ciclo Lectivo</title>
     <title>Insertar Nuevo</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+    require_once "../../mensaje.php";;?>
 
 <body class="body">
 
-<h1 class="titulo"> Registro de Ciclo Lectivo</h1>
+    <div class="titulo">
+        <h1> Registro de Ciclo Lectivo</h1>
+    </div>
 
-    <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
-    
-       
-        <div class="formGrup" id="GrupoDetallePeriodo">
+    <div class="main">
+        <form action="procesar_insert.php" method=POST class="formInsertUnaColumna" id="formInsert" name="formInsert">
         
-        <label for="DetallePeriodo" class="formLabel">Periodo de Desarrollo</label>    
-            <div class="formGrupInput">
-                <input autofocus type="text"  id="DetallePeriodo" name="DetallePeriodo" class="formInput" placeholder="Año de Desarrollo" >
-                <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
-            </div> 
-            <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
-        </div> 
-
-        <!--Grupo de Mensaje-->
+        
+            <div class="formGrup" id="GrupoDetallePeriodo">
             
-        <div class="formMensaje" id="GrupoMensaje">
+            <label for="DetallePeriodo" class="formLabel">Periodo de Desarrollo</label>    
+                <div class="formGrupInput">
+                    <input autofocus type="text"  id="DetallePeriodo" name="DetallePeriodo" class="formInput" placeholder="Año de Desarrollo" >
+                    <i ><img class="formValidacionEstado"  src="" id="formValidacionEst"></i>
+                </div> 
+                <p class="formularioInputError"> El NumeroLegajo no es necesariamente obligatoria.</p> 
+            </div> 
+
+            <!--Grupo de Mensaje-->
                 
-            <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
-        
-        </div>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
+            </div>
 
-        <!--Grupo de Boton Enviar-->
+            <!--Grupo de Boton Enviar-->
 
-        <div class="formGrupBtnEnviar">
-            <button type="submit" class="formButton" id='Guardar' value='FormInsertPeriodoDesarrollo'> Guardar</button>
-        </div>
-        <br>
-        <div class="formGrupBtnEnviar">
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
-        </div>
-    </form>
+            <div class="formGrupBtnEnviarUnaColumna">
+                <button type="submit" class="formButton" id='Guardar' value='FormInsertPeriodoDesarrollo'> Guardar</button>
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
+            </div>
+        </form>
+    </div>
     <?php require_once "../../footer.php"?> 
 
 </body>

@@ -45,14 +45,14 @@
             </div>
 
             <div class="main">
-                <form action="procesar_busqueda_asistencia.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
+                <form action="procesar_busqueda_asistencia.php" method="POST" class="formInsert3Columnas" id="formInsert" name="formInsert">
 
                     <input type="hidden" value="<?php echo $idDocente ?>">
 
                     <div class="formGrup" id="GrupocboCarrera">
                         <label for="cboCarrera" class="formLabel">Carrera</label>
                         <div class="formGrupInput">
-                            <select name="cboCarrera" id="cboCarrera" onchange="cargarMaterias()">
+                            <select name="cboCarrera" class="formInput" id="cboCarrera" onchange="cargarMaterias()">
                                 
                                 <option value="0">
                                     ->Seleccionar Carrera<-
@@ -71,7 +71,7 @@
                     <div class="formGrup" id="GrupocboMateria">
                         <label for="cboMateria" class="formLabel">Materia</label>
                             <div class="formGrupInput">
-                                <select name="cboMateria" id="cboMateria" onchange="cargarNumeroClase()">
+                                <select name="cboMateria" class="formInput" id="cboMateria" onchange="cargarNumeroClase()">
 
                                     <option value="0">
                                         ->Seleccionar Materia<-
@@ -82,8 +82,8 @@
                             <p class="formularioInputError"> Debe seleccionar una opcion. </p> 
                     </div>                  
                     
-                    <div class="formGrupBtnEnviar"> 
-                        <button class="formButton" id="Guardar" type="submit" > Buscar Reporte</button>
+                    <div class="formGrupBtnEnviar3Columnas"> 
+                        <button class="formButton" id="Guardar" value="FormInsertAsistencia" type="submit" > Buscar</button>
                     </div> 
 
                 </form>
@@ -156,4 +156,5 @@
     </body>
 
     <script src="../../script/porcentajeAsistencia.js"></script>
+<script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 </html>

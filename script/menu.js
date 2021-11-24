@@ -66,3 +66,18 @@ $(document).ready(function() {
         $("#mensaje").fadeOut(1000);
     }, 3000);
 })
+
+$('.btnUsuarioConectado').click(function() {
+
+
+
+    if ($(this).hasClass('menuActivado')) {
+        $(this).removeClass('menuActivado');
+        $('.contenedorUsuarioConfig').css({ 'display': 'none' });
+    } else {
+
+        $(this).addClass('menuActivado');
+        $('.contenedorUsuarioConfig').css({ 'display': 'inline-block' });
+    }
+    //$('.contenedorMenuVertical .menu').slideToggle(); //cerrar o abrir el menu cuando este en dispositivos moviles
+});

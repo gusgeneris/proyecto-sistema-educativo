@@ -30,6 +30,7 @@ $pais= Pais::obtenerPorIdPais($idPais);
     <?php require_once "../../menu.php";?>
 
     <body class="modif-user">
+
         <div class="titulo">
             <h1>Ingrese los nuevos datos</h1>
         </div>
@@ -57,13 +58,9 @@ $pais= Pais::obtenerPorIdPais($idPais);
                     
                     </div>
 
-                    <div> 
-                    <div class="formGrupBtnEnviar">
+                    <div class="formGrupBtnEnviarUnaColumna">
                         <button type="submit" class="formButton" value ="FormInsertPais" id="Guardar"> Guardar</button>
-                    </div>
-
-                    <div class="formGrupBtnEnviar">
-                        <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+                        <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                     </div>
             </form>
         </div>

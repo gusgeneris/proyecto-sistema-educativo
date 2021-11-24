@@ -10,6 +10,8 @@
     $idCurriculaCarrera=$_GET["idCurriculaCarrera"];
 
     $detalleLibroTemas=DetalleLibroTemas::obtenerPorId($idDetalleLibroTemas);
+    $idMateria=$_GET["idMateria"];
+    $idCarrera=$_GET["idCarrera"];
 
 ?>
 
@@ -59,7 +61,9 @@
                     </div>
                     <p class="formularioInputError"> Error en el campo Observaciones.</p>
                 </div>
-
+                
+                <input type="hidden" name="idMateria" value="<?php echo $idMateria?>">
+                <input type="hidden" name="idCarrera" value="<?php echo $idCarrera?>">
                 <?php if (isset($_GET["id"])){
                     
                         $idClase=$_GET["idClase"];?>
@@ -70,10 +74,7 @@
 
                 <div class="formGrupBtnEnviar" >
                     <button type="submit" class="formButton" id="Guardar"> Guardar Registro </button>
-                </div>
-
-                <div class="formGrupBtnEnviar" >
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+                    <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
         </form>
     </div>

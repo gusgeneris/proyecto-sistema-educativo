@@ -15,6 +15,9 @@
     $actividad = $_POST['Actividad'];
     $contenidoPriorizado= $_POST['Contenido'];
     $idCurriculaCarrera = $_POST['idCurriculaCarrera'];
+    $numeroEjeContenido= $_POST['cboEjeContenido'];
+    $idCarrera = $_POST['idCarrera'];
+    $idMateria= $_POST['idMateria'];
     
     
     if((!preg_match("/^\d*$/",$numClase))){
@@ -29,11 +32,12 @@
     $detalleCalendarizacion->setActividad($actividad);
     $detalleCalendarizacion->setContenidoPriorizado($contenidoPriorizado);
     $detalleCalendarizacion->setIdCalendarizacion($idCalendarizacion);
+    $detalleCalendarizacion->setNumeroEjeContenido($numeroEjeContenido);
     
     $detalleCalendarizacion->insert();
     
     if ($detalleCalendarizacion){
-        header("Location:detalle_calendarizacion.php?mj=".CORRECT_INSERT_CODE."&idCalendarizacion=".$idCalendarizacion."&idCurriculaCarrera=".$idCurriculaCarrera);
+        header("Location:detalle_calendarizacion.php?idMateria=".$idMateria."&idCarrera=".$idCarrera."&mj=".CORRECT_INSERT_CODE."&idCalendarizacion=".$idCalendarizacion."&idCurriculaCarrera=".$idCurriculaCarrera);
     }
     
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../class/MySql.php";
+require_once "MySql.php";
 
 class EjeContenido{
     private $_idEjeContenido;
@@ -80,13 +80,30 @@ class EjeContenido{
 
     
     
-    public function insert(){
-        $sql = "INSERT INTO `eje_contenido` (`eje_descripcion`, `eje_numero`) VALUES ('$this->_descripcion', '$this->_numero')";
-  
-        $database=new Mysql();
+    public function insert($idCurriculaCarrera){
 
-        $idEjeContenido=$database->insertarRegistro($sql);
-        $this->_idEjeContenido=$idEjeContenido;
+        $sql="SELECT eje_numero from eje_contenido 
+            join curricula_carrera_contenido on id_eje_contenido=eje_contenido_id_eje_contenido
+            where curricula_carrera_id_curricula_carrera = {$idCurriculaCarrera} and eje_numero={$this->_numero} and estado= 1";
+
+        $database=new MySql();
+        $dato=$database->consultar($sql);
+
+        if($dato->num_rows == 0){
+
+            $sql = "INSERT INTO `eje_contenido` (`eje_descripcion`, `eje_numero`) VALUES ('$this->_descripcion', '$this->_numero')";
+  
+            $database=new Mysql();
+    
+            $idEjeContenido=$database->insertarRegistro($sql);
+            $this->_idEjeContenido=$idEjeContenido;
+            return 1;}
+        else{
+            return 0;
+        }
+
+
+        
         
     }
 

@@ -14,8 +14,8 @@
     $listado=$materia->listadoMaterias();
     
     $idCicloLectivo=$_GET["idCiclo"];
-    $listaAnioDesarrollo=AnioDesarrollo::listaTodos();
-    $listaPeriodoDesarrollo=PeriodoDesarrollo::listaTodos();
+    $listaAnioDesarrollo=AnioDesarrollo::listaTodosActivos();
+    $listaPeriodoDesarrollo=PeriodoDesarrollo::listaTodosActivos();
 
     $carrera= Carrera::listadoPorId($idCarrera);
 
@@ -101,10 +101,14 @@
                 <p class="formularioInputError"> Debe seleccionar una opcion.</p> 
                 </div>
 
-                <br>
+                <div class="formMensaje" id="GrupoMensaje">
+                    
+                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                
+                </div>
 
                 <div class="formGrupBtnEnviarUnaColumna">
-                    <button type="submit" class="formButton" value ="FormInsertDocente" id="Guardar"> Guardar</button>
+                    <button type="submit" class="formButton" value ="FormInsertAsignarMateria" id="Guardar"> Guardar</button>
                 
                     <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false;">Cancelar</button>
                 </div>        
@@ -115,4 +119,5 @@
         <?php require_once "../../footer.php"?>                       
     </body>
 
+    <script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 </html>

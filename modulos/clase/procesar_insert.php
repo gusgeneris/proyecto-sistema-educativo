@@ -3,6 +3,7 @@
     require_once "../../class/Carrera.php";
     require_once "../../class/Clase.php";
     require_once "../../class/TipoClase.php";
+    require_once "../../configs.php";  
 
 
     $anio=date("Y");
@@ -20,7 +21,7 @@
     
     $numeroClase=trim($numeroClase);
     
-    $fechaClase=$_POST['fechaClase'];
+    $fechaClase=$_POST['Fecha'];
     $tipoClase=$_POST['cboTipoClase'];
 
     $clase=new Clase;
@@ -32,6 +33,6 @@
     $idClase=$clase->getIdClase();
 
     
-    header("Location:../../modulos/libroTemas/insert.php?idClase=". $idClase."&idMateria=".$idMateria);
+    header("Location:../../modulos/libroTemas/insert.php?mj=".CORRECT_INSERT_CODE."&idClase=". $idClase."&idMateria=".$idMateria."&idCarrera=".$idCarrera);
 
 ?>

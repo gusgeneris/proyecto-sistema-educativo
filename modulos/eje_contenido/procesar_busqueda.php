@@ -3,6 +3,7 @@
     require_once "../../class/Carrera.php";
     require_once "../../class/Clase.php";
     require_once "../../class/TipoClase.php";
+    require_once "../../configs.php";
 
 
     $anio=date("Y");
@@ -16,6 +17,6 @@
 
     $idCurriculaCarrera=Carrera::idCurriculaCarrera($idCicloLectivoCarrera,$idMateria);
     
-    header("Location:../../modulos/eje_contenido/listado.php?idCurriculaCarrera=".$idCurriculaCarrera."&idMateria=".$idMateria."&idCarrera=".$idCarrera);
+    header("Location:../../modulos/eje_contenido/listado.php?mj=".CORRECT_SEARCH_CODE."&idCurriculaCarrera=". $idCurriculaCarrera."&idMateria=".$idMateria."&idCarrera=".$idCarrera);
 
 ?>

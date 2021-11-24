@@ -1,12 +1,13 @@
 <?php
 require_once "../../class/Mysql.php";
 require_once "../../class/TipoContacto.php";
+require_once "../../configs.php";
 
-$idTipocContacto= $_POST['IdTipoContacto'];
+$idTipoContacto= $_POST['IdTipoContacto'];
 
-$descripcion= $_POST[' Descripcion'];
+$descripcion= $_POST['TipoContacto'];
 
-if((!preg_match("/[a-zA-Z]{2,254}/",$descripcion))){
+if((!preg_match("/^[a-zA-ZÀ-ÿ\s ]{3,40}$/",$descripcion))){
     header("Location:listado.php?mj=errorNombre");
     exit;
 };
@@ -14,10 +15,11 @@ if((!preg_match("/[a-zA-Z]{2,254}/",$descripcion))){
 $tipoContacto=new TipoContacto();
 
 $tipoContacto->setIdTipoContacto($idTipoContacto);
-$tipoContacto->setDescripcion($nombre);
+$tipoContacto->setDescripcion($descripcion);
 
-$barrio->modificarBarrio();
 
-header("Location:barrios.php?idLocalidad=".$idLocalidad);
+$tipoContacto->modificar();
+
+header("Location:listado.php?mj=".CORRECT_UPDATE_CODE);
 
 ?>

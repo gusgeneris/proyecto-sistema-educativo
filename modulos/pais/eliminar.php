@@ -7,6 +7,6 @@ $idPais=$_GET["idPais"];
 
 $eliminarRegistro=Pais::eliminarPais($idPais);
 
-header("Location:listado.php");
+header("Location:listado.php?mj=".CORRECT_DELETE_CODE);
 
 ?>

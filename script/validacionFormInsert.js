@@ -2,6 +2,8 @@ const formulario = document.getElementById('formInsert');
 
 const inputs = document.querySelectorAll('#formInsert input');
 
+const textareas = document.querySelectorAll('#formInsert textarea');
+
 const selects = document.querySelectorAll('#formInsert select');
 
 const expresiones = {
@@ -11,7 +13,7 @@ const expresiones = {
     nombreMateria: /^[a-zA-Z0-9_ ]{3,}$/,
     apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     contrasenia: /^.{4,12}$/, // 4 a 12 digitos.
-    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-. ]+$/,
     dni: /^\d{7,14}$/, // 7 a 14 numeros.
     numeros: /^\d{7,14}$/, // 7 a 14 numeros.
     fecha: /^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/,
@@ -24,7 +26,12 @@ const expresiones = {
     contacto: /^[a-zA-Z0-9 _.+-@]{3,40}$/,
     detalleDomicilio: /^[a-zA-Z0-9_ ]*$/,
     cboSelect: /^[1-9]{1,3}$/,
-    numClase: /^\d{1,100}$/
+    numClase: /^\d{1,100}$/,
+    hora: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+    numero: /^\d{1}$/,
+    nombreUsuario: /^[a-zA-Z0-9_.+-@]{3,40}$/,
+    observaciones: /^[a-zA-Z0-9_ ]{1,}$/,
+    temaDia: /^[a-zA-Z0-9_ ]{1,}$/
 }
 
 const campos = {
@@ -54,13 +61,25 @@ const campos = {
     cboBarrio: false,
     cboSexo: false,
     cboPerfil: false,
+    cboDocente: false,
     cboCicloLectivo: false,
     cboCarrera: false,
+    cboMateria: false,
     DetalleAnio: false,
     DetallePeriodo: false,
     NumClase: false,
     NombreCarrera: false,
-    Fecha: false
+    Fecha: false,
+    cboPeriodoDesarrollo: false,
+    cboAnioDesarrollo: false,
+    cboDia: false,
+    HoraInicio: false,
+    HoraFin: false,
+    Numero: false,
+    Modulo: false,
+    observaciones: false,
+    temaDia: false
+
 
 }
 
@@ -85,7 +104,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.numeros, e.target, 'NumeroMatricula')
             break;
         case "NombreUsuario":
-            validarCampo(expresiones.nombre, e.target, 'NombreUsuario')
+            validarCampo(expresiones.nombreUsuario, e.target, 'NombreUsuario')
             break;
         case "Contrasenia":
             validarCampo(expresiones.contrasenia, e.target, 'Contrasenia')
@@ -116,7 +135,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.barrio, e.target, 'Barrio')
             break;
         case "Pais":
-            validarCampo(expresiones.pais, e.target, 'Pais')
+            validarCampo(expresiones.nombre, e.target, 'Pais')
             break;
         case "Provincia":
             validarCampo(expresiones.nombre, e.target, 'Provincia')
@@ -155,6 +174,9 @@ const validarFormulario = (e) => {
         case "cboCarrera":
             validarCampo(expresiones.cboSelect, e.target, 'cboCarrera')
             break;
+        case "cboMateria":
+            validarCampo(expresiones.cboSelect, e.target, 'cboMateria')
+            break;
         case "DetalleAnio":
             validarCampo(expresiones.nombre, e.target, 'DetalleAnio')
             break;
@@ -166,6 +188,46 @@ const validarFormulario = (e) => {
             break;
         case "Fecha":
             validarCampo(expresiones.fecha, e.target, 'Fecha')
+            break;
+        case "cboAnioDesarrollo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboAnioDesarrollo')
+            break;
+        case "cboPeriodoDesarrollo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboPeriodoDesarrollo')
+            break;
+        case "cboDocente":
+            validarCampo(expresiones.cboSelect, e.target, 'cboDocente')
+            break;
+        case "HoraInicio":
+            validarCampo(expresiones.hora, e.target, 'HoraInicio')
+            break;
+        case "HoraFin":
+            validarCampo(expresiones.hora, e.target, 'HoraFin')
+            break;
+        case "Numero":
+            validarCampo(expresiones.numero, e.target, 'Numero')
+            break;
+        case "cboDia":
+            validarCampo(expresiones.cboSelect, e.target, 'cboDia')
+            break;
+        case "cboCicloLectivo":
+            validarCampo(expresiones.cboSelect, e.target, 'cboCicloLectivo')
+            break;
+        case "Modulo":
+            validarCampo(expresiones.nombre, e.target, 'Modulo')
+            break;
+        case "cboTipoClase":
+            validarCampo(expresiones.cboSelect, e.target, 'cboTipoClase')
+            break;
+
+        case "cboTipoContacto":
+            validarCampo(expresiones.cboSelect, e.target, 'cboTipoContacto')
+            break;
+        case "observaciones":
+            validarCampo(expresiones.observaciones, e.target, 'observaciones')
+            break;
+        case "temaDia":
+            validarCampo(expresiones.temaDia, e.target, 'temaDia')
             break;
 
     }
@@ -180,6 +242,7 @@ const validarCampo = (expresion, input, campo) => { //expresion hace referencia 
         document.querySelector(`#Grupo${campo} .formularioInputError`).classList.remove("formularioInputError-activo");
         campos[campo] = true;
 
+
     } else {
         document.getElementById(`Grupo${campo}`).classList.add("formGrupIncorrect") //con classList.add pedimos agregar una clase definida ya en nuestra hoja de css
             /*document.getElementById("formValidacionEst").src = "../../image/iconError.png";*/
@@ -187,7 +250,6 @@ const validarCampo = (expresion, input, campo) => { //expresion hace referencia 
         campos[campo] = false;
     }
 }
-
 const validarContrasenia2 = () => {
     const inputContrasenia1 = document.getElementById('Contrasenia');
     const inputContrasenia2 = document.getElementById('Contrasenia2');
@@ -210,9 +272,14 @@ inputs.forEach((input) => {
     input.addEventListener('blur', (validarFormulario));
 })
 
+textareas.forEach((input) => {
+    input.addEventListener('keyup', (validarFormulario));
+    input.addEventListener('blur', (validarFormulario));
+})
 selects.forEach((select) => {
     select.addEventListener('change', (validarFormulario));
 })
+
 
 
 
@@ -220,12 +287,14 @@ formulario.addEventListener('submit', (e) => {
     e.preventDefault();
 
     switch (document.getElementById('Guardar').value) {
+
+
         case 'FormInsertAlumnos':
 
             if (campos.Nombre && campos.Apellido && campos.Dni && campos.Nacionalidad && campos.NumeroLegajo && campos.cboSexo) {
 
                 formulario.submit();
-                exit;
+                break;
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
@@ -296,6 +365,8 @@ formulario.addEventListener('submit', (e) => {
         case 'FormInsertPais':
             if (campos.Pais) {
 
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
                 formulario.submit();
                 exit;
             } else {
@@ -317,9 +388,8 @@ formulario.addEventListener('submit', (e) => {
             } else {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
-        case 'FormInserContacto':
+        case 'FormInsertContacto':
             if (campos.Contacto) {
-
                 formulario.submit();
                 exit;
             } else {
@@ -335,14 +405,6 @@ formulario.addEventListener('submit', (e) => {
             }
         case 'FormInsertDetalleDomicilio':
             if (campos.DetalleDomicilio) {
-
-                formulario.submit();
-                exit;
-            } else {
-                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
-            }
-        case 'FormInsertAsignarCarrera':
-            if (campos.cboCarrera && campos.cboCicloLectivo) {
 
                 formulario.submit();
                 exit;
@@ -382,6 +444,99 @@ formulario.addEventListener('submit', (e) => {
                 document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
             }
 
+        case 'FormInsertAsignar':
+            if (campos.cboCarrera) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarMateria':
+            if (campos.cboMateria && campos.cboPeriodoDesarrollo && campos.cboAnioDesarrollo) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarDocente':
+            if (campos.cboDocente) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsignarCarrera':
+            if (campos.cboCarrera && campos.cboCicloLectivo) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertHorario':
+            if (campos.cboDia && campos.HoraInicio && campos.HoraFin && campos.Numero) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertModulo':
+            if (campos.Modulo) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertTipoContacto':
+            if (campos.TipoContacto) {
+
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertClase':
+            if (campos.cboCarrera && campos.cboMateria) {
+
+
+                formulario.submit();
+                document.getElementById('GrupoMensaje').classList.remove("formMensaje-activo");
+
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertAsistencia':
+            if (campos.cboCarrera && campos.cboMateria) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertBusquedaApellidoAlumno':
+            if (campos.Apellido) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
+        case 'FormInsertLibroTemas':
+            if (campos.observaciones && campos.temaDia) {
+
+                formulario.submit();
+                exit;
+            } else {
+                document.getElementById('GrupoMensaje').classList.add("formMensaje-activo");
+            }
 
     }
 

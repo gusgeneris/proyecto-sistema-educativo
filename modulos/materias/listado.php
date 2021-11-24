@@ -47,8 +47,8 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
 <body class="body-listuser">
 
     <?php 
-        require_once "../../mensaje.php";
         require_once "../../menu.php";
+        require_once "../../mensaje.php";
     ?>
 
     <div class="titulo">
@@ -105,13 +105,14 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
                     </td>
                     <td>
                         <div class="icon">
-                            <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a> 
-                            
-                            <a href="dar_baja.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-
+                                
                             <?php if (($materia->getEstado())==2){?>
-                                        <a href="dar_alta.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
-                                <?php } ?>
+                                    <a href="dar_alta.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
+                            <?php }else{ ?>
+                                    <a href="modificar.php?id=<?php echo $materia->getIdMateria()?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a> 
+                            
+                                    <a href="#" onclick="consulta(<?php echo $materia->getIdMateria();?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+                            <?php } ?>
                         
                         </div>
                     </td>
@@ -122,4 +123,14 @@ $listadoMaterias=$materia->listadoMaterias($filtroEstado,$filtroNombre);
     </div>
     <?php require_once "../../footer.php"?> 
 </body>
+
+    <script>
+        function consulta(idMateria){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idMateria;
+            }
+        }
+    </script>
 </html>

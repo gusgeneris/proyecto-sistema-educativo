@@ -29,11 +29,6 @@ $descripcion = $_POST['Descripcion'];
         exit;
     }
 
-    if((!preg_match("/^[a-zA-Z0-9_ ]*$/",$descripcion))){
-        header("Location:listado.php?mj=".ERROR_NAME_NO_PERMITE_NUMEROS_CODE);
-        exit;
-    }
-
     
     if((!preg_match("/^\d*$/",$numero))){
         header("Location:listado?mj=".ERROR_DNI_NUMBER_CODE );
@@ -44,11 +39,14 @@ $ejeContenido=new EjeContenido();
 $ejeContenido->setNumero($numero);
 $ejeContenido->setDescripcion($descripcion);
 
-$ejeContenido->insert();
-$ejeContenido-> crearRelacionConCurriculaCarrera($idCarrera,$idMateria,$idCicloLectivo);
+$dato=$ejeContenido->insert($idCurriculaCarrera);
 
-if ($ejeContenido){
+if ($dato==1){
+    $ejeContenido-> crearRelacionConCurriculaCarrera($idCarrera,$idMateria,$idCicloLectivo);
+
     header("Location:listado.php?idCurriculaCarrera=".$idCurriculaCarrera."&idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".CORRECT_INSERT_CODE);
+}else{
+    header("Location:listado.php?idCurriculaCarrera=".$idCurriculaCarrera."&idCarrera=".$idCarrera."&idMateria=".$idMateria."&mj=".INCORRECT_INSERT_DATO_DUPLICATE_NUMBER_EJE_CODE);
 }
 
 ?>

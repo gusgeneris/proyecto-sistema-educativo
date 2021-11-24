@@ -59,12 +59,10 @@ $provincia= Provincia::obtenerPorIdProvincia($idProvincia);
                 
                 </div>
 
-                <div> 
-                <div class="formGrupBtnEnviar">
+                
+                <div class="formGrupBtnEnviarUnaColumna">
                     <button type="submit" class="formButton" value ="FormInsertProvincia" id="Guardar"> Guardar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
+                
                     <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
                 </div>
         </form>

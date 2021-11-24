@@ -5,12 +5,11 @@ require_once "../../class/Materia.php";
 require_once "../../class/Alumno.php";
 require_once "../../configs.php";
 require_once "../../class/CicloLectivo.php";
-require_once "../../mensaje.php";
 
 
 $anio=date("Y");
 $idCicloLectivo=CicloLectivo::obtenerIdCicloPorAnio($anio);
-$listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
+
 
 ?>
 
@@ -26,27 +25,32 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
         <script type="text/javascript" src="../../jquery3.6.js"></script>
         <script type="text/javascript" src="../../script/menu.js" defer> </script>
         <script type="text/javascript" src ="../../script/comboAsignarCarrera.js"></script>
+        <link rel="stylesheet" href="../../style/mensaje.css">
         <link rel="icon" type="image/jpg" href="../../image/logo.png">
         <title>Calendarizacion</title>
     </head>
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+        require_once "../../mensaje.php";
+        $idPersona=$usuario->getIdPersona();
+        $idDocente=Docente::obtenerPorIdPersona($idPersona);
+        $listaCarreras = Carrera::listaCarrerasPorDocente($idDocente,$idCicloLectivo);?>
 
     <body>
 
         <div class="titulo"><h1>Busqueda Calendarizacion</h1></div>
     
         <div class="main">
-            <form action="detalle_calendarizacion.php" method=GET class="formUnaColumna" id="formInsert" name="formInsert">
+            <form action="detalle_calendarizacion.php" method=GET class="formInsert3Columnas" id="formInsert" name="formInsert">
                 
                 <div class="formGrup" id="GrupocboCarrera">
                         <label for="cboCarrera" class="formLabel">Carrera</label>
                         <div class="formGrupInput">
                             <Select name="cboCarrera" id="cboCarrera" class="formInput" onchange="cargarMateria()">
                                 <option value="0">
-                                    ->Seleccionar Carrera<-
+                                    Seleccionar Carrera
                                 </option>
-                                <?php foreach($listadoMateria as $carrera):{?>
+                                <?php foreach($listaCarreras as $carrera):{?>
                                     <option value="<?php echo $carrera->getIdCarrera()?>">
                                     <?php echo $carrera->getNombre()?>
                                 </option>
@@ -61,7 +65,7 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
                         <div class="formGrupInput">
                             <Select name="cboMateria" id="cboMateria" class="formInput" onchange="">
                                 <option value="0">
-                                    ->Seleccionar Materia<-
+                                    Seleccionar Materia
                                 </option>
                             </Select>
                         </div>
@@ -78,12 +82,8 @@ $listadoMateria=Carrera::listadoCarrerasPorCicloLectivo($idCicloLectivo);
 
                 <!--Grupo de Boton Enviar-->
 
-                <div class="formGrupBtnEnviar">
+                <div class="formGrupBtnEnviar3Columnas">
                     <button type="submit" class="formButton" value ="FormInsertBuscarCalendarizacion" id="Guardar"> Buscar</button>
-                </div>
-
-                <div class="formGrupBtnEnviar">
-                    <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
                 </div>
 
 

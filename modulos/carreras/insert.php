@@ -36,7 +36,8 @@ require_once "../../mensaje.php";
                 <h2 id="cabeceraPaso3">Paso3</h2>
             </div>
             <form action="procesar_insert.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
-
+            <input value ="FormInsertCarrera"  type="hidden"  id="Guardar">
+                    
                 <div class="paso1" id="paso1">
                     <div class="formGrup" id="GrupoNombreCarrera" >
                         <label for="NombreCarrera" class="formLabel">NombreCarrera</label>
@@ -67,13 +68,7 @@ require_once "../../mensaje.php";
                     </div>
                 </div>
 
-                <!--Grupo de Mensaje-->
-                    
-                <div class="formMensaje" id="GrupoMensaje">
-                        
-                    <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
                 
-                </div>
 
                 <!--Grupo de Boton Enviar-->
                 
@@ -89,13 +84,22 @@ require_once "../../mensaje.php";
                 
                     </div>
 
+                    <!--Grupo de Mensaje-->
+                    
+                    <div class="formMensaje" id="GrupoMensaje">
+                        
+                        <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+                    
+                    </div>
+
                     <div class="formGrupBtnEnviar3Columnas">
-                        <button type="submit" class="formButton" value ="FormInsertCarrera" id="Guardar"> Guardar</button>
+                        <button value ="FormInsertCarrera"  type="submit" class="formButton" id="Guardar"> Guardar</button>
                     
                         <button type="button" class="formButton" id="Cancelar" onclick="atras2()" > Atras </button>
                     </div>
                     
                 </div>
+                    
             </form>
         </div>
     </div>

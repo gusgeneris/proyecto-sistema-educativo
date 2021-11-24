@@ -3,9 +3,11 @@ require_once "../../class/Domicilio.php";
 require_once "../../class/Persona.php";
 require_once "../../class/Sexo.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 $idPersona=$_GET['idPersona'];
+$persona=Persona::obtenerPorId($idPersona);
+$nombrePersona=$persona->getNombre();
+$apellidoPersona=$persona->getApellido();
 
 $lista = Domicilio::listadoPorIdPersona($idPersona);
 
@@ -24,15 +26,16 @@ $lista = Domicilio::listadoPorIdPersona($idPersona);
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <script type="text/javascript" src ="../../script/comboDomicilio.js"></script>
     <link rel="stylesheet" href="../../style/mensaje.css">
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar domicilio</title>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Domicilio</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+require_once "../../mensaje.php";?>
 
 <body class="body-listuser">
 
     <div class="titulo">
-        <h1>Lista de Domicilios</h1>
+        <h1>Lista de Domicilios de <?php echo $nombrePersona ?>, <?php echo $apellidoPersona ?></h1>
     </div>
 
     <div class="conteiner-btn-agregar">
@@ -45,31 +48,37 @@ $lista = Domicilio::listadoPorIdPersona($idPersona);
         <table class="tabla" method="GET">
             <thead>
                 <tr >
-                    <th> ID Domicilio</th>
-                    <th> ID Barrio</th>
-                    <th> ID Persona</th>
+                    <th> Pais</th>
+                    <th> Provincia</th>
+                    <th> Localida</th>
+                    <th> Barrio</th>
                     <th> Detalle</th>
                     <th> Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($lista as $domicilio ):?> 
+                <?php foreach ($lista as list($idBarrio,$idDomicilio,$idPersona,$domicilioDetalle,$barrio,$localidad,$provincia,$pais) ):?> 
                     <tr >
                         <td >
-                            <?php echo $domicilio->getIdDomicilio(); ?>
+                            <?php echo $pais; ?>
                         </td>
                         <td>
-                            <?php echo $domicilio->getIdBarrio(); ?>
+                            <?php echo $provincia; ?>
                         </td>
                         <td>
-                            <?php echo $domicilio->getIdPersona(); ?>
+                            <?php echo $localidad; ?>
                         </td>
                         <td>
-                            <?php echo $domicilio->getDetalle(); ?>
+                            <?php echo $barrio; ?>
                         </td>
                         <td>
-                            <a href="eliminar.php?idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="modificar.php?idBarrio=<?php echo $domicilio->getIdBarrio();?>&idDomicilio=<?php echo $domicilio->getIdDomicilio(); ?>&idPersona=<?php echo $domicilio->getIdPersona();?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                            <?php echo $domicilioDetalle; ?>
+                        </td>
+                        <td>
+
+                            <a href="#" onclick="consulta(<?php echo $idDomicilio;?>,<?php echo $idPersona; ?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
+				
+                            <a href="modificar.php?idBarrio=<?php echo $idBarrio;?>&idDomicilio=<?php echo $idDomicilio; ?>&idPersona=<?php echo $idPersona;?>" ><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
                         </td>
 
                     </tr>
@@ -79,4 +88,14 @@ $lista = Domicilio::listadoPorIdPersona($idPersona);
     </div>
     <?php require_once "../../footer.php"?>
 </body>
+
+<script>
+    function consulta(idDomicilio,idPersona){
+
+        if (confirm("¿Estas deguro que deseas eliminar?"))
+        {
+            window.location.href="eliminar.php?idDomicilio="+idDomicilio+"&idPersona="+idPersona;
+        }
+    }
+</script>
 </html>

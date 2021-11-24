@@ -1,12 +1,15 @@
 <?php
     require_once '../../class/MySql.php'; 
     require_once "../../class/Modulo.php";
-    require_once "../../mensaje.php";
+    require_once "../../class/Perfil.php";
     
     
     $idPerfilDelModulo=$_GET["idPerfil"];
-    $lista=Modulo::obtenerTodos();
+    $lista=Modulo::obtenerTodosActivos();
     $modulos=Modulo::obtenerPorIdPerfil($idPerfilDelModulo);
+
+    $perfil=Perfil::perfilPorId($idPerfilDelModulo);
+    $nombrePerfil=$perfil->getPerfilNombre();
 
     $listadoModulosActuales=[];
     foreach ($modulos as $i ){
@@ -29,14 +32,17 @@
     <link rel="stylesheet" href="../../style/menuVertical.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
-    <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Agregar Perfil</title>
-    <title>Insertar Nuevo</title>
+    <link rel="icon" type="image/jpg" href="../../image/logo.png">
+    <title>Insertar modulo</title>
 </head>
 
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
 
 <body class="body">
-    <h1 class="titulo"> Seleccione el modulo</h1>
+    <div class="titulo">
+        <h1> Asignar modulos para el perfil: <?php echo $nombrePerfil?></h1>
+    </div>
 
     <form action="procesar_asignar.php" method=POST class="formulario">
 
@@ -70,15 +76,14 @@
             </table>
         </div>
 
-        <div class="formGrupBtnEnviar" >
+        <div class="formGrupBtnEnviarUnaColumna" >
             <button type="submit" class="formButton" value ="FormInsertAlumnos" id="Guardar"> Guardar</button>
-        </div>
-
-        <div class="formGrupBtnEnviar" >
-            <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+            <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
         </div>
 
     </form>
+
+    
     <?php require_once "../../footer.php"?> 
 
 </body>

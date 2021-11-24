@@ -1,7 +1,6 @@
 <?php
 require_once "../../class/Modulo.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 $idPerfilDelModulo=$_GET["idPerfil"];
 $modulo=new Modulo();
@@ -18,6 +17,7 @@ $listaModulos=$modulo->obtenerPorIdPerfil($idPerfilDelModulo);
      <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Modulos</title>
@@ -26,7 +26,8 @@ $listaModulos=$modulo->obtenerPorIdPerfil($idPerfilDelModulo);
 <body class="body-listuser">
 
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+    require_once "../../mensaje.php";?>
     
     <div class="titulo">
         <h1>Lista de Modulos</h1>
@@ -42,7 +43,6 @@ $listaModulos=$modulo->obtenerPorIdPerfil($idPerfilDelModulo);
         <table class="tabla" id="table">
             <thead>
                 <tr>
-                    <th>Id Modulo</th>
                     <th>Nombre</th>
                     <th>Acciones</th>
                 </tr>
@@ -52,14 +52,11 @@ $listaModulos=$modulo->obtenerPorIdPerfil($idPerfilDelModulo);
                     <?php foreach ($listaModulos as $modulo):?>
                     <tr>
                         <td>
-                            <?php echo $modulo->getIdModulo()?>
-                        </td>
-                        <td>
                             <?php echo $modulo->getNombre()?> 
                         </td>
                         <td>
                             <div class="icon">
-                                <a href="dar_baja.php?id=<?php echo $modulo->getIdModulo()?>&idPerfil=<?php echo $idPerfilDelModulo?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
+                                <a href="#" onclick="consulta(<?php echo $modulo->getIdModulo();?>,<?php echo $idPerfilDelModulo?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
                             </div>
                         </td>
                     </tr>
@@ -70,4 +67,14 @@ $listaModulos=$modulo->obtenerPorIdPerfil($idPerfilDelModulo);
         
     <?php require_once "../../footer.php"?> 
 </body>
+
+    <script>
+        function consulta(idModulo,idPerfil){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?id="+idModulo+"&idPerfil="+idPerfil;
+            }
+        }
+    </script>
 </html>

@@ -2,6 +2,7 @@
     require_once "../../class/EjeContenido.php";    
     require_once "../../class/CicloLectivo.php";
     require_once "../../class/Carrera.php";
+    require_once "../../configs.php";
 
     $idEjeContenido=$_GET["id"];
 
@@ -20,7 +21,11 @@
 
     EjeContenido::darDeBaja($idEjeContenido);
 
-    header("Location:listado.php?idCurriculaCarrera=".$idCurriculaCarrera."&idCarrera=".$idCarrera."&idMateria=".$idMateria);
-
+    if(isset($_GET["idLocation"])){
+        header("Location:listado_por_materia.php?mj=".CORRECT_DELETE_CODE."&idCicloLectivo=".$idCicloLectivo."&idCarrera=".$idCarrera."&idMateria=".$idMateria);
+        exit;
+    }else{
+    header("Location:listado.php?mj=".CORRECT_DELETE_CODE."&idCurriculaCarrera=".$idCurriculaCarrera."&idCarrera=".$idCarrera."&idMateria=".$idMateria);
+    }
 
 ?>

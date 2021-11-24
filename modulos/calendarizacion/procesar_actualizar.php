@@ -17,6 +17,8 @@ $fecha = $_POST['FechaClase'];
 $actividad = $_POST['Actividad'];
 $contenidoPriorizado= $_POST['ContenidoPriorizado'];
 $idCurriculaCarrera = $_POST['idCurriculaCarrera'];
+$idCarrera = $_POST['idCarrera'];
+$idMateria= $_POST['idMateria'];
 
 if((!preg_match("/^\d*$/",$numClase))){
     header("Location:detalle_calendarizacion?mj=".ERROR_DNI_NUMBER_CODE );
@@ -33,11 +35,12 @@ $detalleCalendarizacion->setActividad($actividad);
 $detalleCalendarizacion->setContenidoPriorizado($contenidoPriorizado);
 $detalleCalendarizacion->setIdCalendarizacion($idCalendarizacion);
 $detalleCalendarizacion->setIdDetalleCalendarizacion($idDetalleCalendarizacion);
+$detalleCalendarizacion->setNumeroEjeContenido($numeroEjeContenido);
 
 $detalleCalendarizacion->actualizarDetalleCalendarizacion();
 
 if ($detalleCalendarizacion){
-    header("Location:detalle_calendarizacion.php?mj=".CORRECT_UPDATE_CODE."&idCurriculaCarrera=".$idCurriculaCarrera."&idCalendarizacion=".$idCalendarizacion);
+    header("Location:detalle_calendarizacion.php?idMateria=".$idMateria."&idCarrera=".$idCarrera."&mj=".CORRECT_UPDATE_CODE."&idCurriculaCarrera=".$idCurriculaCarrera."&idCalendarizacion=".$idCalendarizacion);
 }
 
 ?>

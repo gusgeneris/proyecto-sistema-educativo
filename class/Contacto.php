@@ -81,23 +81,26 @@ class Contacto {
 	}
 
 	public function eliminar() {
-		$sql = "DELETE FROM tipo_contacto_persona WHERE id_contacto_persona={$this->_idContactoPersona}";
+		$sql = "DELETE FROM tipo_contacto_persona WHERE id_tipo_contacto_persona={$this->_idContactoPersona}";
+		
+		
         $database = new MySQL();
         $database->eliminarRegistro($sql);
 	}
 
     public static function obtenerPorId($idContactoPersona){
-        $sql = "SELECT id_contacto_persona , tipo_contacto_persona.tipo_contacto_persona_valor,tipo_contacto_persona.tipo_contacto_id_tipo_contacto,tipo_contacto_persona.persona_id_persona, tipo_contacto.tipo_contacto_descripcion FROM
-        tipo_contacto_persona JOIN persona on persona.id_persona=tipo_contacto_persona.persona_id_persona JOIN
-        tipo_contacto on tipo_contacto.id_tipo_contacto=tipo_contacto_persona.tipo_contacto_id_tipo_contacto
-        WHERE id_contacto_persona={$idContactoPersona}";
+        $sql = "SELECT id_tipo_contacto_persona , tipo_contacto_persona.tipo_contacto_persona_valor,tipo_contacto_persona.tipo_contacto_id_tipo_contacto,tipo_contacto_persona.persona_id_persona, tipo_contacto.tipo_contacto_descripcion FROM ".
+        	"tipo_contacto_persona JOIN persona on persona.id_persona=tipo_contacto_persona.persona_id_persona JOIN ".
+        	"tipo_contacto on tipo_contacto.id_tipo_contacto=tipo_contacto_persona.tipo_contacto_id_tipo_contacto ".
+        	"WHERE id_tipo_contacto_persona={$idContactoPersona}";
+
 
         $database = new MySQL();
         $datos = $database->consultar($sql);
 
     	$registro = $datos->fetch_assoc();
     	$contacto = new Contacto();
-		$contacto->_idContactoPersona = $registro["id_contacto_persona"];
+		$contacto->_idContactoPersona = $registro["id_tipo_contacto_persona"];
 		$contacto->_idPersona = $registro["persona_id_persona"];
 		$contacto->_idTipoContacto = $registro["tipo_contacto_id_tipo_contacto"];
 		$contacto->_valor = $registro["tipo_contacto_persona_valor"];

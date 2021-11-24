@@ -1,17 +1,11 @@
 <?php
 require_once "../../class/Especialidad.php";
 require_once "../../class/Docente.php";
-require_once "../../mensaje.php";
 
 $especialidad=new Especialidad();
 
-if(isset($_GET['idDocente'])){
-    $idDocente=$_GET['idDocente'];
-}else{
-    header("Location:../../inicio.php");
-};
 
-
+$idDocente=$_GET['idDocente'];
 
 $lista=Especialidad::listarPorDocente($idDocente);
 
@@ -29,12 +23,14 @@ $docente=Docente::obtenerTodoPorId($idDocente);
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Lista especialidads</title>
 
 </head>
-<?php require_once "../../menu.php";?>
+<?php require_once "../../menu.php";
+require_once "../../mensaje.php";?>
 <body class="body-listuser">
     <div class="titulo">
         <h1 class="titulo">Lista de Especialidades de <?php echo $docente?> </h1>
@@ -50,7 +46,6 @@ $docente=Docente::obtenerTodoPorId($idDocente);
         <table class="tabla">
             <thead>
                 <tr >
-                    <th> ID especialidad</th>
                     <th> Descripcion</th>
                     <th> Acciones</th>
 
@@ -59,17 +54,12 @@ $docente=Docente::obtenerTodoPorId($idDocente);
             <tbody>
             <?php foreach ($lista as $especialidad ):?> 
                 <tr >
-                    <td >
-                        <?php echo $especialidad->getIdEspecialidad(); ?>
-                    </td>
-
                     <td>
                         <?php echo $especialidad->getDescripcion(); ?>
                     </td>
                     <td>
                         <div class="icon">
-                            <a href="eliminar_relacion.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>&idDocente=<?php echo $idDocente?>" class=""><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
-                            <a href="modificar.php?id=<?php echo $especialidad->getIdEspecialidad(); ?>" class=""><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                            <a href="#" onclick="consulta(<?php echo $especialidad->getIdEspecialidad();?>,<?php echo $idDocente?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
                         </div>    
                     </td>
                 </tr>
@@ -79,4 +69,14 @@ $docente=Docente::obtenerTodoPorId($idDocente);
     </div>
         <?php require_once "../../footer.php"?>                 
 </body>
+
+    <script>
+        function consulta(idEspecialidad,idDocente){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="eliminar_relacion.php?id="+idEspecialidad+"&idDocente="+idDocente;
+            }
+        }
+    </script>
 </html>

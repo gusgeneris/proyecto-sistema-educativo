@@ -51,5 +51,22 @@ const INCORRECT_INSERT_DOCENTE_DUPLICATE_CODE ="22";
 const INCORRECT_INSERT_DOCENTE_DUPLICATE= "Error: El docente ya se encuentra registrado";
 
 
+const INCORRECT_INSERT_DATO_DUPLICATE_CODE ="23";
+const INCORRECT_INSERT_DATO_DUPLICATE_MENSAJE= "Error: El registro ya se encuentra ";
+
+const INCORRECT_INSERT_DATO_DUPLICATE_USER_NAME_CODE='24';
+const INCORRECT_INSERT_DATO_DUPLICATE_USER_NAME_MENSAJE='Error: El nombre de Usuario ya se encuentra registrado';
+
+const CORRECT_SEARCH_CODE='25';
+const CORRECT_SEARCH_MENSAJE='Se encontraron los registros solicitados';
+
+
+
+const INCORRECT_INSERT_DATO_DUPLICATE_NUMBER_EJE_CODE='26';
+const INCORRECT_INSERT_DATO_DUPLICATE_NUMBER_EJE_MENSAJE='Error: El numero de eje ya se encuentra registrado';
+
+
+
+
 
 ?>

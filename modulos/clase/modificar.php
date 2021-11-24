@@ -9,7 +9,8 @@
     $clase=Clase::mostrarPorId($idClase);
     $listaTiposClases=TipoClase::obtenerTodos();
     $numeroClase=$clase->getNumeroClase();
-
+    $fecha=$clase->getFechaClase();
+    $idCurriculaCarrera=Clase::obtenerIdCurriculaCarreraPorIdClase($idClase);
 ?>
 
 <!DOCTYPE html>
@@ -35,20 +36,12 @@
         
         <div class="main">
 
-        <form action="procesar_modificar.php" method="POST" class="formInsertUnaColumna" id="formInsert" name="formInsert">
-            
-            <div class="formGrup" id="GrupoFecha">
-                    <label for="Fecha" class="formLabel">Numero de Clase</label>
-                    <div class="formGrupInput">
-                        <input id="numeroClase" class="fecha" type="number" name="numeroClase" value="<?php echo $numeroClase; ?>">
-                    </div>
-                <p class="formularioInputError"> Error en la fecha</p>
-            </div>
-
+        <form action="procesar_modificar.php" method="POST" class="formInsertUnaColumna" id="formModificar" name="formInsert">
+                         
             <div class="formGrup" id="GrupoFecha">
                 <label for="Fecha" class="formLabel">Fecha de la nueva clase</label>
                 <div class="formGrupInput">
-                    <input type="date" id="Fecha" name="fechaClase" class="fecha" value="<?php echo date("Y-m-d"); ?>">
+                    <input type="date" id="Fecha" name="Fecha" class="formInput" value="<?php echo $fecha; ?>">
                 </div>
                 <p class="formularioInputError"> Error en la fecha</p>
             </div>  
@@ -56,10 +49,11 @@
             <div class="formGrup" id="GrupocboTipoClase">
                 <label for="cboTipoClase" class="formLabel">Tipo Clase</label>
                     <div class="formGrupInput">
+                        
 
-                        <select name="cboTipoClase" id="cboTipoClase">
-                            <?php foreach ($listaTiposClases as $tipo):?>
-                                <option <?php if($tipo->getIdTipoClase()==$clase->getTipoClase()){echo "SELECTED";}?> value = "<?php echo $tipo->getIdTipoClase()?>">
+                        <select class="formInput" name="cboTipoClase" id="cboTipoClase">
+                            <?php foreach ($listaTiposClases as $tipo): ?>
+                                <option <?php if($tipo->getDetalle()==$clase->getTipoClase()){echo "SELECTED";}?> value = "<?php echo $tipo->getIdTipoClase()?>">
                                     <?php echo $tipo->getDetalle()?>
                                 </option>
                             <?php endforeach; ?>
@@ -71,6 +65,8 @@
 
             
             <input type="hidden" name="idClase" value="<?php echo $idClase ?>">
+            
+            <input type="hidden" name="idCurriculaCarrera" value="<?php echo $idCurriculaCarrera ?>">
             
             <?php if(isset($_GET["id"])){
                     
@@ -90,12 +86,15 @@
 
             <?php }?>
 
-            <div class="formGrupBtnEnviar">
-                <button class="formButton" id="Guardar" type="submit" > Modificar </button>
+            <div class="formMensaje" id="GrupoMensaje">
+                    
+                <p class="MensajeError"> <b>Error</b>: Complete correctamente el Formulario </p>
+            
             </div>
 
-            <div class="formGrupBtnEnviar" >
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
+            <div class="formGrupBtnEnviarDosColumnas">
+                <button class="formButton" id="Guardar" value ="FormInsertAlumnos" type="submit" > Modificar </button>
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false" >Cancelar</button>
             </div>
 
         </form>
@@ -104,4 +103,7 @@
     <?php require_once "../../footer.php"?>     
 
     </body>
+
+    
+    <script type="text/javascript" src="../../script/validacionFormModificar.js"></script>
 </html>

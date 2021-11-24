@@ -1,7 +1,6 @@
 <?php
 require_once "../../class/Modulo.php";
 require_once "../../configs.php";
-require_once "../../mensaje.php";
 
 $modulo=new Modulo();
 $listaModulos=$modulo->obtenerTodos();
@@ -17,6 +16,7 @@ $listaModulos=$modulo->obtenerTodos();
     <link rel="stylesheet" href="/proyecto-modulos/style/tabla.css">
     <link href="../../icon/fontawesome/css/all.css" rel="stylesheet"> <!--Estilos para iconos -->
     <link rel="stylesheet" href="../../style/menuVertical.css">
+    <link rel="stylesheet" href="../../style/mensaje.css">
     <script src="../../jquery3.6.js"></script>
     <script type="text/javascript" src="../../script/menu.js" defer> </script>
     <link rel="icon" type="image/jpg" href="../../image/logo.png"><title>Listado Modulos</title>
@@ -25,7 +25,8 @@ $listaModulos=$modulo->obtenerTodos();
 <body class="body-listuser">
 
 
-    <?php require_once "../../menu.php";?>
+    <?php require_once "../../menu.php";
+require_once "../../mensaje.php";?>
     
     <div class="titulo">
         <h1>Lista de Modulos</h1>
@@ -54,8 +55,14 @@ $listaModulos=$modulo->obtenerTodos();
                         </td>
                         <td>
                             <div class="icon">
-                                <a href="dar_baja.php?idModulo=<?php echo $modulo->getIdModulo()?>"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a> 
+                            <?php    
+                                    $estado=$modulo->getEstado();                        
+                                    if ($estado==2){?>
+                                    <a href="dar_alta.php?id=<?php echo $modulo->getIdModulo()?>"><img class="icon-a" src="../../icon/alta.png" title="Dar Alta" alt="Dar Alta"></a>
+                                <?php }else{ ?>
+                                <a href="#" onclick="consulta(<?php echo $modulo->getIdModulo();?>)"><img class="icon-a" src="../../icon/basurero.png" title="Eliminar" alt="Eliminar"></a>
                                 <a href="modificar.php?idModulo=<?php echo $modulo->getIdModulo(); ?>"><img class="icon-a" src="../../icon/modificar.png" title="Modificar" alt="Modificar"></a>
+                                <?php } ?>
                             </div>
                         </td>
                     </tr>
@@ -66,4 +73,14 @@ $listaModulos=$modulo->obtenerTodos();
     <?php require_once "../../footer.php"?>    
 
 </body>
+
+    <script>
+        function consulta(idModulo){
+
+            if (confirm("¿Estas deguro que deseas eliminar?"))
+            {
+                window.location.href="dar_baja.php?idModulo="+idModulo;
+            }
+        }
+    </script>
 </html>

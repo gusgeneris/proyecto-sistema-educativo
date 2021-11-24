@@ -100,18 +100,26 @@ public function crearDomicilio($domicilio,$registro){
 }
 
 static public function listadoPorIdPersona($idPersona){
-    $sql= "SELECT * FROM domicilio WHERE persona_id_persona={$idPersona}";
+    $sql= " SELECT persona_id_persona,id_domicilio,barrio_id_barrio,domicilio_detalle, barrio_nombre,localidad_nombre, provincia_nombre,pais_nombre FROM domicilio join barrio on id_barrio=barrio_id_barrio join localidad on localidad_id_localidad = id_localidad join provincia on id_provincia=provincia_id_provincia join pais on id_pais = pais_id_pais WHERE persona_id_persona={$idPersona}";
+
     $database=new Mysql();
     $datos=$database->consultar($sql);
 
     $listadoDomicilios=[];
 
     while($registro= $datos->fetch_assoc()){
+        
+        $idBarrio=$registro['barrio_id_barrio'];
+        $idDomicilio=$registro['id_domicilio'];
+        $idPersona=$registro['persona_id_persona'];
+        $domicilioDetalle=$registro['domicilio_detalle'];
+        $barrio=$registro['barrio_nombre'];
+        $localidad=$registro['localidad_nombre'];
+        $provincia=$registro['provincia_nombre'];
+        $pais=$registro['pais_nombre'];
+       
 
-        $domicilio=new Domicilio();
-        $domicilio->crearDomicilio($domicilio,$registro);
-
-        $listadoDomicilios[]=$domicilio;
+        array_push($listadoDomicilios,array($idBarrio,$idDomicilio,$idPersona,$domicilioDetalle,$barrio,$localidad,$provincia,$pais));
     }
     return $listadoDomicilios;
 }

@@ -2,7 +2,6 @@
     require_once '../../class/MySql.php'; 
     require_once "../../class/Horario.php";
     require_once "../../class/Dia.php";
-    require_once "../../mensaje.php";
 
     $listaDias=Dia::obtenerTodo();
 ?>
@@ -29,10 +28,11 @@
     <div class="titulo">
         <h1> Registro de Horario</h1>
     </div>
+
     <div class="main">
-        <form action="procesar_insert.php" method=POST class="formInsertUnaColumna">
+        <form action="procesar_insert.php" method=POST  id="formInsert" class="formInsertUnaColumna">
             
-            <div class="formGrup">     
+            <div class="formGrup" id="GrupoNumero">     
                 <label for="Numero" class="formLabel">Numero del modulo que tendra el horario</label>    
                 <div class="formGrupInput">
                     <input type="text" name="Numero" id="Numero" class="formInput" placeholder="Numero">
@@ -42,37 +42,45 @@
             </div>
 
 
-            <div class="formGrup">
+            <div class="formGrup" id="GrupoHoraInicio">
                 <label for="HoraInicio" class="formLabel">Hora de Inicio</label>
+                <div class="formGrupInput">
                 <input type="time" class="formInput" name="HoraInicio" id="HoraInicio" placeholder="Hora Inicio">
+                <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                </div>
             </div>
 
-            <div class="formGrup">
+            <div class="formGrup" id="GrupoHoraFin">
                 <label for="HoraFin" class="formLabel">Hora de Finalizacion</label>
+                <div class="formGrupInput">
                 <input type="time" class="formInput" name="HoraFin" id="HoraFin" placeholder="Hora Fin">
+                <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                </div>
             </div>
 
-            <div class="">
+            <div class="formGrup" id="GrupocboDia">
                 <label for="cboDia" class="formLabel">Dia</label>
-                <select name="cboDia" id="cboDia">
+                <div class="formGrupInput">
+                <select class="formInput" name="cboDia" id="cboDia">
                     <option value="">->Seleccione el Dia<-</option>
                     <?php foreach($listaDias as $dia ):?>
                         <option value="<?php echo $dia->getIdDia() ?>"><?php echo  $dia->getDescripcion() ?></option>
                     <?php endforeach?>
                 </select>
+                <p class="formularioInputError"> Debe ingresar el dato correctamente.</p> 
+                </div>
             </div>
 
             
-            <div class="formGrupBtnEnviar">
-                <button type="submit" class="formButton" value ="FormInsertMateria" id="Guardar"> Guardar</button>
-            </div>
-        
-            <div class="formGrupBtnEnviar">
-                <button name="Cancelar" class="formButton" type="submit" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
+            <div class="formGrupBtnEnviarDosColumnas">
+                <button type="submit" class="formButton" value ="FormInsertHorario" id="Guardar"> Guardar</button>
+
+                <button name="Cancelar" class="formButton" type="button" value="Cancelar" id="Cancelar" onclick="window.history.go(-1); return false">Cancelar</button>
             </div>             
         </form>
     </div>
     <?php require_once "../../footer.php"?> 
 </body>
 
+<script type="text/javascript" src="../../script/validacionFormInsert.js"></script>
 </html>

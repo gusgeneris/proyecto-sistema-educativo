@@ -6,6 +6,8 @@ Class Materia{
     private $_idMateria;
     private $_nombre;
     private $_estado;
+    private $_periodoDesarrollo;
+    private $_anioDesarrollo;
     private $_arrEjeContenido;
 
         /**
@@ -49,6 +51,43 @@ Class Materia{
     }
 
     /**
+     * Get the value of _estado
+     */ 
+    public function getAnioDesarrollo()
+    {
+        return $this->_anioDesarrollo;
+    }
+
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function setAnioDesarrollo($_anioDesarrollo)
+    {
+        $this->_anioDesarrollo = $_anioDesarrollo;
+
+        return $this;
+    }
+    /**
+     * Get the value of _estado
+     */ 
+    public function getPeriodoDesarrollo()
+    {
+        return $this->_periodoDesarrollo;
+    }
+
+    /**
+     * Set the value of _estado
+     *
+     * @return  self
+     */ 
+    public function setPeriodoDesarrollo($_periodoDesarrollo)
+    {
+        $this->_periodoDesarrollo = $_periodoDesarrollo;
+
+        return $this;
+    }/**
      * Get the value of _estado
      */ 
     public function getEstado()
@@ -181,10 +220,11 @@ Class Materia{
     }
 
     public static function listadoPorIdCarrera($idCicloLectivo,$idCarrera){
-        $sql="SELECT id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado 
+        $sql="SELECT detalle_periodo,detalle_anio,id_materia, materia_nombre, materia.estado_id_estado, curricula_carrera.curricula_carrera_estado 
         FROM curricula_carrera 
         JOIN materia on curricula_carrera.materia_id_materia=materia.id_materia 
         JOIN ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera 
+        join periodo_desarrollo on periodo_desarrollo_id_periodo_desarrollo=id_periodo_desarrollo join anio_desarrollo on anio_desarrollo_id_anios_desarrollo=id_anio_desarrollo
         WHERE ciclo_lectivo_carrera.carrera_id_carrera={$idCarrera} AND ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo}";
         
         
@@ -201,6 +241,8 @@ Class Materia{
                     $materia->_idMateria=$registro['id_materia'];
                     $materia->_nombre=$registro['materia_nombre'];
                     $materia->_estado=$registro['estado_id_estado'];
+                    $materia->_periodoDesarrollo=$registro['detalle_periodo'];
+                    $materia->_anioDesarrollo=$registro['detalle_anio'];
                     #$materia->_arrEjeContenido=EjeContenido::obtenerPorIdMateria($materia->_idMateria,$idCarrera);
                     $listadoMaterias[]=$materia;#}
                 
@@ -374,10 +416,12 @@ Class Materia{
         FROM curricula_carrera 
         JOIN materia on curricula_carrera.materia_id_materia=materia.id_materia 
         JOIN ciclo_lectivo_carrera on curricula_carrera.ciclo_lectivo_carrera_id_ciclo_lectivo_carrera=ciclo_lectivo_carrera.id_ciclo_lectivo_carrera 
-        JOIN docente_materia on docente_materia.materia_id_materia=materia.id_materia
+        JOIN docente_materia on docente_materia.curricula_carrera_id_curricula_carrera=curricula_carrera.id_curricula_carrera
         JOIN docente on id_docente = docente_id_docente
         WHERE ciclo_lectivo_carrera.carrera_id_carrera={$idCarrera} AND ciclo_lectivo_carrera.ciclo_lectivo_id_ciclo_lectivo={$idCicloLectivo} and id_docente= {$idDocente}";
         
+
+
         $database=new Mysql();
         $datos=$database->consultar($sql);
 
@@ -413,6 +457,35 @@ Class Materia{
         $nombreMateria=$registro["materia_nombre"];
 
         return $nombreMateria;
+    }
+
+    public static function obtenerMateriaPorCurricula($idCurriculaCarrera){
+        $sql="SELECT materia_nombre ,periodo_desarrollo_id_periodo_desarrollo, anio_desarrollo_id_anios_desarrollo from materia ".
+            "join curricula_carrera on id_materia=materia_id_materia ".
+            "where id_curricula_carrera = {$idCurriculaCarrera}";
+         
+        
+        $database= new Mysql();
+        $dato=$database->consultar($sql);
+        
+        $registro=$dato->fetch_assoc();
+        $listado=[];
+
+        $nombreMateria=$registro["materia_nombre"];
+        $periodoDesarrollo=$registro["periodo_desarrollo_id_periodo_desarrollo"];
+        $anioDesarrollo=$registro["anio_desarrollo_id_anios_desarrollo"];
+        
+        array_push($listado,$nombreMateria,$periodoDesarrollo,$anioDesarrollo);
+
+        return $listado;
+    }
+
+    public static function modificarPeriodo($idCurricula,$idAnio,$idPeriodo){
+        $sql="UPDATE `curricula_carrera` SET `periodo_desarrollo_id_periodo_desarrollo` = '{$idPeriodo}' , `anio_desarrollo_id_anios_desarrollo` = '{$idAnio}' WHERE id_curricula_carrera= {$idCurricula};";
+       
+        $database=new Mysql();
+        $database->actualizar($sql);
+        return true;
     }
 
 
